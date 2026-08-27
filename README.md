@@ -1,6 +1,4 @@
-﻿<p align="center">
-  <video height="336" src="cc.mp4" controls="controls"></video>
-</p>
+﻿<!-- BẠN HÃY LÊN GITHUB.COM, BẤM NÚT EDIT HÌNH CÂY BÚT RỒI KÉO THẢ FILE cc.mp4 VÀO ĐÂY ĐỂ HIỂN THỊ VIDEO NHÉ -->
 
 # BaoTools
 <p>
@@ -17,20 +15,6 @@
   It ships fully translated in 29 languages and auto-updates via Velopack.
   <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/baotools)</sub>
 </p>
-
-## Statistics
-<div>
-  <img src="https://img.shields.io/github/downloads/madoiscool/baotools/BaoTools-win-Setup.exe?displayAssetName=true&style=for-the-badge" />
-  <img src="https://img.shields.io/github/downloads/madoiscool/baotools/BaoTools-win-Portable.zip?displayAssetName=true&style=for-the-badge" />
-</div>
-
-<a href="https://www.star-history.com/?repos=madoiscool%2Fbaotools&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=madoiscool/baotools&type=date&theme=dark&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=madoiscool/baotools&type=date&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=madoiscool/baotools&type=date&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
- </picture>
-</a>
 
 ## Requirements
 
