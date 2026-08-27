@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download BaoTools</title>
+    <style>
+        :root {
+            --bg: #09090b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #818cf8;
+            --primary-bg: rgba(129, 140, 248, 0.1);
+        }
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 15px 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .cards-container {
+            display: flex;
+            gap: 24px;
+            max-width: 900px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .card {
+            flex: 1;
+            min-width: 320px;
+            max-width: 400px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .card.recommended {
+            border-color: rgba(129, 140, 248, 0.3);
+            background: linear-gradient(180deg, rgba(129, 140, 248, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .badge.blue {
+            background: rgba(129, 140, 248, 0.2);
+            color: #a5b4fc;
+        }
+        .badge.gray {
+            background: rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+        }
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0 0 30px 0;
+            flex-grow: 1;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .btn-primary {
+            background: #a5b4fc;
+            color: #1e1b4b;
+        }
+        .btn-primary:hover {
+            background: #c7d2fe;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .links {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        .links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        .links a:hover {
+            color: var(--text-main);
+        }
+        .app-screenshot {
+            max-width: 900px;
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Download BaoTools</h1>
+        <p class="subtitle">The BaoTools desktop app for Windows. Pick the installer for a normal setup, or the portable build to run it without installing.</p>
+    </div>
+
+    <div class="cards-container">
+        <!-- Installer Card -->
+        <div class="card recommended">
+            <div class="card-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <h2 class="card-title">Installer <span class="badge blue">Recommended</span></h2>
+            </div>
+            <p class="card-desc">Standard Windows installer. Installs BaoTools and creates Start menu shortcuts.</p>
+            <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools_Setup.exe" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download (49.3 MB)
+            </a>
+        </div>
+
+        <!-- Portable Card -->
+        <div class="card">
+            <div class="card-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <h2 class="card-title">Portable <span class="badge gray">No install</span></h2>
+            </div>
+            <p class="card-desc">Unzip and run, no installation required. Great for USB drives or quick use.</p>
+            <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools.exe" class="btn btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download (164 MB)
+            </a>
+        </div>
+    </div>
+
+    <div class="links">
+        <span>Latest version: v1005</span>
+        <span>•</span>
+        <a href="https://github.com/DevBaor/BaoTools_1005/releases">All releases & changelog</a>
+    </div>
+
+    <!-- Bạn có thể thay đường link ảnh này bằng ảnh chụp màn hình App của bạn -->
+    <img src="screenshot.png" alt="BaoTools Screenshot" class="app-screenshot" style="object-fit: cover; height: auto;" onerror="this.style.display='none'">
+
+    <p class="footer-text">Manage your library, drop in .lua / .manifest / .zip files, and apply fixes, all in one app.</p>
+
+</body>
+</html>
+
+

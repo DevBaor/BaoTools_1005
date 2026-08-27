@@ -1,10 +1,13 @@
-﻿﻿
+﻿<p align="center">
+  <!-- THAY LINK BÊN DƯỚI BẰNG LINK VIDEO BẠN UPLOAD LÊN GITHUB -->
+  <video src="LINK_VIDEO_CUA_BAN_O_DAY" height="336" autoplay loop muted controls></video>
+</p>
+
 # BaoTools
 <p>
   <img align="right" height="250" alt="hachimi" src="https://github.com/user-attachments/assets/33aa8bb5-df11-4b33-b5d6-9a8350495c8b" />
-</p>
 
-  [Discord](...) • [Website](...) • [Git Mirror](https://github.com/DevBaor/BaoTools_1005)
+  [Discord](https://discord.gg/baotools) • [Website](https://DevBaor.github.io/BaoTools_1005) • [Git Mirror](https://github.com/DevBaor/BaoTools_1005)
   
   A Windows desktop client for managing Steam manifest/lua configurations, built with WPF on .NET 8.
     
@@ -13,7 +16,7 @@
   store pages.
   
   It ships fully translated in 29 languages and auto-updates via Velopack.
-  <br><sub>Found a translation error? Tell us about it over on [Discord](...)</sub>
+  <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/baotools)</sub>
 </p>
 
 ## Statistics & Download
@@ -34,7 +37,7 @@
   the full SDK
 
 ## Installation
-You can find release builds on the [baotools website](...) or in the [releases](https://github.com/DevBaor/BaoTools_1005/releases/latest) tab. 
+You can find release builds on the [baotools website](https://DevBaor.github.io/BaoTools_1005) or in the [releases](https://github.com/DevBaor/BaoTools_1005/releases/latest) tab. 
 
 ## Credits / Adjacent software
 
