@@ -1,8 +1,4 @@
-﻿<p align="center">
-  <!-- THAY LINK BÊN DƯỚI BẰNG LINK VIDEO BẠN UPLOAD LÊN GITHUB -->
-  <video src="LINK_VIDEO_CUA_BAN_O_DAY" height="336" autoplay loop muted controls></video>
-</p>
-
+﻿
 # BaoTools
 <p>
   <img align="right" height="250" alt="hachimi" src="https://github.com/user-attachments/assets/33aa8bb5-df11-4b33-b5d6-9a8350495c8b" />
