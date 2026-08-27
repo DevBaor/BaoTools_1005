@@ -59,7 +59,7 @@ namespace BaoToolsGui.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BaoTools;component/views/onlinefixesview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BaoTools;V1.1.3.0;component/views/onlinefixesview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\OnlineFixesView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

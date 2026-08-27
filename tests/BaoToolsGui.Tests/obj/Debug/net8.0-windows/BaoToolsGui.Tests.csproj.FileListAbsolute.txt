@@ -350,3 +350,4 @@ C:\Users\ADMIN\Downloads\BaoTools-main\tests\BaoToolsGui.Tests\obj\Debug\net8.0-
 C:\Users\ADMIN\Downloads\BaoTools-main\tests\BaoToolsGui.Tests\obj\Debug\net8.0-windows\BaoToolsGui.Tests.pdb
 C:\Users\ADMIN\Downloads\BaoTools-main\tests\BaoToolsGui.Tests\obj\Debug\net8.0-windows\BaoToolsGui.Tests.genruntimeconfig.cache
 C:\Users\ADMIN\Downloads\BaoTools-main\tests\BaoToolsGui.Tests\obj\Debug\net8.0-windows\ref\BaoToolsGui.Tests.dll
+C:\Users\ADMIN\Downloads\BaoTools-main\tests\BaoToolsGui.Tests\obj\Debug\net8.0-windows\BaoToolsGui.Tests.sourcelink.json

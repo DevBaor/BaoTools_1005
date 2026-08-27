@@ -1,53 +1,38 @@
-<p align="center">
-  <img height="336" alt="baotools" src="https://github.com/user-attachments/assets/54702ada-93a8-439b-ab3e-5cd73747ed46" />
+﻿<p align="center">
+  <video src="cc.mp4" width="100%" controls="controls"></video>
 </p>
 
 # BaoTools
 <p>
-  <img align="right" height="250" src="https://github.com/user-attachments/assets/df083fb0-9be7-4690-9f0f-c8b0a73da881" />
-
-  [Discord](https://discord.gg/baotools) • [Website](https://lua.tools) • [Git Mirror](https://git.lua.tools/baotools)
-  
-  A Windows desktop client for managing Steam manifest/lua configurations, built with WPF on .NET 8.
-    
-  BaoTools browses and installs manifest sources, edits `stplug-in` lua files (depot pinning,
-  per-depot enable/disable), manages unlocker modes, and injects a companion plugin into Steam's
-  store pages.
-  
-  It ships fully translated in 29 languages and auto-updates via Velopack.
-  <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/baotools)</sub>
+  <img align="right" height="200" src="src/BaoToolsGui/icon.ico" />
+  BaoTools là một ứng dụng Desktop trên Windows giúp quản lý và tự động tải game từ Steam một cách tiện lợi và nhanh chóng. App được phát triển dựa trên nền tảng .NET 8 với giao diện WPF hiện đại.
 </p>
 
-## Statistics
-<div>
-  <img src="https://img.shields.io/github/downloads/madoiscool/baotools/BaoTools-win-Setup.exe?displayAssetName=true&style=for-the-badge" />
-  <img src="https://img.shields.io/github/downloads/madoiscool/baotools/BaoTools-win-Portable.zip?displayAssetName=true&style=for-the-badge" />
-</div>
+## Tính năng nổi bật
+- **Tự động tải & cài đặt 1 chạm (1-click):** Chỉ cần gõ tên game hoặc nhập AppID, chọn game từ danh sách thả xuống là App sẽ tự động tải và cài đặt ngay lập tức, không cần thao tác thừa.
+- **Giới hạn số lượt tải mỗi ngày:** Tích hợp chốt chặn an toàn chỉ cho phép tải tối đa **15 game/ngày** cho mỗi người dùng. Giới hạn sẽ được tự động reset vào ngày hôm sau.
+- **Hỗ trợ Online Fix:** Tích hợp sẵn hướng dẫn chi tiết cách cài đặt và sử dụng chế độ chơi Online Fix trực tiếp trong giao diện App.
+- **Hiển thị lỗi thông minh:** Tự động phát hiện và cảnh báo khi máy tính hoặc nhà mạng chặn kết nối tới Steam (lỗi SSL/DNS).
+- **Hỗ trợ Đa ngôn ngữ:** Tích hợp sẵn gói Tiếng Việt chuẩn chỉ.
 
-<a href="https://www.star-history.com/?repos=madoiscool%2Fbaotools&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=madoiscool/baotools&type=date&theme=dark&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=madoiscool/baotools&type=date&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=madoiscool/baotools&type=date&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
- </picture>
-</a>
+## Yêu cầu hệ thống
+- Hệ điều hành: Windows 10 hoặc Windows 11.
+- Yêu cầu cài đặt: Tải file Portable (không cần cài) hoặc file Setup từ mục Releases. 
+- *Lưu ý: Bạn có thể cần dùng Google DNS (8.8.8.8) hoặc GoodbyeDPI/VPN nếu nhà mạng của bạn chặn kết nối tới Steam.*
 
-## Requirements
+## Cách cài đặt (Dành cho người dùng)
+Bạn vào mục **Releases** ở cột bên phải màn hình GitHub, tải về file:
+- BaoTools.exe: Bản Portable chạy ngay không cần cài đặt.
+- BaoTools_Setup.exe: Bản cài đặt có tạo icon ngoài Desktop.
 
-- Windows 10/11
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (the released installer bundles a
-  check for the .NET 8 **Desktop Runtime** and installs it if missing; [building from source](https://github.com/madoiscool/BaoTools/blob/main/CONTRIBUTING.md#building-from-source--developing) needs
-  the full SDK
+## Hướng dẫn Build (Dành cho lập trình viên)
+Nếu bạn muốn tự chỉnh sửa mã nguồn và build lại App:
+1. Cài đặt [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
+2. Mở file BaoToolsGui.sln bằng Visual Studio 2022 để chỉnh sửa.
+3. Để xuất bản Portable, mở Terminal tại thư mục gốc và chạy:
+   `ash
+   dotnet publish src\BaoToolsGui\BaoToolsGui.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o out_portable
+   `
 
-## Installation
-You can find release builds on the [baotools website](https://lua.tools/app) or in the [releases](https://github.com/madoiscool/BaoTools/releases/latest) tab. 
-
-## Credits / Adjacent software
-
-- [Millennium](https://steambrew.app/): the Steam plugin framework whose injection API this app
-  polyfills when Millennium isn't installed
-- [Velopack](https://velopack.io/): installer and auto-update framework
-
-## Licence
-
-MIT. See [LICENSE](LICENSE).
+## Bản quyền
+Dự án được phân phối dưới giấy phép MIT.

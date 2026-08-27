@@ -51,22 +51,19 @@ public partial class OnlineFixesViewModel(SteamLibraryService library, CoverCach
 
     public async Task InitializeAsync()
     {
-        if (_allGames.Count > 0) return; // already loaded
+        if (_allGames.Count > 0 || IsLoading) return; // already loaded or loading
         IsLoading = true;
         try
         {
-            await Task.Run(() =>
+            var apps = await Task.Run(() =>
             {
-                var apps = library.GetAllInstalledApps()
+                return library.GetAllInstalledApps()
                     .OrderBy(a => a.Name)
                     .Select(a => new OnlineFixGameCardVm(a.AppId, a.Name, a.InstallDir))
                     .ToList();
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    _allGames = apps;
-                    ApplyFilter();
-                });
             });
+            _allGames = apps;
+            ApplyFilter();
         }
         finally { IsLoading = false; }
     }

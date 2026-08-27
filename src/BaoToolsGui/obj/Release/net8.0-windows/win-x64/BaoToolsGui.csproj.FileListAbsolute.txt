@@ -660,3 +660,4 @@ C:\Users\ADMIN\Downloads\BaoTools-main\src\BaoToolsGui\obj\Release\net8.0-window
 C:\Users\ADMIN\Downloads\BaoTools-main\src\BaoToolsGui\obj\Release\net8.0-windows\win-x64\BaoTools.pdb
 C:\Users\ADMIN\Downloads\BaoTools-main\src\BaoToolsGui\obj\Release\net8.0-windows\win-x64\BaoToolsGui.genruntimeconfig.cache
 C:\Users\ADMIN\Downloads\BaoTools-main\src\BaoToolsGui\obj\Release\net8.0-windows\win-x64\ref\BaoTools.dll
+C:\Users\ADMIN\Downloads\BaoTools-main\src\BaoToolsGui\obj\Release\net8.0-windows\win-x64\BaoToolsGui.sourcelink.json
