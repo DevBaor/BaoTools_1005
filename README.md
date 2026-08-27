@@ -1,8 +1,12 @@
-﻿<!-- BẠN HÃY LÊN GITHUB.COM, BẤM NÚT EDIT HÌNH CÂY BÚT RỒI KÉO THẢ FILE cc.mp4 VÀO ĐÂY ĐỂ HIỂN THỊ VIDEO NHÉ -->
+﻿<p align="center">
+  <!-- THAY LINK BÊN DƯỚI BẰNG LINK VIDEO BẠN UPLOAD LÊN GITHUB -->
+  <video src="LINK_VIDEO_CUA_BAN_O_DAY" height="336" autoplay loop muted controls></video>
+</p>
 
 # BaoTools
 <p>
-  <img align="right" height="250" src="src/BaoToolsGui/icon.ico" />
+  <!-- THAY LINK BÊN DƯỚI BẰNG LINK ICON BẠN UPLOAD LÊN GITHUB -->
+  <img align="right" height="250" src="LINK_ICON_CUA_BAN_O_DAY" />
 
   [Discord](https://discord.gg/baotools) • [Website](https://lua.tools) • [Git Mirror](https://git.lua.tools/baotools)
   
@@ -15,6 +19,13 @@
   It ships fully translated in 29 languages and auto-updates via Velopack.
   <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/baotools)</sub>
 </p>
+
+## Statistics
+<div>
+  <!-- BẠN HÃY THAY CHỮ TEN_GITHUB_CUA_BAN THÀNH TÊN TÀI KHOẢN GITHUB CỦA BẠN ĐỂ NÓ HIỆN LƯỢT TẢI NHÉ -->
+  <img src="https://img.shields.io/github/downloads/TEN_GITHUB_CUA_BAN/BaoTools/BaoTools_Setup.exe?displayAssetName=true&style=for-the-badge" />
+  <img src="https://img.shields.io/github/downloads/TEN_GITHUB_CUA_BAN/BaoTools/BaoTools.exe?displayAssetName=true&style=for-the-badge" />
+</div>
 
 ## Requirements
 
