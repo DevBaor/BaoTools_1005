@@ -1,0 +1,7 @@
+﻿
+# Output folders
+out_portable/
+out_setup/
+innosetup.exe
+*.csx
+*.py
