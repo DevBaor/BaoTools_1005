@@ -20,11 +20,14 @@
   <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/baotools)</sub>
 </p>
 
-## Statistics
+## Statistics & Download
 <div>
-  <!-- BẠN HÃY THAY CHỮ TEN_GITHUB_CUA_BAN THÀNH TÊN TÀI KHOẢN GITHUB CỦA BẠN ĐỂ NÓ HIỆN LƯỢT TẢI NHÉ -->
-  <img src="https://img.shields.io/github/downloads/TEN_GITHUB_CUA_BAN/BaoTools/BaoTools_Setup.exe?displayAssetName=true&style=for-the-badge" />
-  <img src="https://img.shields.io/github/downloads/TEN_GITHUB_CUA_BAN/BaoTools/BaoTools.exe?displayAssetName=true&style=for-the-badge" />
+  <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools_Setup.exe">
+    <img src="https://img.shields.io/github/downloads/DevBaor/BaoTools_1005/BaoTools_Setup.exe?displayAssetName=true&style=for-the-badge" />
+  </a>
+  <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools.exe">
+    <img src="https://img.shields.io/github/downloads/DevBaor/BaoTools_1005/BaoTools.exe?displayAssetName=true&style=for-the-badge" />
+  </a>
 </div>
 
 ## Requirements
