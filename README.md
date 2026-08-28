@@ -1,9 +1,8 @@
-﻿
 # BaoTools
 <p>
   <img align="right" height="250" alt="hachimi" src="https://github.com/user-attachments/assets/33aa8bb5-df11-4b33-b5d6-9a8350495c8b" />
 
-  [Discord](https://discord.gg/baotools) • [Website](https://DevBaor.github.io/BaoTools_1005) • [Git Mirror](https://github.com/DevBaor/BaoTools_1005)
+  [Discord](https://discord.gg/baocobap) • [Website](https://DevBaor.github.io/BaoTools_1005) • [Git Mirror](https://github.com/DevBaor/BaoTools_1005)
   
   A Windows desktop client for managing Steam manifest/lua configurations, built with WPF on .NET 8.
     
@@ -24,6 +23,14 @@
     <img src="https://img.shields.io/github/downloads/DevBaor/BaoTools_1005/BaoTools.exe?displayAssetName=true&style=for-the-badge" />
   </a>
 </div>
+
+<a href="https://www.star-history.com/?repos=DevBaor/BaoTools_1005&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=DevBaor/BaoTools_1005&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=DevBaor/BaoTools_1005&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=DevBaor/BaoTools_1005&type=date&legend=top-left" />
+ </picture>
+</a>
 
 ## Requirements
 
