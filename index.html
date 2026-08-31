@@ -6,12 +6,12 @@
     <title>BaoTools — Game Library & Manifest Manager</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg: #090a0f;
-            --surface: rgba(17, 19, 26, 0.7); /* Chuyển sang trong suốt nhẹ để thấy background */
+            --surface: rgba(17, 19, 26, 0.7);
             --border: #222634;
             --accent: #ff5500;
             --accent-dim: rgba(255, 85, 0, 0.15);
@@ -25,7 +25,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            /* Xóa background cứng đi, để nền trong suốt hiển thị hiệu ứng */
             background-color: transparent; 
             color: var(--text-main);
             font-family: var(--font-body);
@@ -37,62 +36,32 @@
             overflow-x: hidden;
         }
 
-        /* ========================================== */
-        /* HIỆU ỨNG BACKGROUND ĐỘNG (LƯỚI & GLOW ORBS)*/
-        /* ========================================== */
+        /* --- AMBIENT BACKGROUND --- */
         .ambient-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
-            background-color: var(--bg);
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; background-color: var(--bg); overflow: hidden;
         }
-        
-        /* Hiệu ứng Lưới kỹ thuật (Grid) */
         .ambient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: 1;
+            background-size: 40px 40px; z-index: 1;
             mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
             -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
         }
-
-        /* Các khối sáng trôi lơ lửng */
         .glow-orb-1, .glow-orb-2 {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.12;
-            animation: float 20s infinite ease-in-out alternate;
-            z-index: 0;
+            position: absolute; width: 600px; height: 600px; border-radius: 50%;
+            filter: blur(120px); opacity: 0.12; animation: float 20s infinite ease-in-out alternate; z-index: 0;
         }
-        
-        .glow-orb-1 {
-            background: var(--accent);
-            top: -100px; right: -100px;
-        }
-        
-        .glow-orb-2 {
-            background: #4ade80; /* Màu xanh lá công nghệ */
-            bottom: -200px; left: -100px;
-            animation-delay: -10s;
-            animation-duration: 25s;
-        }
-
+        .glow-orb-1 { background: var(--accent); top: -100px; right: -100px; }
+        .glow-orb-2 { background: #4ade80; bottom: -200px; left: -100px; animation-delay: -10s; animation-duration: 25s; }
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(-50px, 50px) scale(1.1); }
             66% { transform: translate(50px, -20px) scale(0.9); }
             100% { transform: translate(0, 0) scale(1); }
         }
-        /* ========================================== */
         
         .container { width: 100%; max-width: 1000px; z-index: 10; position: relative; }
 
@@ -102,49 +71,27 @@
         }
 
         header {
-            margin-bottom: 4rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            margin-bottom: 4rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem;
+            opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
+        h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
         h1 span { color: var(--accent); }
         .subtitle { font-size: 1.125rem; color: var(--text-muted); max-width: 60ch; }
 
-        .dashboard {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
+        .dashboard { display: grid; grid-template-columns: 240px 1fr; gap: 4rem; align-items: start; }
         @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; gap: 2rem; } }
 
         .sidebar-nav {
             display: flex; flex-direction: column; gap: 0.5rem; position: sticky; top: 2rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+            opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
         }
-        
-        .content-area {
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
-        }
+        .content-area { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
 
         .nav-btn {
             background: transparent; color: var(--text-muted); border: 1px solid transparent;
             padding: 1rem 1.25rem; text-align: left; font-family: var(--font-display);
             font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;
-            cursor: pointer; border-radius: 6px; transition: all 0.3s ease;
-            position: relative;
+            cursor: pointer; border-radius: 6px; transition: all 0.3s ease; position: relative;
         }
         .nav-btn:hover { color: var(--text-main); background: rgba(255, 255, 255, 0.05); padding-left: 1.5rem; }
         .nav-btn.active { color: var(--accent); border-color: var(--border); background: var(--surface); backdrop-filter: blur(10px); }
@@ -155,90 +102,58 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .module {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 12px; padding: 2rem; margin-bottom: 2rem;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem;
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
         }
-        .module:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border-color: rgba(255, 85, 0, 0.3);
-        }
+        .module:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: rgba(255, 85, 0, 0.3); }
         
         .module-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
         .module-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; }
         
-        .badge {
-            background: var(--border); color: var(--text-muted); padding: 0.25rem 0.75rem;
-            border-radius: 99px; font-size: 0.75rem; font-family: var(--font-display);
-            text-transform: uppercase; letter-spacing: 0.05em;
-        }
+        .badge { background: var(--border); color: var(--text-muted); padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.05em; }
         .badge.highlight { background: var(--accent-dim); color: var(--accent); }
         
         p.desc { color: var(--text-muted); margin-bottom: 2rem; }
 
         .action-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            background: var(--text-main); color: var(--bg); padding: 1rem 2rem;
-            border: none; border-radius: 6px; font-weight: 600; font-size: 1rem;
-            cursor: pointer; text-decoration: none; width: 100%;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden;
+            display: inline-flex; align-items: center; justify-content: center; background: var(--text-main); color: var(--bg);
+            padding: 1rem 2rem; border: none; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer;
+            text-decoration: none; width: 100%; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden;
         }
-        .action-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
+        .action-btn:hover { opacity: 0.9; transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
         .action-btn:active { transform: scale(0.97); }
-        
         .action-btn::after {
-            content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-            background: rgba(255,255,255,0.2); border-radius: 6px; opacity: 0;
-            transform: scale(0.5); transition: opacity 0.3s, transform 0.3s;
+            content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: rgba(255,255,255,0.2);
+            border-radius: 6px; opacity: 0; transform: scale(0.5); transition: opacity 0.3s, transform 0.3s;
         }
         .action-btn:active::after { opacity: 1; transform: scale(1); transition: 0s; }
-
         .action-btn.primary { background: var(--accent); color: #fff; }
         .action-btn.primary:hover { box-shadow: 0 8px 25px rgba(255, 85, 0, 0.4); }
         .action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
 
+        /* --- SEARCH AUTOCOMPLETE --- */
         .search-container { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: stretch; }
         @media (max-width: 600px) { .search-container { flex-direction: column; } }
         .search-wrapper { position: relative; flex: 1; }
-        
         input[type="text"] {
-            width: 100%; height: 100%; background: var(--bg); border: 1px solid var(--border);
-            color: var(--text-main); padding: 1rem; border-radius: 6px;
-            font-family: var(--font-display); font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+            width: 100%; height: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text-main); padding: 1rem;
+            border-radius: 6px; font-family: var(--font-display); font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s;
         }
         input[type="text"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
 
-        @keyframes slideDownDropdown {
-            from { opacity: 0; transform: translateY(-10px) scaleY(0.95); transform-origin: top; }
-            to { opacity: 1; transform: translateY(0) scaleY(1); transform-origin: top; }
-        }
-
+        @keyframes slideDownDropdown { from { opacity: 0; transform: translateY(-10px) scaleY(0.95); transform-origin: top; } to { opacity: 1; transform: translateY(0) scaleY(1); transform-origin: top; } }
         .search-results {
-            position: absolute; top: 100%; left: 0; right: 0; background: #090a0f;
-            border: 1px solid var(--border); border-radius: 6px; margin-top: 8px;
-            max-height: 300px; overflow-y: auto; z-index: 100;
-            display: none; box-shadow: 0 15px 45px rgba(0,0,0,0.8);
+            position: absolute; top: 100%; left: 0; right: 0; background: #090a0f; border: 1px solid var(--border); border-radius: 6px; margin-top: 8px;
+            max-height: 300px; overflow-y: auto; z-index: 100; display: none; box-shadow: 0 15px 45px rgba(0,0,0,0.8);
         }
         .search-results.show { display: block; animation: slideDownDropdown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
         .search-results::-webkit-scrollbar { width: 8px; }
         .search-results::-webkit-scrollbar-track { background: transparent; }
         .search-results::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-        
-        .search-result-item {
-            display: flex; align-items: center; padding: 12px; gap: 12px;
-            cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.2s, padding-left 0.2s;
-        }
+        .search-result-item { display: flex; align-items: center; padding: 12px; gap: 12px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.2s, padding-left 0.2s; }
         .search-result-item:last-child { border-bottom: none; }
         .search-result-item:hover { background: rgba(255, 255, 255, 0.04); padding-left: 18px; }
-        
         .search-result-img { width: 80px; height: 37px; border-radius: 4px; object-fit: cover; }
         .search-result-info { display: flex; flex-direction: column; }
         .search-result-id { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
@@ -246,33 +161,42 @@
         .search-loading { padding: 1rem; text-align: center; color: var(--text-muted); font-family: var(--font-display); font-size: 0.85rem; }
 
         .status-msg { font-family: var(--font-display); font-size: 0.85rem; color: var(--text-muted); min-height: 1.5rem; margin-top: 0.5rem; }
-        
         .meta-links { margin-top: 3rem; font-size: 0.9rem; color: var(--text-muted); font-family: var(--font-display); }
         .meta-links a { color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
         .meta-links a:hover { color: var(--text-main); border-color: var(--text-main); }
 
-        .app-screenshot {
-            width: 100%; border-radius: 10px; border: 1px solid var(--border);
-            margin-top: 1.5rem; display: block; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .app-screenshot { width: 100%; border-radius: 10px; border: 1px solid var(--border); margin-top: 1.5rem; display: block; box-shadow: 0 15px 35px rgba(0,0,0,0.4); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .app-screenshot:hover { transform: scale(1.02); }
-        
         .footer-text {
-            color: var(--text-muted); font-size: 0.9rem; margin-top: 1.5rem;
-            text-align: center; font-family: var(--font-body); background: var(--surface);
-            padding: 1rem; border-radius: 8px; border: 1px dashed var(--border);
+            color: var(--text-muted); font-size: 0.9rem; margin-top: 1.5rem; text-align: center; font-family: var(--font-body);
+            background: var(--surface); padding: 1rem; border-radius: 8px; border: 1px dashed var(--border);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
+
+        /* --- GAME GRID STYLING --- */
+        .game-showcase { margin-top: 3.5rem; }
+        .showcase-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border); padding-bottom: 1rem;
+        }
+        .showcase-header h3 { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-main); font-weight: 700; }
+        
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+        .game-card {
+            background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+            cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;
+        }
+        .game-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 25px rgba(255, 85, 0, 0.15); }
+        .game-card img { width: 100%; height: 95px; object-fit: cover; border-bottom: 1px solid var(--border); }
+        .game-card-info { padding: 0.8rem; display: flex; flex-direction: column; gap: 4px; }
+        .game-title { font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .game-id { font-family: var(--font-display); font-size: 0.75rem; color: var(--text-muted); }
     </style>
 </head>
 <body>
 
-    <!-- HIỆU ỨNG BACKGROUND ĐỘNG -->
-    <div class="ambient-bg">
-        <div class="glow-orb-1"></div>
-        <div class="glow-orb-2"></div>
-    </div>
+    <!-- AMBIENT BACKGROUND -->
+    <div class="ambient-bg"><div class="glow-orb-1"></div><div class="glow-orb-2"></div></div>
 
     <div class="container">
         <!-- HEADER -->
@@ -300,9 +224,7 @@
                             <span class="badge highlight">v1005</span>
                         </div>
                         <p class="desc">Standard installation. Creates Start menu shortcuts and registers file handlers for .lua and .zip drops.</p>
-                        <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools_Setup.exe" class="action-btn primary">
-                            Download Setup (49 MB)
-                        </a>
+                        <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools_Setup.exe" class="action-btn primary">Download Setup (49 MB)</a>
                     </div>
 
                     <div class="module">
@@ -311,18 +233,12 @@
                             <span class="badge">Standalone</span>
                         </div>
                         <p class="desc">Zero installation footprint. Extract and run directly from any directory or USB drive.</p>
-                        <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools.exe" class="action-btn">
-                            Download Portable (164 MB)
-                        </a>
+                        <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools.exe" class="action-btn">Download Portable (164 MB)</a>
                     </div>
                     
                     <img src="screenshot.png" alt="BaoTools Screenshot" class="app-screenshot" style="object-fit: cover; height: auto;" onerror="this.style.display='none'">
-
                     <p class="footer-text">Manage your library, drop in .lua / .manifest / .zip files, and apply fixes, all in one app.</p>
-                    
-                    <div class="meta-links">
-                        <a href="https://github.com/DevBaor/BaoTools_1005/releases">View all releases & changelog ↗</a>
-                    </div>
+                    <div class="meta-links"><a href="https://github.com/DevBaor/BaoTools_1005/releases">View all releases & changelog ↗</a></div>
                 </div>
 
                 <!-- VIEW 2: MANIFEST FETCHER -->
@@ -343,6 +259,17 @@
                         </div>
                         <div id="lua-status" class="status-msg">Awaiting input...</div>
                     </div>
+
+                    <!-- SHOWCASE GAME GRID -->
+                    <div class="game-showcase">
+                        <div class="showcase-header">
+                            <h3>Trending Modules</h3>
+                            <span class="badge">Updated Daily</span>
+                        </div>
+                        <div class="game-grid" id="game-grid">
+                            <!-- JS Sẽ đổ danh sách game vào đây -->
+                        </div>
+                    </div>
                 </div>
 
             </main>
@@ -354,10 +281,55 @@
         function switchView(event, viewId) {
             document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-            
             document.getElementById(viewId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
+
+        // Render Popular Games Grid
+        const popularGames = [
+            { id: "730", name: "Counter-Strike 2" },
+            { id: "570", name: "Dota 2" },
+            { id: "1091500", name: "Cyberpunk 2077" },
+            { id: "1245620", name: "ELDEN RING" },
+            { id: "271590", name: "Grand Theft Auto V" },
+            { id: "1086940", name: "Baldur's Gate 3" },
+            { id: "4000", name: "Garry's Mod" },
+            { id: "252490", name: "Rust" },
+            { id: "292030", name: "The Witcher 3: Wild Hunt" },
+            { id: "1172470", name: "Apex Legends" },
+            { id: "1938090", name: "Call of Duty®" },
+            { id: "230410", name: "Warframe" }
+        ];
+
+        function renderGameGrid() {
+            const grid = document.getElementById('game-grid');
+            grid.innerHTML = popularGames.map(game => `
+                <div class="game-card" onclick="selectFromGrid('${game.id}')">
+                    <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.id}/header.jpg" alt="${game.name}" loading="lazy" onerror="this.src='https://store.cloudflare.steamstatic.com/public/images/v6/steam_desktop_logo.png'">
+                    <div class="game-card-info">
+                        <span class="game-title">${game.name}</span>
+                        <span class="game-id">APPID: ${game.id}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function selectFromGrid(appid) {
+            const input = document.getElementById('lua-appid');
+            input.value = appid;
+            // Cuộn mượt mà lên trên khung search
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Tạo hiệu ứng nhá sáng viền để người dùng biết đã chọn thành công
+            input.style.borderColor = "var(--accent)";
+            input.style.boxShadow = "0 0 0 3px var(--accent-dim)";
+            setTimeout(() => {
+                input.style.borderColor = "";
+                input.style.boxShadow = "";
+            }, 600);
+        }
+
+        // Khởi tạo Game Grid khi load web
+        document.addEventListener('DOMContentLoaded', renderGameGrid);
 
         // Autocomplete Search Logic
         const searchInput = document.getElementById('lua-appid');
