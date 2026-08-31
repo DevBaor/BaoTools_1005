@@ -33,14 +33,23 @@
             justify-content: center;
             padding: 5vmax 2rem;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .container { width: 100%; max-width: 1000px; }
+
+        /* --- 1. PAGE LOAD ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         header {
             margin-bottom: 4rem;
             border-bottom: 1px solid var(--border);
             padding-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         
         h1 {
@@ -52,7 +61,6 @@
             margin-bottom: 1rem;
         }
         h1 span { color: var(--accent); }
-        
         .subtitle { font-size: 1.125rem; color: var(--text-muted); max-width: 60ch; }
 
         .dashboard {
@@ -65,24 +73,40 @@
 
         .sidebar-nav {
             display: flex; flex-direction: column; gap: 0.5rem; position: sticky; top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
         }
+        
+        .content-area {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+        }
+
         .nav-btn {
             background: transparent; color: var(--text-muted); border: 1px solid transparent;
             padding: 1rem 1.25rem; text-align: left; font-family: var(--font-display);
             font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;
-            cursor: pointer; border-radius: 6px; transition: all 0.2s ease;
+            cursor: pointer; border-radius: 6px; transition: all 0.3s ease;
+            position: relative;
         }
-        .nav-btn:hover { color: var(--text-main); background: var(--surface); }
+        .nav-btn:hover { color: var(--text-main); background: var(--surface); padding-left: 1.5rem; }
         .nav-btn.active { color: var(--accent); border-color: var(--border); background: var(--surface); }
         .nav-btn.active::before { content: '>'; margin-right: 8px; color: var(--accent); font-weight: 700; }
 
-        .view { display: none; animation: fadeUp 0.3s ease forwards; }
-        .view.active { display: block; }
+        .view { display: none; }
+        .view.active { display: block; animation: fadeUp 0.4s ease forwards; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* --- 2. MODULE HOVER ANIMATIONS --- */
         .module {
             background: var(--surface); border: 1px solid var(--border);
             border-radius: 12px; padding: 2rem; margin-bottom: 2rem;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+        .module:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border-color: rgba(255, 85, 0, 0.3);
         }
         
         .module-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
@@ -97,41 +121,76 @@
         
         p.desc { color: var(--text-muted); margin-bottom: 2rem; }
 
+        /* --- 3. BUTTON MICRO-INTERACTIONS --- */
         .action-btn {
             display: inline-flex; align-items: center; justify-content: center;
             background: var(--text-main); color: var(--bg); padding: 1rem 2rem;
             border: none; border-radius: 6px; font-weight: 600; font-size: 1rem;
-            cursor: pointer; text-decoration: none; transition: opacity 0.2s, transform 0.1s; width: 100%;
+            cursor: pointer; text-decoration: none; width: 100%;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
         }
-        .action-btn:hover { opacity: 0.9; }
-        .action-btn:active { transform: scale(0.98); }
-        .action-btn.primary { background: var(--accent); color: #fff; }
-        .action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .action-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .action-btn:active { transform: scale(0.97); }
+        
+        /* Ripple effect */
+        .action-btn::after {
+            content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+            background: rgba(255,255,255,0.2); border-radius: 6px; opacity: 0;
+            transform: scale(0.5); transition: opacity 0.3s, transform 0.3s;
+        }
+        .action-btn:active::after { opacity: 1; transform: scale(1); transition: 0s; }
 
+        .action-btn.primary { background: var(--accent); color: #fff; }
+        .action-btn.primary:hover { box-shadow: 0 8px 25px rgba(255, 85, 0, 0.4); }
+        .action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* --- 4. SEARCH DROPDOWN ANIMATION --- */
         .search-container { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: stretch; }
         @media (max-width: 600px) { .search-container { flex-direction: column; } }
         .search-wrapper { position: relative; flex: 1; }
+        
         input[type="text"] {
             width: 100%; height: 100%; background: var(--bg); border: 1px solid var(--border);
             color: var(--text-main); padding: 1rem; border-radius: 6px;
-            font-family: var(--font-display); font-size: 1rem; outline: none; transition: border-color 0.2s;
+            font-family: var(--font-display); font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s;
         }
-        input[type="text"]:focus { border-color: var(--accent); }
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-dim);
+        }
+
+        @keyframes slideDownDropdown {
+            from { opacity: 0; transform: translateY(-10px) scaleY(0.95); transform-origin: top; }
+            to { opacity: 1; transform: translateY(0) scaleY(1); transform-origin: top; }
+        }
 
         .search-results {
             position: absolute; top: 100%; left: 0; right: 0; background: var(--surface);
             border: 1px solid var(--border); border-radius: 6px; margin-top: 8px;
-            max-height: 300px; overflow-y: auto; z-index: 100; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            max-height: 300px; overflow-y: auto; z-index: 100;
+            display: none; box-shadow: 0 15px 45px rgba(0,0,0,0.8);
         }
+        .search-results.show {
+            display: block;
+            animation: slideDownDropdown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
         .search-results::-webkit-scrollbar { width: 8px; }
         .search-results::-webkit-scrollbar-track { background: transparent; }
         .search-results::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        
         .search-result-item {
             display: flex; align-items: center; padding: 12px; gap: 12px;
-            cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.2s;
+            cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.2s, padding-left 0.2s;
         }
         .search-result-item:last-child { border-bottom: none; }
-        .search-result-item:hover { background: rgba(255, 255, 255, 0.03); }
+        .search-result-item:hover { background: rgba(255, 255, 255, 0.04); padding-left: 18px; }
+        
         .search-result-img { width: 80px; height: 37px; border-radius: 4px; object-fit: cover; }
         .search-result-info { display: flex; flex-direction: column; }
         .search-result-id { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
@@ -144,26 +203,17 @@
         .meta-links a { color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
         .meta-links a:hover { color: var(--text-main); border-color: var(--text-main); }
 
-        /* --- CSS CHO ẢNH SCREENSHOT VÀ FOOTER CỦA BẠN --- */
         .app-screenshot {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            margin-top: 1.5rem;
-            display: block;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            width: 100%; border-radius: 10px; border: 1px solid var(--border);
+            margin-top: 1.5rem; display: block; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .app-screenshot:hover { transform: scale(1.02); }
         
         .footer-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 1.5rem;
-            text-align: center;
-            font-family: var(--font-body);
-            background: var(--surface);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px dashed var(--border);
+            color: var(--text-muted); font-size: 0.9rem; margin-top: 1.5rem;
+            text-align: center; font-family: var(--font-body); background: var(--surface);
+            padding: 1rem; border-radius: 8px; border: 1px dashed var(--border);
         }
     </style>
 </head>
@@ -211,10 +261,8 @@
                         </a>
                     </div>
                     
-                    <!-- ẢNH SCREENSHOT ĐƯỢC GIỮ NGUYÊN (có thêm khung shadow cho xịn) -->
                     <img src="screenshot.png" alt="BaoTools Screenshot" class="app-screenshot" style="object-fit: cover; height: auto;" onerror="this.style.display='none'">
 
-                    <!-- FOOTER TEXT CỦA BẠN ĐƯỢC GIỮ NGUYÊN -->
                     <p class="footer-text">Manage your library, drop in .lua / .manifest / .zip files, and apply fixes, all in one app.</p>
                     
                     <div class="meta-links">
@@ -266,11 +314,11 @@
             if (searchTimeout) clearTimeout(searchTimeout);
             
             if (query.length < 2) {
-                searchResults.style.display = 'none';
+                searchResults.classList.remove('show');
                 return;
             }
 
-            searchResults.style.display = 'block';
+            searchResults.classList.add('show');
             searchResults.innerHTML = '<div class="search-loading">Querying Steam Database...</div>';
 
             searchTimeout = setTimeout(async () => {
@@ -300,12 +348,12 @@
 
         function selectGame(appid) {
             searchInput.value = appid;
-            searchResults.style.display = 'none';
+            searchResults.classList.remove('show');
         }
 
         document.addEventListener('click', (e) => {
             if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.style.display = 'none';
+                searchResults.classList.remove('show');
             }
         });
 
