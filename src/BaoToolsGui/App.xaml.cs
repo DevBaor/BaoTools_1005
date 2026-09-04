@@ -499,8 +499,8 @@ public partial class App : Application
                         var t = _host.Services.GetRequiredService<ToastService>();
                         t.ShowAction(
                             "BaoTools Update",
-                            $"Đã có bản cập nhật mới ({newVersion})! Nhấn để tải về.",
-                            "Cập nhật ngay",
+                            $"A new update is available ({newVersion})! Click to download.",
+                            "Update Now",
                             () =>
                             {
                                 try
