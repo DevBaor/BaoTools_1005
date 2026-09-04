@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Threading;
 using BaoToolsGui.Models;
 using BaoToolsGui.Services;
@@ -482,6 +482,42 @@ public partial class App : Application
 
         // Warm the hardware-appid blacklist (refreshes from GitHub if the cache is stale). Fire-and-forget.
         _ = _host.Services.GetRequiredService<HardwareAppIdService>().EnsureFreshAsync();
+
+        // Check for new BaoTools release on startup (non-blocking)
+        _ = System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                await System.Threading.Tasks.Task.Delay(3000); // Wait 3s after startup
+                var updateSvc = _host.Services.GetRequiredService<UpdateService>();
+                var mainVm = _host.Services.GetRequiredService<MainViewModel>();
+                string? newVersion = await updateSvc.CheckGitHubReleaseAsync(mainVm.VersionLabel);
+                if (!string.IsNullOrEmpty(newVersion))
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        var t = _host.Services.GetRequiredService<ToastService>();
+                        t.ShowAction(
+                            "BaoTools Update",
+                            $"Đã có bản cập nhật mới ({newVersion})! Nhấn để tải về.",
+                            "Cập nhật ngay",
+                            () =>
+                            {
+                                try
+                                {
+                                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                                    {
+                                        FileName = "https://baotools.baotranduy666666.workers.dev/",
+                                        UseShellExecute = true
+                                    });
+                                }
+                                catch { }
+                            });
+                    });
+                }
+            }
+            catch { }
+        });
     }
 
     protected override async void OnExit(ExitEventArgs e)

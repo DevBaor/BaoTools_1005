@@ -99,10 +99,7 @@ public static class AppConfig
     /// </summary>
     public static readonly string[] GithubReleasesRepos =
     [
-        "https://github.com/madoiscool/LuaTools",   // primary
-        "https://github.com/mendy-tools/BaoTools",  // backup. Create this repo + re-upload the Velopack
-                                                    // assets ONLY if the primary goes down (404s harmlessly
-                                                    // until then; UpdateService just falls through past it).
+        "https://github.com/DevBaor/BaoTools_1005", // primary
     ];
 
     /// <summary>The primary releases repo (first in <see cref="GithubReleasesRepos"/>).</summary>

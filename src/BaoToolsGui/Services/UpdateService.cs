@@ -80,4 +80,48 @@ public class UpdateService
         if (_stagedMgr is not null && _staged is not null)
             _stagedMgr.WaitExitThenApplyUpdates(_staged, silent: true, restart: false);
     }
+
+    /// <summary>
+    /// Checks GitHub Releases API for DevBaor/BaoTools_1005 to see if a newer version is released.
+    /// Returns the newer tag name (e.g. "v1006") if an update is available, or null if up to date / error.
+    /// </summary>
+    public async Task<string?> CheckGitHubReleaseAsync(string currentVersion)
+    {
+        try
+        {
+            using var client = new System.Net.Http.HttpClient();
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("BaoTools");
+            client.Timeout = TimeSpan.FromSeconds(5);
+
+            var res = await client.GetAsync("https://api.github.com/repos/DevBaor/BaoTools_1005/releases/latest");
+            if (!res.IsSuccessStatusCode) return null;
+
+            var json = await res.Content.ReadAsStringAsync();
+            using var doc = System.Text.Json.JsonDocument.Parse(json);
+            if (!doc.RootElement.TryGetProperty("tag_name", out var tagProp)) return null;
+
+            string latestTag = tagProp.GetString()?.Trim() ?? "";
+            if (string.IsNullOrEmpty(latestTag)) return null;
+
+            // Extract numeric version from tag e.g. "v1005" -> 1005
+            string cleanLatest = new string(latestTag.Where(char.IsDigit).ToArray());
+            string cleanCurrent = new string(currentVersion.Where(char.IsDigit).ToArray());
+
+            if (long.TryParse(cleanLatest, out var latestNum) && long.TryParse(cleanCurrent, out var currentNum))
+            {
+                if (latestNum > currentNum) return latestTag;
+            }
+            else if (!string.Equals(latestTag, currentVersion, StringComparison.OrdinalIgnoreCase) &&
+                     !string.Equals(latestTag, "v" + currentVersion, StringComparison.OrdinalIgnoreCase))
+            {
+                // Fallback string compare
+                return latestTag;
+            }
+        }
+        catch
+        {
+            // Network failure / rate limit / offline. Fail silently.
+        }
+        return null;
+    }
 }
