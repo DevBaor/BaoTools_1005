@@ -5,6 +5,7 @@ publish/
 Releases/
 out_portable/
 out_setup/
+out_singlefile/
 *.user
 .vs/
 *_wpftmp.csproj
