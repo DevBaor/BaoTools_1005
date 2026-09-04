@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -15,7 +15,7 @@ public partial class MainViewModel : ObservableObject
     public OnboardingViewModel Onboarding { get; }
 
     /// <summary>App version shown in the nav pane footer, e.g. "v1.0.1". Read from the assembly.</summary>
-    public string VersionLabel { get; } = "New Release";
+    public string VersionLabel { get; } = "v1005";
 
     private static string ReadVersion()
     {
