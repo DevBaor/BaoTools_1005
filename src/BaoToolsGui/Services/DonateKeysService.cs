@@ -70,7 +70,9 @@ public partial class DonateKeysService(SettingsService settings, SteamService st
     /// Walk a parsed config.vdf tree and collect (appid, key) for every object carrying a string
     /// "DecryptionKey" (the object's parent key is the appid). Only validated pairs are returned.
     /// </summary>
-    private static List<(string appid, string key)> ExtractKeys(string content)
+    /// <summary>Depot-id → decryption key pairs from a config.vdf. Internal so the depot downloader can
+    /// reuse it as a key source for depots whose lua carries no key.</summary>
+    internal static List<(string appid, string key)> ExtractKeys(string content)
     {
         var root = ParseVdf(content);
         var result = new List<(string, string)>();

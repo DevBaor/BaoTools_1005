@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- sv -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>Hem</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Lägg till</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Hantera</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} installerade i Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} fil(er) misslyckades — stäng Steam och försök igen.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Starta om Steam för att tillämpa.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Sök efter namn eller App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Läser in…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>Delad depå</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Ta bort lua-fil</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>Ta bort "{0}" (App ID {1})?
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>Ta bort ”{0}” (App ID {1})?
 
-Detta tar bort dess .lua-fil från Steam\config\stplug-in. Starta om Steam efteråt för att ändringen ska träda i kraft.</value></data>
+Detta raderar dess .lua-fil från Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Ta bort lua-filer</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Ta bort {0} lua-filer?
 
-Detta tar bort .lua-filerna från Steam\config\stplug-in. Starta om Steam efteråt för att ändringarna ska träda i kraft.</value></data>
+Detta raderar .lua-filerna från Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Borttagningen misslyckades</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Det gick inte att ta bort filen:
 {0}</value></data>
@@ -290,7 +289,6 @@ Detta tar bort .lua-filerna från Steam\config\stplug-in. Starta om Steam efter�
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} filer kunde inte tas bort.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Starta om Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Starta om Steam nu så att ändringarna träder i kraft?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Det gick inte att hitta eller starta Steam. Ange dess plats i Inställningar.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Fixar</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Läser in fixar…</value></data>
@@ -307,8 +305,7 @@ Detta tar bort .lua-filerna från Steam\config\stplug-in. Starta om Steam efter�
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Installationen misslyckades</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Det gick inte att installera — stäng Steam (eller starta om Steam) och försök igen.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Fix installerad</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest för {0} installerat — Steam startar om.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest för {0} installerat. Starta om Steam för att tillämpa.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Manifest för {0} installerat.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Spelet hittades inte</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Installera {0} i Steam först och tillämpa sedan fixen.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Fix delvis tillämpad</value></data>
@@ -348,13 +345,12 @@ Detta tar bort .lua-filerna från Steam\config\stplug-in. Starta om Steam efter�
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Det gick inte att fastställa grundspelet för denna DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Något gick fel — kontrollera din anslutning och försök igen.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Nedladdningen misslyckades — kontrollera din anslutning och försök igen.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Genereringen misslyckades — kontrollera din anslutning och försök igen.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Ersätta "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Inga depå-/DLC-ändringar — samma innehåll.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Installationen avbröts — befintliga filer är oförändrade.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Det gick inte att installera {0} fil(er) — stäng Steam (eller använd Starta om Steam) och försök igen.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} tillagt — lua + {1} manifest. Starta om Steam för att tillämpa.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} tillagt — Steam hämtar manifesten. Starta om Steam för att tillämpa.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Lade till {0}: lua + {1} manifest.</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Lade till {0}. Steam hämtar manifesten.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Öppna på SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>DELAD</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Detta ersätter den installerade lua-filen. Granska vad som ändras:</value></data>
@@ -451,9 +447,9 @@ Detta tar bort .lua-filerna från Steam\config\stplug-in. Starta om Steam efter�
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Ta bort den här förinställningen?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>”{0}” tas bort från dina sparade förinställningar. Det påverkar inte själva spelet.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Den förinställning som används kan inte tas bort.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Använder nu ”{0}”. Starta om Steam för att det ska börja gälla.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Använder nu ”{0}”.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Kunde inte byta förinställning — lua-filen kan vara upptagen.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Sparat. Starta om Steam för att det ska börja gälla.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Sparat.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Kunde inte spara — lua-filen kan vara upptagen.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Sparad som förinställning.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Spara till ”{0}”</value></data>
@@ -527,4 +523,90 @@ Detta tar bort .lua-filerna från Steam\config\stplug-in. Starta om Steam efter�
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Du har nått din dagliga Hubcap-gräns.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Det finns inget Hubcap-manifest för den här appen.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-nedladdningen misslyckades ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Nedladdningar</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Nedladdningar</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Inga nedladdningar just nu. Kom igen – ladda ner något!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Kö</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Historik</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>I kö</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Laddar ner</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Väntar på dig</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Installerar</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Klar</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Misslyckades</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Avbruten</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Avbryt</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Försök igen</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Ta bort</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Flytta upp</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Flytta ner</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Rensa historik</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Granska</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} av {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>{0} kvar</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Åtgärd krävs</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Avbröts när appen stängdes.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC-upplåsning</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Installera spelet först för att tillämpa en fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Pausad</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Verifierar…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pausa</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Återuppta</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depåfiler</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depåer · {0} av {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Kunde inte hämta depånedladdaren.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Inga dekrypteringsnycklar hittades för det här spelet.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depå {0} misslyckades: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>Laddade ner {0} depåer till {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Ladda ner</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Välj depåer att ladda ner</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Ladda ner {0} depåer ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Den här depån anger ingen version att ladda ner.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Markera alla</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Inga depåer valda</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Välj var depåfilerna ska sparas</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Inte tillräckligt med diskutrymme: kräver {0}, bara {1} ledigt.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Spara i</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Kräver {0} · {1} ledigt på {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Logga in för att ladda ner den här depån.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Logga in för att ladda ner depåer.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>hämtar manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Kunde inte hämta depåns manifest.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Förbereder · {0} av {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Hämtar nedladdaren</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Verktyg</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Kontrollerar .NET-körtiden</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Hämtar SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack öppnades.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Kunde inte installera .NET-körtiden som SteamAutoCrack behöver.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET-körtiden installerades, men Windows måste startas om innan SteamAutoCrack kan köras.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Kunde inte hämta SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Kunde inte starta SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack uppdaterades.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>allokerar filer</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>kontrollerar befintliga filer</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Avbryt nedladdning</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>{0} har redan skrivits till:
+{1}
+
+Ja - stoppa och radera filerna
+Nej - stoppa men behåll dem
+Avbryt - fortsätt hämta</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Kunde inte radera de hämtade filerna. De finns kvar i {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Kopiera App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Visa i mapp</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Kunde inte kopiera — en annan app använder urklipp.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Kunde inte öppna {0} — den kan ha flyttats eller raderats.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Ingen dekrypteringsnyckel i Lua för den här depoten.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Dekrypteringsnyckeln för depot {0} är fel.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Ingen dekrypteringsnyckel i Lua för depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Delad körtid — vanligtvis redan installerad. Kryssa i för att hämta ändå.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Ta bort alla {0} poster från hämtningshistoriken? Hämtade filer påverkas inte.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

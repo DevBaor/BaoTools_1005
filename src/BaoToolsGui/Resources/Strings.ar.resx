@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- ── Navigation (MainWindow) ── -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>الرئيسية</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>إضافة</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>إدارة</value></data>
@@ -73,7 +73,7 @@
   <data name="Nav_Footer_LoggedIn" xml:space="preserve"><value>تم تسجيل الدخول</value></data>
   <data name="Main_RestartSteam_Ask" xml:space="preserve"><value>إعادة تشغيل Steam الآن؟ سيؤدي ذلك إلى إغلاق Steam وأي ألعاب قيد التشغيل ثم إعادة تشغيله.</value></data>
 
-  <!-- ── Settings ── -->
+  
   <data name="Settings_Title" xml:space="preserve"><value>الإعدادات</value></data>
   <data name="Settings_Section_Account" xml:space="preserve"><value>الحساب</value></data>
   <data name="Settings_Section_General" xml:space="preserve"><value>عام</value></data>
@@ -126,12 +126,12 @@
   <data name="Settings_SteamWarning_NoExe" xml:space="preserve"><value>لم يُعثر على steam.exe في هذا المجلد.</value></data>
   <data name="Settings_ChooseSteamFolder" xml:space="preserve"><value>اختر مجلد Steam الخاص بك</value></data>
 
-  <!-- ── Language changed prompt ── -->
+  
   <data name="Lang_Changed_Title" xml:space="preserve"><value>تم تغيير اللغة</value></data>
   <data name="Lang_Changed_Body" xml:space="preserve"><value>أعد تشغيل التطبيق لتطبيق اللغة الجديدة.</value></data>
   <data name="Lang_Changed_Restart" xml:space="preserve"><value>أعد التشغيل الآن</value></data>
 
-  <!-- ── Home ── -->
+  
   <data name="Home_Welcome" xml:space="preserve"><value>مرحبًا بك في BaoTools</value></data>
   <data name="Home_LuasOnBoard" xml:space="preserve"><value>ملفات Lua المتوفرة</value></data>
   <data name="Home_LastAdded" xml:space="preserve"><value>آخر ما أُضيف</value></data>
@@ -147,7 +147,7 @@
   <data name="Home_NoModeSelected" xml:space="preserve"><value>لم يُحدَّد أي وضع</value></data>
   <data name="Home_ModeIs" xml:space="preserve"><value>الوضع · {0}</value></data>
 
-  <!-- ── Mode ── -->
+  
   <data name="Mode_Title" xml:space="preserve"><value>الوضع</value></data>
   <data name="Mode_Subtitle" xml:space="preserve"><value>بدّل الواجهة الخلفية المستخدمة لفتح الألعاب المُضافة عبر BaoTools — وضع واحد نشط في كل مرة.</value></data>
   <data name="Mode_CheckForUpdates" xml:space="preserve"><value>التحقق من التحديثات</value></data>
@@ -156,7 +156,7 @@
   <data name="Mode_Confirm_Body" xml:space="preserve"><value>سيُغلَق Steam ليتسنى تغيير ملفاته، ثم يُعاد تشغيله تلقائيًا. ستتوقف أي ألعاب أو تنزيلات قيد التشغيل.</value></data>
   <data name="Mode_Cancel" xml:space="preserve"><value>إلغاء</value></data>
   <data name="Mode_CloseSteamContinue" xml:space="preserve"><value>إغلاق Steam والمتابعة</value></data>
-  <!-- Mode descriptions + C# strings -->
+  
   <data name="Mode_Desc_Bst" xml:space="preserve"><value>نسخة مفتوحة المصدر من OpenSteamTools يطوّرها فريق BaoTools باستمرار. مع إصلاحات وميزات جديدة!</value></data>
   <data name="Mode_CloudRedirect_Manage" xml:space="preserve"><value>إدارة</value></data>
   <data name="Mode_CloudRedirect_LaunchFailed" xml:space="preserve"><value>تعذّر تنزيل CloudRedirect أو تشغيله.</value></data>
@@ -206,12 +206,12 @@
   <data name="Mode_Toast_InstallFailed" xml:space="preserve"><value>فشل التثبيت</value></data>
   <data name="Mode_Toast_InstallFailed_Body" xml:space="preserve"><value>حدث خطأ ما.</value></data>
 
-  <!-- ── Drop zone ── -->
+  
   <data name="Drop_Title" xml:space="preserve"><value>أفلِت ملفات ‎.lua أو ‎.manifest أو ‎.zip هنا</value></data>
   <data name="Drop_BrowseFiles" xml:space="preserve"><value>تصفّح الملفات…</value></data>
   <data name="Drop_Picker_Title" xml:space="preserve"><value>اختر ملفات ‎.lua / ‎.manifest / ‎.zip</value></data>
   <data name="Drop_Picker_Filter" xml:space="preserve"><value>Lua / manifest / zip|*.lua;*.manifest;*.zip|All files|*.*</value></data>
-  <!-- Drop installer C# strings -->
+  
   <data name="Drop_Nothing" xml:space="preserve"><value>لا شيء لتثبيته — أفلِت ملفات ‎.lua أو ‎.manifest أو ‎.zip.</value></data>
   <data name="Drop_Confirm_Replace" xml:space="preserve"><value>استبدال "{0}"؟</value></data>
   <data name="Drop_Confirm_NoChanges" xml:space="preserve"><value>لا تغييرات في المستودع/DLC — المحتوى نفسه.</value></data>
@@ -220,15 +220,14 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} ملف manifest</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>تم تثبيت {0} في Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> فشل {0} من الملفات — أغلِق Steam وأعِد المحاولة.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> أعد تشغيل Steam للتطبيق.</value></data>
 
-  <!-- ── Common ── -->
+  
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>ابحث بالاسم أو App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>جارٍ التحميل…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
   <data name="Common_AppFallback" xml:space="preserve"><value>التطبيق {0}</value></data>
 
-  <!-- ── Manage ── -->
+  
   <data name="Manage_Title" xml:space="preserve"><value>إدارة</value></data>
   <data name="Manage_Refresh" xml:space="preserve"><value>تحديث</value></data>
   <data name="Manage_Filters" xml:space="preserve"><value>عوامل التصفية</value></data>
@@ -265,7 +264,7 @@
   <data name="Manage_Clear" xml:space="preserve"><value>مسح</value></data>
   <data name="Manage_DeleteSelected" xml:space="preserve"><value>حذف المحدد</value></data>
   <data name="Manage_LoadingGames" xml:space="preserve"><value>جارٍ تحميل ألعابك…</value></data>
-  <!-- Filter/sort option DISPLAY labels (the stored value stays the English key; only the shown text is localized). -->
+  
   <data name="Manage_Opt_Any" xml:space="preserve"><value>الكل</value></data>
   <data name="Manage_Opt_Free" xml:space="preserve"><value>مجاني</value></data>
   <data name="Manage_Opt_Paid" xml:space="preserve"><value>مدفوع</value></data>
@@ -275,7 +274,7 @@
   <data name="Manage_Sort_Metacritic" xml:space="preserve"><value>Metacritic</value></data>
   <data name="Manage_Sort_MostReviewed" xml:space="preserve"><value>الأكثر مراجعةً</value></data>
   <data name="Manage_PageSize_All" xml:space="preserve"><value>الكل</value></data>
-  <!-- Manage dynamic / C# strings -->
+  
   <data name="Manage_PageLabel" xml:space="preserve"><value>الصفحة {0} من {1}</value></data>
   <data name="Manage_SelectionLabel" xml:space="preserve"><value>{0} محدد</value></data>
   <data name="Manage_FetchingDetails" xml:space="preserve"><value>جارٍ جلب تفاصيل {0} تطبيق</value></data>
@@ -294,13 +293,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>مستودع مشترك</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>إزالة ملف lua</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>إزالة "{0}" (App ID {1})؟
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>إزالة ‏«{0}» ‏(App ID {1})؟
 
-سيؤدي ذلك إلى حذف ملف ‎.lua الخاص بها من Steam\config\stplug-in. أعد تشغيل Steam بعد ذلك ليسري التغيير.</value></data>
+سيؤدي هذا إلى حذف ملف ‎.lua الخاص به من Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>إزالة ملفات lua</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>إزالة {0} من ملفات lua؟
 
-سيؤدي ذلك إلى حذف ملفات ‎.lua من Steam\config\stplug-in. أعد تشغيل Steam بعد ذلك لتسري التغييرات.</value></data>
+سيؤدي هذا إلى حذف ملفات ‎.lua من Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>فشلت الإزالة</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>تعذّر حذف الملف:
 {0}</value></data>
@@ -308,16 +307,15 @@
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>تعذّر حذف {0} من الملفات.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>إعادة تشغيل Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>إعادة تشغيل Steam الآن ليسري مفعول التغييرات؟</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>تعذّر العثور على Steam أو تشغيله. حدّد موقعه في الإعدادات.</value></data>
 
-  <!-- ── Fixes ── -->
+  
   <data name="Fixes_Title" xml:space="preserve"><value>الإصلاحات</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>جارٍ تحميل الإصلاحات…</value></data>
   <data name="Fixes_Build" xml:space="preserve"><value>الإصدار {0}</value></data>
   <data name="Fixes_Manifest" xml:space="preserve"><value>Manifest</value></data>
   <data name="Fixes_Fix" xml:space="preserve"><value>إصلاح</value></data>
-  <!-- Fixes C# strings -->
+  
   <data name="Fixes_Count" xml:space="preserve"><value>{0} إصلاح</value></data>
   <data name="Fixes_Err_Load" xml:space="preserve"><value>تعذّر تحميل الإصلاحات — تحقق من اتصالك.</value></data>
   <data name="Fixes_Empty_None" xml:space="preserve"><value>لا تتوفر إصلاحات بعد.</value></data>
@@ -328,8 +326,7 @@
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>فشل التثبيت</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>تعذّر التثبيت — أغلِق Steam (أو أعد تشغيله) وحاول مجددًا.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>تم تثبيت الإصلاح</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>تم تثبيت manifest الخاص بـ {0} — يُعاد تشغيل Steam.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>تم تثبيت manifest الخاص بـ {0}. أعد تشغيل Steam للتطبيق.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>تم تثبيت ملف بيان {0}.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>اللعبة غير موجودة</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>ثبّت {0} في Steam أولًا، ثم طبّق الإصلاح.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>طُبِّق الإصلاح جزئيًا</value></data>
@@ -340,7 +337,7 @@
   <data name="Fixes_Toast_Refreshed_Title" xml:space="preserve"><value>تم التحديث</value></data>
   <data name="Fixes_Toast_Refreshed_Body" xml:space="preserve"><value>{0} لعبة تحتوي على إصلاحات.</value></data>
 
-  <!-- ── Add / Download page ── -->
+  
   <data name="Add_Title" xml:space="preserve"><value>هيا نبدأ اللْوَنة™!</value></data>
   <data name="Add_Subtitle" xml:space="preserve"><value>أدخِل App ID، أو الصِق رابط Steam، أو ابحث باسم اللعبة</value></data>
   <data name="Add_SearchPlaceholder" xml:space="preserve"><value>أدخِل App ID أو ابحث عن الألعاب...</value></data>
@@ -366,21 +363,20 @@
   <data name="Add_Generating" xml:space="preserve"><value>جارٍ الإنشاء…</value></data>
   <data name="Add_DlcHint" xml:space="preserve"><value>ضع ملف ‎.lua في steam\config\stplug-in — تأكّد من إضافة اللعبة الأساسية أيضًا. يُحتسب ضمن حدّك اليومي (25/يوم).</value></data>
   <data name="Add_AlreadyHaveFiles" xml:space="preserve"><value>تمتلك الملفات بالفعل؟</value></data>
-  <!-- Add / Download C# strings -->
+  
   <data name="Add_SignIn_Dlc" xml:space="preserve"><value>سجّل الدخول عبر Discord لعرض فتوحات DLC.</value></data>
   <data name="Add_SignIn_Download" xml:space="preserve"><value>سجّل الدخول عبر Discord للتنزيل.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>تعذّر تحديد اللعبة الأساسية لمحتوى DLC هذا</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>حدث خطأ ما — تحقق من اتصالك وحاول مجددًا.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>فشل التنزيل — تحقق من اتصالك وحاول مجددًا.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>فشل الإنشاء — تحقق من اتصالك وحاول مجددًا.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>استبدال "{0}"؟</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>لا تغييرات في المستودع/DLC — المحتوى نفسه.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>أُلغي التثبيت — تُركت الملفات الحالية دون تغيير.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>تعذّر تثبيت {0} من الملفات — أغلِق Steam (أو استخدم إعادة تشغيل Steam) وحاول مجددًا.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>تمت إضافة {0} — ملف lua + {1} ملف manifest. أعد تشغيل Steam للتطبيق.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>تمت إضافة {0} — سيجلب Steam ملفات manifest. أعد تشغيل Steam للتطبيق.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>تمت إضافة {0}: lua + {1} ملف بيان.</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>تمت إضافة {0}. سيجلب Steam ملفات البيان.</value></data>
 
-  <!-- ── Confirm overlay (overwrite diff) ── -->
+  
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>فتح في SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>مشترك</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>سيؤدي ذلك إلى استبدال ملف lua المثبَّت. راجع ما سيتغيّر:</value></data>
@@ -477,9 +473,9 @@
   <data name="Builds_Delete_Title" xml:space="preserve"><value>حذف هذا الإعداد المسبق؟</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>ستتم إزالة «{0}» من إعداداتك المسبقة المحفوظة. هذا لا يؤثر على اللعبة نفسها.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>لا يمكن حذف الإعداد المسبق المستخدم حاليًا.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>يُستخدم الآن «{0}». أعد تشغيل Steam ليسري المفعول.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>يتم الآن استخدام ‏«{0}».</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>تعذّر تبديل الإعداد المسبق — قد يكون ملف lua قيد الاستخدام.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>تم الحفظ. أعد تشغيل Steam ليسري المفعول.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>تم الحفظ.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>تعذّر الحفظ — قد يكون ملف lua قيد الاستخدام.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>تم الحفظ كإعداد مسبق.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>حفظ في «{0}»</value></data>
@@ -553,4 +549,90 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>لقد بلغت حدّك اليومي في Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>لا يوجد بيان Hubcap متاح لهذا التطبيق.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>فشل التنزيل من Hubcap ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>التنزيلات</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>التنزيلات</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>لا توجد تنزيلات الآن. ابدأ بتنزيل شيء ما!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>قائمة الانتظار</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>السجل</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>في الانتظار</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>جارٍ التنزيل</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>بانتظارك</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>جارٍ التثبيت</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>تم</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>فشل</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>أُلغي</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>إلغاء</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>إعادة المحاولة</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>إزالة</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>تحريك لأعلى</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>تحريك لأسفل</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>مسح السجل</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>مراجعة</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} من {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>يتبقى {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>مطلوب إجراء</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>توقّف عند إغلاق التطبيق.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>فتح DLC</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>ثبّت اللعبة أولاً لتطبيق الإصلاح.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>متوقف مؤقتًا</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>جارٍ التحقق…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>إيقاف مؤقت</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>استئناف</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>ملفات المستودع</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>المستودعات · {0} من {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>تعذّر الحصول على أداة تنزيل المستودعات.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>لم يتم العثور على مفاتيح فك تشفير لهذه اللعبة.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>فشل المستودع {0}: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>تم تنزيل {0} مستودع إلى {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>تنزيل</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>اختر المستودعات المراد تنزيلها</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>تنزيل {0} مستودع ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>هذا المستودع لا يعلن عن أي إصدار للتنزيل.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>تحديد الكل</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>لم يتم اختيار أي مستودع</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>اختر مكان حفظ ملفات المستودع</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>لا توجد مساحة كافية على القرص: يحتاج {0}، والمتاح {1} فقط.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>حفظ في</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>يحتاج {0} · متاح {1} على {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>سجّل الدخول لتنزيل هذا المستودع.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>سجّل الدخول لتنزيل المستودعات.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>جارٍ جلب الملف</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>تعذّر الحصول على ملف manifest لهذا المستودع.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>جارٍ التحضير · {0} من {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>جارٍ إحضار أداة التنزيل</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>أداة</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>جارٍ فحص بيئة تشغيل ‎.NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>جارٍ إحضار SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>تم فتح SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>تعذّر تثبيت بيئة تشغيل ‎.NET التي يحتاجها SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>تم تثبيت بيئة تشغيل ‎.NET، لكن يجب إعادة تشغيل Windows قبل أن يعمل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>تعذّر تنزيل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>تعذّر تشغيل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>تم تحديث SteamAutoCrack.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>تخصيص الملفات</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>فحص الملفات الموجودة</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>إلغاء التنزيل</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>تمت كتابة {0} بالفعل إلى:
+{1}
+
+نعم - إيقاف وحذف تلك الملفات
+لا - إيقاف مع الاحتفاظ بها
+إلغاء - متابعة التنزيل</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>تعذّر حذف الملفات التي تم تنزيلها. لا تزال في {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>نسخ App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>إظهار في المجلد</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>تعذّر النسخ — تطبيق آخر يستخدم الحافظة.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>تعذّر فتح {0} — ربما تم نقله أو حذفه.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>لا يوجد مفتاح فك تشفير في ملف Lua لهذا الـ depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>مفتاح فك التشفير الخاص بالـ depot ‏{0} غير صحيح.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>لا يوجد مفتاح فك تشفير في ملف Lua للـ depot ‏{0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>بيئة تشغيل مشتركة — مثبّتة غالبًا بالفعل. حدّدها للتنزيل على أي حال.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>هل تريد إزالة كل الإدخالات ({0}) من سجل التنزيلات؟ لن تتأثر الملفات التي تم تنزيلها.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

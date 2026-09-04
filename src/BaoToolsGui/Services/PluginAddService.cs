@@ -1,6 +1,7 @@
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.IO;
 using BaoToolsGui.Models;
+using BaoToolsGui.Services.Downloads;
 
 namespace BaoToolsGui.Services;
 
@@ -16,7 +17,8 @@ public class PluginAddService(
     HubcapService hubcap,
     SettingsService settings,
     AuthService auth,
-    LuaInstaller installer)
+    DownloadQueue queue,
+    ManifestJobFactory jobs)
 {
     private const string HubcapSourceName = "Sadie (Morrenus)";
 
@@ -50,19 +52,6 @@ public class PluginAddService(
     }
 
     private readonly ConcurrentDictionary<long, AddState> _states = new();
-
-    /// <summary>True if the file begins with the ZIP magic (PK\x03\x04). A bare .lua returns false so
-    /// it's installed as a loose lua instead of unzipped.</summary>
-    private static bool IsZip(string path)
-    {
-        try
-        {
-            using var fs = File.OpenRead(path);
-            Span<byte> sig = stackalloc byte[4];
-            return fs.Read(sig) == 4 && sig[0] == 0x50 && sig[1] == 0x4B && sig[2] == 0x03 && sig[3] == 0x04;
-        }
-        catch { return false; }
-    }
 
     public AddState? GetState(long appId) => _states.TryGetValue(appId, out var s) ? s : null;
 
@@ -269,6 +258,18 @@ public class PluginAddService(
         catch { }
     }
 
+    /// <summary>
+    /// Queue the pick through the shared <see cref="DownloadQueue"/> and mirror its progress into this
+    /// service's plain-POCO state, which the store-page popup polls over HTTP.
+    /// </summary>
+    /// <remarks>
+    /// The download and install themselves live in <c>ManifestJobFactory</c>, the same code path the Add
+    /// page uses. Mirroring (rather than data binding) is correct here: <see cref="SourceRow"/> is
+    /// serialized to JSON on each poll, so it only needs to hold the latest values.
+    ///
+    /// Routing through the queue also makes the popup's Cancel button work for the first time: it posts
+    /// to /cancel/{appid}, which now resolves the same queue item this method enqueued.
+    /// </remarks>
     private async Task DownloadAsync(long appId, AddState state, SourceRow row)
     {
         if (state.Busy) return;
@@ -279,44 +280,39 @@ public class PluginAddService(
         row.Downloading = true;
         row.Indeterminate = true;
         row.Progress = 0;
+
         try
         {
-            var progress = new Progress<double?>(p =>
+            var job = jobs.CreateManifestJob(appId, state.GameName, row.Name, row.NeedsKey);
+            var item = queue.Enqueue(job);
+
+            void OnChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
             {
-                row.Indeterminate = p is null;
-                if (p is not null) row.Progress = p.Value * 100;
-            });
-
-            DownloadedFile dl = row.NeedsKey
-                ? await hubcap.DownloadManifestAsync(appId.ToString(), settings.HubcapApiKey ?? "", progress)
-                : await api.DownloadManifestAsync(appId.ToString(), row.Name, state.GameName, progress);
-
-            // Some sources (e.g. Luie) return a BARE .lua, not a zip. Sniff the bytes and install
-            // accordingly (same as DownloadViewModel.InstallZipAndReport). Trusting the extension /
-            // always unzipping throws "End of Central Directory record could not be found".
-            var result = IsZip(dl.FilePath)
-                ? installer.InstallZip(dl.FilePath, appId)
-                : installer.InstallLua(dl.FilePath, appId);
-            try { if (File.Exists(dl.FilePath)) File.Delete(dl.FilePath); } catch { }
-
-            if (result.Error is not null)
-            {
-                state.Error = result.Error;
-                state.InstallFailed = true;
-                PluginLog.Log($"PluginAdd.Download appid={appId} source='{row.Name}' INSTALL ERROR: {result.Error}");
+                row.Indeterminate = item.IsIndeterminate;
+                row.Progress = item.Percent;
+                row.Downloading = item.IsActive;
             }
-            else
+            item.PropertyChanged += OnChanged;
+
+            try
             {
-                // Reuse the GUI add flow's localized strings (see DownloadViewModel.ReportInstall) instead
-                // of a hardcoded English string, so the plugin popup is translated + consistent with the app.
-                // "· via {source}" mirrors the GUI's FastFetch suffix, naming the source this add came from.
-                var name = string.IsNullOrEmpty(state.GameName) ? "lua" : state.GameName;
-                state.InstallStatus = result.ManifestCount > 0
-                    ? string.Format(Resources.Strings.Add_Status_AddedManifests, name, result.ManifestCount)
-                    : string.Format(Resources.Strings.Add_Status_AddedFetch, name);
-                state.InstallStatus += " " + string.Format(Resources.Strings.Add_FastFetch_Via, row.Name);
-                PluginLog.Log($"PluginAdd.Download appid={appId} source='{row.Name}' OK: {state.InstallStatus}");
+                var result = await item.Completion;
+
+                if (result is null || !result.Ok)
+                {
+                    state.Error = result?.Message ?? item.Message;
+                    state.InstallFailed = true;
+                    PluginLog.Log($"PluginAdd.Download appid={appId} source='{row.Name}' FAILED: {state.Error}");
+                }
+                else
+                {
+                    // "· via {source}" mirrors the GUI's FastFetch suffix, naming the source this add used.
+                    state.InstallStatus = result.Message
+                        + " " + string.Format(Resources.Strings.Add_FastFetch_Via, row.Name);
+                    PluginLog.Log($"PluginAdd.Download appid={appId} source='{row.Name}' OK: {state.InstallStatus}");
+                }
             }
+            finally { item.PropertyChanged -= OnChanged; }
         }
         catch (Exception ex)
         {

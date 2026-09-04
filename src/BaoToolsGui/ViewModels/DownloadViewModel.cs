@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BaoToolsGui.Models;
 using BaoToolsGui.Services;
+using BaoToolsGui.Services.Downloads;
 
 namespace BaoToolsGui.ViewModels;
 
@@ -34,11 +35,16 @@ public partial class SourceRowViewModel : ObservableObject
 
     [ObservableProperty] private string? _statsText;
     [ObservableProperty] private bool _isSupporter;
-    [ObservableProperty] private bool _isDownloading;
-    [ObservableProperty] private double _progress;
-    [ObservableProperty] private bool _isProgressIndeterminate;
 
-    public bool CanDownload => IsAvailable && !IsLocked;
+    /// <summary>The queue item for this row's in-flight download, if any. The row's progress bar binds
+    /// straight through to it, so the queue stays the only owner of download state.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanDownload))]
+    private DownloadItem? _queueItem;
+
+    // Guard against re-queuing from a double-click while the item is still live. The queue's DedupeKey
+    // would collapse it anyway; this just keeps the button from looking clickable.
+    public bool CanDownload => IsAvailable && !IsLocked && QueueItem?.IsActive != true;
 
     public SourceRowViewModel(DownloadViewModel parent, string name, string status)
     {
@@ -52,7 +58,7 @@ public partial class SourceRowViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private Task DownloadAsync() => _parent.DownloadFromSourceAsync(this);
+    private async Task DownloadAsync() => await _parent.DownloadFromSourceAsync(this);
 
     [RelayCommand]
     private void OpenDiscord()
@@ -81,6 +87,8 @@ public partial class DownloadViewModel : ObservableObject
     private readonly SteamAppInfoCache _appInfo;
     private readonly SteamDepotInfo _depotInfo;
     private readonly HardwareAppIdService _hardware;
+    private readonly DownloadQueue _queue;
+    private readonly ManifestJobFactory _jobs;
     private CancellationTokenSource? _searchCts;
     private CancellationTokenSource? _detailsCts;
 
@@ -149,8 +157,8 @@ public partial class DownloadViewModel : ObservableObject
     // haveCount > 0 → keys exist; missingCount == 0 → addappid alone suffices (mirrors the website rule)
     public bool CanGenerateDlc => DlcInfo is not null && (DlcInfo.HaveCount > 0 || DlcInfo.MissingCount == 0);
 
-    [ObservableProperty] private bool _isGenerating;
-    [ObservableProperty] private double _generateProgress;
+    /// <summary>True while the DLC job is queued or running (drives the button's spinner/disabled state).</summary>
+    public bool IsGenerating => DlcQueueItem?.IsActive == true;
     [ObservableProperty] private string? _error;
 
     [ObservableProperty]
@@ -175,6 +183,9 @@ public partial class DownloadViewModel : ObservableObject
     public async Task ProtocolInstall(long appId, Action<string, bool>? onComplete = null)
     {
         _silentInstall = onComplete is not null;
+        // Cleared so the completion await below can't latch onto a PREVIOUS protocol install's item and
+        // report its stale outcome when this one enqueues nothing (no sources, or the fetch failed).
+        _lastEnqueued = null;
         FastFetch = true;
         _suppressSearch = true;
         SearchText = appId.ToString();
@@ -197,11 +208,14 @@ public partial class DownloadViewModel : ObservableObject
         if (HasDetails)
             await FetchCommand.ExecuteAsync(null);
 
-        // In FastFetch the chain (fetch → download → install) completes inline by the time we get here,
-        // and the overwrite overlay is skipped in silent mode, so the outcome is fully settled. Report
-        // InstallStatus on success/handled-failure, else whatever Error the chain left behind.
+        // The download is no longer inline: FetchAsync only ENQUEUES it. Wait for the queue item to
+        // reach a terminal state before reporting, otherwise the caller's tray balloon fires early and
+        // (on a cold silent launch) App's post-balloon shutdown timer can kill the app mid-download.
         if (onComplete is not null)
         {
+            var item = _lastEnqueued;
+            if (item is not null) await item.Completion;
+
             if (InstallStatus is not null)
                 onComplete(InstallStatus, InstallFailed);
             else
@@ -209,6 +223,10 @@ public partial class DownloadViewModel : ObservableObject
             _silentInstall = false;
         }
     }
+
+    // The most recent item this view model queued. ProtocolInstall awaits it so the silent-install
+    // callback reflects the real outcome rather than "the download started".
+    private DownloadItem? _lastEnqueued;
 
     // ── Steam-plugin headless add (reflected over HTTP; no window) ────
     /// <summary>Headless add driven by the Steam store plugin. Seeds the appid and runs the SAME
@@ -279,8 +297,18 @@ public partial class DownloadViewModel : ObservableObject
     public bool HasDiffAdded => DiffAdded.Count > 0;
     public bool HasDiffRemoved => DiffRemoved.Count > 0;
 
-    // Set while a confirm is pending so the confirm/cancel commands know what to install.
-    private (string zipPath, long appId)? _pendingInstall;
+    // Set while an overwrite overlay is open; the confirm/cancel commands complete it, which unblocks
+    // the queue job waiting in ConfirmOverwriteAsync.
+    private TaskCompletionSource<bool>? _pendingConfirm;
+
+    // Only one overlay can be shown at a time (there is a single set of overlay properties), so
+    // simultaneous confirmations serialize here rather than overwriting each other's diff.
+    private readonly SemaphoreSlim _confirmGate = new(1, 1);
+
+    /// <summary>The in-flight DLC generate, so the DLC button can disable itself while it runs.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsGenerating))]
+    private DownloadItem? _dlcQueueItem;
 
     private bool _suppressSearch;
     private string? _fastFetchSource;
@@ -295,7 +323,8 @@ public partial class DownloadViewModel : ObservableObject
     public DownloadViewModel(BaoToolsApiClient api, HubcapService hubcap, SettingsService settings,
         AuthService auth, ToastService toast, LuaInstaller installer,
         SteamAppListCache appList, SteamAppInfoCache appInfo, SteamDepotInfo depotInfo,
-        HardwareAppIdService hardware, DropInstallViewModel drop)
+        HardwareAppIdService hardware, DropInstallViewModel drop,
+        DownloadQueue queue, ManifestJobFactory jobs)
     {
         _api = api;
         _hubcap = hubcap;
@@ -307,6 +336,8 @@ public partial class DownloadViewModel : ObservableObject
         _appInfo = appInfo;
         _depotInfo = depotInfo;
         _hardware = hardware;
+        _queue = queue;
+        _jobs = jobs;
         Drop = drop;
         _fastFetch = settings.FastFetch;
     }
@@ -404,11 +435,10 @@ public partial class DownloadViewModel : ObservableObject
             await Task.Delay(400, cts.Token);
             Details = await _api.GetDetailsAsync(appid, cts.Token);
             OnPropertyChanged(nameof(GenresText));
-            if (Details is null) { Error = "Không tìm thấy thông tin game này."; return; }
             if (HasDetails) await FetchCommand.ExecuteAsync(null);
         }
         catch (OperationCanceledException) { }
-        catch { Details = null; Error = "Lỗi kết nối khi tải dữ liệu từ Steam."; }
+        catch { Details = null; }
     }
 
     [RelayCommand]
@@ -427,7 +457,6 @@ public partial class DownloadViewModel : ObservableObject
         {
             Details = await _api.GetDetailsAsync(result.AppId.ToString(), cts.Token);
             OnPropertyChanged(nameof(GenresText));
-            if (HasDetails) await FetchCommand.ExecuteAsync(null);
         }
         catch (OperationCanceledException) { }
         catch { Details = null; }
@@ -451,7 +480,6 @@ public partial class DownloadViewModel : ObservableObject
         {
             Details = await _api.GetDetailsAsync(item.AppId.ToString(), cts.Token);
             OnPropertyChanged(nameof(GenresText));
-            if (HasDetails) await FetchCommand.ExecuteAsync(null);
         }
         catch (OperationCanceledException) { }
         catch { Details = null; }
@@ -624,227 +652,199 @@ public partial class DownloadViewModel : ObservableObject
 
     // ── Downloads ───────────────────────────────────────────────────
 
-    /// <summary>Base-game manifest zip: download, then install (confirming first if a lua already exists).</summary>
-    public async Task DownloadFromSourceAsync(SourceRowViewModel source)
+    /// <summary>
+    /// Base-game manifest zip. Builds a job and hands it to the shared queue; the download, the
+    /// overwrite confirmation and the install all happen there.
+    /// </summary>
+    /// <remarks>
+    /// Returns as soon as the item is queued, so several games can be added back to back. The old
+    /// "one at a time" behaviour came from a <c>Sources.Any(s =&gt; s.IsDownloading)</c> gate; duplicate
+    /// suppression is now the queue's DedupeKey, and the queue's concurrency cap (default 1) decides
+    /// how many actually run at once.
+    /// </remarks>
+    public async Task<DownloadItem?> DownloadFromSourceAsync(SourceRowViewModel source)
     {
-        if (Details is null || Sources.Any(s => s.IsDownloading)) return;
+        if (Details is null) return null;
 
         if (!_settings.CanAddGame())
         {
             Error = "Bạn đã đạt giới hạn 15 lượt thêm game/ngày. Vui lòng quay lại vào ngày mai.";
-            return;
+            return null;
         }
 
         // Hubcap downloads use the user's OWN key and never touch lua.tools, so a guest with a key
         // configured can download without signing in. Every other source still needs a lua.tools account.
         bool hubcapWithKey = source.NeedsKey && !string.IsNullOrEmpty(_settings.HubcapApiKey);
-        if (!hubcapWithKey && await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return;
+        if (!hubcapWithKey && await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return null;
+
         Error = null;
         LastDownload = null;
         InstallStatus = null;
+
+        // Captured now, not read from Details later: once the download is backgrounded the user can load
+        // a different game before the confirmation appears, and the dialog must still name THIS one.
         long appId = Details.AppId;
-        source.IsDownloading = true;
-        source.IsProgressIndeterminate = true;
-        try
-        {
-            var progress = new Progress<double?>(p =>
-            {
-                source.IsProgressIndeterminate = p is null;
-                if (p is not null) source.Progress = p.Value * 100;
-            });
-            // Key-gated (Hubcap) sources download DIRECTLY from hubcapmanifest.com with the user's key;
-            // everything else goes through lua.tools and counts toward the 25/day limit.
-            DownloadedFile download;
-            if (source.NeedsKey)
-            {
-                download = await _hubcap.DownloadManifestAsync(
-                    appId.ToString(), _settings.HubcapApiKey ?? "", progress);
-            }
-            else
-            {
-                download = await _api.DownloadManifestAsync(
-                    appId.ToString(), source.Name, Details.Name, progress);
-            }
-            LastDownload = download;
+        string gameName = Details.Name;
+        bool needsKey = source.NeedsKey;
 
-            if (source.NeedsKey) await ApplyHubcapStateAsync(); // refresh the key's X/Y usage badge
-            else await RefreshStandardUsageAsync(); // non-Hubcap usage just changed (counts toward 25/day)
+        var job = _jobs.CreateManifestJob(
+            appId, gameName, source.Name, needsKey,
+            // Silent/headless installs have no surfaced window to confirm on, so they skip the gate.
+            confirm: _silentInstall ? null : (file, _, ct) => ConfirmOverwriteAsync(file, appId, gameName, ct),
+            onFinished: (item, result) => OnManifestFinished(item, result, needsKey),
+            onReveal: () => NavigateToGame?.Invoke(appId));
 
-            // If a lua for this game is already installed, confirm with a before/after diff first, unless
-            // this is a silent install, which has no surfaced window and just overwrites.
-            string? existing = _installer.ReadInstalledLua(appId);
-            if (!_silentInstall && existing is not null && await ShowOverwriteConfirmAsync(existing, download.FilePath, appId))
-                return; // waiting on the user; confirm/cancel command finishes the install
-
-            InstallZipAndReport(download.FilePath, appId);
-        }
-        catch (ApiException ex)
-        {
-            Error = ex.Message;
-        }
-        catch (Exception)
-        {
-            Error = Resources.Strings.Add_Err_Download;
-        }
-        finally
-        {
-            source.IsDownloading = false;
-            source.Progress = 0;
-            source.IsProgressIndeterminate = false;
-        }
+        var queued = _queue.Enqueue(job);
+        source.QueueItem = queued;
+        _lastEnqueued = queued;
+        return queued;
     }
 
     /// <summary>DLC lua: download and install silently (it's just an unlock, no confirm).</summary>
     [RelayCommand]
     private async Task GenerateDlcAsync()
     {
-        if (Details?.BaseAppId is null || IsGenerating) return;
+        if (Details?.BaseAppId is null) return;
         if (await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return;
+
         Error = null;
         LastDownload = null;
         InstallStatus = null;
-        long appId = Details.AppId;
-        IsGenerating = true;
-        try
-        {
-            var download = await _api.GenerateDlcAsync(appId.ToString(), Details.BaseAppId, Details.Name, null);
-            LastDownload = download;
 
-            var result = _installer.InstallLua(download.FilePath, appId);
-            ReportInstall(result);
-            DeleteStaged(download.FilePath); // installed. Drop the temp staging copy
-            await RefreshStandardUsageAsync(); // DLC generate counts toward 25/day
-        }
-        catch (ApiException ex)
+        long appId = Details.AppId;
+        var job = _jobs.CreateDlcJob(
+            appId, Details.BaseAppId, Details.Name,
+            onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),
+            onReveal: () => NavigateToGame?.Invoke(appId));
+
+        DlcQueueItem = _lastEnqueued = _queue.Enqueue(job);
+    }
+
+    /// <summary>
+    /// Terminal callback for a manifest/DLC job: drive the install banner and refresh the usage badge.
+    /// Runs on the dispatcher.
+    /// </summary>
+    private void OnManifestFinished(DownloadItem item, JobResult? result, bool needsKey)
+    {
+        _installedAppId = item.AppId; // the banner's "Reveal" target, even after the search is cleared
+
+        if (result is null)
         {
-            Error = ex.Message;
+            // Cancelled, or failed before the install phase. item.Message already holds the reason.
+            if (item.Status == DownloadStatus.Failed) Error = item.Message;
+            else { InstallStatus = item.Message; InstallFailed = false; }
         }
-        catch (Exception)
+        else
         {
-            Error = Resources.Strings.Add_Err_Generate;
+            InstallFailed = !result.Ok;
+            InstallStatus = result.Message;
+            if (result.Ok) _settings.IncrementAddCount();
+            if (result.Ok && _fastFetchSource is not null)
+            {
+                InstallStatus += " " + string.Format(Resources.Strings.Add_FastFetch_Via, _fastFetchSource);
+                _fastFetchSource = null;
+            }
         }
-        finally
-        {
-            IsGenerating = false;
-        }
+
+        // Usage just changed: Hubcap against the key's own quota, everything else against the 25/day.
+        _ = needsKey ? ApplyHubcapStateAsync() : RefreshStandardUsageAsync();
     }
 
     // ── Install + overwrite confirm ─────────────────────────────────
 
-    /// <summary>Build the before/after diff and open the confirm overlay. Returns true if shown.</summary>
-    private async Task<bool> ShowOverwriteConfirmAsync(string oldLuaPath, string newZipPath, long appId)
+    /// <summary>
+    /// The queue's confirmation gate for a manifest whose lua is already installed: show the
+    /// before/after diff overlay and block until the user answers. True installs, false discards.
+    /// </summary>
+    /// <remarks>
+    /// <para>Called by <see cref="DownloadQueue"/> from a background thread, so everything here marshals
+    /// to the dispatcher. While this is awaited the item has already released its concurrency slot, so
+    /// an overlay the user ignores delays only its own install.</para>
+    ///
+    /// <para><paramref name="appId"/> and <paramref name="gameName"/> are passed in rather than read
+    /// from <c>Details</c>: the user can load a different game while this download is in flight, and the
+    /// overlay must describe the game that was actually downloaded.</para>
+    ///
+    /// <para>Only one overlay can be open at a time (there is a single set of overlay properties), so
+    /// concurrent confirmations queue behind <c>_confirmGate</c>.</para>
+    /// </remarks>
+    private async Task<bool> ConfirmOverwriteAsync(
+        DownloadedFile file, long appId, string gameName, CancellationToken ct)
     {
-        var oldLua = LuaFileParser.Parse(oldLuaPath, appId);
-        var newLua = ExtractLuaFromZip(newZipPath, appId);
-        if (newLua is null) { InstallZipAndReport(newZipPath, appId); return false; } // can't diff. Just install
+        // No existing lua → nothing to confirm against, install straight away.
+        string? existing = _installer.ReadInstalledLua(appId);
+        if (existing is null) return true;
 
-        var diff = LuaFileParser.Diff(oldLua, newLua);
-
-        // Names from caches + one steamcmd call (cached per app) → real names, sizes, OS, language.
-        await _appList.EnsureLoadedAsync();
-        _depotsById = await BuildDepotLookupAsync(appId);
-        DiffAdded = diff.Added.Select(ToDiffRow).ToList();
-        DiffRemoved = diff.Removed.Select(ToDiffRow).ToList();
-        ConfirmTitle = string.Format(Resources.Strings.Add_Confirm_Replace, Details?.Name ?? appId.ToString());
-        ConfirmNoChanges = diff.HasChanges ? null : Resources.Strings.Add_Confirm_NoChanges;
-        _pendingInstall = (newZipPath, appId);
-        IsConfirmingOverwrite = true;
-
-        // Lazily resolve any DLC rows still showing a bare id via appdetails, then rebuild.
-        var unnamed = diff.Added.Concat(diff.Removed)
-            .Where(e => DiffDisplayName(e) is null)
-            .Select(e => e.Id).Distinct().ToList();
-        if (unnamed.Count > 0)
+        await _confirmGate.WaitAsync(ct);
+        try
         {
-            await Parallel.ForEachAsync(unnamed, new ParallelOptions { MaxDegreeOfParallelism = 4 },
-                async (id, _) => await _appInfo.ResolveAsync(id));
-            if (IsConfirmingOverwrite && _pendingInstall is { } p && p.appId == appId)
+            var oldLua = LuaFileParser.Parse(existing, appId);
+            var newLua = ExtractLuaFromZip(file.FilePath, appId);
+            if (newLua is null) return true; // can't diff (bare lua / unreadable zip) → just install
+
+            var diff = LuaFileParser.Diff(oldLua, newLua);
+            var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+
+            await App.Current.Dispatcher.InvokeAsync(async () =>
             {
+                // Names from caches + one steamcmd call (cached per app) → real names, sizes, OS, language.
+                await _appList.EnsureLoadedAsync();
+                _depotsById = await BuildDepotLookupAsync(appId);
                 DiffAdded = diff.Added.Select(ToDiffRow).ToList();
                 DiffRemoved = diff.Removed.Select(ToDiffRow).ToList();
-            }
+                ConfirmTitle = string.Format(Resources.Strings.Add_Confirm_Replace, gameName);
+                ConfirmNoChanges = diff.HasChanges ? null : Resources.Strings.Add_Confirm_NoChanges;
+                _pendingConfirm = tcs;
+                IsConfirmingOverwrite = true;
+
+                // Lazily resolve any DLC rows still showing a bare id via appdetails, then rebuild.
+                var unnamed = diff.Added.Concat(diff.Removed)
+                    .Where(e => DiffDisplayName(e) is null)
+                    .Select(e => e.Id).Distinct().ToList();
+                if (unnamed.Count > 0)
+                {
+                    await Parallel.ForEachAsync(unnamed, new ParallelOptions { MaxDegreeOfParallelism = 4 },
+                        async (id, _) => await _appInfo.ResolveAsync(id));
+                    if (IsConfirmingOverwrite && ReferenceEquals(_pendingConfirm, tcs))
+                    {
+                        DiffAdded = diff.Added.Select(ToDiffRow).ToList();
+                        DiffRemoved = diff.Removed.Select(ToDiffRow).ToList();
+                    }
+                }
+            });
+
+            // Cancelling the download while the overlay is open closes it and declines.
+            await using var reg = ct.Register(() => tcs.TrySetResult(false));
+            bool answer = await tcs.Task;
+
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                if (ReferenceEquals(_pendingConfirm, tcs))
+                {
+                    _pendingConfirm = null;
+                    IsConfirmingOverwrite = false;
+                }
+            });
+            return answer;
         }
-        return true;
+        finally
+        {
+            _confirmGate.Release();
+        }
     }
 
     [RelayCommand]
     private void ConfirmOverwrite()
     {
         IsConfirmingOverwrite = false;
-        if (_pendingInstall is { } p) InstallZipAndReport(p.zipPath, p.appId);
-        _pendingInstall = null;
+        _pendingConfirm?.TrySetResult(true);
     }
 
     [RelayCommand]
     private void CancelOverwrite()
     {
         IsConfirmingOverwrite = false;
-        if (_pendingInstall is { } p) DeleteStaged(p.zipPath); // not installing. Don't leave it in temp
-        _pendingInstall = null;
-        InstallStatus = Resources.Strings.Add_Status_Cancelled;
-        InstallFailed = false;
-    }
-
-    private void InstallZipAndReport(string zipPath, long appId)
-    {
-        _installedAppId = appId; // remember for the banner's Reveal, even after the search is cleared
-        // The download is always saved as "<appid>.zip", but some sources return a BARE .lua (no zip
-        // wrapper). Unzipping that throws "End of Central Directory record could not be found". Sniff
-        // the bytes instead of trusting the extension: real zips start with "PK\x03\x04".
-        ReportInstall(IsZip(zipPath)
-            ? _installer.InstallZip(zipPath, appId)
-            : _installer.InstallLua(zipPath, appId));
-        DeleteStaged(zipPath); // installed into Steam. The temp staging copy is no longer needed
-    }
-
-    /// <summary>Best-effort delete of a staged download after it's been installed, so nothing piles
-    /// up in the temp staging folder.</summary>
-    private static void DeleteStaged(string path)
-    {
-        try { if (File.Exists(path)) File.Delete(path); } catch { /* best effort */ }
-    }
-
-    /// <summary>True if the file begins with the ZIP local-file-header magic (PK\x03\x04). A bare .lua
-    /// (or any non-zip the server returned under a .zip name) returns false → install it as a loose lua.</summary>
-    private static bool IsZip(string path)
-    {
-        try
-        {
-            using var fs = File.OpenRead(path);
-            Span<byte> sig = stackalloc byte[4];
-            return fs.Read(sig) == 4 && sig[0] == 0x50 && sig[1] == 0x4B && sig[2] == 0x03 && sig[3] == 0x04;
-        }
-        catch { return false; }
-    }
-
-    /// <summary>Turn an InstallResult into the result banner text/state.</summary>
-    private void ReportInstall(InstallResult result)
-    {
-        if (result.Error is not null)
-        {
-            InstallFailed = true;
-            InstallStatus = result.Error;
-            return;
-        }
-
-        if (result.AnyFailed)
-        {
-            InstallFailed = true;
-            InstallStatus = string.Format(Resources.Strings.Add_Status_InstallFailed, result.Failed.Count);
-            return;
-        }
-
-        InstallFailed = false;
-        _settings.IncrementAddCount();
-        string name = Details?.Name ?? "lua";
-        InstallStatus = result.ManifestCount > 0
-            ? string.Format(Resources.Strings.Add_Status_AddedManifests, name, result.ManifestCount)
-            : string.Format(Resources.Strings.Add_Status_AddedFetch, name);
-        if (_fastFetchSource is not null)
-        {
-            InstallStatus += " " + string.Format(Resources.Strings.Add_FastFetch_Via, _fastFetchSource);
-            _fastFetchSource = null;
-        }
+        _pendingConfirm?.TrySetResult(false);
     }
 
     /// <summary>Fetch the app's depots from steamcmd (cached) and index by depot id + dlcappid.</summary>
@@ -923,7 +923,8 @@ public partial class DownloadViewModel : ObservableObject
     {
         try
         {
-            if (!IsZip(zipPath)) return LuaFileParser.Parse(zipPath, appId); // bare .lua → parse as-is
+            // bare .lua → parse as-is. Same byte sniff the install path uses.
+            if (!ManifestJobFactory.IsZip(zipPath)) return LuaFileParser.Parse(zipPath, appId);
 
             using var archive = System.IO.Compression.ZipFile.OpenRead(zipPath);
             var luaEntry = archive.Entries.FirstOrDefault(e =>

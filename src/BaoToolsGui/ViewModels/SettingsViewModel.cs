@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -221,7 +221,8 @@ public partial class SettingsViewModel : ObservableObject
     /// App provides the toast + restart action.</summary>
     public Action? RequestRestartPrompt { get; set; }
 
-    public SettingsViewModel(SettingsService settings, AuthService auth, SteamService steam, HubcapService hubcap)
+    public SettingsViewModel(SettingsService settings, AuthService auth, SteamService steam,
+        HubcapService hubcap)
     {
         _settings = settings;
         _auth = auth;

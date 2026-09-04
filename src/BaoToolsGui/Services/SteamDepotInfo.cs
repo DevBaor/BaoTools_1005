@@ -14,6 +14,18 @@ public record ContentDepot(long Id, long Size, long? DlcAppId, bool IsShared, st
     string? PublicManifestId = null)
 {
     public bool IsDlc => DlcAppId is not null;
+
+    /// <summary>
+    /// The app that actually owns this depot's content (<c>depotfromapp</c>), for shared redistributables
+    /// like the VC++/DirectX runtimes under app 228980. Null for a game's own depots.
+    /// </summary>
+    /// <remarks>
+    /// A shared depot appears in the consuming game's app-info as a three-field stub — config,
+    /// depotfromapp, sharedinstall — with NO manifests block at all, so it has neither a gid nor a size
+    /// here. Both live under the owning app, which is why this id has to be kept rather than collapsed
+    /// into the <see cref="IsShared"/> bool: it's the only way to go and look them up.
+    /// </remarks>
+    public long? FromAppId { get; init; }
 }
 
 /// <summary>
@@ -102,8 +114,10 @@ public class SteamDepotInfo
                     if (entry.Value.ValueKind != JsonValueKind.Object) continue;
                     var v = entry.Value;
 
-                    // Shared redistributable (VC++, DirectX, …). Belongs to another app. Keep it, flagged.
-                    bool isShared = v.TryGetProperty("depotfromapp", out _);
+                    // Shared redistributable (VC++, DirectX, …). Belongs to another app. Keep it, flagged,
+                    // AND keep the owning app id — the manifest can only be resolved from there.
+                    bool isShared = v.TryGetProperty("depotfromapp", out var fromEl);
+                    long? fromAppId = isShared && long.TryParse(fromEl.GetString(), out long fa) ? fa : null;
 
                     long? dlcAppId = v.TryGetProperty("dlcappid", out var dlcEl) && long.TryParse(dlcEl.GetString(), out long dlc)
                         ? dlc : null;
@@ -117,7 +131,7 @@ public class SteamDepotInfo
                     }
 
                     depots.Add(new ContentDepot(depotId, ReadPublicSize(v), dlcAppId, isShared, os, lang,
-                        ReadPublicManifestId(v)));
+                        ReadPublicManifestId(v)) { FromAppId = fromAppId });
                 }
             }
 

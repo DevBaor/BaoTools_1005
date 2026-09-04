@@ -1,10 +1,10 @@
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using BaoToolsGui.Models;
+using BaoToolsGui.Services.Downloads;
 
 namespace BaoToolsGui.Services;
 
@@ -24,11 +24,6 @@ public partial class HubcapService
     };
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
-
-    // Interim staging destination, mirroring BaoToolsApiClient (downloads land here before install,
-    // then are deleted once installed). Under %TEMP% so it never pollutes the user's Downloads folder.
-    private static readonly string InterimDownloadsFolder =
-        Path.Combine(Path.GetTempPath(), "BaoToolsGui", "downloads");
 
     [GeneratedRegex("^smm_[0-9a-f]{96}$")]
     private static partial Regex KeyFormatRegex();
@@ -65,7 +60,7 @@ public partial class HubcapService
     /// <summary>Download the manifest zip for an app directly from Hubcap (counts toward the key's daily
     /// limit). Throws <see cref="ApiException"/> on failure so the download flow can report it.</summary>
     public async Task<DownloadedFile> DownloadManifestAsync(
-        string appid, string key, IProgress<double?>? progress, CancellationToken ct = default)
+        string appid, string key, IProgress<DownloadProgress>? progress, CancellationToken ct = default)
     {
         var url = $"/api/v1/manifest/{Uri.EscapeDataString(appid)}?api_key={Uri.EscapeDataString(key)}";
         using var res = await _http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, ct);
@@ -80,37 +75,11 @@ public partial class HubcapService
             };
             throw new ApiException(message, res.StatusCode);
         }
-        return await SaveResponseAsync(res, $"{appid}.zip", progress, ct);
+        return await HttpFileDownloader.SaveResponseAsync(res, $"{appid}.zip", progress, ct);
     }
 
     // ── Plumbing ────────────────────────────────────────────────────
 
     private static async Task<T?> ReadJsonAsync<T>(HttpResponseMessage res, CancellationToken ct) =>
         JsonSerializer.Deserialize<T>(await res.Content.ReadAsStringAsync(ct), JsonOpts);
-
-    private static async Task<DownloadedFile> SaveResponseAsync(
-        HttpResponseMessage res, string fallbackName, IProgress<double?>? progress, CancellationToken ct)
-    {
-        string fileName = res.Content.Headers.ContentDisposition?.FileName?.Trim('"') ?? fallbackName;
-        foreach (char c in Path.GetInvalidFileNameChars()) fileName = fileName.Replace(c, '_');
-
-        Directory.CreateDirectory(InterimDownloadsFolder);
-        string filePath = Path.Combine(InterimDownloadsFolder, fileName);
-
-        long? total = res.Content.Headers.ContentLength;
-        await using var src = await res.Content.ReadAsStreamAsync(ct);
-        await using var dst = File.Create(filePath);
-
-        var buffer = new byte[81920];
-        long written = 0;
-        int read;
-        while ((read = await src.ReadAsync(buffer, ct)) > 0)
-        {
-            await dst.WriteAsync(buffer.AsMemory(0, read), ct);
-            written += read;
-            progress?.Report(total is > 0 ? (double)written / total.Value : null);
-        }
-
-        return new DownloadedFile(filePath, fileName);
-    }
 }

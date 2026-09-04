@@ -146,10 +146,23 @@ public class LuaVault
     }
 
     /// <summary>
-    /// Cheap "has this game been captured at all" check. A directory probe, no index parse. The game
-    /// list calls this per game on every filter pass, so it must not read/hash anything.
+    /// "Has this game been captured at all". Reads the index rather than probing for the directory:
+    /// a folder can outlive its contents (or be half-written), and answering yes for an empty one kept
+    /// deleted games alive on the Depots page.
     /// </summary>
-    public bool HasVariants(long appId) => Directory.Exists(AppDir(appId));
+    /// <remarks>
+    /// This used to be a bare <c>Directory.Exists</c> because the game list called it per game on every
+    /// filter pass. It no longer does — badges are computed once per load in <c>RefreshBadgesAsync</c>,
+    /// off the UI thread, and its caller reads <see cref="GetVariants"/> (which parses the index) two
+    /// lines later regardless.
+    /// </remarks>
+    public bool HasVariants(long appId) => HasStoredVariants(appId);
+
+    /// <summary>At least one variant recorded in this app's index.</summary>
+    private bool HasStoredVariants(long appId)
+    {
+        lock (_gate) return LoadIndex(appId).Variants.Count > 0;
+    }
 
     /// <summary>The variant Steam is currently using, or null if there is none / it was edited externally.</summary>
     public LuaVariant? GetActiveVariant(long appId)
@@ -204,7 +217,10 @@ public class LuaVault
         return Apply(appId, build) ? build : null;
     }
 
-    /// <summary>Appids that have at least one stored variant.</summary>
+    /// <summary>
+    /// Appids that have at least one stored variant. A directory alone is not enough — an empty or
+    /// half-written one reports nothing, rather than a game with no versions to offer.
+    /// </summary>
     public IReadOnlyList<long> AppsWithVariants()
     {
         try
@@ -212,7 +228,7 @@ public class LuaVault
             if (!Directory.Exists(_root)) return [];
             return Directory.EnumerateDirectories(_root)
                 .Select(d => long.TryParse(Path.GetFileName(d), out long id) ? id : 0)
-                .Where(id => id > 0)
+                .Where(id => id > 0 && HasStoredVariants(id))
                 .ToList();
         }
         catch { return []; }

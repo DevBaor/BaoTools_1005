@@ -611,3 +611,4 @@ public class LuaVaultTests : IDisposable
         Assert.Contains(reopened.AppsWithVariants(), id => id == AppId);
     }
 }
+    

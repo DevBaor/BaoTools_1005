@@ -1,7 +1,16 @@
-﻿
-# Output folders
+
+bin/
+obj/
+publish/
+Releases/
 out_portable/
 out_setup/
+*.user
+.vs/
+*_wpftmp.csproj
+TestResults/
+*.suo
 innosetup.exe
 *.csx
 *.py
+*.log

@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,19 +59,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- ── Navigation (MainWindow) ── -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>Home</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Add</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Manage</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Mode</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Fixes</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Restart Steam</value></data>
-  <data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
-  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
-  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
-  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
-  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
-Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Settings</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Sign in with Discord</value></data>
   <data name="Nav_WaitingForBrowser" xml:space="preserve"><value>Waiting for browser…</value></data>
@@ -79,7 +73,7 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Nav_Footer_LoggedIn" xml:space="preserve"><value>Logged In</value></data>
   <data name="Main_RestartSteam_Ask" xml:space="preserve"><value>Restart Steam now? This closes Steam and any running games, then relaunches it.</value></data>
 
-  <!-- ── Settings ── -->
+  
   <data name="Settings_Title" xml:space="preserve"><value>Settings</value></data>
   <data name="Settings_Section_Account" xml:space="preserve"><value>ACCOUNT</value></data>
   <data name="Settings_Section_General" xml:space="preserve"><value>GENERAL</value></data>
@@ -139,12 +133,12 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Settings_SteamWarning_NoExe" xml:space="preserve"><value>steam.exe not found in this folder.</value></data>
   <data name="Settings_ChooseSteamFolder" xml:space="preserve"><value>Choose your Steam folder</value></data>
 
-  <!-- ── Language changed prompt ── -->
+  
   <data name="Lang_Changed_Title" xml:space="preserve"><value>Language changed</value></data>
   <data name="Lang_Changed_Body" xml:space="preserve"><value>Restart the app to apply the new language.</value></data>
   <data name="Lang_Changed_Restart" xml:space="preserve"><value>Restart now</value></data>
 
-  <!-- ── Home ── -->
+  
   <data name="Home_Welcome" xml:space="preserve"><value>Welcome to BaoTools</value></data>
   <data name="Home_LuasOnBoard" xml:space="preserve"><value>Luas on board</value></data>
   <data name="Home_LastAdded" xml:space="preserve"><value>LAST ADDED</value></data>
@@ -160,7 +154,7 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Home_NoModeSelected" xml:space="preserve"><value>No mode selected</value></data>
   <data name="Home_ModeIs" xml:space="preserve"><value>Mode · {0}</value></data>
 
-  <!-- ── Mode ── -->
+  
   <data name="Mode_Title" xml:space="preserve"><value>Mode</value></data>
   <data name="Mode_Subtitle" xml:space="preserve"><value>Switch the backend used to unlock games added with BaoTools. Only one is active at a time.</value></data>
   <data name="Mode_CheckForUpdates" xml:space="preserve"><value>Check for updates</value></data>
@@ -169,7 +163,7 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Mode_Confirm_Body" xml:space="preserve"><value>Steam will be closed so its files can be changed, then restarted automatically. Any running games or downloads will stop.</value></data>
   <data name="Mode_Cancel" xml:space="preserve"><value>Cancel</value></data>
   <data name="Mode_CloseSteamContinue" xml:space="preserve"><value>Close Steam &amp; continue</value></data>
-  <!-- Mode descriptions + C# strings -->
+  
   <data name="Mode_Desc_Bst" xml:space="preserve"><value>An open source fork of OpenSteamTools actively maintained by the BaoTools team. Introducing fixes and new features!</value></data>
   <data name="Mode_CloudRedirect_Manage" xml:space="preserve"><value>Manage</value></data>
   <data name="Mode_CloudRedirect_LaunchFailed" xml:space="preserve"><value>Couldn't download or launch CloudRedirect.</value></data>
@@ -190,7 +184,7 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Mode_CloudRedirect_Toast_Enabled" xml:space="preserve"><value>Enabled. Restart Steam to apply.</value></data>
   <data name="Mode_CloudRedirect_Toast_Disabled" xml:space="preserve"><value>Disabled. Restart Steam to apply.</value></data>
   <data name="Mode_CloudRedirect_Toast_Updated" xml:space="preserve"><value>Updated. Restart Steam to apply.</value></data>
-  <!-- First-run onboarding (English-only draft; translations deferred) -->
+  
   <data name="Onboarding_Title" xml:space="preserve"><value>Welcome to the BaoTools App!</value></data>
   <data name="Onboarding_SignIn_Blurb" xml:space="preserve"><value>Sign in to unlock adding games and fixes.</value></data>
   <data name="Onboarding_SignedIn" xml:space="preserve"><value>Signed in ✓</value></data>
@@ -220,13 +214,13 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Mode_Toast_InstallFailed" xml:space="preserve"><value>Install failed</value></data>
   <data name="Mode_Toast_InstallFailed_Body" xml:space="preserve"><value>Something went wrong.</value></data>
 
-  <!-- ── Drop zone ── -->
+  
   <data name="Drop_Title" xml:space="preserve"><value>Drop .lua, .manifest or .zip files here</value></data>
   <data name="Drop_LinkHint" xml:space="preserve"><value>…or drag in a SteamDB / Steam store link to add that game.</value></data>
   <data name="Drop_BrowseFiles" xml:space="preserve"><value>Browse files…</value></data>
   <data name="Drop_Picker_Title" xml:space="preserve"><value>Choose .lua / .manifest / .zip files</value></data>
   <data name="Drop_Picker_Filter" xml:space="preserve"><value>Lua / manifest / zip|*.lua;*.manifest;*.zip|All files|*.*</value></data>
-  <!-- Drop installer C# strings -->
+  
   <data name="Drop_Nothing" xml:space="preserve"><value>Nothing to install. Drop .lua, .manifest, or .zip files.</value></data>
   <data name="Drop_Confirm_Replace" xml:space="preserve"><value>Replace "{0}"?</value></data>
   <data name="Drop_Confirm_NoChanges" xml:space="preserve"><value>No depot/DLC changes. Same content.</value></data>
@@ -235,15 +229,14 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest(s)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>Installed {0} to Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} file(s) failed. Close Steam and retry.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Restart Steam to apply.</value></data>
 
-  <!-- ── Common ── -->
+  
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Search by name or App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Loading…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
   <data name="Common_AppFallback" xml:space="preserve"><value>App {0}</value></data>
 
-  <!-- ── Manage ── -->
+  
   <data name="Manage_Title" xml:space="preserve"><value>Manage</value></data>
   <data name="Manage_Refresh" xml:space="preserve"><value>Refresh</value></data>
   <data name="Manage_Filters" xml:space="preserve"><value>Filters</value></data>
@@ -284,7 +277,7 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Manage_Clear" xml:space="preserve"><value>Clear</value></data>
   <data name="Manage_DeleteSelected" xml:space="preserve"><value>Delete selected</value></data>
   <data name="Manage_LoadingGames" xml:space="preserve"><value>Loading your games…</value></data>
-  <!-- Filter/sort option DISPLAY labels (the stored value stays the English key; only the shown text is localized). -->
+  
   <data name="Manage_Opt_Any" xml:space="preserve"><value>Any</value></data>
   <data name="Manage_Opt_Free" xml:space="preserve"><value>Free</value></data>
   <data name="Manage_Opt_Paid" xml:space="preserve"><value>Paid</value></data>
@@ -294,7 +287,7 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Manage_Sort_Metacritic" xml:space="preserve"><value>Metacritic</value></data>
   <data name="Manage_Sort_MostReviewed" xml:space="preserve"><value>Most reviewed</value></data>
   <data name="Manage_PageSize_All" xml:space="preserve"><value>All</value></data>
-  <!-- Manage dynamic / C# strings -->
+  
   <data name="Manage_PageLabel" xml:space="preserve"><value>Page {0} of {1}</value></data>
   <data name="Manage_SelectionLabel" xml:space="preserve"><value>{0} selected</value></data>
   <data name="Manage_FetchingDetails" xml:space="preserve"><value>Fetching details for {0} apps</value></data>
@@ -315,11 +308,11 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Remove lua file</value></data>
   <data name="Manage_Delete_Body" xml:space="preserve"><value>Remove "{0}" (App ID {1})?
 
-This deletes its .lua file from Steam\config\stplug-in. Restart Steam afterwards for the change to take effect.</value></data>
+This deletes its .lua file from Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Remove lua files</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Remove {0} lua files?
 
-This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterwards for the changes to take effect.</value></data>
+This deletes the .lua files from Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Remove failed</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Couldn't delete the file:
 {0}</value></data>
@@ -327,16 +320,15 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} files couldn't be deleted.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Restart Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Restart Steam now so the changes take effect?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Couldn't find or launch Steam. Set its location in Settings.</value></data>
 
-  <!-- ── Fixes ── -->
+  
   <data name="Fixes_Title" xml:space="preserve"><value>Fixes</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Loading fixes…</value></data>
   <data name="Fixes_Build" xml:space="preserve"><value>Build {0}</value></data>
   <data name="Fixes_Manifest" xml:space="preserve"><value>Manifest</value></data>
   <data name="Fixes_Fix" xml:space="preserve"><value>Fix</value></data>
-  <!-- Fixes C# strings -->
+  
   <data name="Fixes_Count" xml:space="preserve"><value>{0} fixes</value></data>
   <data name="Fixes_Err_Load" xml:space="preserve"><value>Couldn't load fixes. Check your connection.</value></data>
   <data name="Fixes_Empty_None" xml:space="preserve"><value>No fixes available yet.</value></data>
@@ -347,8 +339,7 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Install failed</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Couldn't install. Close Steam (or Restart Steam) and try again.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Fix installed</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0} manifest installed. Steam is restarting.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0} manifest installed. Restart Steam to apply.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>{0} manifest installed.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Game not found</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Install {0} in Steam first, then apply the fix.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Fix partially applied</value></data>
@@ -359,7 +350,7 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Fixes_Toast_Refreshed_Title" xml:space="preserve"><value>Refreshed</value></data>
   <data name="Fixes_Toast_Refreshed_Body" xml:space="preserve"><value>{0} games with fixes.</value></data>
 
-  <!-- ── Add / Download page ── -->
+  
   <data name="Add_Title" xml:space="preserve"><value>Let's get Luing™!</value></data>
   <data name="Add_Subtitle" xml:space="preserve"><value>Enter an App ID, paste a Steam link, or search by game name</value></data>
   <data name="Add_SearchPlaceholder" xml:space="preserve"><value>Enter App ID or search games...</value></data>
@@ -385,25 +376,24 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Add_Generating" xml:space="preserve"><value>Generating…</value></data>
   <data name="Add_DlcHint" xml:space="preserve"><value>Put the .lua into steam\config\stplug-in, and make sure the base game is added too. Counts toward your daily limit (25/day).</value></data>
   <data name="Add_AlreadyHaveFiles" xml:space="preserve"><value>Already have the files?</value></data>
-  <!-- Add / Download C# strings -->
+  
   <data name="Add_SignIn_Dlc" xml:space="preserve"><value>Sign in with Discord to view DLC unlocks.</value></data>
   <data name="Add_SignIn_Download" xml:space="preserve"><value>Sign in with Discord to download.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Could not resolve the base game for this DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Something went wrong. Check your connection and try again.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Download failed. Check your connection and try again.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generation failed. Check your connection and try again.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Replace "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>No depot/DLC changes. Same content.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Install cancelled. Existing files left unchanged.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Couldn't install {0} file(s). Close Steam (or use Restart Steam) and try again.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Added {0}: lua + {1} manifest(s). Restart Steam to apply.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Added {0}. Steam will fetch manifests. Restart Steam to apply.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Added {0}: lua + {1} manifest(s).</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Added {0}. Steam will fetch manifests.</value></data>
   <data name="Add_FastFetch" xml:space="preserve"><value>FastFetch™️</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Auto-download from the first available source</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>No available sources found for this game</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· via {0}</value></data>
 
-  <!-- ── Confirm overlay (overwrite diff) ── -->
+  
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Open on SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>SHARED</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>This replaces the installed lua. Review what changes:</value></data>
@@ -454,10 +444,7 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Plugin_Feature_AutoUpdate" xml:space="preserve"><value>Automatically keeps itself updated</value></data>
   <data name="Plugin_Feature_Millennium" xml:space="preserve"><value>Works with or without Millennium</value></data>
 
-  <!-- ── Builds page (multi-build switching) ──
-       NOT YET TRANSLATED. These keys are English-only on purpose while the page settles; the
-       Strings.<tag>.resx files fall back to English for anything missing. See Resources/README.md
-       (“Pending translation”) for the list to hand to the translation pass. -->
+  
   <data name="Nav_Builds" xml:space="preserve"><value>Depots</value></data>
   <data name="Builds_Title" xml:space="preserve"><value>Depots</value></data>
   <data name="Builds_Subtitle" xml:space="preserve"><value>Keep multiple versions of a game's lua and switch which one Steam uses.</value></data>
@@ -488,9 +475,9 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Delete this preset?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>“{0}” will be removed from your saved presets. This doesn't affect the game itself.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Can't delete the preset that's currently in use.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Now using “{0}”. Restart Steam for it to take effect.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Now using “{0}”.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Couldn't switch presets. The lua file may be in use.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Saved. Restart Steam for it to take effect.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Saved.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Couldn't save. The lua file may be in use.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Saved as a preset.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Save to “{0}”</value></data>
@@ -503,7 +490,7 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Builds_Depot_NoMatch" xml:space="preserve"><value>No depots match your search.</value></data>
   <data name="Builds_Depot_InactiveNote" xml:space="preserve"><value>You’re editing a preset that isn’t applied. Changes save straight into it, and Steam keeps using the applied preset until you hit Apply.</value></data>
 
-  <!-- ── Launch options (appinfo.vdf editing) ──  NOT YET TRANSLATED, see Resources/README.md -->
+  
   <data name="Manage_Action_LaunchOptions" xml:space="preserve"><value>Launch options…</value></data>
   <data name="Launch_Title" xml:space="preserve"><value>Launch options</value></data>
   <data name="Launch_Loading" xml:space="preserve"><value>Reading Steam's app cache…</value></data>
@@ -539,7 +526,7 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Launch_Drift_Body" xml:space="preserve"><value>Steam has overwritten your launch options for {0} game(s). Re-applying closes and reopens Steam.</value></data>
   <data name="Launch_Drift_Action" xml:space="preserve"><value>Re-apply</value></data>
 
-  <!-- ── Service error messages (surfaced to the user via toasts / MessageBox) ── -->
+  
   <data name="Err_SteamNotFound" xml:space="preserve"><value>Steam location not found. Set it in Settings.</value></data>
   <data name="Err_GithubUnreachable" xml:space="preserve"><value>Couldn't reach GitHub. Check your connection and try again.</value></data>
   <data name="Err_UpdateServerUnreachable" xml:space="preserve"><value>Couldn't reach the update server. Check your connection and try again.</value></data>
@@ -568,5 +555,90 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Your Hubcap daily limit has been reached.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>No Hubcap manifest is available for this app.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap download failed ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Nothing downloading right now. Start downloading some shit!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Queue</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>History</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>Queued</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Downloading</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Waiting for you</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Installing</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Done</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Failed</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Cancelled</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Retry</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Remove</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Move up</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Move down</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Clear history</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Review</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} of {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>{0} left</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Action required</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Interrupted when the app closed.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC unlock</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Install the game first to apply a fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Paused</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Verifying…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Resume</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depot files</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depots · {0} of {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Couldn't get the depot downloader.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>No decryption keys found for this game.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} failed: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>Downloaded {0} depot(s) to {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Download</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Select depots to download</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Download {0} depots ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>This depot declares no version to download.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Select all</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>No depots selected</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Choose where to save the depot files</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Not enough disk space: needs {0}, only {1} free.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Save to</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Needs {0} · {1} free on {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Sign in to download this depot.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Sign in to download depots.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>fetching manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Couldn't get this depot's manifest.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Preparing · {0} of {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Getting the downloader</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Tool</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Checking the .NET runtime</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Getting SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack opened.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Couldn't install the .NET runtime SteamAutoCrack needs.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>The .NET runtime installed, but Windows needs a restart before SteamAutoCrack can run.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Couldn't download SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Couldn't start SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack updated.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>allocating files</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>checking existing files</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Cancel download</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>{0} has already been written to:
+{1}
 
+Yes - stop and delete those files
+No - stop but keep them
+Cancel - keep downloading</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Couldn't delete the downloaded files. They're still in {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Copy App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Show in folder</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Couldn't copy — another app is holding the clipboard.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Couldn't open {0} — it may have been moved or deleted.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>No decryption key in Lua for this depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>The decryption key for depot {0} is wrong.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>No decryption key in Lua for depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Shared runtime — usually already installed. Tick to download anyway.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Remove all {0} entries from the download history? Downloaded files are not affected.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

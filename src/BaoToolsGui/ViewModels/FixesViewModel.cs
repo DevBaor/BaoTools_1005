@@ -1,10 +1,11 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BaoToolsGui.Models;
 using BaoToolsGui.Services;
+using BaoToolsGui.Services.Downloads;
 
 namespace BaoToolsGui.ViewModels;
 
@@ -61,6 +62,32 @@ public partial class FixItemVm(DenuvoFix f) : ObservableObject
     public string? FixFilename { get; } = f.FixFilename;
     public string DateLabel { get; } = FormatDate(f.CreatedAt);
 
+    /// <summary>In-flight queue items for this fix's two slots. The buttons and their progress bars bind
+    /// straight through, so the shared queue stays the only owner of download state.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanDownloadManifest))]
+    private DownloadItem? _manifestItem;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanDownloadFix))]
+    private DownloadItem? _fixItem;
+
+    /// <summary>
+    /// Whether the game is installed on disk. Only the FIX slot cares: it extracts a zip into the game
+    /// folder, so with no folder there is nothing to apply. The MANIFEST slot installs a lua and works
+    /// whether or not the game is installed.
+    /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanDownloadFix), nameof(FixHint))]
+    private bool _gameInstalled;
+
+    public bool CanDownloadManifest => HasManifest && ManifestItem?.IsActive != true;
+    public bool CanDownloadFix => HasFix && GameInstalled && FixItem?.IsActive != true;
+
+    /// <summary>Why the Fix button is greyed out, or null when it isn't. A null ToolTip shows nothing,
+    /// so this doubles as the "should there be a tooltip at all" test.</summary>
+    public string? FixHint => GameInstalled ? null : Resources.Strings.Fixes_NotInstalled_Hint;
+
     private static string FormatDate(string? iso) =>
         DateTimeOffset.TryParse(iso, out var d) ? d.UtcDateTime.ToString("d MMM yyyy") : "";
 }
@@ -74,25 +101,26 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
 {
     private readonly BaoToolsApiClient api;
     private readonly AuthService auth;
-    private readonly LuaInstaller installer;
-    private readonly SteamService steam;
-    private readonly SteamLibraryService library;
     private readonly CoverCache covers;
     private readonly ToastService toast;
     private readonly SettingsService settings;
+    private readonly DownloadQueue queue;
+    private readonly ManifestJobFactory jobs;
+    private readonly SteamLibraryService library;
 
     public FixesViewModel(
-        BaoToolsApiClient api, AuthService auth, LuaInstaller installer, SteamService steam,
-        SteamLibraryService library, CoverCache covers, ToastService toast, SettingsService settings)
+        BaoToolsApiClient api, AuthService auth, CoverCache covers, ToastService toast,
+        SettingsService settings, DownloadQueue queue, ManifestJobFactory jobs,
+        SteamLibraryService library)
     {
         this.api = api;
         this.auth = auth;
-        this.installer = installer;
-        this.steam = steam;
-        this.library = library;
         this.covers = covers;
         this.toast = toast;
         this.settings = settings;
+        this.queue = queue;
+        this.jobs = jobs;
+        this.library = library;
         InitPageSize(settings.FixesPageSize);
     }
 
@@ -136,13 +164,8 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
     private string? _selectedFixTagId;
     public bool HasFixTags => FixTags.Count > 0;
 
-    // ── Download state (one at a time) ───────────────────────────────
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(NotBusy))]
-    private bool _isBusy;
-    public bool NotBusy => !IsBusy;
-    [ObservableProperty] private double _progress;
-    [ObservableProperty] private bool _isProgressIndeterminate;
+    // Downloads are owned by the shared DownloadQueue; per-fix progress lives on FixItemVm. The page no
+    // longer has an IsBusy gate, so several fixes can be queued without waiting for each other.
 
     // ── Load ─────────────────────────────────────────────────────────
 
@@ -230,6 +253,32 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
     }
 
     [RelayCommand]
+    private void CopyAppId(FixGameCardVm game)
+    {
+        if (!SteamService.CopyToClipboard(game.AppId))
+            toast.Show(Resources.Strings.Common_CopyAppId, Resources.Strings.Err_ClipboardBusy, error: true);
+    }
+
+    /// <summary>
+    /// Open the game's Steam install folder — where <c>ApplyDenuvoFix</c> extracts a fix to.
+    /// </summary>
+    /// <remarks>
+    /// Resolved on click, not bound to a property: <c>GetInstallDir</c> walks libraryfolders.vdf and the
+    /// appmanifest files, which is far too much work to repeat for every card in a grid on every render.
+    /// The cost of that is the action being offered for games that aren't installed, so it reports the
+    /// same "game not found" toast the fix flow already uses rather than failing silently.
+    /// </remarks>
+    [RelayCommand]
+    private void ShowInFolder(FixGameCardVm game)
+    {
+        string? dir = long.TryParse(game.AppId, out long appId) ? library.GetInstallDir(appId) : null;
+        if (SteamService.ShowInExplorer(dir)) return;
+
+        toast.Show(Resources.Strings.Fixes_Toast_GameNotFound,
+            string.Format(Resources.Strings.Fixes_Toast_GameNotFound_Body, game.Name), error: true);
+    }
+
+    [RelayCommand]
     private async Task OpenGame(FixGameCardVm game)
     {
         SelectedGame = game;
@@ -245,6 +294,12 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
             if (data is not null)
             {
                 _allFixes = data.Fixes.Select(f => new FixItemVm(f)).ToList();
+
+                // Is the game on disk? GetInstallDir walks libraryfolders.vdf + appmanifest_*.acf, so
+                // it's file I/O — off the UI thread. Resolved once here rather than per fix row.
+                bool installed = long.TryParse(game.AppId, out long gameAppId)
+                    && await Task.Run(() => library.GetInstallDir(gameAppId) is not null);
+                foreach (var f in _allFixes) f.GameInstalled = installed;
 
                 // Build the per-game filter pills from the distinct tags across this game's fixes.
                 // But only when there's more than one (a single tag is no filter).
@@ -289,120 +344,43 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
     [RelayCommand]
     private Task DownloadFix(FixItemVm fix) => RunDownload(fix, "fix");
 
+    /// <summary>
+    /// Queue one slot of a fix. The download, install and result toast all happen in the shared queue,
+    /// so this returns as soon as the item is enqueued.
+    /// </summary>
     private async Task RunDownload(FixItemVm fix, string slot)
     {
-        if (IsBusy) return;
         if (await PromptSignInIfGuestAsync(Resources.Strings.Fixes_SignIn)) return;
         if (SelectedGame is not { } game) return;
         if (!long.TryParse(game.AppId, out long appId)) return;
 
-        IsBusy = true;
-        IsProgressIndeterminate = true;
-        Progress = 0;
-        try
+        // The Fix button is disabled for uninstalled games, but the flyout's snapshot can be stale by
+        // now (and nothing stops a programmatic caller). Cheap local check, so do it before queueing
+        // rather than after paying for a download.
+        if (slot == "fix" && library.GetInstallDir(appId) is null)
         {
-            string fallback = slot == "manifest"
-                ? fix.ManifestFilename ?? $"{game.AppId}.zip"
-                : fix.FixFilename ?? $"{game.AppId}_fix.zip";
+            toast.Show(Resources.Strings.Fixes_Toast_GameNotFound,
+                string.Format(Resources.Strings.Fixes_Toast_GameNotFound_Body, game.Name), error: true);
+            return;
+        }
 
-            var prog = new Progress<double?>(p =>
+        string fallback = slot == "manifest"
+            ? fix.ManifestFilename ?? $"{game.AppId}.zip"
+            : fix.FixFilename ?? $"{game.AppId}_fix.zip";
+
+        var job = jobs.CreateDenuvoJob(fix.Id, slot, fallback, appId, game.Name, fix.Title,
+            onFinished: (item, result) =>
             {
-                IsProgressIndeterminate = p is null;
-                if (p is not null) Progress = p.Value * 100;
+                // The factory already toasts success and install failures. A download that never got
+                // that far (network, auth, daily limit) still needs to say something.
+                if (result is null && item.Status == DownloadStatus.Failed)
+                    toast.Show(Resources.Strings.Fixes_Toast_DownloadFailed,
+                        item.Message ?? Resources.Strings.Fixes_Toast_DownloadFailed_Body, error: true);
             });
 
-            var file = await api.DownloadDenuvoAsync(fix.Id, slot, fallback, prog);
-
-            if (slot == "manifest")
-                InstallManifest(file, appId, game.Name);
-            else
-                ApplyFix(file, appId, game.Name);
-        }
-        catch (ApiException ex)
-        {
-            toast.Show(Resources.Strings.Fixes_Toast_DownloadFailed, ex.Message, error: true);
-        }
-        catch (Exception)
-        {
-            toast.Show(Resources.Strings.Fixes_Toast_DownloadFailed, Resources.Strings.Fixes_Toast_DownloadFailed_Body, error: true);
-        }
-        finally
-        {
-            IsBusy = false;
-            IsProgressIndeterminate = false;
-        }
-    }
-
-    /// <summary>Manifest slot: install into Steam force-LOCKED (Denuvo fixes must stay version-pinned).</summary>
-    private void InstallManifest(DownloadedFile file, long appId, string gameName)
-    {
-        bool isZip = file.FileName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase);
-        var result = isZip
-            ? installer.InstallZip(file.FilePath, appId, forceLocked: true)
-            : installer.InstallLuaFile(file.FilePath, appId, forceLocked: true);
-        DeleteStaged(file.FilePath); // consumed by the install. Drop the temp staging copy
-
-        if (result.AnyFailed)
-        {
-            toast.Show(Resources.Strings.Fixes_Toast_InstallFailed,
-                result.Error ?? Resources.Strings.Fixes_Toast_InstallFailed_Body,
-                error: true);
-            return;
-        }
-
-        bool restarted = steam.RestartSteam();
-        toast.Show(Resources.Strings.Fixes_Toast_FixInstalled, restarted
-            ? string.Format(Resources.Strings.Fixes_Toast_FixInstalled_Restarting, gameName)
-            : string.Format(Resources.Strings.Fixes_Toast_FixInstalled_Restart, gameName));
-    }
-
-    /// <summary>Fix slot: only applicable if the game is installed. Extract the zip into its folder.</summary>
-    private void ApplyFix(DownloadedFile file, long appId, string gameName)
-    {
-        string? installDir = library.GetInstallDir(appId);
-        if (installDir is null)
-        {
-            toast.Show(Resources.Strings.Fixes_Toast_GameNotFound, string.Format(Resources.Strings.Fixes_Toast_GameNotFound_Body, gameName), error: true);
-            return;
-        }
-
-        try
-        {
-            // Extract into the game folder (overwrite existing files). Best-effort per entry.
-            using var archive = ZipFile.OpenRead(file.FilePath);
-            int failed = 0;
-            foreach (var entry in archive.Entries)
-            {
-                if (string.IsNullOrEmpty(entry.Name)) continue; // directory entry
-                string dest = Path.Combine(installDir, entry.FullName);
-                try
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(dest)!);
-                    entry.ExtractToFile(dest, overwrite: true);
-                }
-                catch { failed++; }
-            }
-
-            if (failed > 0)
-                toast.Show(Resources.Strings.Fixes_Toast_PartiallyApplied,
-                    string.Format(Resources.Strings.Fixes_Toast_PartiallyApplied_Body, failed), error: true);
-            else
-                toast.Show(Resources.Strings.Fixes_Toast_FixApplied, string.Format(Resources.Strings.Fixes_Toast_FixApplied_Body, gameName));
-        }
-        catch (Exception ex)
-        {
-            toast.Show(Resources.Strings.Fixes_Toast_CouldntApply, ex.Message, error: true);
-        }
-        finally
-        {
-            DeleteStaged(file.FilePath); // archive is disposed by now. Drop the temp staging copy
-        }
-    }
-
-    /// <summary>Best-effort delete of a staged download after it's been consumed by an install.</summary>
-    private static void DeleteStaged(string path)
-    {
-        try { if (File.Exists(path)) File.Delete(path); } catch { /* best effort */ }
+        var item = queue.Enqueue(job);
+        if (slot == "manifest") fix.ManifestItem = item;
+        else fix.FixItem = item;
     }
 
     private async Task<bool> PromptSignInIfGuestAsync(string message)

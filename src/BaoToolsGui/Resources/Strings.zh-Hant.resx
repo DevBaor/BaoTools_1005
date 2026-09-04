@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- zh-Hant -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>首頁</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>新增</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>管理</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} 個資訊清單</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>已安裝 {0} 到 Steam。</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} 個檔案失敗——請關閉 Steam 後重試。</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> 重新啟動 Steam 以套用。</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>依名稱或 App ID 搜尋...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>載入中…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID：{0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>共享倉庫</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>刪除 lua 檔案</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>刪除「{0}」（App ID {1}）？
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>移除「{0}」（App ID {1}）？
 
-這會從 Steam\config\stplug-in 中刪除其 .lua 檔案。刪除後請重新啟動 Steam 以使變更生效。</value></data>
+這會從 Steam\config\stplug-in 刪除它的 .lua 檔案。</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>刪除 lua 檔案</value></data>
-  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>刪除 {0} 個 lua 檔案？
+  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>移除 {0} 個 lua 檔案？
 
-這會從 Steam\config\stplug-in 中刪除這些 .lua 檔案。刪除後請重新啟動 Steam 以使變更生效。</value></data>
+這會從 Steam\config\stplug-in 刪除這些 .lua 檔案。</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>刪除失敗</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>無法刪除檔案：
 {0}</value></data>
@@ -290,7 +289,6 @@
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>有 {0} 個檔案無法刪除。</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>重新啟動 Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>立即重新啟動 Steam 以使變更生效？</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>無法找到或啟動 Steam。請在設定中設定其位置。</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>修正</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>正在載入修正…</value></data>
@@ -307,8 +305,7 @@
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>安裝失敗</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>無法安裝——請關閉 Steam（或使用「重新啟動 Steam」）後重試。</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>修正已安裝</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0} 資訊清單已安裝——Steam 正在重新啟動。</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0} 資訊清單已安裝。重新啟動 Steam 以套用。</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>已安裝 {0} 的資訊清單。</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>找不到遊戲</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>請先在 Steam 中安裝 {0}，然後再套用修正。</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>修正部分套用</value></data>
@@ -348,13 +345,12 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>無法確定此 DLC 的本體遊戲</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>發生錯誤——請檢查你的連線後重試。</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>下載失敗——請檢查你的連線後重試。</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>產生失敗——請檢查你的連線後重試。</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>取代「{0}」？</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>倉庫/DLC 無變更——內容相同。</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>安裝已取消——現有檔案保持不變。</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>無法安裝 {0} 個檔案——請關閉 Steam（或使用「重新啟動 Steam」）後重試。</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>已新增 {0}——lua + {1} 個資訊清單。重新啟動 Steam 以套用。</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>已新增 {0}——Steam 將自動擷取資訊清單。重新啟動 Steam 以套用。</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>已新增 {0}：lua + {1} 個資訊清單。</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>已新增 {0}。Steam 將擷取資訊清單。</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>在 SteamDB 中開啟</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>共享</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>這將取代已安裝的 lua。請檢視變更內容：</value></data>
@@ -451,9 +447,9 @@
   <data name="Builds_Delete_Title" xml:space="preserve"><value>刪除這個預設集？</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>「{0}」將從你儲存的預設集中移除。這不會影響遊戲本身。</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>無法刪除正在使用的預設集。</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>已切換到「{0}」。重新啟動 Steam 後生效。</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>現在使用「{0}」。</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>切換預設集失敗 — lua 檔案可能正被占用。</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>已儲存。重新啟動 Steam 後生效。</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>已儲存。</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>儲存失敗 — lua 檔案可能正被占用。</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>已另存為預設集。</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>儲存到「{0}」</value></data>
@@ -527,4 +523,90 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>已達到每日 Hubcap 上限。</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>此應用程式沒有可用的 Hubcap 資訊清單。</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap 下載失敗（{0}）。</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>下載</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>下載</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>目前沒有下載。快去下載點什麼吧！</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>佇列</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>歷史紀錄</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>排隊中</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>下載中</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>等待你確認</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>安裝中</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>已完成</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>失敗</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>已取消</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>重試</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>移除</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>上移</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>下移</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>清除歷史紀錄</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>檢視</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} / {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>剩餘 {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>需要操作</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>應用程式關閉時被中斷。</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC 解鎖</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>請先安裝遊戲，才能套用修正。</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>已暫停</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>正在驗證…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>暫停</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>繼續</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>倉庫檔案</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>倉庫 · 第 {0} 個，共 {1} 個</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>無法取得倉庫下載器。</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>找不到這款遊戲的解密金鑰。</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>倉庫 {0} 失敗：{1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>已將 {0} 個倉庫下載到 {1}。</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>下載</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>選擇要下載的倉庫</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>下載 {0} 個倉庫（{1}）</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>這個倉庫未宣告可下載的版本。</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>全選</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>未選擇倉庫</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>選擇倉庫檔案的儲存位置</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>磁碟空間不足：需要 {0}，僅剩 {1}。</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>儲存至</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>需要 {0} · {2} 剩餘 {1}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>登入後可下載這個倉庫。</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>登入後可下載倉庫。</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>正在取得 manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>無法取得這個倉庫的 manifest。</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>準備中 · {0} / {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>正在取得下載器</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>工具</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>正在檢查 .NET 執行階段</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>正在取得 SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>已開啟 SteamAutoCrack。</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>無法安裝 SteamAutoCrack 所需的 .NET 執行階段。</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET 執行階段已安裝，但需要重新啟動 Windows 後 SteamAutoCrack 才能執行。</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>無法下載 SteamAutoCrack。</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>無法啟動 SteamAutoCrack。</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack 已更新。</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>正在配置檔案</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>正在驗證既有檔案</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>取消下載</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>已寫入 {0} 到：
+{1}
+
+是 - 停止並刪除這些檔案
+否 - 停止但保留檔案
+取消 - 繼續下載</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>無法刪除已下載的檔案。它們仍在 {0}。</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>複製 App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>在資料夾中顯示</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>無法複製 — 另一個應用程式正佔用剪貼簿。</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>無法開啟 {0} — 可能已被移動或刪除。</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Lua 中沒有此 depot 的解密金鑰。</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>depot {0} 的解密金鑰不正確。</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua 中沒有 depot {0} 的解密金鑰。</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>共用執行階段 — 通常已安裝。如仍需下載請勾選。</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>要從下載紀錄中移除全部 {0} 筆記錄嗎？已下載的檔案不會受影響。</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

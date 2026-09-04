@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- el -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>Αρχική</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Προσθήκη</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Διαχείριση</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>Το {0} εγκαταστάθηκε στο Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} αρχείο(α) απέτυχαν — κλείστε το Steam και δοκιμάστε ξανά.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Επανεκκινήστε το Steam για εφαρμογή.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Αναζήτηση με όνομα ή App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Φόρτωση…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -278,11 +277,11 @@
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Κατάργηση αρχείου lua</value></data>
   <data name="Manage_Delete_Body" xml:space="preserve"><value>Κατάργηση του «{0}» (App ID {1});
 
-Αυτό διαγράφει το αρχείο .lua του από το Steam\config\stplug-in. Επανεκκινήστε το Steam έπειτα για να τεθεί σε ισχύ η αλλαγή.</value></data>
+Αυτό διαγράφει το αρχείο .lua από το Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Κατάργηση αρχείων lua</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Κατάργηση {0} αρχείων lua;
 
-Αυτό διαγράφει τα αρχεία .lua από το Steam\config\stplug-in. Επανεκκινήστε το Steam έπειτα για να τεθούν σε ισχύ οι αλλαγές.</value></data>
+Αυτό διαγράφει τα αρχεία .lua από το Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Η κατάργηση απέτυχε</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Δεν ήταν δυνατή η διαγραφή του αρχείου:
 {0}</value></data>
@@ -290,7 +289,6 @@
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>Δεν ήταν δυνατή η διαγραφή {0} αρχείων.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Επανεκκίνηση Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Επανεκκίνηση του Steam τώρα ώστε να τεθούν σε ισχύ οι αλλαγές;</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Δεν ήταν δυνατή η εύρεση ή εκκίνηση του Steam. Ορίστε την τοποθεσία του στις Ρυθμίσεις.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Διορθώσεις</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Φόρτωση διορθώσεων…</value></data>
@@ -307,8 +305,7 @@
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Η εγκατάσταση απέτυχε</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Δεν ήταν δυνατή η εγκατάσταση — κλείστε το Steam (ή επανεκκινήστε το) και δοκιμάστε ξανά.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Η διόρθωση εγκαταστάθηκε</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Το manifest του {0} εγκαταστάθηκε — το Steam επανεκκινείται.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Το manifest του {0} εγκαταστάθηκε. Επανεκκινήστε το Steam για εφαρμογή.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Το μανιφέστο του {0} εγκαταστάθηκε.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Το παιχνίδι δεν βρέθηκε</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Εγκαταστήστε πρώτα το {0} στο Steam και έπειτα εφαρμόστε τη διόρθωση.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Η διόρθωση εφαρμόστηκε εν μέρει</value></data>
@@ -348,13 +345,12 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Δεν ήταν δυνατός ο προσδιορισμός του βασικού παιχνιδιού για αυτό το DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Κάτι πήγε στραβά — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Η λήψη απέτυχε — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Η δημιουργία απέτυχε — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Αντικατάσταση του «{0}»;</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Καμία αλλαγή depot/DLC — ίδιο περιεχόμενο.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Η εγκατάσταση ακυρώθηκε — τα υπάρχοντα αρχεία παρέμειναν αμετάβλητα.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Δεν ήταν δυνατή η εγκατάσταση {0} αρχείου(ων) — κλείστε το Steam (ή χρησιμοποιήστε την Επανεκκίνηση Steam) και δοκιμάστε ξανά.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Προστέθηκε το {0} — lua + {1} manifest. Επανεκκινήστε το Steam για εφαρμογή.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Προστέθηκε το {0} — το Steam θα ανακτήσει τα manifest. Επανεκκινήστε το Steam για εφαρμογή.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Προστέθηκε {0}: lua + {1} μανιφέστα.</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Προστέθηκε {0}. Το Steam θα λάβει τα μανιφέστα.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Άνοιγμα στο SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>ΚΟΙΝΟΧΡΗΣΤΟ</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Αυτό αντικαθιστά το εγκατεστημένο lua. Ελέγξτε τι αλλάζει:</value></data>
@@ -451,9 +447,9 @@
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Διαγραφή αυτής της προρύθμισης;</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>Η «{0}» θα αφαιρεθεί από τις αποθηκευμένες προρυθμίσεις σας. Αυτό δεν επηρεάζει το ίδιο το παιχνίδι.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Δεν μπορείτε να διαγράψετε την προρύθμιση που χρησιμοποιείται.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Χρησιμοποιείται πλέον η «{0}». Επανεκκινήστε το Steam για να τεθεί σε ισχύ.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Χρησιμοποιείται τώρα «{0}».</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Δεν ήταν δυνατή η αλλαγή προρύθμισης — το αρχείο lua μπορεί να χρησιμοποιείται.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Αποθηκεύτηκε. Επανεκκινήστε το Steam για να τεθεί σε ισχύ.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Αποθηκεύτηκε.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Δεν ήταν δυνατή η αποθήκευση — το αρχείο lua μπορεί να χρησιμοποιείται.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Αποθηκεύτηκε ως προρύθμιση.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Αποθήκευση στην «{0}»</value></data>
@@ -527,4 +523,90 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Έφτασες το ημερήσιο όριο του Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Δεν υπάρχει διαθέσιμο manifest Hubcap για αυτήν την εφαρμογή.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Η λήψη από το Hubcap απέτυχε ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Λήψεις</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Λήψεις</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Καμία λήψη αυτή τη στιγμή. Έλα, κατέβασε κάτι!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Ουρά</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Ιστορικό</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>Σε ουρά</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Γίνεται λήψη</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Περιμένει εσένα</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Γίνεται εγκατάσταση</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Ολοκληρώθηκε</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Απέτυχε</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Ακυρώθηκε</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Ακύρωση</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Επανάληψη</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Αφαίρεση</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Μετακίνηση πάνω</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Μετακίνηση κάτω</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Εκκαθάριση ιστορικού</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Έλεγχος</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} από {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Απομένουν {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Απαιτείται ενέργεια</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Διακόπηκε όταν έκλεισε η εφαρμογή.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Ξεκλείδωμα DLC</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Εγκαταστήστε πρώτα το παιχνίδι για να εφαρμόσετε ένα fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Σε παύση</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Έλεγχος…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Παύση</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Συνέχιση</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Αρχεία depot</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depot · {0} από {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Δεν ήταν δυνατή η λήψη του depot downloader.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Δεν βρέθηκαν κλειδιά αποκρυπτογράφησης για αυτό το παιχνίδι.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Το depot {0} απέτυχε: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>Έγινε λήψη {0} depot στο {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Λήψη</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Επίλεξε depot για λήψη</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Λήψη {0} depot ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Αυτό το depot δεν δηλώνει έκδοση για λήψη.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Επιλογή όλων</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Δεν επιλέχθηκαν depot</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Επίλεξε πού θα αποθηκευτούν τα αρχεία depot</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Δεν υπάρχει αρκετός χώρος στον δίσκο: χρειάζονται {0}, ελεύθερα μόνο {1}.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Αποθήκευση σε</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Χρειάζεται {0} · {1} ελεύθερα σε {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Συνδέσου για να κατεβάσεις αυτό το depot.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Συνδέσου για λήψη depot.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>λήψη manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Δεν ήταν δυνατή η λήψη του manifest αυτού του depot.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Προετοιμασία · {0} από {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Λήψη του εργαλείου</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Εργαλείο</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Έλεγχος του runtime .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Λήψη του SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>Το SteamAutoCrack άνοιξε.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Δεν ήταν δυνατή η εγκατάσταση του runtime .NET που χρειάζεται το SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Το runtime .NET εγκαταστάθηκε, αλλά τα Windows χρειάζονται επανεκκίνηση πριν τρέξει το SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Δεν ήταν δυνατή η λήψη του SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Δεν ήταν δυνατή η εκκίνηση του SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>Το SteamAutoCrack ενημερώθηκε.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>δέσμευση αρχείων</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>έλεγχος υπαρχόντων αρχείων</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Ακύρωση λήψης</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Έχουν ήδη γραφτεί {0} στο:
+{1}
+
+Ναι - διακοπή και διαγραφή των αρχείων
+Όχι - διακοπή αλλά διατήρηση
+Άκυρο - συνέχιση της λήψης</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Δεν ήταν δυνατή η διαγραφή των ληφθέντων αρχείων. Παραμένουν στο {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Αντιγραφή App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Εμφάνιση στον φάκελο</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Δεν έγινε αντιγραφή — άλλη εφαρμογή χρησιμοποιεί το πρόχειρο.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Δεν άνοιξε το {0} — ίσως μετακινήθηκε ή διαγράφηκε.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Δεν υπάρχει κλειδί αποκρυπτογράφησης στο Lua για αυτό το depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Το κλειδί αποκρυπτογράφησης για το depot {0} είναι λάθος.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Δεν υπάρχει κλειδί αποκρυπτογράφησης στο Lua για το depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Κοινόχρηστο runtime — συνήθως ήδη εγκατεστημένο. Επιλέξτε για λήψη ούτως ή άλλως.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Να αφαιρεθούν και οι {0} καταχωρίσεις από το ιστορικό λήψεων; Τα ληφθέντα αρχεία δεν επηρεάζονται.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

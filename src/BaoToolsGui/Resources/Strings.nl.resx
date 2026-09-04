@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- nl -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>Start</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Toevoegen</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Beheren</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest(en)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} geïnstalleerd in Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} bestand(en) mislukt — sluit Steam en probeer opnieuw.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Herstart Steam om toe te passen.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Zoeken op naam of App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Laden…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>Gedeeld depot</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Lua-bestand verwijderen</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>"{0}" (App ID {1}) verwijderen?
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>“{0}” (App ID {1}) verwijderen?
 
-Dit verwijdert het .lua-bestand uit Steam\config\stplug-in. Herstart Steam daarna om de wijziging door te voeren.</value></data>
+Dit verwijdert het .lua-bestand uit Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Lua-bestanden verwijderen</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>{0} lua-bestanden verwijderen?
 
-Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in. Herstart Steam daarna om de wijzigingen door te voeren.</value></data>
+Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Verwijderen mislukt</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Kon het bestand niet verwijderen:
 {0}</value></data>
@@ -290,7 +289,6 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in. Herstart Steam daar
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} bestanden konden niet worden verwijderd.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Steam herstarten</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Steam nu herstarten zodat de wijzigingen worden doorgevoerd?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Kon Steam niet vinden of starten. Stel de locatie in bij Instellingen.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Fixes</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Fixes laden…</value></data>
@@ -307,8 +305,7 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in. Herstart Steam daar
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Installatie mislukt</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Kon niet installeren — sluit Steam (of herstart Steam) en probeer opnieuw.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Fix geïnstalleerd</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest van {0} geïnstalleerd — Steam wordt opnieuw gestart.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest van {0} geïnstalleerd. Herstart Steam om toe te passen.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Manifest van {0} geïnstalleerd.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Game niet gevonden</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Installeer {0} eerst in Steam en pas dan de fix toe.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Fix gedeeltelijk toegepast</value></data>
@@ -348,13 +345,12 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in. Herstart Steam daar
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Kon de basisgame voor deze DLC niet bepalen</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Er is iets misgegaan — controleer je verbinding en probeer opnieuw.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Download mislukt — controleer je verbinding en probeer opnieuw.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Genereren mislukt — controleer je verbinding en probeer opnieuw.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>"{0}" vervangen?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Geen depot-/DLC-wijzigingen — dezelfde inhoud.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Installatie geannuleerd — bestaande bestanden ongewijzigd.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Kon {0} bestand(en) niet installeren — sluit Steam (of gebruik Steam herstarten) en probeer opnieuw.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} toegevoegd — lua + {1} manifest(en). Herstart Steam om toe te passen.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} toegevoegd — Steam haalt de manifesten op. Herstart Steam om toe te passen.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} toegevoegd: lua + {1} manifest(en).</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} toegevoegd. Steam haalt de manifests op.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Openen op SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>GEDEELD</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Dit vervangt de geïnstalleerde lua. Bekijk wat er verandert:</value></data>
@@ -451,9 +447,9 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in. Herstart Steam daar
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Deze voorinstelling verwijderen?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>‘{0}’ wordt uit je opgeslagen voorinstellingen verwijderd. Dit heeft geen invloed op de game zelf.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>De voorinstelling die in gebruik is, kan niet worden verwijderd.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>‘{0}’ wordt nu gebruikt. Start Steam opnieuw op om het door te voeren.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Gebruikt nu “{0}”.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Kon niet van voorinstelling wisselen — het lua-bestand is mogelijk in gebruik.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Opgeslagen. Start Steam opnieuw op om het door te voeren.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Opgeslagen.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Opslaan mislukt — het lua-bestand is mogelijk in gebruik.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Opgeslagen als voorinstelling.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Opslaan in ‘{0}’</value></data>
@@ -527,4 +523,90 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in. Herstart Steam daar
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Je dagelijkse Hubcap-limiet is bereikt.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Er is geen Hubcap-manifest voor deze app.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-download mislukt ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Geen downloads bezig. Kom op, download iets!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Wachtrij</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Geschiedenis</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>In wachtrij</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Bezig met downloaden</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Wacht op jou</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Bezig met installeren</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Klaar</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Mislukt</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Geannuleerd</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Annuleren</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Opnieuw proberen</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Verwijderen</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Omhoog</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Omlaag</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Geschiedenis wissen</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Bekijken</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} van {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Nog {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Actie vereist</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Onderbroken toen de app werd afgesloten.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC-ontgrendeling</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Installeer eerst de game om een fix toe te passen.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Gepauzeerd</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Verifiëren…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pauzeren</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Hervatten</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depotbestanden</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depots · {0} van {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Kon de depot-downloader niet ophalen.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Geen ontsleutelsleutels gevonden voor dit spel.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} mislukt: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} depots gedownload naar {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Downloaden</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Kies depots om te downloaden</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>{0} depots downloaden ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Dit depot geeft geen te downloaden versie op.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Alles selecteren</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Geen depots geselecteerd</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Kies waar de depotbestanden worden opgeslagen</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Niet genoeg schijfruimte: vereist {0}, slechts {1} vrij.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Opslaan in</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Vereist {0} · {1} vrij op {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Meld je aan om dit depot te downloaden.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Meld je aan om depots te downloaden.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>manifest ophalen</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Kon het manifest van dit depot niet ophalen.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Voorbereiden · {0} van {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Downloader ophalen</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Hulpprogramma</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>.NET-runtime controleren</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>SteamAutoCrack ophalen</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack geopend.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Kan de .NET-runtime die SteamAutoCrack nodig heeft niet installeren.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>De .NET-runtime is geïnstalleerd, maar Windows moet opnieuw opstarten voordat SteamAutoCrack kan draaien.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Kan SteamAutoCrack niet downloaden.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Kan SteamAutoCrack niet starten.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack bijgewerkt.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>bestanden reserveren</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>bestaande bestanden controleren</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Download annuleren</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Er is al {0} geschreven naar:
+{1}
+
+Ja - stoppen en die bestanden verwijderen
+Nee - stoppen maar behouden
+Annuleren - doorgaan met downloaden</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Kan de gedownloade bestanden niet verwijderen. Ze staan nog in {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>App ID kopiëren</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>In map weergeven</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Kopiëren mislukt — een andere app gebruikt het klembord.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Kan {0} niet openen — mogelijk verplaatst of verwijderd.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Geen ontsleutelingssleutel in de Lua voor deze depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>De ontsleutelingssleutel voor depot {0} is onjuist.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Geen ontsleutelingssleutel in de Lua voor depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Gedeelde runtime — meestal al geïnstalleerd. Vink aan om toch te downloaden.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Alle {0} items uit de downloadgeschiedenis verwijderen? Gedownloade bestanden blijven staan.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

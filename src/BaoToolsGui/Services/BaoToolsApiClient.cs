@@ -1,9 +1,9 @@
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using BaoToolsGui.Models;
+using BaoToolsGui.Services.Downloads;
 
 namespace BaoToolsGui.Services;
 
@@ -17,11 +17,6 @@ public record DownloadedFile(string FilePath, string FileName);
 /// <summary>Typed client for the lua.tools web API, authenticated with a Supabase bearer token.</summary>
 public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, CoverCache covers)
 {
-    // Interim staging destination: downloads land here, get installed into Steam, then are deleted.
-    // Under %TEMP% (not the user's Downloads) so nothing accumulates in a user-visible folder.
-    private static readonly string InterimDownloadsFolder =
-        Path.Combine(Path.GetTempPath(), "BaoToolsGui", "downloads");
-
     private readonly HttpClient _http = new(new HttpClientHandler { ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator })
     {
         BaseAddress = new Uri(AppConfig.ApiBaseUrl),
@@ -155,15 +150,37 @@ public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
     }
 
     public Task<DownloadedFile> DownloadManifestAsync(
-        string appid, string source, string? gameName, IProgress<double?>? progress, CancellationToken ct = default)
+        string appid, string source, string? gameName,
+        IProgress<DownloadProgress>? progress, CancellationToken ct = default)
     {
         string url = $"/api/manifest/download?appid={appid}&source={Uri.EscapeDataString(source)}";
         if (!string.IsNullOrEmpty(gameName)) url += $"&game_name={Uri.EscapeDataString(gameName)}";
         return DownloadFileAsync(url, $"{appid}.zip", progress, ct);
     }
 
+    /// <summary>
+    /// One depot's raw <c>.manifest</c> by id, so a depot download no longer depends on Steam happening
+    /// to have the file in its depotcache.
+    /// </summary>
+    /// <remarks>
+    /// Unlike every other endpoint here the ids go in the PATH, not the query string. Auth is the same
+    /// Bearer token as the rest, and the response is raw bytes on 200 / a JSON error otherwise, which
+    /// <see cref="SendAsync"/> already turns into an <see cref="ApiException"/>.
+    ///
+    /// <para>This one writes no history row and does NOT consume the daily download cap. It is instead
+    /// limited to 120 requests per 10 minutes per user, and only cache misses count. A large game is
+    /// ~20 depots, comfortably inside that — which is why manifests are fetched lazily per depot at
+    /// download time rather than eagerly when the picker opens.</para>
+    /// </remarks>
+    public Task<DownloadedFile> DownloadDepotManifestAsync(
+        long depotId, string manifestId,
+        IProgress<DownloadProgress>? progress, CancellationToken ct = default)
+        => DownloadFileAsync($"/api/givemethemanifestpunk/{depotId}/{manifestId}",
+                             $"{depotId}_{manifestId}.manifest", progress, ct);
+
     public Task<DownloadedFile> GenerateDlcAsync(
-        string appid, string baseAppId, string? gameName, IProgress<double?>? progress, CancellationToken ct = default)
+        string appid, string baseAppId, string? gameName,
+        IProgress<DownloadProgress>? progress, CancellationToken ct = default)
     {
         string url = $"/api/dlc/generate?appid={appid}&base={baseAppId}";
         if (!string.IsNullOrEmpty(gameName)) url += $"&game_name={Uri.EscapeDataString(gameName)}";
@@ -193,7 +210,8 @@ public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
     /// R2 URL (counts toward 25/day); we then fetch the file from that URL. Caller must be signed in.
     /// </summary>
     public async Task<DownloadedFile> DownloadDenuvoAsync(
-        string fixId, string slot, string fallbackName, IProgress<double?>? progress, CancellationToken ct = default)
+        string fixId, string slot, string fallbackName,
+        IProgress<DownloadProgress>? progress, CancellationToken ct = default)
     {
         // 1. Ask the API for a signed URL (auth + daily-limit gate live here).
         var res = await SendAsync(HttpMethod.Get,
@@ -238,48 +256,21 @@ public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
         JsonSerializer.Deserialize<T>(await res.Content.ReadAsStringAsync(ct), JsonOpts);
 
     private async Task<DownloadedFile> DownloadFileAsync(
-        string url, string fallbackName, IProgress<double?>? progress, CancellationToken ct)
+        string url, string fallbackName, IProgress<DownloadProgress>? progress, CancellationToken ct)
     {
         var res = await SendAsync(HttpMethod.Get, url, ct, HttpCompletionOption.ResponseHeadersRead);
-        return await SaveResponseAsync(res, fallbackName, progress, ct);
+        return await HttpFileDownloader.SaveResponseAsync(res, fallbackName, progress, ct);
     }
 
     /// <summary>Download a file from an absolute URL with NO auth header (e.g. a signed R2 link).</summary>
     private async Task<DownloadedFile> DownloadFromUrlAsync(
-        string url, string fallbackName, IProgress<double?>? progress, CancellationToken ct)
+        string url, string fallbackName, IProgress<DownloadProgress>? progress, CancellationToken ct)
     {
         // New request (not via SendAsync) so no Bearer header and the absolute URL isn't prefixed.
         var req = new HttpRequestMessage(HttpMethod.Get, url);
         var res = await _http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead, ct);
         if (!res.IsSuccessStatusCode)
             throw new ApiException(string.Format(Resources.Strings.Api_Err_DownloadFailed, (int)res.StatusCode), res.StatusCode);
-        return await SaveResponseAsync(res, fallbackName, progress, ct);
-    }
-
-    private async Task<DownloadedFile> SaveResponseAsync(
-        HttpResponseMessage res, string fallbackName, IProgress<double?>? progress, CancellationToken ct)
-    {
-        string fileName = res.Content.Headers.ContentDisposition?.FileName?.Trim('"') ?? fallbackName;
-        foreach (char c in Path.GetInvalidFileNameChars()) fileName = fileName.Replace(c, '_');
-
-        string folder = InterimDownloadsFolder;
-        Directory.CreateDirectory(folder);
-        string filePath = Path.Combine(folder, fileName);
-
-        long? total = res.Content.Headers.ContentLength;
-        await using var src = await res.Content.ReadAsStreamAsync(ct);
-        await using var dst = File.Create(filePath);
-
-        var buffer = new byte[81920];
-        long written = 0;
-        int read;
-        while ((read = await src.ReadAsync(buffer, ct)) > 0)
-        {
-            await dst.WriteAsync(buffer.AsMemory(0, read), ct);
-            written += read;
-            progress?.Report(total is > 0 ? (double)written / total.Value : null);
-        }
-
-        return new DownloadedFile(filePath, fileName);
+        return await HttpFileDownloader.SaveResponseAsync(res, fallbackName, progress, ct);
     }
 }

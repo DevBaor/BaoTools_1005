@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- id -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>Beranda</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Tambah</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Kelola</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} dipasang ke Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} file gagal — tutup Steam dan coba lagi.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Mulai ulang Steam untuk menerapkan.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Cari berdasarkan nama atau App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Memuat…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>Depot bersama</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Hapus file lua</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>Hapus "{0}" (App ID {1})?
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>Hapus “{0}” (App ID {1})?
 
-Ini menghapus file .lua-nya dari Steam\config\stplug-in. Mulai ulang Steam setelahnya agar perubahan berlaku.</value></data>
+Ini menghapus berkas .lua-nya dari Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Hapus file lua</value></data>
-  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Hapus {0} file lua?
+  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Hapus {0} berkas lua?
 
-Ini menghapus file .lua dari Steam\config\stplug-in. Mulai ulang Steam setelahnya agar perubahan berlaku.</value></data>
+Ini menghapus berkas .lua dari Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Penghapusan gagal</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Tidak dapat menghapus file:
 {0}</value></data>
@@ -290,7 +289,6 @@ Ini menghapus file .lua dari Steam\config\stplug-in. Mulai ulang Steam setelahny
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} file tidak dapat dihapus.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Mulai Ulang Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Mulai ulang Steam sekarang agar perubahan berlaku?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Tidak dapat menemukan atau menjalankan Steam. Atur lokasinya di Pengaturan.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Perbaikan</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Memuat perbaikan…</value></data>
@@ -307,8 +305,7 @@ Ini menghapus file .lua dari Steam\config\stplug-in. Mulai ulang Steam setelahny
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Pemasangan gagal</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Tidak dapat memasang — tutup Steam (atau mulai ulang Steam) dan coba lagi.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Perbaikan terpasang</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest {0} terpasang — Steam sedang dimulai ulang.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest {0} terpasang. Mulai ulang Steam untuk menerapkan.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Manifest {0} terpasang.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Gim tidak ditemukan</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Pasang {0} di Steam dahulu, lalu terapkan perbaikan.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Perbaikan diterapkan sebagian</value></data>
@@ -348,13 +345,12 @@ Ini menghapus file .lua dari Steam\config\stplug-in. Mulai ulang Steam setelahny
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Tidak dapat menentukan gim dasar untuk DLC ini</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Terjadi kesalahan — periksa koneksi Anda dan coba lagi.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Unduhan gagal — periksa koneksi Anda dan coba lagi.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Pembuatan gagal — periksa koneksi Anda dan coba lagi.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Ganti "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Tidak ada perubahan depot/DLC — konten sama.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Pemasangan dibatalkan — file yang ada tidak berubah.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Tidak dapat memasang {0} file — tutup Steam (atau gunakan Mulai Ulang Steam) dan coba lagi.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} ditambahkan — lua + {1} manifest. Mulai ulang Steam untuk menerapkan.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} ditambahkan — Steam akan mengambil manifest. Mulai ulang Steam untuk menerapkan.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} ditambahkan: lua + {1} manifest.</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} ditambahkan. Steam akan mengambil manifest.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Buka di SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>BERSAMA</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Ini menggantikan lua yang terpasang. Tinjau apa yang berubah:</value></data>
@@ -451,9 +447,9 @@ Ini menghapus file .lua dari Steam\config\stplug-in. Mulai ulang Steam setelahny
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Hapus praatur ini?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>“{0}” akan dihapus dari praatur tersimpan Anda. Ini tidak memengaruhi game itu sendiri.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Praatur yang sedang dipakai tidak bisa dihapus.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Sekarang memakai “{0}”. Mulai ulang Steam agar berlaku.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Sekarang memakai “{0}”.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Tidak bisa mengganti praatur — berkas lua mungkin sedang dipakai.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Tersimpan. Mulai ulang Steam agar berlaku.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Tersimpan.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Tidak bisa menyimpan — berkas lua mungkin sedang dipakai.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Disimpan sebagai praatur.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Simpan ke “{0}”</value></data>
@@ -527,4 +523,90 @@ Ini menghapus file .lua dari Steam\config\stplug-in. Mulai ulang Steam setelahny
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Kamu sudah mencapai batas harian Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Tidak ada manifes Hubcap untuk aplikasi ini.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Unduhan Hubcap gagal ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Unduhan</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Unduhan</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Tidak ada unduhan saat ini. Ayo, unduh sesuatu!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Antrean</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Riwayat</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>Dalam antrean</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Mengunduh</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Menunggu kamu</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Memasang</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Selesai</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Gagal</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Dibatalkan</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Batal</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Coba lagi</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Hapus</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Naikkan</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Turunkan</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Hapus riwayat</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Tinjau</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} dari {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Sisa {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Perlu tindakan</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Terhenti saat aplikasi ditutup.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Buka kunci DLC</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Pasang gamenya dulu untuk menerapkan fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Dijeda</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Memverifikasi…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Jeda</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Lanjutkan</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Berkas depot</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depot · {0} dari {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Tidak bisa mendapatkan pengunduh depot.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Tidak ada kunci dekripsi untuk gim ini.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} gagal: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} depot diunduh ke {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Unduh</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Pilih depot yang mau diunduh</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Unduh {0} depot ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Depot ini tidak menyatakan versi untuk diunduh.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Pilih semua</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Tidak ada depot dipilih</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Pilih tempat menyimpan berkas depot</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Ruang disk tidak cukup: butuh {0}, hanya {1} tersisa.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Simpan ke</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Butuh {0} · {1} tersisa di {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Masuk untuk mengunduh depot ini.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Masuk untuk mengunduh depot.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>mengambil manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Tidak bisa mendapatkan manifest depot ini.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Menyiapkan · {0} dari {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Mengambil pengunduh</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Alat</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Memeriksa runtime .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Mengambil SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack dibuka.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Tidak dapat memasang runtime .NET yang dibutuhkan SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Runtime .NET terpasang, tetapi Windows perlu dimulai ulang sebelum SteamAutoCrack bisa berjalan.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Tidak dapat mengunduh SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Tidak dapat menjalankan SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack diperbarui.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>mengalokasikan berkas</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>memeriksa berkas yang ada</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Batalkan unduhan</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Sudah tertulis {0} ke:
+{1}
+
+Ya - hentikan dan hapus berkas tersebut
+Tidak - hentikan tapi simpan
+Batal - lanjutkan mengunduh</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Tidak dapat menghapus berkas yang diunduh. Berkas masih ada di {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Salin App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Tampilkan di folder</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Tidak bisa menyalin — aplikasi lain sedang memakai papan klip.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Tidak dapat membuka {0} — mungkin sudah dipindahkan atau dihapus.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Tidak ada kunci dekripsi di Lua untuk depot ini.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Kunci dekripsi untuk depot {0} salah.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Tidak ada kunci dekripsi di Lua untuk depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime bersama — biasanya sudah terpasang. Centang untuk tetap mengunduh.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Hapus semua {0} entri dari riwayat unduhan? Berkas yang sudah diunduh tidak terpengaruh.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

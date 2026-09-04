@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- ro -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>Acasă</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Adaugă</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Gestionează</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest(e)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} instalat(e) în Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} fișier(e) au eșuat — închide Steam și încearcă din nou.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Repornește Steam pentru a aplica.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Caută după nume sau App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Se încarcă…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -278,11 +277,11 @@
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Elimină fișierul lua</value></data>
   <data name="Manage_Delete_Body" xml:space="preserve"><value>Elimini „{0}” (App ID {1})?
 
-Aceasta șterge fișierul .lua din Steam\config\stplug-in. Repornește Steam după aceea pentru ca modificarea să aibă efect.</value></data>
+Aceasta șterge fișierul .lua din Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Elimină fișierele lua</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Elimini {0} fișiere lua?
 
-Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam după aceea pentru ca modificările să aibă efect.</value></data>
+Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Eliminare eșuată</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Fișierul nu a putut fi șters:
 {0}</value></data>
@@ -290,7 +289,6 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} fișiere nu au putut fi șterse.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Repornește Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Repornești Steam acum pentru ca modificările să aibă efect?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Steam nu a putut fi găsit sau pornit. Setează-i locația în Setări.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Remedieri</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Se încarcă remedierile…</value></data>
@@ -307,8 +305,7 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Instalare eșuată</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Nu s-a putut instala — închide Steam (sau repornește-l) și încearcă din nou.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Remediere instalată</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifestul {0} instalat — Steam repornește.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifestul {0} instalat. Repornește Steam pentru a aplica.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Manifestul {0} a fost instalat.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Joc negăsit</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Instalează mai întâi {0} în Steam, apoi aplică remedierea.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Remediere aplicată parțial</value></data>
@@ -348,13 +345,12 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Nu s-a putut determina jocul de bază pentru acest DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Ceva nu a mers bine — verifică-ți conexiunea și încearcă din nou.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Descărcare eșuată — verifică-ți conexiunea și încearcă din nou.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generare eșuată — verifică-ți conexiunea și încearcă din nou.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Înlocuiești „{0}”?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Nicio modificare de depozit/DLC — același conținut.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Instalare anulată — fișierele existente au rămas neschimbate.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Nu s-au putut instala {0} fișier(e) — închide Steam (sau folosește Repornește Steam) și încearcă din nou.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} adăugat — lua + {1} manifest(e). Repornește Steam pentru a aplica.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} adăugat — Steam va prelua manifestele. Repornește Steam pentru a aplica.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Adăugat {0}: lua + {1} manifest(e).</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Adăugat {0}. Steam va descărca manifestele.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Deschide pe SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>PARTAJAT</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Aceasta înlocuiește lua-ul instalat. Verifică ce se modifică:</value></data>
@@ -451,9 +447,9 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Ștergi această presetare?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>„{0}” va fi eliminată din presetările tale salvate. Acest lucru nu afectează jocul în sine.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Presetarea aflată în uz nu poate fi ștearsă.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Se folosește acum „{0}”. Repornește Steam pentru a avea efect.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Se folosește acum „{0}”.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Nu s-a putut schimba presetarea — fișierul lua ar putea fi în uz.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Salvat. Repornește Steam pentru a avea efect.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Salvat.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Nu s-a putut salva — fișierul lua ar putea fi în uz.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Salvat ca presetare.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Salvează în „{0}”</value></data>
@@ -527,4 +523,90 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Ai atins limita zilnică Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Nu există manifest Hubcap pentru această aplicație.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Descărcarea Hubcap a eșuat ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Descărcări</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Descărcări</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Nicio descărcare în curs. Hai, descarcă ceva!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Coadă</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Istoric</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>În coadă</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Se descarcă</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Te așteaptă</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Se instalează</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Gata</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Eșuat</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Anulat</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Anulează</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Reîncearcă</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Elimină</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Mută mai sus</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Mută mai jos</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Șterge istoricul</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Verifică</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} din {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Au rămas {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Necesită acțiune</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Întreruptă la închiderea aplicației.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Deblocare DLC</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Instalează întâi jocul pentru a aplica un fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>În pauză</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Se verifică…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pauză</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Reia</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Fișiere depot</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depouri · {0} din {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Nu s-a putut obține descărcătorul de depouri.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Nu s-au găsit chei de decriptare pentru acest joc.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depoul {0} a eșuat: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>S-au descărcat {0} depouri în {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Descarcă</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Alege depourile de descărcat</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Descarcă {0} depouri ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Acest depou nu declară nicio versiune de descărcat.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Selectează tot</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Niciun depou selectat</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Alege unde să salvezi fișierele depoului</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Spațiu insuficient pe disc: necesită {0}, doar {1} liberi.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Salvează în</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Necesită {0} · {1} liberi pe {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Autentifică-te ca să descarci acest depou.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Autentifică-te ca să descarci depouri.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>se obține manifestul</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nu s-a putut obține manifestul acestui depou.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Se pregătește · {0} din {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Se obține descărcătorul</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Instrument</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Se verifică runtime-ul .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Se obține SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack a fost deschis.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Nu s-a putut instala runtime-ul .NET necesar pentru SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Runtime-ul .NET a fost instalat, dar Windows trebuie repornit înainte ca SteamAutoCrack să poată rula.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Nu s-a putut descărca SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Nu s-a putut porni SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack a fost actualizat.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>se alocă fișierele</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>se verifică fișierele existente</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Anulează descărcarea</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>S-au scris deja {0} în:
+{1}
+
+Da - oprește și șterge acele fișiere
+Nu - oprește dar păstrează-le
+Anulare - continuă descărcarea</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Fișierele descărcate nu au putut fi șterse. Sunt încă în {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Copiază App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Afișează în folder</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Nu s-a putut copia — altă aplicație folosește clipboardul.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Nu s-a putut deschide {0} — poate a fost mutat sau șters.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Nu există cheie de decriptare în Lua pentru acest depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Cheia de decriptare pentru depot {0} este greșită.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Nu există cheie de decriptare în Lua pentru depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime partajat — de obicei deja instalat. Bifează pentru a-l descărca oricum.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Elimini toate cele {0} intrări din istoricul descărcărilor? Fișierele descărcate nu sunt afectate.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

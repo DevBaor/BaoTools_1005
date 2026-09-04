@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using BaoToolsGui.Services;
 using BaoToolsGui.ViewModels;
 using BaoToolsGui.Views;
@@ -117,6 +117,9 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
 
     /// <summary>Switch to the Add page (used by the Manage page's "Update" action).</summary>
     public void NavigateToAdd() => RootNavigation.Navigate(typeof(DownloadView));
+
+    /// <summary>Switch to Downloads (used when an item needs the user to resolve something).</summary>
+    public void NavigateToDownloads() => RootNavigation.Navigate(typeof(DownloadsView));
 
     /// <summary>Switch to Manage (used by Home's "recently added" cards). Caller opens the detail.</summary>
     public void NavigateToManage() => RootNavigation.Navigate(typeof(ManageView));

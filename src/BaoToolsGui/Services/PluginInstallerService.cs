@@ -1,8 +1,7 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
@@ -287,7 +286,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         bool dllMatches = Slots.All(slot =>
             SlotPath(slot) is { } p && File.Exists(p) &&
             AssetDigest(latest, slot.DllAsset) is { } digest &&
-            Sha256OfFile(p) == digest);
+            AssetHash.OfFile(p) == digest);
         bool installed = frontend && loader;
         // `|| legacy` keeps a leftover/locked legacy dll getting swept on subsequent auto-updates until gone.
         bool updateAvailable = installed && (manifest?.Tag != latest.TagName || !dllMatches || legacy);
@@ -331,13 +330,13 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             }
 
             // Verify each against its release asset digest before touching anything on disk.
-            string zipSha = Sha256OfFile(zipPath);
+            string zipSha = AssetHash.OfFile(zipPath);
             if (AssetDigest(latest, PluginZipAsset) is { } zd && zipSha != zd)
                 return (false, string.Format(Resources.Strings.Plugin_Err_VerifyFailed, PluginZipAsset));
             var slotShas = new Dictionary<LoaderSlot, string>();
             foreach (var (slot, p) in slotDlPaths)
             {
-                string sha = Sha256OfFile(p);
+                string sha = AssetHash.OfFile(p);
                 slotShas[slot] = sha;
                 if (AssetDigest(latest, slot.DllAsset) is { } dd && sha != dd)
                     return (false, string.Format(Resources.Strings.Plugin_Err_VerifyFailed, slot.DllAsset));
@@ -366,7 +365,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             // (so hand-placed test builds aren't clobbered), and thus never stop/restart Steam for it either.
             bool legacyPresent = LegacyDllPaths.Any(File.Exists);
             bool anySlotNeedsUpdate = Slots.Any(slot =>
-                SlotPath(slot) is not { } cur || !File.Exists(cur) || Sha256OfFile(cur) != slotShas[slot]);
+                SlotPath(slot) is not { } cur || !File.Exists(cur) || AssetHash.OfFile(cur) != slotShas[slot]);
             bool dllNeedsUpdate = !DllUpdateDisabled && (anySlotNeedsUpdate || legacyPresent);
             if (dllNeedsUpdate)
             {
@@ -624,7 +623,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         }
         Hoist();
         
-        // Patch luatools.js to baotools.js if it exists (since we renamed the project)
+        // Patch baotools.js if it exists (since we renamed the project)
         string luaPath = Path.Combine(FrontendDir, "public", "luatools.js");
         string baoPath = Path.Combine(FrontendDir, "public", "baotools.js");
         if (File.Exists(luaPath) && !File.Exists(baoPath))
@@ -633,8 +632,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             jsContent = jsContent.Replace("luatools", "baotools");
             jsContent = jsContent.Replace("LuaTools", "BaoTools");
             jsContent = System.Text.RegularExpressions.Regex.Replace(jsContent, @"data:image/png;base64,[A-Za-z0-9+/=]+", "data:image/png;base64,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");
-            jsContent = System.Text.RegularExpressions.Regex.Replace(jsContent, @"data:image/png;base64,[A-Za-z0-9+/=]+", "data:image/png;base64,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");
-              jsContent = System.Text.RegularExpressions.Regex.Replace(jsContent, @"const discordBtn = createIconButton\([^;]+;", "$0 if (discordBtn) { discordBtn.style.display = 'none'; }");
+            jsContent = System.Text.RegularExpressions.Regex.Replace(jsContent, @"const discordBtn = createIconButton\([^;]+;", "$0 if (discordBtn) { discordBtn.style.display = 'none'; }");
             string publicDir = Path.Combine(FrontendDir, "public");
             string oldPng = Path.Combine(publicDir, "luatools-icon.png");
             string newPng = Path.Combine(publicDir, "baotools-icon.png");
@@ -642,26 +640,14 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             File.WriteAllBytes(newPng, Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAXWSURBVFhH1VdbaFxVFD0mk3cmnUnmdTPvV+b9vncyM3dmMklmMpOknSRNrLaoUB+gIGKLtgVTikhtA/ajPgoV1CKIP8EX/lVQEMTWQguC+qViLYL9aD+sSm27ZJ9OpL1qnUn744LNuee19j777LPPuYz9DxBjjNmVjU3CzRgLKRtbQUdHZ+ePvkjyUm9//x5l562g3qB9diSS+F2lUn3DGLtL2d8sHEuRqSvFyTom6vdg0CC82Wg3McaWNIO6ZYPJvKIZ1D3DGFtgjOkYY20GwbI6Ob8VpfE6lsJTvzDG9ArephF9+74XUEtOIVaqIVfeBIvTeyoiyReK0wuYnNuK8vw2XhZqCwiL2fNWp+d0fmoOoUIZi+k6jt174GpjK9aF6EePvYHDS3thCkYgFqdR2rgFhdoixLFpxOUK4rkyEnIF0tgMCtNLKM1u4eMM/hBe33YQ7z/0ypXbMcCzuv2lq1/t+hB6pwep4jRi2UnEs5NcqVKojyRVrMHo9OLs3o9xbNvKJcaYoCRuFppXtzx3YWVuF8zhOJKF6t+U/pPQOCEYwct378OLm5fPMca6lcRNQ7bFT0eDEhLF5pSvSawwhVhQQs4W/1TJ2SreCogFvuepJj1A4ygmfMksGGNHlIStoNdgtn+fHt+IkDgGs6+AhFyFODbD4yGZn+IKqaQ6tcflKswjeYSlMdA8ncnyNWNMpSRuCm1tbTuDKRmpsTrCURee3N6Pfq0ZA3o/XEEJ8ewEkvkqYtkJOAIi1HofNLph7HiwD/7QCMRSHf54hrzwsJK7GdiNVtclWkUiPw27N4wzHwxg56M6PL9Hg32Pd8FoT2B0og6DLYqDT3Vh7w4NlnfocGJ1ABZ3DMnCNNLjszAM2y40kldLsOiHrT9LpVke1X6xgljMjqMrGhxd0SKTcSOQrsAtyQhIFRRkB147pMWR/RqEIi4E01N8nlSawZDR/MN6s6Es2D2XyQtisYrQaBUmdw4mt4xgpop4SMIjpQcQCYkIUJ8rB8EtI5yp8fFkvNHqpDwQVxK3ghnB7v6VAowyHEU4SVQuIxGQcGjTboT9KcTyFP013kcnhsYaLa6LjLGSknA9SA0ahDMhscBXdd2QGiKZcai0GsTkMq+TYuoPpvLQ6kwnGGNhJdHtoEulUj2tF2xn3cEEwlIB8dwkIukxXpJxrkAcOsH6XVtb2xOMsXYlwR1Bv1pzyuENwSDYoDdZKMJ5aRy2weENo7dv4BPlnDuJaW9EwuhknSegsFhAMJFDRCwiKVeQmayDvEPBq5zIGCvSyVI2tgJTT6/6S579GkJJiI4aldfrlBnL6OzuPckY065N7OrpO+AJpygr/rTem7Gjq7vv82GHl6fbG/M+V35DnQJRsLnR3dN7fO0pNmgQTsvVRXgjInmHPNEaOjq677e4/DzISAGtlISCz+GL/HUfkFC/0x+D2elDe3v7OGV0wea5mK0swOoO0OvIoeT/T2h1pnc8oSQ3gJISfQeTMldstLquZ8pEFp6wiPT4Jjj9UZDLe9QDRzu6ug5HR8f5PM2g4Qsld1PQm22feUIpHmCjE/Qu9GEkmuYrFuz0UqpxhVZ3gN8N5AF3KEkpGL7YKLKV+bXgnFdyNwWt3vQuKSDidGkWJrMDvnjmJgPodAhWF18pbYvDF+UXWG5qM78ROzu7X1TytoJFq9sPmzcEsViDwWTlpDcaMBKVYBRsPEuSJ4btXpgdI9fsntB5lUq1rCRsBVm1Zui4zRO8RoEVTOagN1q4a2/2gMgNCMSzfIvIiD71hsuN/4X1Q63VnaTEkynPISwVodYMwWRx8tdvIlcGHU0yJJoZh9HswIBWh+hoiY+ne0G9QfuekrMl9PSp99N+jkQkrowiPFOe5+SpfBUmq4u7neqklPadB2lE4t+d3b27lZzrQZIxlqerWS/YzlHAecMiGfSbqqNr1ez0/UF1ah8ymb9ljFUa42/rHfBvMDTISTyNNl+jTnfAoGL8LfEnLue+B8nLVXEAAAAASUVORK5CYII="));
             File.WriteAllText(baoPath, jsContent);
             File.Delete(luaPath);
-          }
-      }
+        }
+    }
+
+    // ── Helpers (same shape as UnlockerService's) ──
     private static string? AssetDigest(GithubRelease r, string name) =>
-        ParseDigest(r.Assets.FirstOrDefault(a => a.Name.Equals(name, StringComparison.OrdinalIgnoreCase))?.Digest);
+        AssetHash.ParseDigest(r.Assets.FirstOrDefault(a => a.Name.Equals(name, StringComparison.OrdinalIgnoreCase))?.Digest);
 
     private static GithubAsset? FindAsset(GithubRelease r, string name) =>
         r.Assets.FirstOrDefault(a => a.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-    private static string Sha256OfFile(string path)
-    {
-        using var s = File.OpenRead(path);
-        return Convert.ToHexString(SHA256.HashData(s)).ToLowerInvariant();
-    }
-
-    private static string? ParseDigest(string? digest)
-    {
-        if (string.IsNullOrWhiteSpace(digest)) return null;
-        int colon = digest.IndexOf(':');
-        return (colon >= 0 ? digest[(colon + 1)..] : digest).Trim().ToLowerInvariant();
-    }
 }
-
-

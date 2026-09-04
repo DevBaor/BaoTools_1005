@@ -1,4 +1,4 @@
-<ui:FluentWindow
+﻿<ui:FluentWindow
     x:Class="BaoToolsGui.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -92,6 +92,7 @@
                             <ui:SymbolIcon Symbol="Globe24" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
+
                     <ui:NavigationViewItem Content="Plugin" TargetPageType="{x:Type views:PluginView}">
                         <ui:NavigationViewItem.Icon>
                             <ui:SymbolIcon Symbol="PuzzlePiece24" />
@@ -103,6 +104,11 @@
                     <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_RestartSteam}" Click="RestartSteam_Click">
                         <ui:NavigationViewItem.Icon>
                             <ui:SymbolIcon Symbol="ArrowClockwise24" />
+                        </ui:NavigationViewItem.Icon>
+                    </ui:NavigationViewItem>
+                    <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Downloads}" TargetPageType="{x:Type views:DownloadsView}">
+                        <ui:NavigationViewItem.Icon>
+                            <ui:SymbolIcon Symbol="ArrowDownload24" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
                     <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Settings}" TargetPageType="{x:Type views:SettingsView}">
@@ -177,5 +183,3 @@
         </Grid>
     </Grid>
 </ui:FluentWindow>
-
-

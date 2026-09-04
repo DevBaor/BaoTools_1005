@@ -23,18 +23,17 @@ public partial class OnlineFixGameCardVm(long appId, string name, string install
     public bool Matches(string q) =>
         Name.Contains(q, StringComparison.OrdinalIgnoreCase) || AppId.ToString().Contains(q);
 
-    public async Task EnsureCoverAsync(CoverCache covers)
+    public Task EnsureCoverAsync(CoverCache covers)
     {
-        if (Cover is not null) return;
-        if (System.Threading.Interlocked.Exchange(ref _resolving, 1) == 1) return;
+        if (Cover is not null) return Task.CompletedTask;
+        if (System.Threading.Interlocked.Exchange(ref _resolving, 1) == 1) return Task.CompletedTask;
         try
         {
-            // We don't have a reliable header image URL, but CoverCache.EnsureAsync usually takes (appid, url).
-            // Let's just try to get the local one, or use a default.
             string? local = covers.GetLocalPath(AppId);
             if (local is not null) Cover = local;
         }
         finally { System.Threading.Interlocked.Exchange(ref _resolving, 0); }
+        return Task.CompletedTask;
     }
 }
 

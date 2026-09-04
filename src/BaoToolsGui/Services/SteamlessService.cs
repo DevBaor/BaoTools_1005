@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Text.Json;
@@ -20,7 +20,7 @@ public record SteamlessResult(int Patched, int Unchanged, int Total, string? Err
 /// filtered recursive scan of the install folder. Each patched exe is backed up to <c>&lt;exe&gt;.bak</c>
 /// first. Steamless silently no-ops on exes without DRM, so over-selection is harmless.
 /// </summary>
-public class SteamlessService(GithubProxy gh, SteamLibraryService library, SteamDepotInfo depots)
+public class SteamlessService(GithubProxy gh, SteamLibraryService library, SteamDepotInfo depots, CacheService cache)
 {
     private static readonly string ToolDir =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BaoToolsGui", "steamless");
@@ -38,38 +38,83 @@ public class SteamlessService(GithubProxy gh, SteamLibraryService library, Steam
 
     private readonly SemaphoreSlim _toolGate = new(1, 1);
 
-    /// <summary>Ensure Steamless.CLI.exe is on disk (downloads + extracts once). Returns its path, or null
-    /// if the tool couldn't be obtained.</summary>
+    /// <summary>How long an up-to-date check is trusted before we ask GitHub again.</summary>
+    private static readonly TimeSpan ToolCheckInterval = TimeSpan.FromHours(6);
+
+    private static bool CheckedRecently(long lastMs) =>
+        lastMs > 0 && DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - lastMs < (long)ToolCheckInterval.TotalMilliseconds;
+
+    /// <summary>
+    /// Ensure Steamless.CLI.exe is on disk and reasonably current. Null only if no usable tool exists.
+    /// </summary>
+    /// <remarks>
+    /// Was a bare <c>File.Exists</c>, which pinned the first download forever. Now the installed release
+    /// tag is recorded and re-checked at most every <see cref="ToolCheckInterval"/>.
+    ///
+    /// <para><b>A failed check never disables a working tool</b> — every failure path falls back to an
+    /// existing <c>CliPath</c>, so being offline can't break DRM removal for someone who already has it.</para>
+    /// </remarks>
     public async Task<string?> EnsureToolAsync(IProgress<double?>? progress, CancellationToken ct = default)
     {
-        if (File.Exists(CliPath)) return CliPath;
+        if (File.Exists(CliPath) && CheckedRecently(cache.SteamlessCheckedAtMs)) return CliPath;
 
         await _toolGate.WaitAsync(ct);
+        bool have = false;
         try
         {
-            if (File.Exists(CliPath)) return CliPath; // won the race elsewhere
+            have = File.Exists(CliPath);
+            if (have && CheckedRecently(cache.SteamlessCheckedAtMs)) return CliPath; // won the race
+
+            // A failed lookup still counts as "we looked", so an offline run backs off instead of
+            // retrying the whole GithubProxy mirror chain on the next call.
+            void RecordAttempt() =>
+                cache.SteamlessCheckedAtMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
             // Latest release → the single distributable .zip asset.
             string url = $"https://api.github.com/repos/{AppConfig.SteamlessRepo}/releases/latest";
             using var res = await gh.SendAsync(url, ct);
-            if (res is null || !res.IsSuccessStatusCode) return null;
+            if (res is null || !res.IsSuccessStatusCode) { if (have) RecordAttempt(); return have ? CliPath : null; }
 
             var release = JsonSerializer.Deserialize<GithubRelease>(await res.Content.ReadAsStringAsync(ct), JsonOpts);
             var asset = release?.Assets.FirstOrDefault(a => a.Name.EndsWith(".zip", StringComparison.OrdinalIgnoreCase));
-            if (asset is null) return null;
+            if (asset is null) { if (have) RecordAttempt(); return have ? CliPath : null; }
+
+            // Already on the published build: record that we looked and skip the download.
+            if (have && !string.IsNullOrEmpty(release!.TagName)
+                     && string.Equals(release.TagName, cache.SteamlessVersion, StringComparison.Ordinal))
+            {
+                cache.SteamlessCheckedAtMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                return CliPath;
+            }
 
             Directory.CreateDirectory(ToolDir);
             string zipPath = Path.Combine(ToolDir, "steamless.zip");
             await gh.DownloadAsync(asset.DownloadUrl, zipPath, progress, ct);
 
+            // Verify before overwriting a working install: this is an executable we then run.
+            if (!AssetHash.Matches(zipPath, asset.Digest))
+            {
+                try { File.Delete(zipPath); } catch { }
+                if (have) RecordAttempt();
+                return have ? CliPath : null;
+            }
+
             // Extract the WHOLE zip: the CLI needs its plugin DLLs alongside it.
             ZipFile.ExtractToDirectory(zipPath, ToolDir, overwriteFiles: true);
             try { File.Delete(zipPath); } catch { /* leftover zip is harmless */ }
 
-            return File.Exists(CliPath) ? CliPath : null;
+            if (!File.Exists(CliPath)) { if (have) RecordAttempt(); return have ? CliPath : null; }
+
+            cache.SteamlessVersion = release!.TagName;
+            cache.SteamlessCheckedAtMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            return CliPath;
         }
         catch (OperationCanceledException) { throw; }
-        catch { return null; }
+        catch
+        {
+            if (have) cache.SteamlessCheckedAtMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            return have ? CliPath : null;
+        }
         finally { _toolGate.Release(); }
     }
 

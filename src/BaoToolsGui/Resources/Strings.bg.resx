@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- bg -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>Начало</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Добавяне</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Управление</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} манифест(а)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} е инсталиран(и) в Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} файл(а) са неуспешни — затворете Steam и опитайте отново.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Рестартирайте Steam, за да приложите.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Търсене по име или App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Зареждане…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>Споделено депо</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Премахване на lua файл</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>Премахване на „{0}“ (App ID {1})?
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>Да се премахне ли „{0}“ (App ID {1})?
 
-Това изтрива неговия .lua файл от Steam\config\stplug-in. След това рестартирайте Steam, за да влезе в сила промяната.</value></data>
+Това изтрива неговия .lua файл от Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Премахване на lua файлове</value></data>
-  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Премахване на {0} lua файла?
+  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Да се премахнат ли {0} lua файла?
 
-Това изтрива .lua файловете от Steam\config\stplug-in. След това рестартирайте Steam, за да влязат в сила промените.</value></data>
+Това изтрива .lua файловете от Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Премахването е неуспешно</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Файлът не може да бъде изтрит:
 {0}</value></data>
@@ -290,7 +289,6 @@
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} файла не можаха да бъдат изтрити.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Рестартиране на Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Рестартиране на Steam сега, за да влязат в сила промените?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Steam не може да бъде намерен или стартиран. Задайте местоположението му в Настройки.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Корекции</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Зареждане на корекции…</value></data>
@@ -307,8 +305,7 @@
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Инсталирането е неуспешно</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Не може да се инсталира — затворете Steam (или го рестартирайте) и опитайте отново.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Корекцията е инсталирана</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Манифестът на {0} е инсталиран — Steam се рестартира.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Манифестът на {0} е инсталиран. Рестартирайте Steam, за да приложите.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Манифестът на {0} е инсталиран.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Играта не е намерена</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Първо инсталирайте {0} в Steam, след което приложете корекцията.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Корекцията е приложена частично</value></data>
@@ -348,13 +345,12 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Не може да се определи основната игра за това DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Нещо се обърка — проверете връзката си и опитайте отново.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Изтеглянето е неуспешно — проверете връзката си и опитайте отново.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Генерирането е неуспешно — проверете връзката си и опитайте отново.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Замяна на „{0}“?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Няма промени в депо/DLC — същото съдържание.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Инсталирането е отказано — съществуващите файлове са непроменени.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Не можаха да се инсталират {0} файл(а) — затворете Steam (или използвайте Рестартиране на Steam) и опитайте отново.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} е добавен — lua + {1} манифест(а). Рестартирайте Steam, за да приложите.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} е добавен — Steam ще извлече манифестите. Рестартирайте Steam, за да приложите.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Добавено {0}: lua + {1} манифест(а).</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Добавено {0}. Steam ще изтегли манифестите.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Отваряне в SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>СПОДЕЛЕНО</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Това замества инсталирания lua. Прегледайте какво се променя:</value></data>
@@ -451,9 +447,9 @@
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Да се изтрие ли тази настройка?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>„{0}“ ще бъде премахната от запазените ви настройки. Това не засяга самата игра.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Настройката, която се използва в момента, не може да бъде изтрита.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Сега се използва „{0}“. Рестартирайте Steam, за да влезе в сила.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Сега се използва „{0}“.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Настройката не можа да бъде сменена — lua файлът може да е зает.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Запазено. Рестартирайте Steam, за да влезе в сила.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Запазено.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Запазването е неуспешно — lua файлът може да е зает.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Запазено като предварителна настройка.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Запази в „{0}“</value></data>
@@ -527,4 +523,90 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Достигна дневния си лимит за Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Няма наличен Hubcap манифест за това приложение.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Изтеглянето от Hubcap е неуспешно ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Изтегляния</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Изтегляния</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>В момента няма изтегляния. Хайде, свали нещо!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Опашка</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>История</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>На опашка</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Изтегляне</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Чака теб</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Инсталиране</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Готово</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Неуспешно</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Отказано</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Отказ</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Опитай пак</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Премахни</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Нагоре</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Надолу</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Изчисти историята</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Прегледай</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} от {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Остават {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Изисква действие</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Прекъснато при затваряне на приложението.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Отключване на DLC</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Първо инсталирайте играта, за да приложите фикс.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>На пауза</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Проверка…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Пауза</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Възобнови</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Файлове на депото</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Депота · {0} от {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Изтеглячът на депота не можа да бъде получен.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Не са намерени ключове за дешифриране за тази игра.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Депо {0} се провали: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>Изтеглени са {0} депота в {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Изтегли</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Избери депота за изтегляне</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Изтегли {0} депота ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Това депо не обявява версия за изтегляне.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Избери всички</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Няма избрани депота</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Избери къде да се запишат файловете на депото</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Няма достатъчно място на диска: нужни са {0}, свободни са само {1}.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Запази в</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Нужни {0} · свободни {1} на {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Влез, за да изтеглиш това депо.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Влез, за да изтегляш депота.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>зарежда manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Manifest файлът за това депо не можа да бъде получен.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Подготовка · {0} от {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Изтегляне на инструмента</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Инструмент</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Проверка на .NET средата</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Изтегляне на SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack е отворен.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Не можа да се инсталира .NET средата, необходима на SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET средата е инсталирана, но Windows трябва да се рестартира, преди SteamAutoCrack да може да работи.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack не можа да се изтегли.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack не можа да се стартира.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack е обновен.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>заделяне на файлове</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>проверка на съществуващите файлове</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Отказ на изтеглянето</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Вече са записани {0} в:
+{1}
+
+Да - спри и изтрий тези файлове
+Не - спри, но ги запази
+Отказ - продължи изтеглянето</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Изтеглените файлове не можаха да бъдат изтрити. Още са в {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Копиране на App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Показване в папката</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Копирането е неуспешно — друго приложение използва клипборда.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>{0} не може да се отвори — може да е преместен или изтрит.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>В Lua няма ключ за дешифриране за този depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Ключът за дешифриране за depot {0} е грешен.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>В Lua няма ключ за дешифриране за depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Споделена среда за изпълнение — обикновено вече е инсталирана. Отметнете, за да я изтеглите.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Да се премахнат ли всички {0} записа от историята на изтеглянията? Изтеглените файлове не се засягат.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

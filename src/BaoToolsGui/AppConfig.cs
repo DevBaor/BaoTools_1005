@@ -48,12 +48,41 @@ public static class AppConfig
     // CloudRedirect (Selectively11): the Mode page "Manage" button downloads the latest CloudRedirect.exe
     // GUI manager from here and launches it. (Separate from the CLI fixer used by the mode install flow.)
     public const string CloudRedirectRepo = "Selectively11/CloudRedirect";
+
+    // SteamAutoCrack: the Downloads page button fetches this release and launches its GUI.
+    //
+    // Three facts about the shipped asset drive how SteamAutoCrackService handles it:
+    //   * GUI ONLY. The release contains a single exe and no SteamAutoCrack.CLI.exe, and that GUI parses
+    //     no command-line arguments, so we can open it and nothing more. There is no way to drive a
+    //     crack from here; the user does everything in their own window.
+    //   * FRAMEWORK-DEPENDENT net10.0-windows. It is a single-file bundle but the runtime is NOT inside
+    //     it (no hostpolicy/coreclr/System.Private.CoreLib, no includedFrameworks), so the .NET 10
+    //     DESKTOP runtime must be present. We install it on demand via Velopack's Runtimes API.
+    //   * Its zip has a real directory TREE (Goldberg/, TEMP/ beside the exe), unlike the flat zip
+    //     DepotDownloaderService expects. Their exe resolves those paths from its own base directory,
+    //     so extract without flattening.
+    public const string SteamAutoCrackRepo = "SteamAutoCracks/Steam-auto-crack";
+
+    // DepotDownloaderMod: downloads raw depot content from Steam's CDN using depot keys + a local manifest.
+    // Powers the Depots page "Download" action.
+    //
+    // This is a RE-PACK we host ourselves, NOT the upstream SteamAutoCracks/DepotDownloaderMod repo, for two
+    // reasons: upstream ships its assets as `Release.rar` (System.IO.Compression cannot read RAR), and its
+    // build is framework-dependent net9.0 while this app is net8.0-windows, so users without the .NET 9
+    // runtime couldn't run it. Note that adding a RAR reader would fix only the FIRST of those.
+    //
+    // The re-pack is produced automatically by the `repack.yml` workflow in that repo: on each upstream
+    // release it rebuilds their source at that tag as a SELF-CONTAINED win-x64 publish and uploads a FLAT
+    // zip. Both properties are load-bearing for DepotDownloaderService.EnsureToolAsync, which takes the
+    // first `.zip` asset, extracts it straight into ToolDir, and then expects DepotDownloaderMod.exe at the
+    // archive ROOT (unlike PluginInstallerService, it has no single-top-level-folder hoisting).
+    public const string DepotDownloaderRepo = "mendy-tools/DepotDownloaderMod";
     public const string ManifestBackendUrl = "http://167.235.229.108";
     public const string ManifestBackendUserAgent = "secretgoonpoon";
 
     // The donate-keys endpoint gates on a DIFFERENT User-Agent than the manifest backend (it 403s
     // otherwise). This matches the BaoTools plugin's config.USER_AGENT.
-    public const string DonateKeysUserAgent = "discord(dot)gg/baotools";
+    public const string DonateKeysUserAgent = "discord(dot)gg/baocobap";
 
     // ── Umami analytics (anonymous app-launch counting) ──────────────
     public const string UmamiHost = "https://analytics.lua.tools";
@@ -70,7 +99,7 @@ public static class AppConfig
     /// </summary>
     public static readonly string[] GithubReleasesRepos =
     [
-        "https://github.com/madoiscool/BaoTools",   // primary
+        "https://github.com/madoiscool/LuaTools",   // primary
         "https://github.com/mendy-tools/BaoTools",  // backup. Create this repo + re-upload the Velopack
                                                     // assets ONLY if the primary goes down (404s harmlessly
                                                     // until then; UpdateService just falls through past it).

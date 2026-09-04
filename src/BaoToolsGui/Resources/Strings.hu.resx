@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- hu -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>Kezdőlap</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Hozzáadás</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Kezelés</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} telepítve a Steamre.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} fájl sikertelen — zárd be a Steamet, és próbáld újra.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Indítsd újra a Steamet az alkalmazáshoz.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Keresés név vagy App ID alapján...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Betöltés…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>Megosztott depó</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Lua fájl eltávolítása</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>Eltávolítod a következőt: „{0}” (App ID {1})?
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>Eltávolítod a(z) „{0}” (App ID {1}) elemet?
 
-Ez törli a .lua fájlját a Steam\config\stplug-in mappából. Ezután indítsd újra a Steamet, hogy a változás érvénybe lépjen.</value></data>
+Ez törli a .lua fájlját a Steam\config\stplug-in mappából.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Lua fájlok eltávolítása</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Eltávolítasz {0} lua fájlt?
 
-Ez törli a .lua fájlokat a Steam\config\stplug-in mappából. Ezután indítsd újra a Steamet, hogy a változások érvénybe lépjenek.</value></data>
+Ez törli a .lua fájlokat a Steam\config\stplug-in mappából.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Az eltávolítás sikertelen</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>A fájlt nem sikerült törölni:
 {0}</value></data>
@@ -290,7 +289,6 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából. Ezután indítsd
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} fájlt nem sikerült törölni.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Steam újraindítása</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Újraindítod most a Steamet, hogy a változások érvénybe lépjenek?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>A Steam nem található vagy nem indítható el. Add meg a helyét a Beállításokban.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Javítások</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Javítások betöltése…</value></data>
@@ -307,8 +305,7 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából. Ezután indítsd
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Telepítés sikertelen</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Nem sikerült telepíteni — zárd be a Steamet (vagy indítsd újra), és próbáld újra.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Javítás telepítve</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>A(z) {0} manifest telepítve — a Steam újraindul.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>A(z) {0} manifest telepítve. Indítsd újra a Steamet az alkalmazáshoz.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>{0} manifest telepítve.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Játék nem található</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Először telepítsd a(z) {0} játékot a Steamre, majd alkalmazd a javítást.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Javítás részben alkalmazva</value></data>
@@ -348,13 +345,12 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából. Ezután indítsd
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Nem sikerült meghatározni a DLC alapjátékát</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Hiba történt — ellenőrizd a kapcsolatot, és próbáld újra.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Letöltés sikertelen — ellenőrizd a kapcsolatot, és próbáld újra.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generálás sikertelen — ellenőrizd a kapcsolatot, és próbáld újra.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Lecseréled a következőt: „{0}”?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Nincs depó-/DLC-változás — ugyanaz a tartalom.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Telepítés megszakítva — a meglévő fájlok változatlanok.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Nem sikerült telepíteni {0} fájlt — zárd be a Steamet (vagy használd a Steam újraindítása lehetőséget), és próbáld újra.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} hozzáadva — lua + {1} manifest. Indítsd újra a Steamet az alkalmazáshoz.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} hozzáadva — a Steam lekéri a manifesteket. Indítsd újra a Steamet az alkalmazáshoz.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} hozzáadva: lua + {1} manifest.</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} hozzáadva. A Steam letölti a manifesteket.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Megnyitás a SteamDB-n</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>MEGOSZTOTT</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Ez lecseréli a telepített luát. Tekintsd át, mi változik:</value></data>
@@ -451,9 +447,9 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából. Ezután indítsd
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Törlöd ezt az előbeállítást?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>A(z) „{0}” eltávolításra kerül a mentett előbeállításaid közül. Ez magára a játékra nincs hatással.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>A jelenleg használt előbeállítás nem törölhető.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Mostantól a(z) „{0}” van használatban. Indítsd újra a Steamet, hogy érvénybe lépjen.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Most a(z) „{0}” van használatban.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Nem sikerült előbeállítást váltani — a lua fájl használatban lehet.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Mentve. Indítsd újra a Steamet, hogy érvénybe lépjen.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Mentve.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Nem sikerült menteni — a lua fájl használatban lehet.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Mentve előbeállításként.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Mentés ide: „{0}”</value></data>
@@ -527,4 +523,90 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából. Ezután indítsd
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Elérted a napi Hubcap-korlátot.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Ehhez az alkalmazáshoz nincs Hubcap-manifeszt.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>A Hubcap-letöltés sikertelen ({0}).</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Letöltések</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Letöltések</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Most nincs letöltés. Gyerünk, tölts le valamit!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Várólista</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Előzmények</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>Várólistán</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Letöltés</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Rád vár</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Telepítés</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Kész</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Sikertelen</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Megszakítva</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Mégse</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Újra</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Eltávolítás</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Fel</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Le</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Előzmények törlése</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Megnézem</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} / {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>{0} van hátra</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Beavatkozás szükséges</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Megszakadt az alkalmazás bezárásakor.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC-feloldás</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Előbb telepítsd a játékot a fix alkalmazásához.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Szüneteltetve</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Ellenőrzés…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Szünet</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Folytatás</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depot-fájlok</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depotok · {0} / {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>A depot-letöltő nem szerezhető be.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Nem található visszafejtési kulcs ehhez a játékhoz.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>A(z) {0} depot hibára futott: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} depot letöltve ide: {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Letöltés</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Válaszd ki a letöltendő depotokat</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>{0} depot letöltése ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Ez a depot nem ad meg letölthető verziót.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Összes kijelölése</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Nincs kiválasztott depot</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Válaszd ki, hova mentsük a depot-fájlokat</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Nincs elég lemezterület: {0} kellene, csak {1} szabad.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Mentés ide</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>{0} kell · {1} szabad itt: {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Jelentkezz be a depot letöltéséhez.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Jelentkezz be a depotok letöltéséhez.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>manifest letöltése</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nem sikerült megszerezni a depot manifestjét.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Előkészítés · {0} / {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Letöltő beszerzése</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Eszköz</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>.NET futtatókörnyezet ellenőrzése</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>SteamAutoCrack beszerzése</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>A SteamAutoCrack megnyílt.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Nem sikerült telepíteni a SteamAutoCrackhez szükséges .NET futtatókörnyezetet.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>A .NET futtatókörnyezet települt, de a Windows újraindítása szükséges a SteamAutoCrack futtatásához.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Nem sikerült letölteni a SteamAutoCracket.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Nem sikerült elindítani a SteamAutoCracket.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>A SteamAutoCrack frissült.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>fájlok lefoglalása</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>meglévő fájlok ellenőrzése</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Letöltés megszakítása</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Már {0} lett kiírva ide:
+{1}
+
+Igen - leállítás és a fájlok törlése
+Nem - leállítás, de a fájlok megtartása
+Mégse - letöltés folytatása</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>A letöltött fájlokat nem sikerült törölni. Továbbra is itt vannak: {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>App ID másolása</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Megjelenítés a mappában</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Nem sikerült a másolás — egy másik alkalmazás használja a vágólapot.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>A(z) {0} nem nyitható meg — lehet, hogy áthelyezték vagy törölték.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>A Lua nem tartalmaz visszafejtő kulcsot ehhez a depot-hoz.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>A(z) {0} depot visszafejtő kulcsa hibás.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>A Lua nem tartalmaz visszafejtő kulcsot a(z) {0} depot-hoz.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Megosztott futtatókörnyezet — általában már telepítve van. Jelölje be, ha mégis letöltené.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Eltávolítja mind a(z) {0} bejegyzést a letöltési előzményekből? A letöltött fájlokat ez nem érinti.</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>

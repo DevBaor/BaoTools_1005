@@ -1,4 +1,4 @@
-<UserControl
+﻿<UserControl
     x:Class="BaoToolsGui.Views.ManageView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -221,7 +221,7 @@
                                 <MenuItem
                                     Command="{Binding PlacementTarget.Tag.CopyAppIdCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                     CommandParameter="{Binding}"
-                                    Header="{x:Static res:Strings.Manage_Action_CopyAppId}"
+                                    Header="{x:Static res:Strings.Common_CopyAppId}"
                                     Icon="{ui:SymbolIcon Copy24}" />
                                 <Separator />
                                 <MenuItem

@@ -1,4 +1,4 @@
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -6,26 +6,13 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
+using BaoToolsGui.Services.Downloads;
 using BaoToolsGui.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace BaoToolsGui.Services;
-
-public record DownloadState
-{
-    public string Status { get; set; } = "queued"; // queued, downloading, processing, done, error, cancelled
-    public long BytesRead { get; set; }
-    public long TotalBytes { get; set; }
-    public string? CurrentApi { get; set; }
-    public Dictionary<string, object> ApiErrors { get; set; } = new();
-    public string? Error { get; set; }
-    public string? InstalledPath { get; set; }
-    public bool Success { get; set; }
-    public string? Api { get; set; }
-    public CancellationTokenSource? Cts { get; set; }
-}
 
 public class HttpServerService : IHostedService
 {
@@ -37,7 +24,9 @@ public class HttpServerService : IHostedService
     private HttpListener? _listener;
     private CancellationTokenSource? _appCts;
 
-    private readonly ConcurrentDictionary<long, DownloadState> _downloads = new();
+    // appid -> the queue item for its manifest download. Retained after completion so a late poll from
+    // the store-page popup still sees "done" (the previous DownloadState dictionary behaved the same way).
+    private readonly ConcurrentDictionary<long, Services.Downloads.DownloadItem> _downloads = new();
     private List<ApiSource> _apiSources = new();
     private bool _apiSourcesLoaded = false;
 
@@ -357,54 +346,87 @@ public class HttpServerService : IHostedService
         if (string.IsNullOrWhiteSpace(source))
             return (400, JsonErr("source is required"));
 
-        if (_downloads.TryGetValue(appId, out var existing) && existing.Status is "downloading" or "processing")
+        // The queue's DedupeKey is the real duplicate guard; this keeps the documented 409 contract.
+        var queue = _services.GetRequiredService<Services.Downloads.DownloadQueue>();
+        if (queue.FindActive($"manifest:{appId}") is not null)
             return (409, JsonErr("Download already in progress for this app"));
 
-        var cts = new CancellationTokenSource();
-        var state = new DownloadState
-        {
-            Status = "queued",
-            CurrentApi = source,
-            Cts = cts,
-        };
-        _downloads[appId] = state;
-
-        _ = DownloadAndInstallAsync(appId, source, cts.Token);
+        var jobs = _services.GetRequiredService<Services.Downloads.ManifestJobFactory>();
+        bool needsKey = BaoToolsGui.Models.SourceMeta.Get(source).RequiresUserKey;
+        _downloads[appId] = queue.Enqueue(jobs.CreateManifestJob(appId, null, source, needsKey));
 
         return (200, Json(new { success = true }));
     }
 
+    /// <summary>
+    /// Project a queue item onto the EXACT JSON the store-page plugin already expects. The field names
+    /// and the status vocabulary are a published contract consumed by baotools.js (via main.lua's
+    /// GetAddViaBaoToolsStatus), so nothing here may drift.
+    /// </summary>
     private (int, string) HandleStatus(long appId)
     {
-        if (!_downloads.TryGetValue(appId, out var state))
+        if (!_downloads.TryGetValue(appId, out var item))
             return (200, Json(new { success = true, state = (object?)null }));
+
+        bool done = item.Status == Services.Downloads.DownloadStatus.Completed;
+        var (bytesRead, totalBytes) = LegacyBytes(item);
 
         var payload = new
         {
-            status = state.Status,
-            bytesRead = state.BytesRead,
-            totalBytes = state.TotalBytes,
-            currentApi = state.CurrentApi,
-            apiErrors = state.ApiErrors.Count > 0 ? state.ApiErrors : null,
-            error = state.Error,
-            installedPath = state.InstalledPath,
-            success = state.Success,
-            api = state.Api,
+            status = StatusWireName(item.Status),
+            bytesRead,
+            totalBytes,
+            currentApi = item.SubTitle,
+            apiErrors = (object?)null, // nothing ever populated this
+            error = item.Status is Services.Downloads.DownloadStatus.Failed
+                                or Services.Downloads.DownloadStatus.Cancelled ? item.Message : null,
+            installedPath = (string?)null,
+            success = done,
+            api = done ? item.SubTitle : null,
         };
         return (200, Json(new { success = true, state = payload }));
     }
 
+    /// <summary>
+    /// The wire vocabulary. Note "failed", NOT "error": the plugin's startPolling shows its failure UI
+    /// on "failed", and the old DownloadState comment claiming "error" was simply wrong.
+    /// </summary>
+    private static string StatusWireName(Services.Downloads.DownloadStatus s) => s switch
+    {
+        Services.Downloads.DownloadStatus.Queued => "queued",
+        Services.Downloads.DownloadStatus.Downloading => "downloading",
+        Services.Downloads.DownloadStatus.AwaitingConfirmation => "processing",
+        Services.Downloads.DownloadStatus.Installing => "processing",
+        Services.Downloads.DownloadStatus.Completed => "done",
+        Services.Downloads.DownloadStatus.Cancelled => "cancelled",
+        _ => "failed",
+    };
+
+    /// <summary>
+    /// Real byte counts when the response had a Content-Length. When it did not, fall back to exactly
+    /// what this endpoint used to synthesize (0 of 100) rather than 0/0, so an unknown-length download
+    /// renders no worse in the popup than it did before.
+    /// </summary>
+    private static (long BytesRead, long TotalBytes) LegacyBytes(Services.Downloads.DownloadItem item) =>
+        item.TotalBytes is > 0 ? (item.BytesRead, item.TotalBytes.Value) : (0L, 100L);
+
+    /// <summary>
+    /// Cancel this app's in-flight manifest download.
+    /// </summary>
+    /// <remarks>
+    /// Resolved through the queue rather than this class's own dictionary, which means it now also
+    /// cancels adds started by the store-page popup's own pipeline (PluginAddService, /add/{appid}).
+    /// Those share the DedupeKey "manifest:{appid}" but never touched _downloads, so before the queue
+    /// existed this endpoint silently did nothing for them and the download ran on after the popup closed.
+    /// </remarks>
     private (int, string) HandleCancel(long appId)
     {
-        if (_downloads.TryGetValue(appId, out var state) && state.Status is "queued" or "downloading" or "processing")
-        {
-            state.Cts?.Cancel();
-            state.Status = "cancelled";
-            state.Error = Resources.Strings.Err_CancelledByUser;
-            _downloads[appId] = state;
-            return (200, Json(new { success = true }));
-        }
-        return (200, Json(new { success = true, message = "Nothing to cancel" }));
+        var queue = _services.GetRequiredService<Services.Downloads.DownloadQueue>();
+        var item = queue.FindActive($"manifest:{appId}");
+        if (item is null) return (200, Json(new { success = true, message = "Nothing to cancel" }));
+
+        queue.Cancel(item);
+        return (200, Json(new { success = true }));
     }
 
     private (int, string) HandleRemove(long appId)
@@ -577,71 +599,6 @@ public class HttpServerService : IHostedService
     }
 
     // ── Download worker ───────────────────────────────────────────────
-
-    private async Task DownloadAndInstallAsync(long appId, string source, CancellationToken ct)
-    {
-        var state = _downloads[appId];
-        try
-        {
-            state.Status = "downloading";
-            state.BytesRead = 0;
-            state.TotalBytes = 100; // progress reported as a 0..100 percentage
-
-            var api = _services.GetRequiredService<BaoToolsApiClient>();
-            var hubcap = _services.GetRequiredService<HubcapService>();
-            var settings = _services.GetRequiredService<SettingsService>();
-            
-            var progress = new Progress<double?>(p =>
-            {
-                if (p is not null)
-                {
-                    state.TotalBytes = 100;
-                    state.BytesRead = (long)(p.Value * 100);
-                }
-            });
-
-            bool needsKey = BaoToolsGui.Models.SourceMeta.Get(source).RequiresUserKey;
-            DownloadedFile download;
-            if (needsKey)
-            {
-                download = await hubcap.DownloadManifestAsync(appId.ToString(), settings.HubcapApiKey ?? "", progress);
-            }
-            else
-            {
-                download = await api.DownloadManifestAsync(appId.ToString(), source, null, progress, ct);
-            }
-
-            state.Status = "processing";
-            var result = _installer.InstallZip(download.FilePath, appId);
-            try { if (File.Exists(download.FilePath)) File.Delete(download.FilePath); } catch { }
-
-            if (result.Error is not null)
-            {
-                state.Status = "failed"; // frontend startPolling shows failure UI on "failed"
-                state.Error = result.Error;
-                return;
-            }
-
-            state.Status = "done";
-            state.Success = true;
-            state.Api = source;
-        }
-        catch (OperationCanceledException)
-        {
-            state.Status = "cancelled";
-            state.Error = Resources.Strings.Err_CancelledByUser;
-        }
-        catch (Exception ex)
-        {
-            state.Status = "failed"; // frontend startPolling shows failure UI on "failed"
-            state.Error = ex.Message;
-        }
-        finally
-        {
-            state.Cts?.Dispose();
-            state.Cts = null;
-        }
-    }
 
     // ── Helpers ───────────────────────────────────────────────────────
 

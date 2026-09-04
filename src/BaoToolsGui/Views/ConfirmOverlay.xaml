@@ -1,4 +1,4 @@
-<UserControl
+﻿<UserControl
     x:Class="BaoToolsGui.Views.ConfirmOverlay"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -128,7 +128,8 @@
                     Grid.Row="2"
                     Margin="0,12,0,0"
                     VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
+                    <!-- Right margin keeps the scrollbar in its own lane instead of sitting on the rows. -->
+                    <StackPanel Margin="0,0,12,0">
                         <TextBlock
                             FontSize="12.5"
                             Foreground="#6b7280"

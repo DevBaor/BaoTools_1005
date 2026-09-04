@@ -1,4 +1,4 @@
-<UserControl
+﻿<UserControl
     x:Class="BaoToolsGui.Views.DownloadView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -230,7 +230,11 @@
                         HorizontalScrollBarVisibility="Auto"
                         PreviewMouseWheel="FeaturedStrip_PreviewMouseWheel"
                         VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemTemplate="{StaticResource FeaturedCardTemplate}" ItemsSource="{Binding TopSellers}">
+                        <!-- Bottom margin keeps the horizontal scrollbar off the cover art. -->
+                        <ItemsControl
+                            Margin="0,0,0,12"
+                            ItemTemplate="{StaticResource FeaturedCardTemplate}"
+                            ItemsSource="{Binding TopSellers}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />
@@ -252,7 +256,11 @@
                         HorizontalScrollBarVisibility="Auto"
                         PreviewMouseWheel="FeaturedStrip_PreviewMouseWheel"
                         VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemTemplate="{StaticResource FeaturedCardTemplate}" ItemsSource="{Binding NewReleases}">
+                        <!-- Bottom margin keeps the horizontal scrollbar off the cover art. -->
+                        <ItemsControl
+                            Margin="0,0,0,12"
+                            ItemTemplate="{StaticResource FeaturedCardTemplate}"
+                            ItemsSource="{Binding NewReleases}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />
@@ -548,12 +556,41 @@
                                         Visibility="{Binding IsLocked, Converter={StaticResource BoolToVis}}" />
                                 </Grid>
 
+                                <!--  Progress is owned by the shared download queue; this row is just a view onto it.  -->
                                 <ProgressBar
                                     Margin="0,8,0,0"
-                                    IsIndeterminate="{Binding IsProgressIndeterminate}"
+                                    IsIndeterminate="{Binding QueueItem.IsIndeterminate, FallbackValue=False}"
                                     Maximum="100"
-                                    Visibility="{Binding IsDownloading, Converter={StaticResource BoolToVis}}"
-                                    Value="{Binding Progress, Mode=OneWay}" />
+                                    Visibility="{Binding QueueItem.ShowProgress, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}"
+                                    Value="{Binding QueueItem.Percent, Mode=OneWay, FallbackValue=0}" />
+
+                                <StackPanel
+                                    Margin="0,5,0,0"
+                                    Orientation="Horizontal"
+                                    Visibility="{Binding QueueItem.ShowProgress, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}">
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding QueueItem.SizeLabel}" />
+                                    <TextBlock
+                                        Margin="8,0,0,0"
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                        Text="{Binding QueueItem.RateLabel}" />
+                                    <TextBlock
+                                        Margin="8,0,0,0"
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                        Text="{Binding QueueItem.EtaLabel}" />
+                                </StackPanel>
+
+                                <!--  Queued behind something else: say so, since nothing is moving yet.  -->
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    FontSize="11"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="{Binding QueueItem.StatusLabel}"
+                                    Visibility="{Binding QueueItem.CanReorder, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}" />
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -634,7 +671,8 @@
                     <ItemsControl.Template>
                         <ControlTemplate TargetType="ItemsControl">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                <ItemsPresenter />
+                                <!-- Right margin keeps the scrollbar in its own lane instead of sitting on the rows. -->
+                                <ItemsPresenter Margin="0,0,12,0" />
                             </ScrollViewer>
                         </ControlTemplate>
                     </ItemsControl.Template>
@@ -760,7 +798,8 @@
                     Grid.Row="2"
                     Margin="0,14,0,0"
                     VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
+                    <!-- Right margin keeps the scrollbar in its own lane instead of sitting on the rows. -->
+                    <StackPanel Margin="0,0,12,0">
                         <!-- No changes note -->
                         <TextBlock
                             FontSize="12.5"

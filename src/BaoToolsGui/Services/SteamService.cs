@@ -33,6 +33,38 @@ public class SteamService(SettingsService settings)
 
     public bool IsOverridden => !string.IsNullOrWhiteSpace(settings.SteamPathOverride);
 
+    /// <summary>
+    /// The Steam client's UI language ("english", "schinese", "brazilian", ...), or null if unreadable.
+    /// </summary>
+    /// <remarks>
+    /// This is the same vocabulary a depot's <c>config.language</c> uses — verified against steamcmd's
+    /// app info, where the registry's "english" matches the depot value verbatim, and against the
+    /// <c>baselanguages</c> list ("english,german,french,..."). So it can be compared to depot languages
+    /// directly, with no mapping table.
+    ///
+    /// Read fresh each time rather than cached: a user can change Steam's language without restarting
+    /// this app, and the read is a single registry lookup.
+    ///
+    /// Lowercased on the way out — the depot values are lowercase, and relying on every future call site
+    /// to remember OrdinalIgnoreCase is the kind of thing that breaks once and is never noticed.
+    /// </remarks>
+    public static string? SteamLanguage
+    {
+        get
+        {
+            try
+            {
+                using var key = RegistryKey
+                    .OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64)
+                    .OpenSubKey(@"SOFTWARE\Valve\Steam");
+                return key?.GetValue("Language") is string s && s.Length > 0
+                    ? s.Trim().ToLowerInvariant()
+                    : null;
+            }
+            catch { return null; } // no Steam, or the value is missing/unreadable
+        }
+    }
+
     /// <summary>True when the effective path exists and contains steam.exe.</summary>
     public bool IsValid => EffectivePath is not null && File.Exists(SteamExePathFor(EffectivePath));
 
@@ -53,6 +85,45 @@ public class SteamService(SettingsService settings)
     /// <summary>Open Explorer with the given file selected.</summary>
     public static void RevealInExplorer(string filePath) =>
         Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{filePath}\"") { UseShellExecute = true });
+
+    /// <summary>
+    /// Show a path in Explorer, picking the right gesture for what it is: a file gets selected inside
+    /// its folder, a folder is opened. Returns false when the path is missing or Explorer refuses.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="RevealInExplorer"/> always passes <c>/select</c>, which for a directory highlights it
+    /// in its PARENT rather than opening it — wrong for the depot output folder and a game's install
+    /// directory, which are the two most common targets. Callers hand over whichever they have and let
+    /// this sort it out, so no call site has to probe the filesystem itself.
+    /// </remarks>
+    public static bool ShowInExplorer(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path)) return false;
+        try
+        {
+            if (File.Exists(path)) { RevealInExplorer(path); return true; }
+            if (Directory.Exists(path))
+            {
+                Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
+                return true;
+            }
+            return false; // deleted since the row was created
+        }
+        catch { return false; } // no shell association, or Explorer is wedged
+    }
+
+    /// <summary>Put text on the clipboard. Returns false instead of throwing when it can't.</summary>
+    /// <remarks>
+    /// <c>Clipboard.SetText</c> throws <c>CLIPBRD_E_CANT_OPEN</c> when another process is holding the
+    /// clipboard open — common with remote-desktop and clipboard-manager tools, and entirely outside our
+    /// control. Copying an app id is never worth an unhandled exception, so failure is reported, not thrown.
+    /// </remarks>
+    public static bool CopyToClipboard(string? text)
+    {
+        if (string.IsNullOrEmpty(text)) return false;
+        try { System.Windows.Clipboard.SetText(text); return true; }
+        catch { return false; }
+    }
 
     /// <summary>Kill any running steam.exe (and its tree) and wait for it to exit. Safe to call when
     /// Steam isn't running. Use before changing Steam's files so they aren't locked.</summary>

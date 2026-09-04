@@ -1,51 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -59,7 +59,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 
-  <!-- th -->
+  
   <data name="Nav_Home" xml:space="preserve"><value>หน้าแรก</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>เพิ่ม</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>จัดการ</value></data>
@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>ติดตั้ง {0} ลงใน Steam แล้ว</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} ไฟล์ล้มเหลว — ปิด Steam แล้วลองอีกครั้ง</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> รีสตาร์ท Steam เพื่อนำไปใช้</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>ค้นหาด้วยชื่อหรือ App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>กำลังโหลด…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>depot ที่ใช้ร่วมกัน</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>ลบไฟล์ lua</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>ลบ "{0}" (App ID {1}) หรือไม่?
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>นำ “{0}” (App ID {1}) ออกหรือไม่?
 
-การดำเนินการนี้จะลบไฟล์ .lua ของมันออกจาก Steam\config\stplug-in หลังจากนั้นให้รีสตาร์ท Steam เพื่อให้การเปลี่ยนแปลงมีผล</value></data>
+การทำเช่นนี้จะลบไฟล์ .lua ออกจาก Steam\config\stplug-in</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>ลบไฟล์ lua</value></data>
-  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>ลบไฟล์ lua {0} ไฟล์หรือไม่?
+  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>นำไฟล์ lua {0} ไฟล์ออกหรือไม่?
 
-การดำเนินการนี้จะลบไฟล์ .lua ออกจาก Steam\config\stplug-in หลังจากนั้นให้รีสตาร์ท Steam เพื่อให้การเปลี่ยนแปลงมีผล</value></data>
+การทำเช่นนี้จะลบไฟล์ .lua ออกจาก Steam\config\stplug-in</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>การลบล้มเหลว</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>ไม่สามารถลบไฟล์ได้:
 {0}</value></data>
@@ -290,7 +289,6 @@
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>ไม่สามารถลบ {0} ไฟล์ได้</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>รีสตาร์ท Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>รีสตาร์ท Steam ตอนนี้เพื่อให้การเปลี่ยนแปลงมีผลหรือไม่?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>ไม่พบหรือไม่สามารถเปิด Steam ได้ ตั้งค่าตำแหน่งในการตั้งค่า</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>การแก้ไข</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>กำลังโหลดการแก้ไข…</value></data>
@@ -307,8 +305,7 @@
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>การติดตั้งล้มเหลว</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>ไม่สามารถติดตั้งได้ — ปิด Steam (หรือรีสตาร์ท Steam) แล้วลองอีกครั้ง</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>ติดตั้งการแก้ไขแล้ว</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>ติดตั้ง manifest ของ {0} แล้ว — Steam กำลังรีสตาร์ท</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>ติดตั้ง manifest ของ {0} แล้ว รีสตาร์ท Steam เพื่อนำไปใช้</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>ติดตั้งแมนิเฟสต์ของ {0} แล้ว</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>ไม่พบเกม</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>ติดตั้ง {0} ใน Steam ก่อน จากนั้นจึงใช้การแก้ไข</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>ใช้การแก้ไขบางส่วนแล้ว</value></data>
@@ -348,13 +345,12 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>ไม่สามารถระบุเกมหลักของ DLC นี้ได้</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>มีบางอย่างผิดพลาด — ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>การดาวน์โหลดล้มเหลว — ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>การสร้างล้มเหลว — ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>แทนที่ "{0}" หรือไม่?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>ไม่มีการเปลี่ยนแปลง depot/DLC — เนื้อหาเหมือนเดิม</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>ยกเลิกการติดตั้งแล้ว — ไฟล์ที่มีอยู่ไม่เปลี่ยนแปลง</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>ไม่สามารถติดตั้ง {0} ไฟล์ได้ — ปิด Steam (หรือใช้ รีสตาร์ท Steam) แล้วลองอีกครั้ง</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>เพิ่ม {0} แล้ว — lua + {1} manifest รีสตาร์ท Steam เพื่อนำไปใช้</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>เพิ่ม {0} แล้ว — Steam จะดึง manifest รีสตาร์ท Steam เพื่อนำไปใช้</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>เพิ่ม {0} แล้ว: lua + แมนิเฟสต์ {1} รายการ</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>เพิ่ม {0} แล้ว Steam จะดึงแมนิเฟสต์ให้</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>เปิดใน SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>ใช้ร่วมกัน</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>การดำเนินการนี้จะแทนที่ lua ที่ติดตั้งไว้ ตรวจสอบสิ่งที่เปลี่ยนแปลง:</value></data>
@@ -451,9 +447,9 @@
   <data name="Builds_Delete_Title" xml:space="preserve"><value>ลบพรีเซ็ตนี้หรือไม่?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>“{0}” จะถูกลบออกจากพรีเซ็ตที่คุณบันทึกไว้ ซึ่งไม่มีผลต่อตัวเกม</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>ไม่สามารถลบพรีเซ็ตที่กำลังใช้งานอยู่</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>ตอนนี้ใช้ “{0}” แล้ว รีสตาร์ท Steam เพื่อให้มีผล</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>กำลังใช้ “{0}” แล้ว</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>สลับพรีเซ็ตไม่สำเร็จ — ไฟล์ lua อาจกำลังถูกใช้งานอยู่</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>บันทึกแล้ว รีสตาร์ท Steam เพื่อให้มีผล</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>บันทึกแล้ว</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>บันทึกไม่สำเร็จ — ไฟล์ lua อาจกำลังถูกใช้งานอยู่</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>บันทึกเป็นพรีเซ็ตแล้ว</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>บันทึกลงใน “{0}”</value></data>
@@ -527,4 +523,90 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>คุณใช้ Hubcap ครบตามขีดจำกัดรายวันแล้ว</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>ไม่มี manifest ของ Hubcap สำหรับแอปนี้</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>ดาวน์โหลดจาก Hubcap ไม่สำเร็จ ({0})</value></data>
-</root>
+  <data name="Nav_Downloads" xml:space="preserve"><value>การดาวน์โหลด</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>การดาวน์โหลด</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>ยังไม่มีการดาวน์โหลด มาเริ่มดาวน์โหลดอะไรสักอย่างกัน!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>คิว</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>ประวัติ</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>อยู่ในคิว</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>กำลังดาวน์โหลด</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>รอคุณยืนยัน</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>กำลังติดตั้ง</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>เสร็จแล้ว</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>ล้มเหลว</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>ยกเลิกแล้ว</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>ยกเลิก</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>ลองใหม่</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>นำออก</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>เลื่อนขึ้น</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>เลื่อนลง</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>ล้างประวัติ</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>ตรวจสอบ</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} จาก {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>เหลืออีก {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>ต้องดำเนินการ</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>ถูกขัดจังหวะเมื่อปิดแอป</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>ปลดล็อก DLC</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>ติดตั้งเกมก่อนจึงจะใช้ฟิกซ์ได้</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>หยุดชั่วคราว</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>กำลังตรวจสอบ…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>หยุดชั่วคราว</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>ทำต่อ</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>ไฟล์ depot</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depot · {0} จาก {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>ไม่สามารถดึงตัวดาวน์โหลด depot ได้</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>ไม่พบคีย์ถอดรหัสสำหรับเกมนี้</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} ล้มเหลว: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>ดาวน์โหลด {0} depot ไปที่ {1} แล้ว</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>ดาวน์โหลด</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>เลือก depot ที่จะดาวน์โหลด</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>ดาวน์โหลด {0} depot ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>depot นี้ไม่ได้ระบุเวอร์ชันให้ดาวน์โหลด</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>เลือกทั้งหมด</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>ยังไม่ได้เลือก depot</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>เลือกที่จัดเก็บไฟล์ depot</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>พื้นที่ดิสก์ไม่พอ: ต้องการ {0} แต่เหลือเพียง {1}</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>บันทึกไปที่</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>ต้องการ {0} · เหลือ {1} บน {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>ลงชื่อเข้าใช้เพื่อดาวน์โหลด depot นี้</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>ลงชื่อเข้าใช้เพื่อดาวน์โหลด depot</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>กำลังดึง manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>ไม่สามารถดึง manifest ของ depot นี้ได้</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>กำลังเตรียม · {0} จาก {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>กำลังรับตัวดาวน์โหลด</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>เครื่องมือ</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>กำลังตรวจสอบ .NET runtime</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>กำลังรับ SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>เปิด SteamAutoCrack แล้ว</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>ติดตั้ง .NET runtime ที่ SteamAutoCrack ต้องใช้ไม่สำเร็จ</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>ติดตั้ง .NET runtime แล้ว แต่ต้องรีสตาร์ท Windows ก่อนจึงจะเรียกใช้ SteamAutoCrack ได้</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>ดาวน์โหลด SteamAutoCrack ไม่สำเร็จ</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>เริ่ม SteamAutoCrack ไม่สำเร็จ</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>อัปเดต SteamAutoCrack แล้ว</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>กำลังจองพื้นที่ไฟล์</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>กำลังตรวจสอบไฟล์ที่มีอยู่</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>ยกเลิกการดาวน์โหลด</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>เขียนไปแล้ว {0} ที่:
+{1}
+
+ใช่ - หยุดและลบไฟล์เหล่านั้น
+ไม่ - หยุดแต่เก็บไฟล์ไว้
+ยกเลิก - ดาวน์โหลดต่อ</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>ลบไฟล์ที่ดาวน์โหลดไม่สำเร็จ ไฟล์ยังอยู่ที่ {0}</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>คัดลอก App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>แสดงในโฟลเดอร์</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>คัดลอกไม่ได้ — แอปอื่นกำลังใช้คลิปบอร์ดอยู่</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>เปิด {0} ไม่ได้ — อาจถูกย้ายหรือลบไปแล้ว</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>ไม่มีคีย์ถอดรหัสใน Lua สำหรับ depot นี้</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>คีย์ถอดรหัสสำหรับ depot {0} ไม่ถูกต้อง</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>ไม่มีคีย์ถอดรหัสใน Lua สำหรับ depot {0}</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>รันไทม์ที่ใช้ร่วมกัน — ปกติติดตั้งไว้แล้ว ติ๊กเพื่อดาวน์โหลดอยู่ดี</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>ต้องการลบรายการทั้งหมด {0} รายการออกจากประวัติการดาวน์โหลดหรือไม่ ไฟล์ที่ดาวน์โหลดแล้วจะไม่ได้รับผลกระทบ</value></data>
+<data name="Nav_OnlineFixes" xml:space="preserve"><value>Online Fix</value></data>
+  <data name="OnlineFixes_Download" xml:space="preserve"><value>Download Fix</value></data>
+  <data name="OnlineFixes_Install" xml:space="preserve"><value>Install Fix</value></data>
+  <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
+  <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
+Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
+  </root>
