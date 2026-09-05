@@ -10,7 +10,7 @@
     <AssemblyName>BaoTools</AssemblyName>
     <AssemblyTitle>BaoTools</AssemblyTitle>
     <Product>BaoTools</Product>
-    <Version>1005</Version>
+    <Version>105.1</Version>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <!-- Velopack needs a custom Main (Program.Main) that runs before WPF -->
     <StartupObject>BaoToolsGui.Program</StartupObject>

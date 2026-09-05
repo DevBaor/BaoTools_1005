@@ -35,16 +35,25 @@ internal static class HttpFileDownloader
 
         long? total = res.Content.Headers.ContentLength;
         await using var src = await res.Content.ReadAsStreamAsync(ct);
-        await using var dst = File.Create(filePath);
+        await using var dst = new FileStream(
+            filePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize: 524288, useAsync: true);
 
-        var buffer = new byte[81920];
+        var buffer = new byte[524288];
         long written = 0;
         int read;
+        long lastReportTicks = 0;
+
         while ((read = await src.ReadAsync(buffer, ct)) > 0)
         {
             await dst.WriteAsync(buffer.AsMemory(0, read), ct);
             written += read;
-            progress?.Report(new DownloadProgress(written, total));
+
+            long now = Environment.TickCount64;
+            if (now - lastReportTicks >= 80 || written == total)
+            {
+                lastReportTicks = now;
+                progress?.Report(new DownloadProgress(written, total));
+            }
         }
 
         // One final report so a zero-length or single-chunk body still settles the bar at 100%.

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
@@ -117,7 +117,7 @@ public partial class DepotDownloaderService(
     /// nothing. If downloads ever look CPU-bound or the CDN starts refusing connections, this is the
     /// first number to turn back down.</para>
     /// </remarks>
-    private const int MaxChunkDownloads = 32;
+    private static int MaxChunkDownloads => Math.Clamp(Environment.ProcessorCount * 8, 32, 64);
 
     private readonly SemaphoreSlim _toolGate = new(1, 1);
     private readonly SemaphoreSlim _runGate = new(1, 1);
@@ -301,6 +301,41 @@ public partial class DepotDownloaderService(
     }
 
     /// <summary>
+    /// Reads the configured Steam download region CellID from Steam's config.vdf so the downloader
+    /// connects to the closest local CDN server (e.g. Vietnam / SEA) rather than defaulting to global US/EU.
+    /// </summary>
+    public string? ResolveCellId()
+    {
+        try
+        {
+            if (steam.EffectivePath is not { } root) return null;
+            string vdf = Path.Combine(root, "config", "config.vdf");
+            if (!File.Exists(vdf)) return null;
+
+            string content = File.ReadAllText(vdf);
+
+            // Check for explicit server override first
+            var overrideMatch = Regex.Match(content, @"""CellIDServerOverride""\s+""(\d+)""", RegexOptions.IgnoreCase);
+            if (overrideMatch.Success && overrideMatch.Groups[1].Value is { Length: > 0 } ovId && ovId != "0")
+            {
+                return ovId;
+            }
+
+            // Fallback to Steam's auto-detected regional CellID
+            var cellMatch = Regex.Match(content, @"""CellID""\s+""(\d+)""", RegexOptions.IgnoreCase);
+            if (cellMatch.Success && cellMatch.Groups[1].Value is { Length: > 0 } id && id != "0")
+            {
+                return id;
+            }
+        }
+        catch (Exception ex)
+        {
+            log.LogDebug(ex, "Failed to resolve CellID from config.vdf");
+        }
+        return null;
+    }
+
+    /// <summary>
     /// The depotcache path for a depot at a given manifest version, or null when Steam doesn't have it.
     /// A game added with "Auto Update Apps" on has its pins commented out and its manifests skipped, so
     /// this is genuinely absent for many installs — callers must check BEFORE queueing, not mid-run.
@@ -430,6 +465,12 @@ public partial class DepotDownloaderService(
                 "-dir", outDir,
                 "-max-downloads", MaxChunkDownloads.ToString(),
             }) psi.ArgumentList.Add(a);
+
+            if (ResolveCellId() is { Length: > 0 } cellId)
+            {
+                psi.ArgumentList.Add("-cellid");
+                psi.ArgumentList.Add(cellId);
+            }
 
             // Mandatory on a resume: without it the tool short-circuits and reports success over a
             // partially-written file. See class remarks.

@@ -1,5 +1,6 @@
 using Velopack;
 using Velopack.Sources;
+using BaoToolsGui.Models;
 
 namespace BaoToolsGui.Services;
 
@@ -83,45 +84,125 @@ public class UpdateService
 
     /// <summary>
     /// Checks GitHub Releases API for DevBaor/BaoTools_1005 to see if a newer version is released.
-    /// Returns the newer tag name (e.g. "v1006") if an update is available, or null if up to date / error.
+    /// Returns full release info (with IsNewer = true if newer version detected), or null on network failure.
     /// </summary>
-    public async Task<string?> CheckGitHubReleaseAsync(string currentVersion)
+    public async Task<GitHubReleaseInfo?> CheckGitHubReleaseFullAsync(string currentVersion)
+    {
+        string url = "https://api.github.com/repos/DevBaor/BaoTools_1005/releases/latest";
+        using var client = new System.Net.Http.HttpClient();
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("BaoTools");
+        client.Timeout = TimeSpan.FromSeconds(5);
+
+        foreach (var candidate in GithubProxy.Candidates(url))
+        {
+            try
+            {
+                var res = await client.GetAsync(candidate);
+                if (res.IsSuccessStatusCode)
+                {
+                    var json = await res.Content.ReadAsStringAsync();
+                    var parsed = ParseGitHubRelease(json, currentVersion);
+                    if (parsed is not null) return parsed;
+                }
+            }
+            catch
+            {
+                // Network failure / rate limit / offline. Try next mirror candidate.
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Parses GitHub release JSON payload and compares version against currentVersion.
+    /// </summary>
+    public static GitHubReleaseInfo? ParseGitHubRelease(string json, string currentVersion)
     {
         try
         {
-            using var client = new System.Net.Http.HttpClient();
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("BaoTools");
-            client.Timeout = TimeSpan.FromSeconds(5);
-
-            var res = await client.GetAsync("https://api.github.com/repos/DevBaor/BaoTools_1005/releases/latest");
-            if (!res.IsSuccessStatusCode) return null;
-
-            var json = await res.Content.ReadAsStringAsync();
             using var doc = System.Text.Json.JsonDocument.Parse(json);
             if (!doc.RootElement.TryGetProperty("tag_name", out var tagProp)) return null;
 
             string latestTag = tagProp.GetString()?.Trim() ?? "";
             if (string.IsNullOrEmpty(latestTag)) return null;
 
-            // Extract numeric version from tag e.g. "v1005" -> 1005
-            string cleanLatest = new string(latestTag.Where(char.IsDigit).ToArray());
-            string cleanCurrent = new string(currentVersion.Where(char.IsDigit).ToArray());
+            string title = doc.RootElement.TryGetProperty("name", out var nameProp) ? nameProp.GetString()?.Trim() ?? "" : "";
+            string body = doc.RootElement.TryGetProperty("body", out var bodyProp) ? bodyProp.GetString()?.Trim() ?? "" : "";
+            string htmlUrl = doc.RootElement.TryGetProperty("html_url", out var urlProp) ? urlProp.GetString()?.Trim() ?? "" : "";
+            DateTimeOffset? publishedAt = null;
+            if (doc.RootElement.TryGetProperty("published_at", out var pubProp) && pubProp.TryGetDateTimeOffset(out var pubDate))
+            {
+                publishedAt = pubDate;
+            }
 
-            if (long.TryParse(cleanLatest, out var latestNum) && long.TryParse(cleanCurrent, out var currentNum))
+            bool isNewer = IsVersionNewer(latestTag, currentVersion);
+
+            return new GitHubReleaseInfo
             {
-                if (latestNum > currentNum) return latestTag;
-            }
-            else if (!string.Equals(latestTag, currentVersion, StringComparison.OrdinalIgnoreCase) &&
-                     !string.Equals(latestTag, "v" + currentVersion, StringComparison.OrdinalIgnoreCase))
-            {
-                // Fallback string compare
-                return latestTag;
-            }
+                TagName = latestTag,
+                Title = string.IsNullOrWhiteSpace(title) ? latestTag : title,
+                Body = body,
+                HtmlUrl = string.IsNullOrWhiteSpace(htmlUrl) ? "https://github.com/DevBaor/BaoTools_1005/releases/latest" : htmlUrl,
+                PublishedAt = publishedAt,
+                IsNewer = isNewer
+            };
         }
         catch
         {
-            // Network failure / rate limit / offline. Fail silently.
+            return null;
         }
-        return null;
+    }
+
+    /// <summary>
+    /// Determines whether latestTag represents a newer version than currentVersion.
+    /// </summary>
+    public static bool IsVersionNewer(string latestTag, string currentVersion)
+    {
+        if (string.IsNullOrWhiteSpace(latestTag) || string.IsNullOrWhiteSpace(currentVersion))
+            return false;
+
+        string tLatest = latestTag.Trim().TrimStart('v', 'V');
+        string tCurrent = currentVersion.Trim().TrimStart('v', 'V');
+
+        if (string.Equals(tLatest, tCurrent, StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        // If both have dot-separated version components (e.g. 105.1 vs 105.2)
+        if (tLatest.Contains('.') && tCurrent.Contains('.'))
+        {
+            var pLatest = tLatest.Split('.');
+            var pCurrent = tCurrent.Split('.');
+            int len = Math.Max(pLatest.Length, pCurrent.Length);
+            for (int i = 0; i < len; i++)
+            {
+                long nLatest = i < pLatest.Length && long.TryParse(new string(pLatest[i].Where(char.IsDigit).ToArray()), out var nl) ? nl : 0;
+                long nCurrent = i < pCurrent.Length && long.TryParse(new string(pCurrent[i].Where(char.IsDigit).ToArray()), out var nc) ? nc : 0;
+                if (nLatest != nCurrent)
+                    return nLatest > nCurrent;
+            }
+            return false;
+        }
+
+        // Fallback / legacy comparison: all digits (e.g. 105.1 -> 1051 vs 1005 -> 1005)
+        string cleanLatest = new string(latestTag.Where(char.IsDigit).ToArray());
+        string cleanCurrent = new string(currentVersion.Where(char.IsDigit).ToArray());
+
+        if (long.TryParse(cleanLatest, out var latestNum) && long.TryParse(cleanCurrent, out var currentNum))
+        {
+            return latestNum > currentNum;
+        }
+
+        return !string.Equals(latestTag, currentVersion, StringComparison.OrdinalIgnoreCase) &&
+               !string.Equals(latestTag, "v" + currentVersion, StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Checks GitHub Releases API for DevBaor/BaoTools_1005 to see if a newer version is released.
+    /// Returns the newer tag name (e.g. "v1006") if an update is available, or null if up to date / error.
+    /// </summary>
+    public async Task<string?> CheckGitHubReleaseAsync(string currentVersion)
+    {
+        var info = await CheckGitHubReleaseFullAsync(currentVersion);
+        return info?.IsNewer == true ? info.TagName : null;
     }
 }

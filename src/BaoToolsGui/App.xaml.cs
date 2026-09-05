@@ -489,32 +489,8 @@ public partial class App : Application
             try
             {
                 await System.Threading.Tasks.Task.Delay(3000); // Wait 3s after startup
-                var updateSvc = _host.Services.GetRequiredService<UpdateService>();
                 var mainVm = _host.Services.GetRequiredService<MainViewModel>();
-                string? newVersion = await updateSvc.CheckGitHubReleaseAsync(mainVm.VersionLabel);
-                if (!string.IsNullOrEmpty(newVersion))
-                {
-                    Dispatcher.Invoke(() =>
-                    {
-                        var t = _host.Services.GetRequiredService<ToastService>();
-                        t.ShowAction(
-                            "BaoTools Update",
-                            $"A new update is available ({newVersion})! Click to download.",
-                            "Update Now",
-                            () =>
-                            {
-                                try
-                                {
-                                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                                    {
-                                        FileName = "https://baotools.baotranduy666666.workers.dev/",
-                                        UseShellExecute = true
-                                    });
-                                }
-                                catch { }
-                            });
-                    });
-                }
+                await mainVm.CheckForUpdatesInternalAsync(showToastIfUpToDate: false);
             }
             catch { }
         });
