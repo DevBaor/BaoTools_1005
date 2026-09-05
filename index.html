@@ -221,10 +221,10 @@
                     <div class="module">
                         <div class="module-header">
                             <h2 class="module-title">Windows Installer</h2>
-                            <span class="badge highlight">v1005</span>
+                            <span id="installer-version" class="badge highlight">v105.1</span>
                         </div>
                         <p class="desc">Standard installation. Creates Start menu shortcuts and registers file handlers for .lua and .zip drops.</p>
-                        <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools_Setup.exe" class="action-btn primary">Download Setup (5 MB)</a>
+                        <a id="installer-btn" href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools_Setup.exe" class="action-btn primary">Download Setup (5.2 MB)</a>
                     </div>
 
                     <div class="module">
@@ -233,7 +233,7 @@
                             <span class="badge">Standalone</span>
                         </div>
                         <p class="desc">Zero installation footprint. Extract and run directly from any directory or USB drive.</p>
-                        <a href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools.exe" class="action-btn">Download Portable (14 MB)</a>
+                        <a id="portable-btn" href="https://github.com/DevBaor/BaoTools_1005/releases/latest/download/BaoTools_v105.1_Portable.zip" class="action-btn">Download Portable (5.4 MB)</a>
                     </div>
                     
                     <img src="screenshot.png" alt="BaoTools Screenshot" class="app-screenshot" style="object-fit: cover; height: auto;" onerror="this.style.display='none'">
@@ -315,6 +315,42 @@
             `).join('');
         }
         document.addEventListener('DOMContentLoaded', renderGameGrid);
+
+        // Tự động đồng bộ Version và Dung lượng file từ GitHub Releases
+        async function fetchLatestRelease() {
+            try {
+                const res = await fetch('https://api.github.com/repos/DevBaor/BaoTools_1005/releases/latest');
+                if (!res.ok) return;
+                const release = await res.json();
+
+                const versionBadge = document.getElementById('installer-version');
+                if (versionBadge && release.tag_name) {
+                    versionBadge.innerText = release.tag_name;
+                }
+
+                const formatSize = (bytes) => (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+
+                const setupAsset = release.assets?.find(a => a.name.toLowerCase().includes('setup') && a.name.endsWith('.exe'));
+                const setupBtn = document.getElementById('installer-btn');
+                if (setupBtn && setupAsset) {
+                    setupBtn.href = setupAsset.browser_download_url;
+                    setupBtn.innerText = `Download Setup (${formatSize(setupAsset.size)})`;
+                }
+
+                const portableAsset = release.assets?.find(a => 
+                    (a.name.toLowerCase().includes('portable') || a.name.toLowerCase() === 'baotools.exe') &&
+                    !a.name.toLowerCase().includes('setup')
+                );
+                const portableBtn = document.getElementById('portable-btn');
+                if (portableBtn && portableAsset) {
+                    portableBtn.href = portableAsset.browser_download_url;
+                    portableBtn.innerText = `Download Portable (${formatSize(portableAsset.size)})`;
+                }
+            } catch (err) {
+                console.warn('Could not fetch release metadata:', err);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', fetchLatestRelease);
 
         // --- LOGIC SEARCH AUTOCOMPLETE ---
         const searchInput = document.getElementById('lua-appid');
