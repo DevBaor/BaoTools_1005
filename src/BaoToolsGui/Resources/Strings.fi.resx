@@ -609,4 +609,66 @@ Peruuta - jatka lataamista</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Pura liput</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Steam-kirjastostasi ei löytynyt asennettuja pelejä.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Yksikään asennettu peli ei vastaa hakukyselyäsi.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Asennettu</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Tarkistetaan asennettuja pelejä...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Avaa Pelikansio</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Napsauta 'Lataa korjaus' löytääksesi ja ladataksesi moninpelikorjausarkisto.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Lataa Fix (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Napsauta &quot;Asenna korjaus&quot; ja valitse ladattu ZIP-tiedosto, joka puretaan automaattisesti pelikansioon.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Asenna automaattisesti</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket-heksa kopioitu leikepöydälle.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Salattu ETicket-heksa kopioitu leikepöydälle.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Lua-lipun koodi kopioitiin leikepöydälle.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Copy Lua Snippet</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>{0} vietiin työpöydälle onnistuneesti!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Vie ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Pura liput</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Lippujen purkaminen epäonnistui. Varmista, että tili omistaa pelin.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Lippujen pyytäminen Steam-asiakkaalta...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>AppID:n {0} liput purettu onnistuneesti.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Anna kelvollinen numeerinen Steam AppID.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Tai anna AppID manuaalisesti</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steamin on oltava aktiivinen ja kirjautunut sisään purkamisen aikana, koska lippuja pyydetään suoraan muistista virallisesta Steam-asiakasliittymästä.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Pidä Steam-asiakas käynnissä</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo sallii jopa 5 ainutlaatuista PC-aktivointia päivässä per pelilisenssi. Jakaminen yli viiden koneen kanssa 24 tunnin sisällä lukitsee tilapäisesti uudet aktivoinnit seuraavaan päivään.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 aktivointia / 24 tunnin rajoitus</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Lippuja voidaan luoda vain, jos tällä hetkellä kirjautuneena Steam-tili todella omistaa pelilisenssin tai sillä on aktiivinen perhejako.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Tilin omistajuus vaaditaan</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Denuvon valtuutusliput (EncryptedAppTicket) vanhenevat ~30 minuutissa. Kun jaat, neuvo vastaanottajaa suorittamaan asennusohjelma ja käynnistämään peli välittömästi offline-aktivoinnin suorittamiseksi.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30 minuutin lipun voimassaoloaikaikkuna</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Lippuja voi lunastaa vain tililtä, ​​joka todella omistaa pelin tai jolla on voimassa oleva Family Sharing. Denuvon valtuutuslipuilla on ~30 minuutin voimassaoloaika, ennen kuin ne on päivitettävä.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Tärkeitä huomautuksia Denuvolle</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Avaa kansio</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Ota setAppTicket ja setETicket automaattisesti käyttöön osoitteeseen config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Tallenna raakalipputiedostot (appticket.bin, eticket.bin, tickets.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Tallentaa raakalipputiedostot ja valmistelee jaettavan ZIP-paketin (BaoTools_ticket) yhdellä napsautuksella aktivointia varten muissa tietokoneissa.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Tarkista Steamin tila</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Tarkista asennetut Denuvo-pelit uudelleen</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Poimitut liput</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Valitse Asennettu Denuvo Game</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Vain pelit, joissa on havaittu Denuvo-suojaus, on lueteltu alla nopeaa valintaa varten.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Please launch Steam and sign into an account that owns the game before extracting.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam ei ole käynnissä</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Steam-asiakasohjelma havaittu. Varmista, että sisäänkirjautunut tili omistaa pelin.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam on käynnissä</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Pura AppOwnershipTicket ja EncryptedAppTicket (Denuvo) suoraan aktiivisesta Steam-istunnostasi.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Steam &amp; Denuvo -liput</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Päivittäiset lataukset:</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Kirjaudu sisään saadaksesi 10 latausta päivässä</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>You have reached your daily limit of 10 downloads. Please try again tomorrow.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Daily downloads: Sign in with Discord for 10 downloads/day</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Daily downloads: {0} / Unlimited (Supporter)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Daily downloads: {0}/{1} used today</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>App Ownership Ticket</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Salattu sovelluslippu (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Ei saatavilla</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

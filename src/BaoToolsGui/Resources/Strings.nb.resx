@@ -609,4 +609,66 @@ Avbryt - fortsett nedlastingen</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Trekk ut billetter</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Ingen installerte spill funnet i Steam-biblioteket ditt.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Ingen installerte spill samsvarer med søket ditt.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Installert</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Scanning installed games...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Åpne spillmappen</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Klikk &quot;Last ned Fix&quot; for å finne og laste ned flerspillerpatch-arkivet.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Last ned Fix (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Klikk &quot;Install Fix&quot; og velg den nedlastede ZIP-filen som skal pakkes ut automatisk til spillmappen.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Installer automatisk</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket hex kopiert til utklippstavlen.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Kryptert ETicket hex kopiert til utklippstavlen.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Lua billettkode kopiert til utklippstavlen.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Kopier Lua Snippet</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>{0} ble eksportert til skrivebordet!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Eksporter ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Trekk ut billetter</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Kunne ikke hente ut billetter. Sørg for at kontoen eier spillet.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Ber om billetter fra Steam-klienten...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Billetter er hentet ut for AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Vennligst skriv inn en gyldig numerisk Steam-app-ID.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Eller skriv inn AppID manuelt</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam må være aktivt og logget på under utvinning, da billetter blir forespurt direkte i minnet fra det offisielle Steam-klientgrensesnittet.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Hold Steam-klienten i gang</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo tillater opptil 5 unike PC-aktiveringer per dag per spilllisens. Deling med mer enn 5 maskiner innen 24 timer vil midlertidig låse nye aktiveringer til neste dag.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 aktiveringer / 24 timers grense</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Billetter kan bare genereres hvis den for øyeblikket påloggede Steam-kontoen virkelig eier spilllisensen eller har aktiv familiedeling.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Kontoeierskap kreves</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Denuvo-autorisasjonsbilletter (EncryptedAppTicket) utløper om ~30 minutter. Når du deler, ber du mottakeren om å kjøre installasjonsprogrammet og starte spillet umiddelbart for å etablere offline aktivering.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30-minutters billettgyldighetsvindu</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Billetter kan bare trekkes ut fra en konto som virkelig eier spillet eller har gyldig familiedeling. Denuvo-autorisasjonsbilletter har en gyldighetsperiode på ~30 minutter før de må oppdateres.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Viktige merknader for Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Åpne mappe</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Bruk automatisk setAppTicket og setETicket til config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Lagre rå billettfiler (appticket.bin, eticket.bin, tickets.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Lagrer rå billettfiler og forbereder en delbar ZIP-pakke (BaoTools_ticket) for 1-klikksaktivering på andre PC-er.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Sjekk Steam-status</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Scan installerte Denuvo-spill på nytt</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Utpakkede billetter</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Velg Installert Denuvo Game</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Bare spill med oppdaget Denuvo-beskyttelse er oppført nedenfor for raskt valg.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Start Steam og logg på en konto som eier spillet før du pakker ut.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam kjører ikke</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Steam-klient oppdaget. Sørg for at den påloggede kontoen eier spillet.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam kjører</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Trekk ut AppOwnershipTicket og EncryptedAppTicket (Denuvo) direkte fra din aktive Steam-økt.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Steam &amp; Denuvo-billetter</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Daglige nedlastinger:</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>Du har nådd den daglige grensen på 10 nedlastinger. Prøv igjen i morgen.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Daglige nedlastinger: Logg på med Discord for 10 nedlastinger/dag</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Daglige nedlastinger: {0} / ubegrenset (supporter)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Daglige nedlastinger: {0}/{1} brukt i dag</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>App Ownership Ticket</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Encrypted App Ticket (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

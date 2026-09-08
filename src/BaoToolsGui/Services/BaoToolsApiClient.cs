@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -13,6 +13,11 @@ public class ApiException(string message, HttpStatusCode? status = null) : Excep
 }
 
 public record DownloadedFile(string FilePath, string FileName);
+
+public record QuotaSummary(int Used, int Limit, bool IsSupporter)
+{
+    public string DisplayText => IsSupporter ? $"{Used} / {Resources.Strings.Add_Unlimited}" : $"{Used}/{Limit}";
+}
 
 /// <summary>Typed client for the lua.tools web API, authenticated with a Supabase bearer token.</summary>
 public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, CoverCache covers)
@@ -141,6 +146,29 @@ public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
             return await ReadJsonAsync<SupporterStatus>(res, ct);
         }
         catch { return null; }
+    }
+
+    /// <summary>
+    /// Fetches standard usage count (25/day cap) together with supporter status.
+    /// Returns null when user is not signed in or on network failure.
+    /// </summary>
+    public async Task<QuotaSummary?> GetQuotaSummaryAsync(CancellationToken ct = default)
+    {
+        if (auth.IsGuest) return null;
+        try
+        {
+            var usageTask = GetStandardUsageAsync(ct);
+            var supporterTask = GetSupporterStatusAsync(ct);
+            await Task.WhenAll(usageTask, supporterTask);
+            var usage = usageTask.Result;
+            bool isSupporter = supporterTask.Result?.IsSupporter == true;
+            if (usage is null) return null;
+            return new QuotaSummary(usage.Used, AppConfig.AppDailyDownloadLimit, isSupporter);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public async Task<DlcInfo?> GetDlcInfoAsync(string appid, string baseAppId, CancellationToken ct = default)

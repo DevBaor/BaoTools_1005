@@ -19,7 +19,7 @@ public static class Strings
     /// <summary>Look up a localized string by key for the current UI culture.</summary>
     public static string Get(string key) => Rm.GetString(key, CultureInfo.CurrentUICulture) ?? key;
 
-    // ── Navigation ──
+    // -- Navigation --
     public static string Nav_Home => Get(nameof(Nav_Home));
     public static string Nav_Add => Get(nameof(Nav_Add));
     public static string Nav_Manage => Get(nameof(Nav_Manage));
@@ -40,7 +40,7 @@ public static class Strings
     public static string Nav_Footer_LoggedIn => Get(nameof(Nav_Footer_LoggedIn));
     public static string Main_RestartSteam_Ask => Get(nameof(Main_RestartSteam_Ask));
 
-    // ── Settings ──
+    // -- Settings --
     public static string Settings_Title => Get(nameof(Settings_Title));
     public static string Settings_Section_Account => Get(nameof(Settings_Section_Account));
     public static string Settings_Section_General => Get(nameof(Settings_Section_General));
@@ -100,12 +100,12 @@ public static class Strings
     public static string Settings_SteamWarning_NoExe => Get(nameof(Settings_SteamWarning_NoExe));
     public static string Settings_ChooseSteamFolder => Get(nameof(Settings_ChooseSteamFolder));
 
-    // ── Language changed prompt ──
+    // -- Language changed prompt --
     public static string Lang_Changed_Title => Get(nameof(Lang_Changed_Title));
     public static string Lang_Changed_Body => Get(nameof(Lang_Changed_Body));
     public static string Lang_Changed_Restart => Get(nameof(Lang_Changed_Restart));
 
-    // ── Home ──
+    // -- Home --
     public static string Home_Welcome => Get(nameof(Home_Welcome));
     public static string Home_LuasOnBoard => Get(nameof(Home_LuasOnBoard));
     public static string Home_LastAdded => Get(nameof(Home_LastAdded));
@@ -121,7 +121,7 @@ public static class Strings
     public static string Home_NoModeSelected => Get(nameof(Home_NoModeSelected));
     public static string Home_ModeIs => Get(nameof(Home_ModeIs));
 
-    // ── Mode ──
+    // -- Mode --
     public static string Mode_Title => Get(nameof(Mode_Title));
     public static string Mode_Subtitle => Get(nameof(Mode_Subtitle));
     public static string Mode_CheckForUpdates => Get(nameof(Mode_CheckForUpdates));
@@ -179,7 +179,7 @@ public static class Strings
     public static string Mode_Toast_InstallFailed => Get(nameof(Mode_Toast_InstallFailed));
     public static string Mode_Toast_InstallFailed_Body => Get(nameof(Mode_Toast_InstallFailed_Body));
 
-    // ── Drop zone ──
+    // -- Drop zone --
     public static string Drop_Title => Get(nameof(Drop_Title));
     public static string Drop_LinkHint => Get(nameof(Drop_LinkHint));
     public static string Drop_BrowseFiles => Get(nameof(Drop_BrowseFiles));
@@ -194,13 +194,13 @@ public static class Strings
     public static string Drop_Result_Installed => Get(nameof(Drop_Result_Installed));
     public static string Drop_Result_Failed => Get(nameof(Drop_Result_Failed));
 
-    // ── Common ──
+    // -- Common --
     public static string Common_SearchPlaceholder => Get(nameof(Common_SearchPlaceholder));
     public static string Common_Loading => Get(nameof(Common_Loading));
     public static string Common_AppId => Get(nameof(Common_AppId));
     public static string Common_AppFallback => Get(nameof(Common_AppFallback));
 
-    // ── Manage ──
+    // -- Manage --
     public static string Manage_Title => Get(nameof(Manage_Title));
     public static string Manage_Refresh => Get(nameof(Manage_Refresh));
     public static string Manage_Filters => Get(nameof(Manage_Filters));
@@ -278,7 +278,7 @@ public static class Strings
     public static string Manage_RestartSteam_Title => Get(nameof(Manage_RestartSteam_Title));
     public static string Manage_RestartSteam_Failed => Get(nameof(Manage_RestartSteam_Failed));
 
-    // ── Fixes ──
+    // -- Fixes --
     public static string Fixes_Title => Get(nameof(Fixes_Title));
     public static string Fixes_Loading => Get(nameof(Fixes_Loading));
     public static string Fixes_Build => Get(nameof(Fixes_Build));
@@ -305,7 +305,7 @@ public static class Strings
     public static string Fixes_Toast_Refreshed_Title => Get(nameof(Fixes_Toast_Refreshed_Title));
     public static string Fixes_Toast_Refreshed_Body => Get(nameof(Fixes_Toast_Refreshed_Body));
 
-    // ── Add / Download ──
+    // -- Add / Download --
     public static string Add_Title => Get(nameof(Add_Title));
     public static string Add_Subtitle => Get(nameof(Add_Subtitle));
     public static string Add_SearchPlaceholder => Get(nameof(Add_SearchPlaceholder));
@@ -347,7 +347,7 @@ public static class Strings
     public static string Add_FastFetch_NoSource => Get(nameof(Add_FastFetch_NoSource));
     public static string Add_FastFetch_Via => Get(nameof(Add_FastFetch_Via));
 
-    // ── Confirm overlay ──
+    // -- Confirm overlay --
     public static string Confirm_OpenSteamDb => Get(nameof(Confirm_OpenSteamDb));
     public static string Confirm_Shared => Get(nameof(Confirm_Shared));
     public static string Confirm_ReviewChanges => Get(nameof(Confirm_ReviewChanges));
@@ -398,9 +398,9 @@ public static class Strings
         public static string Plugin_Err_VerifyFailed => Get(nameof(Plugin_Err_VerifyFailed));
         public static string Plugin_Err_NoLuatoolsJs => Get(nameof(Plugin_Err_NoLuatoolsJs));
 
-    // ── Builds page ──
+    // -- Builds page --
     // NOT YET TRANSLATED: English-only for now (Get falls back to the English resx for any culture
-    // whose Strings.<tag>.resx is missing the key). See Resources/README.md → "Pending translation".
+    // whose Strings.<tag>.resx is missing the key). See Resources/README.md ? "Pending translation".
     public static string Builds_Title => Get(nameof(Builds_Title));
     public static string Builds_Subtitle => Get(nameof(Builds_Subtitle));
     public static string Builds_NoSelection => Get(nameof(Builds_NoSelection));
@@ -445,7 +445,7 @@ public static class Strings
     public static string Builds_Depot_NoMatch => Get(nameof(Builds_Depot_NoMatch));
     public static string Builds_Depot_InactiveNote => Get(nameof(Builds_Depot_InactiveNote));
 
-    // ── Launch options ── (English-only for now)
+    // -- Launch options -- (English-only for now)
     public static string Manage_Action_LaunchOptions => Get(nameof(Manage_Action_LaunchOptions));
     public static string Launch_Title => Get(nameof(Launch_Title));
     public static string Launch_Loading => Get(nameof(Launch_Loading));
@@ -511,7 +511,7 @@ public static class Strings
     public static string Hubcap_Err_NoManifest => Get(nameof(Hubcap_Err_NoManifest));
     public static string Hubcap_Err_DownloadFailed => Get(nameof(Hubcap_Err_DownloadFailed));
 
-    // ── Downloads tab ──
+    // -- Downloads tab --
     public static string Nav_Downloads => Get(nameof(Nav_Downloads));
     public static string Downloads_Title => Get(nameof(Downloads_Title));
     public static string Downloads_Empty => Get(nameof(Downloads_Empty));
@@ -538,7 +538,7 @@ public static class Strings
     public static string Downloads_Kind_Dlc => Get(nameof(Downloads_Kind_Dlc));
     public static string Fixes_NotInstalled_Hint => Get(nameof(Fixes_NotInstalled_Hint));
 
-    // ── Depot downloading ──
+    // -- Depot downloading --
     public static string Downloads_Status_Paused => Get(nameof(Downloads_Status_Paused));
     public static string Downloads_Status_Verifying => Get(nameof(Downloads_Status_Verifying));
     public static string Downloads_Action_Pause => Get(nameof(Downloads_Action_Pause));
@@ -589,4 +589,64 @@ public static class Strings
     public static string Depot_Err_NoKeyFor => Get(nameof(Depot_Err_NoKeyFor));
     public static string Builds_Select_SharedHint => Get(nameof(Builds_Select_SharedHint));
     public static string Downloads_ClearHistory_Confirm => Get(nameof(Downloads_ClearHistory_Confirm));
+    public static string Nav_Tickets => Get(nameof(Nav_Tickets));
+    public static string Tickets_Title => Get(nameof(Tickets_Title));
+    public static string Tickets_Subtitle => Get(nameof(Tickets_Subtitle));
+    public static string Tickets_SteamRunning => Get(nameof(Tickets_SteamRunning));
+    public static string Tickets_SteamNotRunning => Get(nameof(Tickets_SteamNotRunning));
+    public static string Tickets_SteamReadyHint => Get(nameof(Tickets_SteamReadyHint));
+    public static string Tickets_SteamClosedHint => Get(nameof(Tickets_SteamClosedHint));
+    public static string Tickets_RefreshSteam => Get(nameof(Tickets_RefreshSteam));
+    public static string Tickets_SelectDenuvoGame => Get(nameof(Tickets_SelectDenuvoGame));
+    public static string Tickets_SelectDenuvoGameHint => Get(nameof(Tickets_SelectDenuvoGameHint));
+    public static string Tickets_RescanGames => Get(nameof(Tickets_RescanGames));
+    public static string Tickets_ManualAppIdLabel => Get(nameof(Tickets_ManualAppIdLabel));
+    public static string Tickets_Opt_AutoLua => Get(nameof(Tickets_Opt_AutoLua));
+    public static string Tickets_Opt_SaveFiles => Get(nameof(Tickets_Opt_SaveFiles));
+    public static string Tickets_ExtractButton => Get(nameof(Tickets_ExtractButton));
+    public static string Tickets_Extracting => Get(nameof(Tickets_Extracting));
+    public static string Tickets_ResultsHeader => Get(nameof(Tickets_ResultsHeader));
+    public static string Tickets_CopyHex => Get(nameof(Tickets_CopyHex));
+    public static string Tickets_CopyLuaCode => Get(nameof(Tickets_CopyLuaCode));
+    public static string Tickets_OpenFolder => Get(nameof(Tickets_OpenFolder));
+    public static string Tickets_NoticeHeader => Get(nameof(Tickets_NoticeHeader));
+    public static string Tickets_NoticeBody => Get(nameof(Tickets_NoticeBody));
+    public static string Tickets_ExtractSuccess => Get(nameof(Tickets_ExtractSuccess));
+    public static string Tickets_ExtractFailed => Get(nameof(Tickets_ExtractFailed));
+    public static string Tickets_InvalidAppId => Get(nameof(Tickets_InvalidAppId));
+    public static string Tickets_CopiedAppTicket => Get(nameof(Tickets_CopiedAppTicket));
+    public static string Tickets_CopiedETicket => Get(nameof(Tickets_CopiedETicket));
+    public static string Tickets_CopiedLua => Get(nameof(Tickets_CopiedLua));
+    public static string Manage_Action_ExtractTickets => Get(nameof(Manage_Action_ExtractTickets));
+    public static string Tickets_ExportZip => Get(nameof(Tickets_ExportZip));
+    public static string Tickets_ExportSuccess => Get(nameof(Tickets_ExportSuccess));
+    public static string Tickets_Note_Ownership_Title => Get(nameof(Tickets_Note_Ownership_Title));
+    public static string Tickets_Note_Ownership_Desc => Get(nameof(Tickets_Note_Ownership_Desc));
+    public static string Tickets_Note_Validity_Title => Get(nameof(Tickets_Note_Validity_Title));
+    public static string Tickets_Note_Validity_Desc => Get(nameof(Tickets_Note_Validity_Desc));
+    public static string Tickets_Note_Limit_Title => Get(nameof(Tickets_Note_Limit_Title));
+    public static string Tickets_Note_Limit_Desc => Get(nameof(Tickets_Note_Limit_Desc));
+    public static string Tickets_Note_Client_Title => Get(nameof(Tickets_Note_Client_Title));
+    public static string Tickets_Note_Client_Desc => Get(nameof(Tickets_Note_Client_Desc));
+    public static string Tickets_Opt_SaveFiles_Hint => Get(nameof(Tickets_Opt_SaveFiles_Hint));
+    public static string OnlineFixes_Step1_Title => Get(nameof(OnlineFixes_Step1_Title));
+    public static string OnlineFixes_Step1_Desc => Get(nameof(OnlineFixes_Step1_Desc));
+    public static string OnlineFixes_Step2_Title => Get(nameof(OnlineFixes_Step2_Title));
+    public static string OnlineFixes_Step2_Desc => Get(nameof(OnlineFixes_Step2_Desc));
+    public static string OnlineFixes_InstalledBadge => Get(nameof(OnlineFixes_InstalledBadge));
+    public static string OnlineFixes_EmptySearch => Get(nameof(OnlineFixes_EmptySearch));
+    public static string OnlineFixes_EmptyLibrary => Get(nameof(OnlineFixes_EmptyLibrary));
+    public static string OnlineFixes_Loading => Get(nameof(OnlineFixes_Loading));
+    public static string OnlineFixes_OpenFolder => Get(nameof(OnlineFixes_OpenFolder));
+    public static string Download_DailyQuota_Label => Get(nameof(Download_DailyQuota_Label));
+    public static string Download_DailyQuota_GuestBadge => Get(nameof(Download_DailyQuota_GuestBadge));
+    public static string Download_DailyQuota_LimitReached => Get(nameof(Download_DailyQuota_LimitReached));
+    public static string Home_DailyQuota_Guest => Get(nameof(Home_DailyQuota_Guest));
+    public static string Home_DailyQuota_Supporter => Get(nameof(Home_DailyQuota_Supporter));
+    public static string Home_DailyQuota_Used => Get(nameof(Home_DailyQuota_Used));
+    public static string Home_DailyQuota_Active => Get(nameof(Home_DailyQuota_Active));
+    public static string Tickets_AppTicket_Title => Get(nameof(Tickets_AppTicket_Title));
+    public static string Tickets_ETicket_Title => Get(nameof(Tickets_ETicket_Title));
+    public static string Common_NotAvailable => Get(nameof(Common_NotAvailable));
+    public static string Nav_Plugin => Get(nameof(Nav_Plugin));
 }

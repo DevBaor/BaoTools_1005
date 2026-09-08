@@ -143,15 +143,77 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel MaxWidth="640" Margin="8,16,8,24">
 
-            <TextBlock
-                FontSize="22"
-                FontWeight="Bold"
-                Text="{x:Static res:Strings.Add_Title}" />
-            <TextBlock
-                Margin="0,4,0,16"
-                FontSize="13"
-                Foreground="#9ca3af"
-                Text="{x:Static res:Strings.Add_Subtitle}" />
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock
+                        FontSize="22"
+                        FontWeight="Bold"
+                        Text="{x:Static res:Strings.Add_Title}" />
+                    <TextBlock
+                        Margin="0,4,0,0"
+                        FontSize="13"
+                        Foreground="#9ca3af"
+                        Text="{x:Static res:Strings.Add_Subtitle}" />
+                </StackPanel>
+
+                <!-- Quota Badge (Signed-in) -->
+                <Border
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    CornerRadius="8"
+                    Padding="10,6"
+                    Background="#14FFFFFF"
+                    BorderBrush="#22FFFFFF"
+                    BorderThickness="1"
+                    Visibility="{Binding HasQuota, Converter={StaticResource BoolToVis}}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <ui:SymbolIcon
+                            Symbol="ArrowDownload24"
+                            FontSize="15"
+                            Foreground="#a78bfa"
+                            Margin="0,0,6,0" />
+                        <TextBlock
+                            FontSize="12"
+                            VerticalAlignment="Center"
+                            Foreground="#9ca3af"
+                            Text="{x:Static res:Strings.Download_DailyQuota_Label}" />
+                        <TextBlock
+                            FontSize="12.5"
+                            FontWeight="SemiBold"
+                            VerticalAlignment="Center"
+                            Foreground="#f3f4f6"
+                            Text="{Binding QuotaText}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Guest Notice Badge -->
+                <Border
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    CornerRadius="8"
+                    Padding="10,6"
+                    Background="#12a78bfa"
+                    BorderBrush="#28a78bfa"
+                    BorderThickness="1"
+                    Visibility="{Binding IsGuest, Converter={StaticResource BoolToVis}}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <ui:SymbolIcon
+                            Symbol="Person24"
+                            FontSize="14"
+                            Foreground="#a78bfa"
+                            Margin="0,0,6,0" />
+                        <TextBlock
+                            FontSize="11.5"
+                            VerticalAlignment="Center"
+                            Foreground="#c4b5fd"
+                            Text="{x:Static res:Strings.Download_DailyQuota_GuestBadge}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
 
             <!-- Search -->
             <ui:TextBox

@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Threading;
 using BaoToolsGui.Models;
 using BaoToolsGui.Services;
@@ -40,6 +40,7 @@ public partial class App : Application
                 services.AddSingleton<GithubProxy>();
                 services.AddSingleton<HardwareAppIdService>();
                 services.AddSingleton<SteamlessService>();
+                services.AddSingleton<SteamTicketService>();
                 services.AddSingleton<SteamAutoCrackService>();
                 services.AddSingleton<CloudRedirectService>();
                 services.AddSingleton<DepotDownloaderService>();
@@ -75,6 +76,7 @@ public partial class App : Application
                 services.AddSingleton<OnlineFixesViewModel>();
                 services.AddSingleton<DownloadsViewModel>();
                 services.AddSingleton<PluginViewModel>();
+                services.AddSingleton<TicketsViewModel>();
                 services.AddSingleton<OnboardingViewModel>();
                 services.AddSingleton<MainViewModel>();
                 // Pages resolved by NavigationView via the DI service provider.
@@ -87,6 +89,7 @@ public partial class App : Application
                 services.AddSingleton<FixesView>();
                 services.AddSingleton<OnlineFixesView>();
                 services.AddSingleton<PluginView>();
+                services.AddSingleton<TicketsView>();
                 services.AddSingleton<SettingsView>();
                 services.AddSingleton<MainWindow>();
             })
@@ -398,6 +401,7 @@ public partial class App : Application
         home.NavigateToManage = () => Dispatcher.Invoke(window.NavigateToManage);
         home.NavigateToSettings = () => Dispatcher.Invoke(window.NavigateToSettings);
         home.NavigateToMode = () => Dispatcher.Invoke(window.NavigateToMode);
+        home.NavigateToAdd = () => Dispatcher.Invoke(window.NavigateToAdd);
 
         // Onboarding finished applying its actions → refresh the Home dashboard tiles (mode + plugin status).
         main.Onboarding.RefreshHome = () => Dispatcher.Invoke(() => home.LoadAsync());

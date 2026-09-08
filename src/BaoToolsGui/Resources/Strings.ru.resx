@@ -609,4 +609,66 @@
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Тикеты</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Копировать Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Извлечь билеты</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>В вашей библиотеке Steam не найдено установленных игр.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Нет установленных игр, соответствующих вашему поисковому запросу.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Установлено</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Сканирование установленных игр...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Открыть папку с игрой</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Нажмите «Загрузить исправление», чтобы найти и загрузить архив патчей для многопользовательской игры.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Загрузите исправление (online-fix.me).</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Click 'Install Fix' and select the downloaded ZIP file to auto-extract into the game folder.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Установить автоматически</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>Шестнадцатеричный код AppTicket скопирован в буфер обмена.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Зашифрованный шестнадцатеричный код ETicket скопирован в буфер обмена.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Код билета Lua скопирован в буфер обмена.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Копировать фрагмент Lua</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>{0} успешно экспортировано на рабочий стол!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Экспортировать ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Извлечь билеты</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Не удалось извлечь билеты. Убедитесь, что эта учетная запись является владельцем игры.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Запрос билетов из клиента Steam...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Билеты успешно извлечены для AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Введите действительный числовой идентификатор приложения Steam.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Или введите AppID вручную</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam должен быть активным и войти в систему во время извлечения, поскольку билеты запрашиваются непосредственно в памяти из официального интерфейса клиента Steam.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Поддерживайте работу клиента Steam</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo допускает до 5 уникальных активаций ПК в день на одну лицензию на игру. Совместное использование более чем с 5 компьютерами в течение 24 часов временно заблокирует новые активации до следующего дня.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Активации Denuvo 5 / лимит в 24 часа</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Билеты могут быть созданы только в том случае, если текущая учетная запись Steam, вошедшая в систему, действительно владеет лицензией на игру или имеет активный семейный доступ.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Требуется владение учетной записью</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Билеты авторизации Denuvo (EncryptedAppTicket) истекают примерно через 30 минут. При обмене посоветуйте получателю запустить установщик и немедленно запустить игру, чтобы установить автономную активацию.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30-минутный период действия билета</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Tickets can only be extracted from an account that genuinely owns the game or has valid Family Sharing. Denuvo authorization tickets have a ~30-minute validity window before they must be refreshed.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Важные примечания для Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Open Folder</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Автоматически применить setAppTicket и setETicket к config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Сохраните необработанные файлы билетов (appticket.bin, eticket.bin, Tickets.txt).</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Сохраняет необработанные файлы билетов и подготавливает общий ZIP-пакет (BaoTools_ticket) для активации в один клик на других компьютерах.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Проверить статус Steam</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Повторное сканирование установленных игр Denuvo</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Извлеченные билеты</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Выберите установленную игру Denuvo.</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Ниже для быстрого выбора перечислены только игры с обнаруженной защитой Denuvo.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Перед распаковкой запустите Steam и войдите в учетную запись, которой принадлежит игра.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Стим не запускается</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Обнаружен клиент Steam. Убедитесь, что игра принадлежит авторизованной учетной записи.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam работает</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Извлеките AppOwnershipTicket и EncryptedAppTicket (Denuvo) непосредственно из активного сеанса Steam.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Билеты на Steam и Denuvo</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Daily downloads: </value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Войдите и получите 10 загрузок в день</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>You have reached your daily limit of 10 downloads. Please try again tomorrow.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Daily downloads: Sign in with Discord for 10 downloads/day</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Ежедневные загрузки: {0} / без ограничений (поддержка)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Ежедневные загрузки: использовано сегодня: {0}/{1}.</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>Билет на владение приложением</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Зашифрованный билет приложения (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Нет в наличии</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

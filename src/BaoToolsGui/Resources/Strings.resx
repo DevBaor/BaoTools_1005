@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -187,7 +187,7 @@
   
   <data name="Onboarding_Title" xml:space="preserve"><value>Welcome to the BaoTools App!</value></data>
   <data name="Onboarding_SignIn_Blurb" xml:space="preserve"><value>Sign in to unlock adding games and fixes.</value></data>
-  <data name="Onboarding_SignedIn" xml:space="preserve"><value>Signed in ✓</value></data>
+  <data name="Onboarding_SignedIn" xml:space="preserve"><value>Signed in ?</value></data>
   <data name="Onboarding_Recommended_Title" xml:space="preserve"><value>Apply recommended settings</value></data>
   <data name="Onboarding_Recommended_Detail" xml:space="preserve"><value>Mode: BetterSteamTools · FastFetch on</value></data>
   <data name="Onboarding_Plugin_Title" xml:space="preserve"><value>Install our famous plugin</value></data>
@@ -388,7 +388,7 @@ This deletes the .lua files from Steam\config\stplug-in.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Couldn't install {0} file(s). Close Steam (or use Restart Steam) and try again.</value></data>
   <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Added {0}: lua + {1} manifest(s).</value></data>
   <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Added {0}. Steam will fetch manifests.</value></data>
-  <data name="Add_FastFetch" xml:space="preserve"><value>FastFetch™️</value></data>
+  <data name="Add_FastFetch" xml:space="preserve"><value>FastFetch™?</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Auto-download from the first available source</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>No available sources found for this game</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· via {0}</value></data>
@@ -641,4 +641,65 @@ Cancel - keep downloading</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+    <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Steam &amp; Denuvo Tickets</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Extract AppOwnershipTicket and EncryptedAppTicket (Denuvo) directly from your active Steam session.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam is running</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam is not running</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Steam client detected. Make sure the signed-in account owns the game.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Please launch Steam and sign into an account that owns the game before extracting.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Check Steam status</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Select Installed Denuvo Game</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Only games with detected Denuvo protection are listed below for quick selection.</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Rescan installed Denuvo games</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Or Enter AppID Manually</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Auto-apply setAppTicket and setETicket to config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Save raw ticket files (appticket.bin, eticket.bin, tickets.txt)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Extract Tickets</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Requesting tickets from Steam client...</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Extracted Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Copy Lua Snippet</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Open Folder</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Important Notes for Denuvo</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Tickets can only be extracted from an account that genuinely owns the game or has valid Family Sharing. Denuvo authorization tickets have a ~30-minute validity window before they must be refreshed.</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Tickets extracted successfully for AppID {0}.</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Failed to extract tickets. Make sure the account owns the game.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Please enter a valid numeric Steam AppID.</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket hex copied to clipboard.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Encrypted ETicket hex copied to clipboard.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Lua ticket code copied to clipboard.</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Extract Tickets</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Export ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>Exported {0} to Desktop successfully!</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Account Ownership Required</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Tickets can only be generated if the currently logged-in Steam account genuinely owns the game license or has active Family Sharing.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30-Minute Ticket Validity Window</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Denuvo authorization tickets (EncryptedAppTicket) expire in ~30 minutes. When sharing, advise the recipient to run the installer and launch the game immediately to establish offline activation.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 Activations / 24 Hours Limit</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo permits up to 5 unique PC activations per day per game license. Sharing with more than 5 machines within 24 hours will temporarily lock new activations until the next day.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Keep Steam Client Running</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam must be active and logged in during extraction, as tickets are requested directly in-memory from the official Steam client interface.</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Saves raw ticket files and prepares a shareable ZIP package (BaoTools_ticket) for 1-click activation on other PCs.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Download Fix (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Click 'Download Fix' to find and download the multiplayer patch archive.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Install Automatically</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Click 'Install Fix' and select the downloaded ZIP file to auto-extract into the game folder.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Installed</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>No installed games match your search query.</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>No installed games found in your Steam library.</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Scanning installed games...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Open Game Folder</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Daily downloads: </value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>You have reached your daily limit of 10 downloads. Please try again tomorrow.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Daily downloads: Sign in with Discord for 10 downloads/day</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Daily downloads: {0} / Unlimited (Supporter)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Daily downloads: {0}/{1} used today</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>App Ownership Ticket</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Encrypted App Ticket (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

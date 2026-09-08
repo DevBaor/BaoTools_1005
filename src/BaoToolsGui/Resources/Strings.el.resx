@@ -609,4 +609,66 @@
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Απόσπασμα εισιτηρίων</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Δεν βρέθηκαν εγκατεστημένα παιχνίδια στη βιβλιοθήκη σας στο Steam.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Δεν υπάρχουν εγκατεστημένα παιχνίδια που να αντιστοιχούν στο ερώτημα αναζήτησής σας.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Εγκατεστημένο</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Σάρωση εγκατεστημένων παιχνιδιών...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Ανοίξτε το φάκελο παιχνιδιού</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Κάντε κλικ στο «Λήψη επιδιόρθωσης» για να βρείτε και να κατεβάσετε το αρχείο ενημέρωσης κώδικα για πολλούς παίκτες.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Λήψη του Fix (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Κάντε κλικ στην «Εγκατάσταση Διόρθωσης» και επιλέξτε το ληφθέν αρχείο ZIP για αυτόματη εξαγωγή στο φάκελο του παιχνιδιού.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Αυτόματη εγκατάσταση</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>Το δεκαεξαδικό AppTicket αντιγράφηκε στο πρόχειρο.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Το κρυπτογραφημένο δεκαεξαδικό ETicket αντιγράφηκε στο πρόχειρο.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Ο κωδικός εισιτηρίου Lua αντιγράφηκε στο πρόχειρο.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Αντιγράψτε το απόσπασμα Lua</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>Έγινε επιτυχής εξαγωγή του {0} στην επιφάνεια εργασίας!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Εξαγωγή ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Extract Tickets</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Αποτυχία εξαγωγής εισιτηρίων. Βεβαιωθείτε ότι ο λογαριασμός κατέχει το παιχνίδι.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Αίτημα εισιτηρίων από πελάτη Steam...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Tickets extracted successfully for AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Εισαγάγετε ένα έγκυρο αριθμητικό Steam AppID.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Ή Εισαγάγετε το AppID με μη αυτόματο τρόπο</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Το Steam πρέπει να είναι ενεργό και συνδεδεμένο κατά την εξαγωγή, καθώς τα εισιτήρια ζητούνται απευθείας στη μνήμη από την επίσημη διεπαφή πελάτη Steam.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Διατηρήστε το Steam Client σε λειτουργία</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Το Denuvo επιτρέπει έως και 5 μοναδικές ενεργοποιήσεις υπολογιστή ανά ημέρα ανά άδεια παιχνιδιού. Η κοινή χρήση με περισσότερα από 5 μηχανήματα εντός 24 ωρών θα κλειδώσει προσωρινά τις νέες ενεργοποιήσεις μέχρι την επόμενη μέρα.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 Ενεργοποιήσεις / Όριο 24 ωρών</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Τα εισιτήρια μπορούν να δημιουργηθούν μόνο εάν ο λογαριασμός Steam που είναι συνδεδεμένος αυτήν τη στιγμή κατέχει πραγματικά την άδεια του παιχνιδιού ή έχει ενεργό Family Sharing.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Απαιτείται ιδιοκτησία λογαριασμού</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Τα εισιτήρια εξουσιοδότησης Denuvo (EncryptedAppTicket) λήγουν σε ~30 λεπτά. Κατά την κοινή χρήση, συμβουλεύστε τον παραλήπτη να εκτελέσει το πρόγραμμα εγκατάστασης και να ξεκινήσει αμέσως το παιχνίδι για να πραγματοποιήσει ενεργοποίηση εκτός σύνδεσης.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>Παράθυρο ισχύος εισιτηρίου 30 λεπτών</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Τα εισιτήρια μπορούν να εξαχθούν μόνο από έναν λογαριασμό στον οποίο ανήκει πραγματικά το παιχνίδι ή έχει έγκυρο Family Sharing. Τα εισιτήρια εξουσιοδότησης Denuvo έχουν ένα παράθυρο ισχύος ~ 30 λεπτών πριν πρέπει να ανανεωθούν.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Σημαντικές σημειώσεις για το Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Άνοιγμα φακέλου</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Αυτόματη εφαρμογή setAppTicket και setETicket σε config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Αποθήκευση ακατέργαστων αρχείων εισιτηρίων (appticket.bin, eticket.bin, tickets.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Αποθηκεύει ακατέργαστα αρχεία εισιτηρίων και προετοιμάζει ένα κοινόχρηστο πακέτο ZIP (BaoTools_ticket) για ενεργοποίηση με 1 κλικ σε άλλους υπολογιστές.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Ελέγξτε την κατάσταση του Steam</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Εκ νέου σάρωση εγκατεστημένων παιχνιδιών Denuvo</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Εξαγόμενα Εισιτήρια</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Επιλέξτε Εγκατεστημένο παιχνίδι Denuvo</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Μόνο παιχνίδια με ανιχνευμένη προστασία Denuvo παρατίθενται παρακάτω για γρήγορη επιλογή.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Εκκινήστε το Steam και συνδεθείτε σε έναν λογαριασμό στον οποίο ανήκει το παιχνίδι πριν από την εξαγωγή.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Το Steam δεν λειτουργεί</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Εντοπίστηκε πελάτης Steam. Βεβαιωθείτε ότι ο συνδεδεμένος λογαριασμός ανήκει στο παιχνίδι.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Το Steam τρέχει</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Εξαγάγετε το AppOwnershipTicket και το EncryptedAppTicket (Denuvo) απευθείας από την ενεργή συνεδρία σας στο Steam.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Εισιτήρια Steam &amp; Denuvo</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Daily downloads: </value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>Έχετε φτάσει το ημερήσιο όριο των 10 λήψεων. Δοκιμάστε ξανά αύριο.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Καθημερινές λήψεις: Συνδεθείτε με το Discord για 10 λήψεις/ημέρα</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Καθημερινές λήψεις: {0} / Απεριόριστες (Υποστήριξη)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Daily downloads: {0}/{1} used today</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Καθημερινές λήψεις: 10/ημέρα (Ενεργό)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>App Ownership Ticket</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Κρυπτογραφημένο εισιτήριο εφαρμογής (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Μη διαθέσιμο</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

@@ -609,4 +609,66 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>チケット</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Hex をコピー</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>チケットを抽出する</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Steam ライブラリにインストールされているゲームが見つかりません。</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>検索クエリに一致するインストール済みのゲームはありません。</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>インストール済み</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>インストールされているゲームをスキャンしています...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>ゲームフォルダーを開く</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>[修正をダウンロード] をクリックして、マルチプレイヤー パッチ アーカイブを見つけてダウンロードします。</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. 修正プログラムをダウンロード (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>「修正のインストール」をクリックし、ダウンロードした ZIP ファイルを選択してゲームフォルダーに自動解凍します。</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. 自動的にインストールする</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket 16 進数がクリップボードにコピーされました。</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>暗号化された ETicket 16 進数がクリップボードにコピーされました。</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Lua チケット コードがクリップボードにコピーされました。</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Lua スニペットをコピー</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>{0} をデスクトップに正常にエクスポートしました。</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>ZIP をエクスポート (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>チケットを抽出する</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>チケットの抽出に失敗しました。アカウントがゲームを所有していることを確認してください。</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Steam クライアントからチケットをリクエストしています...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>AppID {0} のチケットが正常に抽出されました。</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>有効な数値の Steam AppID を入力してください。</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>または AppID を手動で入力します</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam must be active and logged in during extraction, as tickets are requested directly in-memory from the official Steam client interface.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Steam クライアントを実行し続ける</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo では、ゲーム ライセンスごとに 1 日あたり最大 5 件の固有の PC アクティベーションが許可されます。 24 時間以内に 5 台を超えるマシンと共有すると、翌日まで新しいアクティベーションが一時的にロックされます。</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 アクティベーション / 24 時間制限</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>チケットは、現在ログインしている Steam アカウントがゲーム ライセンスを真に所有しているか、アクティブなファミリー共有を持っている場合にのみ生成できます。</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>アカウントの所有権が必要です</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Denuvo 認証チケット (EncryptedAppTicket) の有効期限は 30 分以内に切れます。共有する場合は、受信者にインストーラーを実行し、すぐにゲームを起動してオフライン アクティベーションを確立するようにアドバイスしてください。</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30 分間のチケット有効期限</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>チケットは、ゲームを真に所有しているアカウント、または有効なファミリー共有を持つアカウントからのみ抽出できます。 Denuvo 認証チケットには、更新が必要になるまでに最大 30 分の有効期間があります。</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Denuvo に関する重要な注意事項</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>フォルダーを開く</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>setAppTicket と setETicket を config/stplug-in/&lt;appid&gt;.lua に自動適用します</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>未加工のチケット ファイル (appticket.bin、eticket.bin、tickets.txt) を保存します。</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>生のチケット ファイルを保存し、他の PC で 1 クリックでアクティベーションできるように共有可能な ZIP パッケージ (BaoTools_ticket) を準備します。</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Check Steam status</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>インストールされている Denuvo ゲームを再スキャンします</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>抽出されたチケット</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>インストールされているDenuvoゲームを選択します</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>簡単に選択できるように、Denuvo 保護が検出されたゲームのみが以下にリストされています。</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>解凍する前に、Steam を起動し、ゲームを所有するアカウントにサインインしてください。</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>スチームが動作していない</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Steamクライアントが検出されました。サインインしたアカウントがゲームを所有していることを確認してください。</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>蒸気が作動しています</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>アクティブな Steam セッションから AppOwnershipTicket と EncryptedAppTicket (Denuvo) を直接抽出します。</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Steam &amp; Denuvo チケット</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>毎日のダウンロード:</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>サインインすると 1 日あたり 10 回のダウンロードが可能</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>1 日あたりのダウンロード数の制限である 10 件に達しました。明日もう一度試してください。</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>毎日のダウンロード: Discord でサインインすると、1 日あたり 10 回のダウンロードが可能</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>毎日のダウンロード: {0} / 無制限 (サポーター)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>毎日のダウンロード: {0}/{1} が今日使用されました</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>毎日のダウンロード: 10/日 (アクティブ)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>アプリ所有権チケット</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>暗号化されたアプリチケット (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>利用不可</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>プラグイン</value></data>
+</root>

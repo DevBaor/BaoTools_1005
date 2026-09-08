@@ -629,4 +629,66 @@
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>凭证</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>复制 Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>提取门票</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>您的 Steam 库中未找到已安装的游戏。</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>没有已安装的游戏与您的搜索查询匹配。</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>已安装</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>正在扫描已安装的游戏...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>打开游戏文件夹</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>单击“下载修复”以查找并下载多人补丁存档。</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1.下载修复程序（online-fix.me）</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>单击“安装修复程序”并选择下载的 ZIP 文件以自动解压到游戏文件夹中。</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. 自动安装</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket 十六进制已复制到剪贴板。</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>加密的 ETicket 十六进制复制到剪贴板。</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Lua 票证代码已复制到剪贴板。</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>复制 Lua 片段</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>已成功将 {0} 导出到桌面！</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>导出 ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>提取门票</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>提取门票失败。确保该帐户拥有该游戏。</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>正在向 Steam 客户端请求门票...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>已成功提取 AppID {0} 的票证。</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>请输入有效的数字 Steam AppID。</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>或者手动输入AppID</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>在提取过程中，Steam 必须处于活动状态并登录，因为门票是直接从官方 Steam 客户端界面在内存中请求的。</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>保持 Steam 客户端运行</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo 允许每个游戏许可证每天最多进行 5 次唯一的 PC 激活。 24 小时内与超过 5 台机器共享将暂时锁定新的激活，直到第二天。</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 Activations / 24 Hours Limit</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>仅当当前登录的 Steam 帐户真正拥有游戏许可证或具有活跃的家庭共享时，才能生成门票。</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>需要帐户所有权</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Denuvo 授权票证 (EncryptedAppTicket) 将在大约 30 分钟后过期。共享时，建议接收者立即运行安装程序并启动游戏以建立离线激活。</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30 分钟门票有效期</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>门票只能从真正拥有游戏或具有有效家庭共享的帐户中提取。 Denuvo 授权票证的有效期约为 30 分钟，之后必须刷新。</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Denuvo 的重要注意事项</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>打开文件夹</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>自动将 setAppTicket 和 setETicket 应用于 config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>保存原始票证文件（appticket.bin、eticket.bin、tickets.txt）</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>保存原始票据文件并准备可共享的 ZIP 包 (BaoTools_ticket)，以便在其他 PC 上一键激活。</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>检查 Steam 状态</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>重新扫描已安装的 Denuvo 游戏</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>提取的门票</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>选择已安装的 Denuvo 游戏</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>下面仅列出了检测到 Denuvo 保护的游戏，以便快速选择。</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>请启动 Steam 并登录拥有该游戏的帐户，然后再解压。</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>蒸汽未运行</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Steam client detected. Make sure the signed-in account owns the game.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>蒸汽正在运行</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>直接从活动的 Steam 会话中提取 AppOwnershipTicket 和 EncryptedAppTicket (Denuvo)。</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Steam 和 Denuvo 门票</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>每日下载量：</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>登录即可每天下载 10 次</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>您已达到每日 10 次下载的限制。请明天再试一次。</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>每日下载：使用 Discord 登录每天可下载 10 次</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>每日下载量：{0}/无限制（支持者）</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>每日下载量：今天使用了 {0}/{1}</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>每日下载量：10 次/天（活跃）</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>应用程序所有权票</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>加密应用程序票证 (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>无法使用</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>插件</value></data>
+</root>

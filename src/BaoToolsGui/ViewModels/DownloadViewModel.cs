@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -316,6 +316,10 @@ public partial class DownloadViewModel : ObservableObject
     [ObservableProperty] private bool _fastFetch;
     partial void OnFastFetchChanged(bool value) => _settings.FastFetch = value;
 
+    public bool IsGuest => _auth.IsGuest;
+    [ObservableProperty] private string? _quotaText;
+    [ObservableProperty] private bool _hasQuota;
+
     /// <summary>Re-sync the FastFetch toggle from the saved setting when the Add view appears. The Settings
     /// page exposes the same toggle, and both VMs are singletons that otherwise only read it at startup.</summary>
     public void SyncFastFetch() => FastFetch = _settings.FastFetch;
@@ -340,6 +344,32 @@ public partial class DownloadViewModel : ObservableObject
         _jobs = jobs;
         Drop = drop;
         _fastFetch = settings.FastFetch;
+
+        _auth.AuthStateChanged += () =>
+        {
+            OnPropertyChanged(nameof(IsGuest));
+            _ = RefreshQuotaAsync();
+        };
+        _ = RefreshQuotaAsync();
+    }
+
+    public async Task RefreshQuotaAsync()
+    {
+        if (_auth.IsGuest)
+        {
+            QuotaText = null;
+            HasQuota = false;
+            OnPropertyChanged(nameof(IsGuest));
+            return;
+        }
+
+        OnPropertyChanged(nameof(IsGuest));
+        var summary = await _api.GetQuotaSummaryAsync();
+        if (summary is not null)
+        {
+            QuotaText = summary.DisplayText;
+            HasQuota = true;
+        }
     }
 
     /// <summary>
@@ -668,8 +698,19 @@ public partial class DownloadViewModel : ObservableObject
 
         if (!_settings.CanAddGame())
         {
-            Error = "Bạn đã đạt giới hạn 15 lượt thêm game/ngày. Vui lòng quay lại vào ngày mai.";
+            Error = Resources.Strings.Download_DailyQuota_LimitReached;
             return null;
+        }
+
+        // Live server quota check at 10 limit (unless Supporter)
+        if (!_auth.IsGuest)
+        {
+            var summary = await _api.GetQuotaSummaryAsync();
+            if (summary is not null && !summary.IsSupporter && summary.Used >= AppConfig.AppDailyDownloadLimit)
+            {
+                Error = Resources.Strings.Download_DailyQuota_LimitReached;
+                return null;
+            }
         }
 
         // Hubcap downloads use the user's OWN key and never touch lua.tools, so a guest with a key
@@ -748,6 +789,7 @@ public partial class DownloadViewModel : ObservableObject
 
         // Usage just changed: Hubcap against the key's own quota, everything else against the 25/day.
         _ = needsKey ? ApplyHubcapStateAsync() : RefreshStandardUsageAsync();
+        _ = RefreshQuotaAsync();
     }
 
     // ── Install + overwrite confirm ─────────────────────────────────

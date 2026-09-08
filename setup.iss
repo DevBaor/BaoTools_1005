@@ -1,6 +1,6 @@
 [Setup]
 AppName=BaoTools
-AppVersion=v105.1
+AppVersion=v105.2
 DefaultDirName={autopf}\BaoTools
 DefaultGroupName=BaoTools
 OutputDir=out_setup

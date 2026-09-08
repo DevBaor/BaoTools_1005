@@ -635,4 +635,66 @@
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>استخراج التذاكر</value></data>
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>لم يتم العثور على أي ألعاب مثبتة في مكتبة Steam الخاصة بك.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>لا توجد ألعاب مثبتة تتطابق مع استعلام البحث الخاص بك.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>تم التثبيت</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>جارٍ فحص الألعاب المثبتة...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>افتح مجلد اللعبة</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>انقر فوق &quot;تنزيل الإصلاح&quot; للعثور على أرشيف تصحيح اللاعبين المتعددين وتنزيله.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. تنزيل الإصلاح (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>انقر فوق &quot;تثبيت الإصلاح&quot; وحدد ملف ZIP الذي تم تنزيله لاستخراجه تلقائيًا في مجلد اللعبة.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. التثبيت تلقائيًا</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>تم نسخ AppTicket السداسي إلى الحافظة.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>تم نسخ ETicket سداسي عشري مشفر إلى الحافظة.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>تم نسخ رمز تذكرة Lua إلى الحافظة.</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>انسخ مقتطف Lua</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>تم تصدير {0} إلى سطح المكتب بنجاح!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>تصدير ملف ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>استخراج التذاكر</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>فشل استخراج التذاكر. تأكد من أن الحساب يمتلك اللعبة.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>طلب التذاكر من عميل Steam...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>تم استخراج التذاكر بنجاح لمعرف التطبيق {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>الرجاء إدخال معرف تطبيق Steam الرقمي الصحيح.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>أو أدخل معرف التطبيق يدويًا</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>يجب أن يكون Steam نشطًا وأن يتم تسجيل الدخول أثناء الاستخراج، حيث يتم طلب التذاكر مباشرة في الذاكرة من واجهة عميل Steam الرسمية.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>استمر في تشغيل عميل Steam</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>يسمح Denuvo بما يصل إلى 5 عمليات تنشيط فريدة للكمبيوتر الشخصي يوميًا لكل ترخيص لعبة. ستؤدي المشاركة مع أكثر من 5 أجهزة خلال 24 ساعة إلى قفل عمليات التنشيط الجديدة مؤقتًا حتى اليوم التالي.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>عمليات تنشيط Denuvo 5 / حد 24 ساعة</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>لا يمكن إنشاء التذاكر إلا إذا كان حساب Steam الذي تم تسجيل الدخول إليه حاليًا يمتلك حقًا ترخيص اللعبة أو لديه مشاركة عائلية نشطة.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>ملكية الحساب مطلوبة</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>تنتهي صلاحية تذاكر ترخيص Denuvo (EncryptedAppTicket) خلال 30 دقيقة تقريبًا. عند المشاركة، انصح المستلم بتشغيل برنامج التثبيت وتشغيل اللعبة على الفور لإنشاء التنشيط دون اتصال بالإنترنت.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>نافذة صلاحية التذكرة لمدة 30 دقيقة</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>لا يمكن استخراج التذاكر إلا من حساب يملك اللعبة بشكل حقيقي أو لديه مشاركة عائلية صالحة. تتمتع تذاكر ترخيص Denuvo بفترة صلاحية مدتها 30 دقيقة تقريبًا قبل أن يتم تحديثها.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>ملاحظات هامة لدينوفو</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>افتح المجلد</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>تطبيق setAppTicket وsetETicket تلقائيًا على config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>حفظ ملفات التذاكر الأولية (appticket.bin، eticket.bin، Tickets.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>يحفظ ملفات التذاكر الأولية ويعد حزمة ZIP قابلة للمشاركة (BaoTools_ticket) للتنشيط بنقرة واحدة على أجهزة الكمبيوتر الأخرى.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>تحقق من حالة البخار</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>إعادة فحص ألعاب Denuvo المثبتة</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>التذاكر المستخرجة</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>حدد لعبة Denuvo المثبتة</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>تم إدراج الألعاب التي تم اكتشاف حماية Denuvo بها فقط أدناه للاختيار السريع.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>يرجى تشغيل Steam وتسجيل الدخول إلى الحساب الذي يملك اللعبة قبل استخراجها.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>البخار لا يعمل</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>تم اكتشاف عميل Steam. تأكد من أن الحساب الذي تم تسجيل الدخول إليه يمتلك اللعبة.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>البخار قيد التشغيل</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>قم باستخراج AppOwnershipTicket وEncryptedAppTicket (Denuvo) مباشرة من جلسة Steam النشطة لديك.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>تذاكر ستيم ودينوفو</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>التنزيلات اليومية:</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>قم بتسجيل الدخول لمدة 10 تنزيلات/اليوم</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>لقد وصلت إلى الحد اليومي المسموح به وهو 10 تنزيلات. يرجى المحاولة مرة أخرى غدا.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>التنزيلات اليومية: قم بتسجيل الدخول باستخدام Discord لمدة 10 تنزيلات في اليوم</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>التنزيلات اليومية: {0} / غير محدود (مؤيد)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>التنزيلات اليومية: {0}/{1} مستخدمة اليوم</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>التنزيلات اليومية: 10/اليوم (نشط)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>تذكرة ملكية التطبيق</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>تذكرة التطبيق المشفرة (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>غير متوفر</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>البرنامج المساعد</value></data>
+</root>

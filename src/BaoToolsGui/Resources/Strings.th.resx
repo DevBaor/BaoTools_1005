@@ -609,4 +609,66 @@
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>แยกตั๋ว</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>ไม่พบเกมที่ติดตั้งไว้ในคลัง Steam ของคุณ</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>ไม่มีเกมที่ติดตั้งตรงกับคำค้นหาของคุณ</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>ติดตั้งแล้ว</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>กำลังสแกนเกมที่ติดตั้ง...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>เปิดโฟลเดอร์เกม</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>คลิก 'ดาวน์โหลด Fix' เพื่อค้นหาและดาวน์โหลดไฟล์เก็บถาวรแพตช์สำหรับผู้เล่นหลายคน</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. ดาวน์โหลด Fix (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>คลิก 'ติดตั้งโปรแกรมแก้ไข' และเลือกไฟล์ ZIP ที่ดาวน์โหลดมาเพื่อแตกไฟล์ลงในโฟลเดอร์เกมโดยอัตโนมัติ</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. ติดตั้งโดยอัตโนมัติ</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>คัดลอก AppTicket hex ไปยังคลิปบอร์ดแล้ว</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>คัดลอก ETicket hex ที่เข้ารหัสไปยังคลิปบอร์ดแล้ว</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>คัดลอกรหัสตั๋ว Lua ไปยังคลิปบอร์ดแล้ว</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>คัดลอกตัวอย่าง Lua</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>ส่งออก {0} ไปยังเดสก์ท็อปสำเร็จแล้ว!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>ส่งออก ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>แยกตั๋ว</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>ดึงข้อมูลตั๋วไม่สำเร็จ ตรวจสอบให้แน่ใจว่าบัญชีเป็นเจ้าของเกม</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>กำลังขอตั๋วจากไคลเอนต์ Steam...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>แยกตั๋วสำหรับ AppID {0} สำเร็จแล้ว</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>กรุณากรอก Steam AppID ที่เป็นตัวเลขที่ถูกต้อง</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>หรือป้อน AppID ด้วยตนเอง</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam จะต้องเปิดใช้งานและเข้าสู่ระบบในระหว่างการแตกไฟล์ เนื่องจากมีคำขอตั๋วในหน่วยความจำโดยตรงจากอินเทอร์เฟซไคลเอนต์ Steam อย่างเป็นทางการ</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>ทำให้ไคลเอนต์ Steam ทำงานต่อไป</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo อนุญาตให้เปิดใช้งานพีซีที่ไม่ซ้ำกันได้สูงสุด 5 รายการต่อวันต่อลิขสิทธิ์เกม การแชร์กับเครื่องมากกว่า 5 เครื่องภายใน 24 ชั่วโมงจะล็อคการเปิดใช้งานใหม่ชั่วคราวจนถึงวันถัดไป</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>การเปิดใช้งาน Denuvo 5 / จำกัด 24 ชั่วโมง</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>ตั๋วสามารถสร้างขึ้นได้ก็ต่อเมื่อบัญชี Steam ที่เข้าสู่ระบบอยู่ในปัจจุบันเป็นเจ้าของลิขสิทธิ์เกมอย่างแท้จริง หรือมี Family Sharing ที่ใช้งานอยู่</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>ต้องเป็นเจ้าของบัญชี</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>ตั๋วอนุญาต Denuvo (EncryptedAppTicket) จะหมดอายุใน ~30 นาที เมื่อแชร์ แนะนำให้ผู้รับเรียกใช้ตัวติดตั้งและเปิดเกมทันทีเพื่อสร้างการเปิดใช้งานออฟไลน์</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>หน้าต่างอายุตั๋ว 30 นาที</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>ตั๋วสามารถดึงมาจากบัญชีที่เป็นเจ้าของเกมอย่างแท้จริงหรือมี Family Sharing ที่ถูกต้องเท่านั้น ตั๋วอนุญาต Denuvo มีกรอบเวลาที่ใช้ได้ประมาณ 30 นาทีก่อนที่จะต้องรีเฟรช</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>หมายเหตุสำคัญสำหรับ Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>เปิดโฟลเดอร์</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>ใช้ setAppTicket และ setETicket โดยอัตโนมัติเพื่อ config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>บันทึกไฟล์ตั๋วดิบ (appticket.bin, eticket.bin, ticket.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>บันทึกไฟล์ตั๋วดิบและเตรียมแพ็คเกจ ZIP ที่ใช้ร่วมกันได้ (BaoTools_ticket) สำหรับการเปิดใช้งาน 1 คลิกบนพีซีเครื่องอื่น</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>ตรวจสอบสถานะ Steam</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>สแกนเกม Denuvo ที่ติดตั้งอีกครั้ง</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>ตั๋วที่แยกออกมา</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>เลือกเกม Denuvo ที่ติดตั้งไว้</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>เฉพาะเกมที่ตรวจพบการป้องกัน Denuvo เท่านั้นที่แสดงด้านล่างสำหรับการเลือกอย่างรวดเร็ว</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>โปรดเปิด Steam และลงชื่อเข้าใช้บัญชีที่เป็นเจ้าของเกมก่อนที่จะแตกไฟล์</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam ไม่ทำงาน</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>ตรวจพบไคลเอนต์ Steam ตรวจสอบให้แน่ใจว่าบัญชีที่ลงชื่อเข้าใช้เป็นเจ้าของเกม</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam กำลังทำงานอยู่</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>แยก AppOwnershipTicket และ EncryptedAppTicket (Denuvo) โดยตรงจากเซสชัน Steam ที่คุณใช้งานอยู่</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>ตั๋ว Steam และ Denuvo</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Daily downloads: </value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>You have reached your daily limit of 10 downloads. Please try again tomorrow.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>ดาวน์โหลดรายวัน: ลงชื่อเข้าใช้ด้วย Discord เพื่อดาวน์โหลด 10 ครั้ง/วัน</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Daily downloads: {0} / Unlimited (Supporter)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>ดาวน์โหลดรายวัน: {0}/{1} ใช้แล้ววันนี้</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>ตั๋วการเป็นเจ้าของแอป</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Encrypted App Ticket (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>ไม่สามารถใช้ได้</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

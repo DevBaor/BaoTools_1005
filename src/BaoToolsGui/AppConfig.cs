@@ -29,6 +29,9 @@ public static class AppConfig
     // because the web app enforces it inline with no API field exposing it; change in one place if it moves.
     public const int DailyDownloadLimit = 25;
 
+    /// <summary>App's configured daily download limit for standard users (10 downloads/day).</summary>
+    public const int AppDailyDownloadLimit = 10;
+
     // Public upstream APIs the app calls directly (no lua.tools proxy needed for guest browsing).
     public const string SteamStoreSearchUrl = "https://store.steampowered.com/api/storesearch/";
     // Steam's storefront "featured categories" (top sellers, new releases, etc.). Drives the Add page's

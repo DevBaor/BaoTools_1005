@@ -178,6 +178,31 @@
 
                     <Separator Margin="0,10" Background="#14FFFFFF" />
 
+                    <!-- Quota → Add page -->
+                    <Button Command="{Binding OpenAddCommand}" Style="{StaticResource StatusRowButton}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="22" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:SymbolIcon
+                                Margin="0,1,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Foreground="#a78bfa"
+                                Symbol="ArrowDownload24" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="12.5"
+                                Foreground="#d1d5db"
+                                Text="{Binding DailyQuotaStatus}" />
+                        </Grid>
+                    </Button>
+
+                    <Separator Margin="0,10" Background="#14FFFFFF" />
+
                     <!-- Active mode → Mode -->
                     <Button Command="{Binding OpenModeCommand}" Style="{StaticResource StatusRowButton}">
                         <Grid>

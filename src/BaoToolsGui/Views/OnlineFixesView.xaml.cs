@@ -1,15 +1,16 @@
-using BaoToolsGui.ViewModels;
 using System.Windows.Controls;
-using System.Windows;
+using BaoToolsGui.ViewModels;
 
 namespace BaoToolsGui.Views;
 
-public partial class OnlineFixesView : Page
+public partial class OnlineFixesView : UserControl
 {
+    private readonly OnlineFixesViewModel _viewModel;
+
     public OnlineFixesView(OnlineFixesViewModel viewModel)
     {
         InitializeComponent();
-        DataContext = viewModel;
-        Loaded += async (s, e) => await viewModel.InitializeAsync();
+        DataContext = _viewModel = viewModel;
+        Loaded += async (_, _) => await _viewModel.InitializeAsync();
     }
 }

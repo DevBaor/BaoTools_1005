@@ -609,4 +609,66 @@ Hayır - durdur ama dosyaları koru
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Biletleri Çıkar</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Steam kitaplığınızda yüklü oyun bulunamadı.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Arama sorgunuzla eşleşen yüklü oyun yok.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Yüklendi</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Yüklü oyunlar taranıyor...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Oyun Klasörünü Aç</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Çok oyunculu yama arşivini bulup indirmek için 'Düzeltmeyi İndir'i tıklayın.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Düzeltmeyi İndirin (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>'Düzeltmeyi Yükle'yi tıklayın ve oyun klasörüne otomatik olarak çıkartılacak indirilen ZIP dosyasını seçin.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Otomatik Olarak Kur</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket hex panoya kopyalandı.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Şifrelenmiş ETicket hex'i panoya kopyalandı.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Lua bilet kodu panoya kopyalandı.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Lua Snippet'ini kopyala</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>{0} başarıyla Masaüstüne aktarıldı!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>ZIP'i dışa aktar (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Biletleri Çıkar</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Biletler çıkarılamadı. Hesabın oyunun sahibi olduğundan emin olun.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Steam istemcisinden bilet isteniyor...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>{0} Uygulama Kimliği için biletler başarıyla çıkarıldı.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Lütfen geçerli bir sayısal Steam Uygulama Kimliği girin.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Veya AppID'yi Manuel Olarak Girin</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Biletler doğrudan bellekten resmi Steam istemci arayüzünden talep edildiğinden, çıkarma sırasında Steam'in aktif olması ve oturum açmış olması gerekir.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Steam İstemcisini Çalıştırmaya Devam Edin</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo, oyun lisansı başına günde en fazla 5 benzersiz bilgisayar aktivasyonuna izin verir. 24 saat içinde 5'ten fazla makineyle paylaşmak, yeni etkinleştirmeleri bir sonraki güne kadar geçici olarak kilitleyecektir.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 Activations / 24 Hours Limit</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Biletler yalnızca halihazırda oturum açmış olan Steam hesabının gerçekten oyun lisansına sahip olması veya etkin Aile Paylaşımı olması durumunda oluşturulabilir.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Hesap Sahipliği Gerekli</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Denuvo yetkilendirme biletlerinin (EncryptedAppTicket) geçerliliği yaklaşık 30 dakika içinde sona erer. Paylaşırken, alıcıya yükleyiciyi çalıştırmasını ve çevrimdışı aktivasyonu sağlamak için oyunu hemen başlatmasını söyleyin.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30 Dakikalık Bilet Geçerlilik Penceresi</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Biletler yalnızca oyuna gerçekten sahip olan veya geçerli Aile Paylaşımına sahip bir hesaptan alınabilir. Denuvo yetkilendirme biletlerinin yenilenmeden önce yaklaşık 30 dakikalık bir geçerlilik süresi vardır.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Important Notes for Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Klasörü Aç</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>setAppTicket ve setETicket'i config/stplug-in/&lt;appid&gt;.lua dosyasına otomatik olarak uygulayın</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Ham bilet dosyalarını kaydedin (appticket.bin, eticket.bin, ticket.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Ham bilet dosyalarını kaydeder ve diğer bilgisayarlarda tek tıklamayla etkinleştirme için paylaşılabilir bir ZIP paketi (BaoTools_ticket) hazırlar.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Steam durumunu kontrol edin</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Yüklü Denuvo oyunlarını yeniden tarayın</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Çıkarılan Biletler</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Yüklü Denuvo Oyununu Seçin</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Hızlı seçim için yalnızca Denuvo koruması tespit edilen oyunlar aşağıda listelenmiştir.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Lütfen Steam'i başlatın ve çıkarmadan önce oyunun sahibi olan bir hesapta oturum açın.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam çalışmıyor</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Steam istemcisi algılandı. Oturum açılan hesabın oyunun sahibi olduğundan emin olun.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam çalışıyor</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Extract AppOwnershipTicket and EncryptedAppTicket (Denuvo) directly from your active Steam session.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Steam ve Denuvo Biletleri</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Daily downloads: </value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>Günlük 10 indirme sınırınıza ulaştınız. Lütfen yarın tekrar deneyin.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Günlük indirmeler: Günde 10 indirme için Discord&#x27;da oturum açın</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Daily downloads: {0} / Unlimited (Supporter)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Daily downloads: {0}/{1} used today</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>Uygulama Sahipliği Bileti</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Encrypted App Ticket (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Müsait değil</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

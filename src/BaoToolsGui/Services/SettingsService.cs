@@ -74,7 +74,7 @@ public class SettingsService
             _settings.LastAddDate = DateTime.Today;
             Save();
         }
-        return _settings.DailyAddCount < 15;
+        return _settings.DailyAddCount < AppConfig.AppDailyDownloadLimit;
     }
 
     public void IncrementAddCount()

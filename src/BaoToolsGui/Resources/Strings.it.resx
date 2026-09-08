@@ -609,4 +609,66 @@ Annulla - continua a scaricare</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Estrai biglietti</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Nessun gioco installato trovato nella tua libreria Steam.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Nessun gioco installato corrisponde alla tua query di ricerca.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Installed</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Scansione dei giochi installati...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Apri la cartella del gioco</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Fai clic su &quot;Scarica correzione&quot; per trovare e scaricare l'archivio delle patch multiplayer.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Scarica Fix (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Fai clic su &quot;Installa correzione&quot; e seleziona il file ZIP scaricato da estrarre automaticamente nella cartella del gioco.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Installa automaticamente</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket esadecimale copiato negli appunti.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>ETicket crittografato esadecimale copiato negli appunti.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Codice biglietto Lua copiato negli appunti.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Copia lo snippet di Lua</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>Esportato {0} sul desktop con successo!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Esporta ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Estrai biglietti</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Impossibile estrarre i biglietti. Assicurati che l'account sia il proprietario del gioco.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Richiesta di biglietti dal client Steam...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Ticket estratti correttamente per AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Inserisci un ID app Steam numerico valido.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Oppure inserisci AppID manualmente</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam deve essere attivo e registrato durante l'estrazione, poiché i ticket vengono richiesti direttamente in memoria dall'interfaccia ufficiale del client Steam.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Mantieni il client Steam in esecuzione</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo permits up to 5 unique PC activations per day per game license. Sharing with more than 5 machines within 24 hours will temporarily lock new activations until the next day.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 attivazioni/limite di 24 ore</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>I biglietti possono essere generati solo se l'account Steam attualmente connesso possiede effettivamente la licenza del gioco o ha la condivisione familiare attiva.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>È richiesta la proprietà dell'account</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>I ticket di autorizzazione Denuvo (EncryptedAppTicket) scadono tra circa 30 minuti. Durante la condivisione, consiglia al destinatario di eseguire il programma di installazione e di avviare immediatamente il gioco per stabilire l'attivazione offline.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>Finestra di validità del biglietto di 30 minuti</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>I biglietti possono essere estratti solo da un account che possiede realmente il gioco o che dispone di una condivisione familiare valida. I ticket di autorizzazione Denuvo hanno una finestra di validità di circa 30 minuti prima di dover essere aggiornati.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Note importanti per Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Apri cartella</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Applica automaticamente setAppTicket e setETicket a config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Salva i file dei biglietti grezzi (appticket.bin, eticket.bin, tickets.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Salva i file dei ticket grezzi e prepara un pacchetto ZIP condivisibile (BaoTools_ticket) per l'attivazione con 1 clic su altri PC.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Controlla lo stato di Steam</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Eseguire nuovamente la scansione dei giochi Denuvo installati</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Biglietti estratti</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Seleziona Gioco Denuvo installato</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Di seguito sono elencati solo i giochi con protezione Denuvo rilevata per una selezione rapida.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Avvia Steam e accedi a un account proprietario del gioco prima di estrarlo.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam non è in esecuzione</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Rilevato client Steam. Assicurati che l'account a cui hai effettuato l'accesso sia il proprietario del gioco.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam è in esecuzione</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Estrai AppOwnershipTicket e EncryptedAppTicket (Denuvo) direttamente dalla tua sessione Steam attiva.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Biglietti Steam e Denuvo</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Download giornalieri:</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Accedi per 10 download al giorno</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>You have reached your daily limit of 10 downloads. Please try again tomorrow.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Download giornalieri: accedi con Discord per 10 download al giorno</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Download giornalieri: {0}/illimitati (sostenitore)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Download giornalieri: {0}/{1} utilizzati oggi</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Download giornalieri: 10/giorno (attivo)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>App Ownership Ticket</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Ticket app crittografato (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

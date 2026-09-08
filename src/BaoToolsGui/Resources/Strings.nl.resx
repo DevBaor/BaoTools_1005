@@ -609,4 +609,66 @@ Annuleren - doorgaan met downloaden</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Tickets uitpakken</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Geen geïnstalleerde games gevonden in je Steam-bibliotheek.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Er zijn geen geïnstalleerde games die overeenkomen met uw zoekopdracht.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Installed</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Geïnstalleerde games scannen...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Open Game Folder</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Klik op 'Download Fix' om het multiplayer-patcharchief te vinden en te downloaden.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Fix downloaden (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Klik op 'Install Fix' en selecteer het gedownloade ZIP-bestand om het automatisch uit te pakken in de gamemap.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Automatisch installeren</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket hex gekopieerd naar klembord.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Gecodeerde ETicket hex gekopieerd naar klembord.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Lua-ticketcode gekopieerd naar klembord.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Kopieer het Lua-fragment</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>{0} succesvol naar desktop geëxporteerd!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>ZIP exporteren (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Tickets uitpakken</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Kan tickets niet extraheren. Zorg ervoor dat het account eigenaar is van het spel.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Requesting tickets from Steam client...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Tickets succesvol geëxtraheerd voor AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Voer een geldige numerieke Steam AppID in.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Of voer AppID handmatig in</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam moet actief zijn en ingelogd zijn tijdens het uitpakken, omdat tickets rechtstreeks in het geheugen worden opgevraagd via de officiële Steam-clientinterface.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Houd de Steam-client actief</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo staat maximaal 5 unieke pc-activeringen per dag per gamelicentie toe. Als u binnen 24 uur met meer dan 5 machines deelt, worden nieuwe activeringen tijdelijk vergrendeld tot de volgende dag.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 activeringen / limiet van 24 uur</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Tickets kunnen alleen worden gegenereerd als het momenteel ingelogde Steam-account daadwerkelijk de gamelicentie bezit of over actieve Family Sharing beschikt.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Accounteigendom vereist</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Denuvo-autorisatietickets (EncryptedAppTicket) verlopen over ~30 minuten. Adviseer de ontvanger bij het delen het installatieprogramma uit te voeren en de game onmiddellijk te starten om de offline activering tot stand te brengen.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>Ticketgeldigheidsperiode van 30 minuten</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Tickets kunnen alleen worden afgehaald van een account dat daadwerkelijk eigenaar is van de game of een geldige Family Sharing-account heeft. Denuvo-autorisatietickets hebben een geldigheidsduur van ongeveer 30 minuten voordat ze moeten worden vernieuwd.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Belangrijke opmerkingen voor Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Map openen</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>SetAppTicket en setETicket automatisch toepassen op config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Sla onbewerkte ticketbestanden op (appticket.bin, eticket.bin, tickets.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Slaat onbewerkte ticketbestanden op en bereidt een deelbaar ZIP-pakket voor (BaoTools_ticket) voor activering met 1 klik op andere pc's.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Controleer de Steam-status</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Geïnstalleerde Denuvo-spellen opnieuw scannen</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Uitgepakte kaartjes</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Selecteer Geïnstalleerde Denuvo-game</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Alleen games met gedetecteerde Denuvo-bescherming worden hieronder vermeld voor een snelle selectie.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Start Steam en log in op een account dat eigenaar is van het spel voordat je het uitpakt.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Stoom draait niet</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Steam-client gedetecteerd. Zorg ervoor dat het ingelogde account eigenaar is van de game.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Er loopt stoom</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Pak AppOwnershipTicket en EncryptedAppTicket (Denuvo) rechtstreeks uit uw actieve Steam-sessie.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Steam- en Denuvo-tickets</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Dagelijkse downloads:</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>U heeft uw dagelijkse limiet van 10 downloads bereikt. Probeer het morgen opnieuw.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Daily downloads: Sign in with Discord for 10 downloads/day</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Dagelijkse downloads: {0} / onbeperkt (supporter)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Dagelijkse downloads: {0}/{1} vandaag gebruikt</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>App Ownership Ticket</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Gecodeerd app-ticket (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

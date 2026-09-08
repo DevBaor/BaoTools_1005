@@ -609,4 +609,66 @@ Anulare - continuă descărcarea</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Extrage bilete</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Nu s-au găsit jocuri instalate în biblioteca dvs. Steam.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Niciun joc instalat nu corespunde interogării dvs. de căutare.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Instalat</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Se scanează jocurile instalate...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Deschideți folderul joc</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Click 'Download Fix' to find and download the multiplayer patch archive.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Descărcați Fix (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Faceți clic pe „Instalare remediere” și selectați fișierul ZIP descărcat pentru a-l extrage automat în folderul jocului.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Instalați automat</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket hex copiat în clipboard.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Hex ETicket criptat copiat în clipboard.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Codul biletului Lua a fost copiat în clipboard.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Copiați fragmentul Lua</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>Exportat {0} pe desktop cu succes!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Export ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Extrage bilete</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Biletele nu au putut fi extrase. Asigurați-vă că contul deține jocul.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Se solicită bilete de la clientul Steam...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Biletele extrase cu succes pentru AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Vă rugăm să introduceți un ID de aplicație Steam numeric valid.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Sau introduceți manual AppID</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam trebuie să fie activ și conectat în timpul extracției, deoarece biletele sunt solicitate direct în memorie din interfața oficială a clientului Steam.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Păstrați clientul Steam în funcțiune</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo permite până la 5 activări unice de PC pe zi per licență de joc. Partajarea cu mai mult de 5 computere în decurs de 24 de ore va bloca temporar noile activări până a doua zi.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 activări / 24 de ore limită</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Biletele pot fi generate numai dacă contul Steam conectat în prezent deține cu adevărat licența de joc sau are Family Sharing activ.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Proprietatea contului este necesară</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Tichetele de autorizare Denuvo (EncryptedAppTicket) expiră în ~30 de minute. Când partajați, sfătuiți destinatarul să ruleze programul de instalare și să lanseze jocul imediat pentru a stabili activarea offline.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>Fereastră de valabilitate a biletului de 30 de minute</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Biletele pot fi extrase numai dintr-un cont care deține cu adevărat jocul sau care are Partajare în familie validă. Biletele de autorizare Denuvo au o fereastră de valabilitate de aproximativ 30 de minute înainte ca acestea să fie reîmprospătate.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Important Notes for Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Deschideți folderul</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Aplicați automat setAppTicket și setETicket la config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Salvați fișiere de bilete brute (appticket.bin, eticket.bin, tickets.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Salvează fișierele de bilete brute și pregătește un pachet ZIP care poate fi partajat (BaoTools_ticket) pentru activarea cu un singur clic pe alte computere.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Verificați starea Steam</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Rescanați jocurile Denuvo instalate</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Bilete extrase</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Select Installed Denuvo Game</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Doar jocurile cu protecție Denuvo detectată sunt enumerate mai jos pentru o selecție rapidă.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Lansați Steam și conectați-vă la un cont care deține jocul înainte de a extrage.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam nu rulează</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Client Steam detectat. Asigurați-vă că contul conectat deține jocul.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam rulează</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Extrageți AppOwnershipTicket și EncryptedAppTicket (Denuvo) direct din sesiunea dvs. activă de Steam.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Bilete Steam și Denuvo</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Descărcări zilnice:</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Conectați-vă pentru 10 descărcări/zi</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>Ați atins limita zilnică de 10 descărcări. Vă rugăm să încercați din nou mâine.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Descărcări zilnice: conectați-vă cu Discord pentru 10 descărcări/zi</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Descărcări zilnice: {0}/Nelimitat (Asistență)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Descărcări zilnice: {0}/{1} utilizate astăzi</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Descărcări zilnice: 10/zi (activ)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>Tichet de proprietate asupra aplicației</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Ticket pentru aplicație criptată (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Nu este disponibil</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

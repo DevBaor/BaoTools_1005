@@ -184,6 +184,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     private readonly ToastService _toast;
     private readonly SettingsService _settings;
     private readonly SteamlessService _steamless;
+    private readonly SteamTicketService _tickets;
 
     private List<LuaTileViewModel> _all = [];
     private CancellationTokenSource? _prefetchCts;
@@ -275,7 +276,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
     public ManageViewModel(SteamService steam, SteamAppListCache appList, SteamAppInfoCache appInfo,
         CoverCache covers, ToastService toast, SettingsService settings,
-        SteamlessService steamless)
+        SteamlessService steamless, SteamTicketService tickets)
     {
         _steam = steam;
         _appList = appList;
@@ -284,6 +285,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         _toast = toast;
         _settings = settings;
         _steamless = steamless;
+        _tickets = tickets;
         InitPageSize(settings.ManagePageSize);
     }
 
@@ -383,6 +385,52 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
     [ObservableProperty] private double _progress;
     [ObservableProperty] private bool _isProgressIndeterminate;
+
+    /// <summary>Extract Denuvo and AppOwnership tickets for this game.</summary>
+    [RelayCommand]
+    private async Task ExtractTickets(LuaTileViewModel? tile)
+    {
+        if (tile is null || IsBusy) return;
+
+        if (!_tickets.IsSteamRunning)
+        {
+            _toast.Show(Resources.Strings.Manage_Action_ExtractTickets, Resources.Strings.Tickets_SteamNotRunning, error: true);
+            return;
+        }
+
+        IsBusy = true;
+        IsProgressIndeterminate = true;
+
+        try
+        {
+            var result = await _tickets.ExtractTicketsAsync((uint)tile.AppId, updateLua: true, saveFiles: true);
+            if (result.Success)
+            {
+                _toast.Show(
+                    Resources.Strings.Manage_Action_ExtractTickets,
+                    string.Format(Resources.Strings.Tickets_ExtractSuccess, tile.AppId));
+            }
+            else
+            {
+                _toast.Show(
+                    Resources.Strings.Manage_Action_ExtractTickets,
+                    result.Error ?? Resources.Strings.Tickets_ExtractFailed,
+                    error: true);
+            }
+        }
+        catch (Exception ex)
+        {
+            _toast.Show(
+                Resources.Strings.Manage_Action_ExtractTickets,
+                ex.Message,
+                error: true);
+        }
+        finally
+        {
+            IsBusy = false;
+            IsProgressIndeterminate = false;
+        }
+    }
 
     /// <summary>Download Steamless (once) and strip SteamStub DRM from this game's executable(s).</summary>
     [RelayCommand]

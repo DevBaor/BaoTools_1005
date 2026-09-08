@@ -609,4 +609,66 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Ekstrak Tiket</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Tidak ada game terinstal yang ditemukan di perpustakaan Steam Anda.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Tidak ada game terpasang yang cocok dengan permintaan pencarian Anda.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Dipasang</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Memindai game yang diinstal...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Buka Folder Permainan</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Klik 'Unduh Perbaikan' untuk menemukan dan mengunduh arsip patch multipemain.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Unduh Perbaikan (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Klik 'Instal Perbaiki' dan pilih file ZIP yang diunduh untuk diekstraksi secara otomatis ke dalam folder game.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Instal Secara Otomatis</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>Hex AppTicket disalin ke papan klip.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Hex ETicket terenkripsi disalin ke clipboard.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Kode tiket Lua disalin ke clipboard.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Salin Cuplikan Lua</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>Berhasil mengekspor {0} ke Desktop!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Ekspor ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Ekstrak Tiket</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Gagal mengekstrak tiket. Pastikan akun tersebut adalah pemilik game tersebut.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Meminta tiket dari klien Steam...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Tiket berhasil diekstraksi untuk AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Silakan masukkan AppID Steam numerik yang valid.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Atau Masukkan AppID Secara Manual</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam must be active and logged in during extraction, as tickets are requested directly in-memory from the official Steam client interface.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Jaga agar Klien Steam Tetap Berjalan</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo mengizinkan hingga 5 aktivasi PC unik per hari per lisensi game. Berbagi dengan lebih dari 5 mesin dalam waktu 24 jam akan mengunci sementara aktivasi baru hingga hari berikutnya.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Aktivasi Denuvo 5 / Batas 24 Jam</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Tiket hanya dapat dibuat jika akun Steam yang masuk saat ini benar-benar memiliki lisensi game atau memiliki Keluarga Berbagi yang aktif.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Kepemilikan Akun Diperlukan</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Tiket otorisasi Denuvo (EncryptedAppTicket) kedaluwarsa dalam ~30 menit. Saat berbagi, sarankan penerima untuk menjalankan penginstal dan segera meluncurkan game untuk melakukan aktivasi offline.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>Jendela Validitas Tiket 30 Menit</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Tiket hanya dapat diambil dari akun yang benar-benar memiliki game tersebut atau memiliki Keluarga Berbagi yang valid. Tiket otorisasi Denuvo memiliki masa validitas ~30 menit sebelum harus disegarkan.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Catatan Penting untuk Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Buka Folder</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Terapkan otomatis setAppTicket dan setETicket ke config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Simpan file tiket mentah (appticket.bin, eticket.bin, ticket.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Menyimpan file tiket mentah dan menyiapkan paket ZIP yang dapat dibagikan (BaoTools_ticket) untuk aktivasi 1-klik di PC lain.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Periksa status Uap</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Pindai ulang game Denuvo yang diinstal</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Extracted Tickets</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Pilih Game Denuvo yang Terinstal</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Hanya game dengan perlindungan Denuvo yang terdeteksi yang tercantum di bawah ini untuk pemilihan cepat.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Silakan luncurkan Steam dan masuk ke akun pemilik game tersebut sebelum mengekstraksi.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Uap tidak berjalan</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Klien Steam terdeteksi. Pastikan akun yang masuk adalah pemilik game tersebut.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Uap sedang berjalan</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Ekstrak AppOwnershipTicket dan EncryptedAppTicket (Denuvo) langsung dari sesi Steam aktif Anda.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Tiket Steam &amp; Denuvo</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Daily downloads: </value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>Anda telah mencapai batas harian 10 unduhan. Silakan coba lagi besok.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Daily downloads: Sign in with Discord for 10 downloads/day</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Unduhan harian: {0} / Tidak Terbatas (Pendukung)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Unduhan harian: {0}/{1} digunakan hari ini</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Unduhan harian: 10/hari (Aktif)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>App Ownership Ticket</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Encrypted App Ticket (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

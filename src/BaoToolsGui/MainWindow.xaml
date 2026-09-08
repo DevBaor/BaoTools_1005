@@ -1,4 +1,4 @@
-<ui:FluentWindow
+﻿<ui:FluentWindow
     x:Class="BaoToolsGui.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -380,7 +380,13 @@
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
 
-                    <ui:NavigationViewItem Content="Plugin" TargetPageType="{x:Type views:PluginView}">
+                                        <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Tickets}" TargetPageType="{x:Type views:TicketsView}">
+                        <ui:NavigationViewItem.Icon>
+                            <ui:SymbolIcon Symbol="Key24" />
+                        </ui:NavigationViewItem.Icon>
+                    </ui:NavigationViewItem>
+
+                    <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Plugin}" TargetPageType="{x:Type views:PluginView}">
                         <ui:NavigationViewItem.Icon>
                             <ui:SymbolIcon Symbol="PuzzlePiece24" />
                         </ui:NavigationViewItem.Icon>

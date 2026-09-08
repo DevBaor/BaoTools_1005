@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -18,10 +18,13 @@ public partial class SettingsViewModel : ObservableObject
     private readonly AuthService _auth;
     private readonly SteamService _steam;
     private readonly HubcapService _hubcap;
+    private readonly BaoToolsApiClient _api;
 
     [ObservableProperty] private string? _displayName;
     [ObservableProperty] private string? _email;
     [ObservableProperty] private string? _avatarUrl;
+    [ObservableProperty] private string? _quotaText;
+    [ObservableProperty] private bool _hasQuotaText;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsRealUser))]
@@ -222,12 +225,13 @@ public partial class SettingsViewModel : ObservableObject
     public Action? RequestRestartPrompt { get; set; }
 
     public SettingsViewModel(SettingsService settings, AuthService auth, SteamService steam,
-        HubcapService hubcap)
+        HubcapService hubcap, BaoToolsApiClient api)
     {
         _settings = settings;
         _auth = auth;
         _steam = steam;
         _hubcap = hubcap;
+        _api = api;
         _auth.AuthStateChanged += RefreshAccount;
         RefreshAccount();
         RefreshSteam();
@@ -263,6 +267,32 @@ public partial class SettingsViewModel : ObservableObject
         AvatarUrl = _auth.AvatarUrl;
         IsBotProvisioned = _auth.IsBotProvisioned;
         if (!IsGuest) LoginRequiredMessage = null;
+        _ = RefreshQuotaAsync();
+    }
+
+    public async Task RefreshQuotaAsync()
+    {
+        if (_auth.IsGuest)
+        {
+            QuotaText = null;
+            HasQuotaText = false;
+            return;
+        }
+        try
+        {
+            var q = await _api.GetQuotaSummaryAsync();
+            if (q is not null)
+            {
+                QuotaText = q.IsSupporter
+                    ? $"Daily downloads: {q.Used} / Unlimited (Supporter)"
+                    : $"Daily downloads: {q.Used}/{q.Limit} used today";
+                HasQuotaText = true;
+            }
+        }
+        catch
+        {
+            // best-effort
+        }
     }
 
     /// <summary>Hide the re-link banner for this session (returns next launch if still a bot account).</summary>

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -21,9 +21,11 @@ public partial class HomeViewModel : ObservableObject
     public Action? NavigateToManage { get; set; }
     public Action? NavigateToSettings { get; set; }
     public Action? NavigateToMode { get; set; }
+    public Action? NavigateToAdd { get; set; }
 
     private readonly SteamService _steam;
     private readonly AuthService _auth;
+    private readonly BaoToolsApiClient _api;
     private readonly SteamAppListCache _appList;
     private readonly SteamAppInfoCache _appInfo;
     private readonly CoverCache _covers;
@@ -65,16 +67,18 @@ public partial class HomeViewModel : ObservableObject
 
     public bool IsGuest => !IsSignedIn;
     [ObservableProperty] private string _accountStatus = Resources.Strings.Home_BrowsingAsGuest;
+    [ObservableProperty] private string _dailyQuotaStatus = Resources.Strings.Home_DailyQuota_Guest;
 
     // ── Active unlocker mode ────────────────────────────────────────
     [ObservableProperty] private string _modeStatus = Resources.Strings.Home_NoModeSelected;
 
-    public HomeViewModel(SteamService steam, AuthService auth,
+    public HomeViewModel(SteamService steam, AuthService auth, BaoToolsApiClient api,
         SteamAppListCache appList, SteamAppInfoCache appInfo, CoverCache covers, DropInstallViewModel drop,
         UnlockerService unlocker, PluginInstallerService plugin, ToastService toast)
     {
         _steam = steam;
         _auth = auth;
+        _api = api;
         _appList = appList;
         _appInfo = appInfo;
         _covers = covers;
@@ -83,6 +87,7 @@ public partial class HomeViewModel : ObservableObject
         _toast = toast;
         Drop = drop;
         _auth.AuthStateChanged += RefreshAccount;
+        _ = RefreshQuotaAsync();
         // Library refresh on any install (drag-drop, plugin, Add page, Fixes) is driven by
         // LuaInstaller.Installed, wired in App → RefreshLibraryAsync.
     }
@@ -96,6 +101,7 @@ public partial class HomeViewModel : ObservableObject
     [RelayCommand] private void OpenManage() => NavigateToManage?.Invoke();
     [RelayCommand] private void OpenSettings() => NavigateToSettings?.Invoke();
     [RelayCommand] private void OpenMode() => NavigateToMode?.Invoke();
+    [RelayCommand] private void OpenAdd() => NavigateToAdd?.Invoke();
 
     /// <summary>Inline install of the store-page plugin from the Home tile (mirrors PluginViewModel.Install):
     /// confirm the Steam restart, install, toast the outcome, then refresh the tile.</summary>
@@ -211,5 +217,31 @@ public partial class HomeViewModel : ObservableObject
         AccountStatus = IsSignedIn
             ? (_auth.DisplayName is { } n ? string.Format(Resources.Strings.Home_SignedInAs, n) : Resources.Strings.Home_SignedIn)
             : Resources.Strings.Home_BrowsingAsGuest;
+        _ = RefreshQuotaAsync();
+    }
+
+    public async Task RefreshQuotaAsync()
+    {
+        if (_auth.IsGuest)
+        {
+            DailyQuotaStatus = Resources.Strings.Home_DailyQuota_Guest;
+            return;
+        }
+        try
+        {
+            var q = await _api.GetQuotaSummaryAsync();
+            if (q is not null)
+            {
+                DailyQuotaStatus = q.IsSupporter ? string.Format(Resources.Strings.Home_DailyQuota_Supporter, q.Used) : string.Format(Resources.Strings.Home_DailyQuota_Used, q.Used, q.Limit);
+            }
+            else
+            {
+                DailyQuotaStatus = Resources.Strings.Home_DailyQuota_Active;
+            }
+        }
+        catch
+        {
+            DailyQuotaStatus = Resources.Strings.Home_DailyQuota_Active;
+        }
     }
 }

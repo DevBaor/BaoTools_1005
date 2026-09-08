@@ -609,4 +609,66 @@ Zrušit - pokračovat ve stahování</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Extrahovat vstupenky</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Ve vaší knihovně Steam nebyly nalezeny žádné nainstalované hry.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>No installed games match your search query.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Instalováno</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Prohledávání nainstalovaných her...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Otevřete složku hry</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Kliknutím na 'Stáhnout opravu' vyhledejte a stáhněte archiv oprav pro více hráčů.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Stáhněte si opravu (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Klikněte na 'Install Fix' a vyberte stažený soubor ZIP, který chcete automaticky extrahovat do složky hry.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Instalovat automaticky</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket hex zkopírován do schránky.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Zašifrovaný ETicket hex zkopírován do schránky.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Kód lístku Lua zkopírován do schránky.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Copy Lua Snippet</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>Soubor {0} byl úspěšně exportován do počítače!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Exportovat ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Extrahovat vstupenky</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Failed to extract tickets. Make sure the account owns the game.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Žádost o vstupenky z klienta Steam...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Vstupenky byly úspěšně extrahovány pro AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Zadejte prosím platné číselné ID aplikace Steam.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Nebo zadejte AppID ručně</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam musí být během extrakce aktivní a přihlášený, protože vstupenky jsou vyžadovány přímo v paměti z oficiálního rozhraní klienta Steam.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Udržujte klienta Steam spuštěný</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo umožňuje až 5 unikátních aktivací PC denně na jednu herní licenci. Sdílení s více než 5 počítači během 24 hodin dočasně uzamkne nové aktivace do dalšího dne.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 Activations / 24 Hours Limit</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Tickets can only be generated if the currently logged-in Steam account genuinely owns the game license or has active Family Sharing.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Je vyžadováno vlastnictví účtu</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Autorizační lístky Denuvo (EncryptedAppTicket) vyprší za ~30 minut. Při sdílení doporučte příjemci, aby spustil instalační program a okamžitě spustil hru, aby se aktivovala offline.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30minutové okno platnosti vstupenky</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Tickets can only be extracted from an account that genuinely owns the game or has valid Family Sharing. Denuvo authorization tickets have a ~30-minute validity window before they must be refreshed.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Důležité poznámky pro Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Otevřete složku</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Automaticky použít setAppTicket a setETicket na config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Uložit nezpracované soubory lístků (appticket.bin, eticket.bin, ticket.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Uloží nezpracované soubory lístků a připraví sdílený balíček ZIP (BaoTools_ticket) pro aktivaci jedním kliknutím na jiných počítačích.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Zkontrolujte stav Steamu</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Rescan installed Denuvo games</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Extrahované vstupenky</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Vyberte nainstalovanou hru Denuvo</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Only games with detected Denuvo protection are listed below for quick selection.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Před extrahováním spusťte Steam a přihlaste se k účtu, který hru vlastní.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam neběží</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Zjištěn klient Steam. Ujistěte se, že hru vlastní přihlášený účet.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam běží</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Extrahujte AppOwnershipTicket a EncryptedAppTicket (Denuvo) přímo z vaší aktivní relace Steam.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Vstupenky Steam &amp; Denuvo</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Denní stahování:</value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>Dosáhli jste svého denního limitu 10 stažení. Zkuste to prosím znovu zítra.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Denní stahování: Přihlaste se pomocí Discord a získáte 10 stažení za den</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Denní stažení: {0} / Neomezeno (podporovatel)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Denní stažení: dnes využito {0}/{1}</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>App Ownership Ticket</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Vstupenka do šifrované aplikace (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

@@ -609,4 +609,66 @@ Mégse - letöltés folytatása</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Search installed games...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>Step 1: Click "Download Fix" to search and download the ZIP file from online-fix.me.
 Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically extract it into the game folder.</value></data>
-  </root>
+  
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Copy Hex</value></data>
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Jegyek kivonata</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Nem található telepített játék a Steam-könyvtárban.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Egyetlen telepített játék sem felel meg a keresési lekérdezésnek.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Telepítve</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Telepített játékok vizsgálata...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Nyissa meg a Játék mappát</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Kattintson a „Javítás letöltése” gombra a többjátékos javítási archívum megkereséséhez és letöltéséhez.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Töltse le a Fixet (online-fix.me)</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Kattintson a „Javítás telepítése” gombra, és válassza ki a letöltött ZIP-fájlt, amelyet automatikusan kicsomagol a játék mappájába.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Automatikus telepítés</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>AppTicket hexa vágólapra másolva.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Titkosított ETicket hexa vágólapra másolva.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Lua ticket code copied to clipboard.</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Lua Snippet másolása</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>A(z) {0} sikeresen exportálva asztali számítógépre!</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>ZIP exportálása (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Jegyek kivonata</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Nem sikerült kivonni a jegyeket. Győződjön meg arról, hogy a fiók a játék tulajdonosa.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Jegyek kérése a Steam klienstől...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>A jegyek sikeresen kivonatolva a(z) {0} AppID azonosítóhoz.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Adj meg egy érvényes numerikus Steam AppID-t.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Vagy írja be az AppID-t manuálisan</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>A Steamnek aktívnak kell lennie és be kell jelentkeznie a kibontás során, mivel a jegyek közvetlenül a memóriában kérhetők a hivatalos Steam kliens felületről.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Tartsa a Steam klienst futva</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>A Denuvo játéklicencenként napi 5 egyedi PC-aktiválást tesz lehetővé. Ha több mint 5 géppel oszt meg 24 órán belül, az új aktiválásokat másnapig ideiglenesen zárolja.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Denuvo 5 aktiválás / 24 órás korlátozás</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Jegyek csak akkor generálhatók, ha a jelenleg bejelentkezett Steam-fiók valóban a játéklicenc tulajdonosa, vagy ha aktív családi megosztással rendelkezik.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Fióktulajdonlás szükséges</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>A Denuvo engedélyezési jegyek (EncryptedAppTicket) ~30 percen belül lejárnak. Megosztáskor javasolja a címzettnek, hogy futtassa a telepítőt, és azonnal indítsa el a játékot az offline aktiválás létrehozásához.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>30 perces jegy érvényességi ablak</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Jegyek csak olyan fiókból szerezhetők be, amely valóban a játék tulajdonosa, vagy amely érvényes családi megosztással rendelkezik. A Denuvo engedélyezési jegyeknek ~30 perces érvényességi ideje van, mielőtt frissíteni kell őket.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Fontos megjegyzések Denuvo számára</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Nyissa meg a mappát</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>A setAppTicket és setETicket automatikus alkalmazása a config/stplug-in/&lt;appid&gt;.lua fájlra</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Nyers jegyfájlok mentése (appticket.bin, eticket.bin, jegyek.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Saves raw ticket files and prepares a shareable ZIP package (BaoTools_ticket) for 1-click activation on other PCs.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Ellenőrizze a Steam állapotát</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Rescan installed Denuvo games</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Kivont jegyek</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Select Installed Denuvo Game</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Csak az észlelt Denuvo védelemmel rendelkező játékok szerepelnek az alábbiakban a gyors kiválasztáshoz.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Kérjük, indítsa el a Steamet, és jelentkezzen be egy fiókba, amely a játék tulajdonosa, mielőtt kicsomagolja.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>A Steam nem fut</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Steam kliens észlelve. Győződjön meg arról, hogy a bejelentkezett fiók a játék tulajdonosa.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>A Steam fut</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Az AppOwnershipTicket és az EncryptedAppTicket (Denuvo) kibontása közvetlenül az aktív Steam munkamenetből.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Steam és Denuvo Jegyek</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Daily downloads: </value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Sign in for 10 downloads/day</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>You have reached your daily limit of 10 downloads. Please try again tomorrow.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Daily downloads: Sign in with Discord for 10 downloads/day</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Daily downloads: {0} / Unlimited (Supporter)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Daily downloads: {0}/{1} used today</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Daily downloads: 10/day (Active)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>Alkalmazástulajdonosi jegy</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Encrypted App Ticket (Denuvo)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>

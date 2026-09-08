@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using BaoToolsGui.Services;
 using BaoToolsGui.ViewModels;
 using BaoToolsGui.Views;

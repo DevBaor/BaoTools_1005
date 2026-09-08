@@ -609,4 +609,66 @@ Hủy - tiếp tục tải</value></data>
   <data name="OnlineFixes_Search" xml:space="preserve"><value>Tìm game đã cài...</value></data>
   <data name="OnlineFixes_Help" xml:space="preserve"><value>B1: Bấm "Tải Fix" để tải file ZIP từ trang online-fix.me.
 B2: Bấm "Cài đặt" và chọn file ZIP vừa tải về để app tự giải nén chép đè vào thư mục game.</value></data>
-  </root>
+  
+  <data name="Manage_Action_ExtractTickets" xml:space="preserve"><value>Trích xuất vé</value></data>
+  <data name="Nav_Tickets" xml:space="preserve"><value>Tickets</value></data>
+  <data name="OnlineFixes_EmptyLibrary" xml:space="preserve"><value>Chưa phát hiện thấy game nào được cài đặt trong thư viện Steam.</value></data>
+  <data name="OnlineFixes_EmptySearch" xml:space="preserve"><value>Không tìm thấy game đã cài nào phù hợp với tìm kiếm.</value></data>
+  <data name="OnlineFixes_InstalledBadge" xml:space="preserve"><value>Đã cài đặt</value></data>
+  <data name="OnlineFixes_Loading" xml:space="preserve"><value>Đang quét danh sách game đã cài...</value></data>
+  <data name="OnlineFixes_OpenFolder" xml:space="preserve"><value>Mở thư mục game</value></data>
+  <data name="OnlineFixes_Step1_Desc" xml:space="preserve"><value>Bấm 'Tải Fix' để tìm kiếm và tải file ZIP patch multiplayer từ online-fix.me.</value></data>
+  <data name="OnlineFixes_Step1_Title" xml:space="preserve"><value>1. Tìm &amp; Tải Fix</value></data>
+  <data name="OnlineFixes_Step2_Desc" xml:space="preserve"><value>Bấm 'Cài đặt Fix' và chọn file ZIP vừa tải về để tự động giải nén đè vào thư mục game.</value></data>
+  <data name="OnlineFixes_Step2_Title" xml:space="preserve"><value>2. Cài đặt tự động</value></data>
+  <data name="Tickets_CopiedAppTicket" xml:space="preserve"><value>Đã sao chép chuỗi AppTicket vào clipboard.</value></data>
+  <data name="Tickets_CopiedETicket" xml:space="preserve"><value>Đã sao chép chuỗi ETicket vào clipboard.</value></data>
+  <data name="Tickets_CopiedLua" xml:space="preserve"><value>Đã sao chép đoạn mã Lua vào clipboard.</value></data>
+  <data name="Tickets_CopyHex" xml:space="preserve"><value>Sao chép Hex</value></data>
+  <data name="Tickets_CopyLuaCode" xml:space="preserve"><value>Sao chép mã Lua</value></data>
+  <data name="Tickets_ExportSuccess" xml:space="preserve"><value>Đã xuất gói chia sẻ ra Desktop: {0}</value></data>
+  <data name="Tickets_ExportZip" xml:space="preserve"><value>Xuất file ZIP (BaoTools_ticket)</value></data>
+  <data name="Tickets_ExtractButton" xml:space="preserve"><value>Trích xuất vé bản quyền</value></data>
+  <data name="Tickets_ExtractFailed" xml:space="preserve"><value>Trích xuất vé thất bại. Hãy đảm bảo tài khoản sở hữu game.</value></data>
+  <data name="Tickets_Extracting" xml:space="preserve"><value>Đang trích xuất vé...</value></data>
+  <data name="Tickets_ExtractSuccess" xml:space="preserve"><value>Trích xuất vé thành công cho AppID {0}.</value></data>
+  <data name="Tickets_InvalidAppId" xml:space="preserve"><value>Vui lòng nhập AppID hợp lệ.</value></data>
+  <data name="Tickets_ManualAppIdLabel" xml:space="preserve"><value>Hoặc nhập AppID thủ công</value></data>
+  <data name="Tickets_Note_Client_Desc" xml:space="preserve"><value>Steam cần phải đang mở và đăng nhập khi trích xuất, do công cụ giao tiếp trực tiếp với bộ nhớ của Steam client chính thức.</value></data>
+  <data name="Tickets_Note_Client_Title" xml:space="preserve"><value>Duy trì Steam luôn mở</value></data>
+  <data name="Tickets_Note_Limit_Desc" xml:space="preserve"><value>Denuvo áp dụng chính sách tối đa 5 máy tính kích hoạt trong vòng 24 giờ cho 1 bản quyền game. Chia sẻ quá 5 máy cùng ngày sẽ bị tạm khóa kích hoạt sang ngày hôm sau.</value></data>
+  <data name="Tickets_Note_Limit_Title" xml:space="preserve"><value>Giới hạn kích hoạt 5 máy / 24 giờ</value></data>
+  <data name="Tickets_Note_Ownership_Desc" xml:space="preserve"><value>Steam chỉ cấp vé bản quyền khi tài khoản Steam đang đăng nhập thực sự sở hữu game hoặc được chia sẻ qua Steam Family Sharing.</value></data>
+  <data name="Tickets_Note_Ownership_Title" xml:space="preserve"><value>Yêu cầu tài khoản sở hữu game</value></data>
+  <data name="Tickets_Note_Validity_Desc" xml:space="preserve"><value>Vé Denuvo (EncryptedAppTicket) chỉ có hiệu lực khoảng 30 phút. Khi chia sẻ cho người khác, hãy nhắc họ chạy file cài đặt và vào game ngay để kích hoạt token offline.</value></data>
+  <data name="Tickets_Note_Validity_Title" xml:space="preserve"><value>Thời hạn vé Denuvo khoảng 30 phút</value></data>
+  <data name="Tickets_NoticeBody" xml:space="preserve"><value>Vé bản quyền chỉ có thể trích xuất từ tài khoản thực sự sở hữu game hoặc qua Family Sharing hợp lệ. Vé Denuvo có hiệu lực khoảng 30 phút trước khi cần làm mới lại.</value></data>
+  <data name="Tickets_NoticeHeader" xml:space="preserve"><value>Lưu ý quan trọng về Denuvo</value></data>
+  <data name="Tickets_OpenFolder" xml:space="preserve"><value>Mở thư mục lưu vé</value></data>
+  <data name="Tickets_Opt_AutoLua" xml:space="preserve"><value>Tự động áp dụng setAppTicket và setETicket vào config/stplug-in/&lt;appid&gt;.lua</value></data>
+  <data name="Tickets_Opt_SaveFiles" xml:space="preserve"><value>Lưu file vé thô (appticket.bin, eticket.bin, tickets.txt)</value></data>
+  <data name="Tickets_Opt_SaveFiles_Hint" xml:space="preserve"><value>Lưu file vé thô và chuẩn bị gói ZIP (BaoTools_ticket) để chia sẻ cho người khác kích hoạt 1-click.</value></data>
+  <data name="Tickets_RefreshSteam" xml:space="preserve"><value>Kiểm tra lại</value></data>
+  <data name="Tickets_RescanGames" xml:space="preserve"><value>Quét lại danh sách game Denuvo</value></data>
+  <data name="Tickets_ResultsHeader" xml:space="preserve"><value>Kết quả trích xuất vé</value></data>
+  <data name="Tickets_SelectDenuvoGame" xml:space="preserve"><value>Chọn game Denuvo đã cài đặt</value></data>
+  <data name="Tickets_SelectDenuvoGameHint" xml:space="preserve"><value>Chỉ các tựa game được nhận diện bảo vệ bằng Denuvo mới xuất hiện ở đây để chọn nhanh.</value></data>
+  <data name="Tickets_SteamClosedHint" xml:space="preserve"><value>Hãy mở Steam và đăng nhập tài khoản trước khi lấy vé.</value></data>
+  <data name="Tickets_SteamNotRunning" xml:space="preserve"><value>Steam chưa chạy</value></data>
+  <data name="Tickets_SteamReadyHint" xml:space="preserve"><value>Đã sẵn sàng trích xuất vé từ Steam client.</value></data>
+  <data name="Tickets_SteamRunning" xml:space="preserve"><value>Steam đang chạy</value></data>
+  <data name="Tickets_Subtitle" xml:space="preserve"><value>Trích xuất vé bản quyền AppOwnershipTicket và Denuvo Ticket trực tiếp từ Steam client đang mở.</value></data>
+  <data name="Tickets_Title" xml:space="preserve"><value>Trích xuất vé bản quyền (Tickets)</value></data>
+
+  <data name="Download_DailyQuota_Label" xml:space="preserve"><value>Lượt tải hôm nay: </value></data>
+  <data name="Download_DailyQuota_GuestBadge" xml:space="preserve"><value>Đăng nhập để nhận 10 lượt tải/ngày</value></data>
+  <data name="Download_DailyQuota_LimitReached" xml:space="preserve"><value>Bạn đã đạt giới hạn 10 lượt tải trong ngày. Vui lòng thử lại vào ngày mai.</value></data>
+  <data name="Home_DailyQuota_Guest" xml:space="preserve"><value>Lượt tải hôm nay: Đăng nhập Discord để nhận 10 lượt tải/ngày</value></data>
+  <data name="Home_DailyQuota_Supporter" xml:space="preserve"><value>Lượt tải hôm nay: {0} / Không giới hạn (Supporter)</value></data>
+  <data name="Home_DailyQuota_Used" xml:space="preserve"><value>Lượt tải hôm nay: đã dùng {0}/{1}</value></data>
+  <data name="Home_DailyQuota_Active" xml:space="preserve"><value>Lượt tải hôm nay: 10 lượt/ngày (Đang hoạt động)</value></data>
+  <data name="Tickets_AppTicket_Title" xml:space="preserve"><value>Vé sở hữu ứng dụng (AppTicket)</value></data>
+  <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Vé mã hóa Denuvo (ETicket)</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>Chưa có sẵn</value></data>
+  <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+</root>
