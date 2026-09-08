@@ -10,6 +10,9 @@ public class GitHubReleaseInfo
     public string Body { get; set; } = "";
     public string HtmlUrl { get; set; } = "";
     public string DownloadUrl { get; set; } = "https://baotools.baotranduy666666.workers.dev/";
+    public string? SetupDownloadUrl { get; set; }
+    public string? PortableDownloadUrl { get; set; }
+    public string? StandaloneExeDownloadUrl { get; set; }
     public DateTimeOffset? PublishedAt { get; set; }
     public bool IsNewer { get; set; }
 }

@@ -3,6 +3,7 @@ using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BaoToolsGui.Services;
+using BaoToolsGui.Models;
 
 namespace BaoToolsGui.ViewModels;
 
@@ -69,6 +70,17 @@ public partial class MainViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsUpToDate))]
     [NotifyPropertyChangedFor(nameof(HasUpdateError))]
     private string? _updateError;
+
+    private GitHubReleaseInfo? _latestReleaseInfo;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanUpdate))]
+    private bool _isDownloadingUpdate;
+
+    [ObservableProperty]
+    private string _updateButtonText = "Update Now";
+
+    public bool CanUpdate => !IsDownloadingUpdate;
 
     public bool HasUpdateContent => HasUpdate && !IsCheckingUpdate;
     public bool IsUpToDate => !HasUpdate && !IsCheckingUpdate && string.IsNullOrEmpty(UpdateError);
@@ -177,6 +189,7 @@ public partial class MainViewModel : ObservableObject
 
             if (info.IsNewer)
             {
+                _latestReleaseInfo = info;
                 HasUpdate = true;
                 HasUnreadNotification = true;
                 LatestVersion = info.TagName;
@@ -189,9 +202,9 @@ public partial class MainViewModel : ObservableObject
 
                 _toast.ShowAction(
                     "BaoTools Update",
-                    $"A new update is available ({info.TagName})! Click to download.",
+                    $"A new update is available ({info.TagName})! Click to update.",
                     "Update Now",
-                    DownloadUpdate);
+                    () => _ = DownloadUpdateAsync());
             }
             else
             {
@@ -215,13 +228,58 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void DownloadUpdate()
+    private async Task DownloadUpdateAsync()
+    {
+        if (IsDownloadingUpdate) return;
+        if (_latestReleaseInfo is null)
+        {
+            OpenBrowserUrl(UpdateUrl);
+            return;
+        }
+
+        IsDownloadingUpdate = true;
+        UpdateButtonText = "Downloading...";
+
+        try
+        {
+            var progress = new Progress<double?>(pct =>
+            {
+                if (pct.HasValue)
+                {
+                    double p = Math.Clamp(pct.Value * 100, 0, 100);
+                    UpdateButtonText = $"Downloading {p:0}%";
+                }
+                else
+                {
+                    UpdateButtonText = "Downloading...";
+                }
+            });
+
+            bool applied = await _updates.DownloadAndApplyUpdateAsync(_latestReleaseInfo, progress);
+            if (!applied)
+            {
+                OpenBrowserUrl(UpdateUrl);
+            }
+        }
+        catch (Exception ex)
+        {
+            _toast.Show("Update Failed", ex.Message, error: true);
+            OpenBrowserUrl(UpdateUrl);
+        }
+        finally
+        {
+            IsDownloadingUpdate = false;
+            UpdateButtonText = "Update Now";
+        }
+    }
+
+    private void OpenBrowserUrl(string url)
     {
         try
         {
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
             {
-                FileName = UpdateUrl,
+                FileName = url,
                 UseShellExecute = true
             });
         }

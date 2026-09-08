@@ -1,3 +1,4 @@
+using System.IO;
 using Velopack;
 using Velopack.Sources;
 using BaoToolsGui.Models;
@@ -16,6 +17,17 @@ namespace BaoToolsGui.Services;
 /// </summary>
 public class UpdateService
 {
+    private readonly GithubProxy _gh;
+
+    public UpdateService(GithubProxy gh)
+    {
+        _gh = gh;
+    }
+
+    public UpdateService() : this(new GithubProxy())
+    {
+    }
+
     // One UpdateManager per configured repo, in priority order (primary first). All share the proxied
     // downloader so every repo is also mirror-resilient.
     private readonly UpdateManager[] _managers =
@@ -137,12 +149,35 @@ public class UpdateService
 
             bool isNewer = IsVersionNewer(latestTag, currentVersion);
 
+            string? setupUrl = null;
+            string? portableUrl = null;
+            string? exeUrl = null;
+
+            if (doc.RootElement.TryGetProperty("assets", out var assetsProp) && assetsProp.ValueKind == System.Text.Json.JsonValueKind.Array)
+            {
+                foreach (var asset in assetsProp.EnumerateArray())
+                {
+                    string name = asset.TryGetProperty("name", out var n) ? n.GetString() ?? "" : "";
+                    string dl = asset.TryGetProperty("browser_download_url", out var u) ? u.GetString() ?? "" : "";
+                    if (name.EndsWith("_Setup.exe", StringComparison.OrdinalIgnoreCase) || name.EndsWith("Setup.exe", StringComparison.OrdinalIgnoreCase))
+                        setupUrl = dl;
+                    else if (name.EndsWith("Portable.zip", StringComparison.OrdinalIgnoreCase))
+                        portableUrl = dl;
+                    else if (name.Equals("BaoTools.exe", StringComparison.OrdinalIgnoreCase))
+                        exeUrl = dl;
+                }
+            }
+
             return new GitHubReleaseInfo
             {
                 TagName = latestTag,
                 Title = string.IsNullOrWhiteSpace(title) ? latestTag : title,
                 Body = body,
                 HtmlUrl = string.IsNullOrWhiteSpace(htmlUrl) ? "https://github.com/DevBaor/BaoTools_1005/releases/latest" : htmlUrl,
+                SetupDownloadUrl = setupUrl,
+                PortableDownloadUrl = portableUrl,
+                StandaloneExeDownloadUrl = exeUrl,
+                DownloadUrl = setupUrl ?? portableUrl ?? exeUrl ?? "https://baotools.baotranduy666666.workers.dev/",
                 PublishedAt = publishedAt,
                 IsNewer = isNewer
             };
@@ -204,5 +239,99 @@ public class UpdateService
     {
         var info = await CheckGitHubReleaseFullAsync(currentVersion);
         return info?.IsNewer == true ? info.TagName : null;
+    }
+
+    /// <summary>
+    /// Downloads the latest release asset and automatically launches it to apply the update.
+    /// Supports both Inno Setup installations and Portable (folder) deployments.
+    /// </summary>
+    public async Task<bool> DownloadAndApplyUpdateAsync(GitHubReleaseInfo info, IProgress<double?>? progress = null, CancellationToken ct = default)
+    {
+        if (info is null) return false;
+
+        string appDir = AppContext.BaseDirectory;
+        bool isSetupInstall = File.Exists(Path.Combine(appDir, "unins000.exe"));
+
+        if (isSetupInstall)
+        {
+            // 1. Setup mode: download BaoTools_Setup.exe and execute with /SILENT
+            string setupUrl = info.SetupDownloadUrl
+                ?? $"https://github.com/DevBaor/BaoTools_1005/releases/download/{info.TagName}/BaoTools_Setup.exe";
+
+            string tempSetup = Path.Combine(Path.GetTempPath(), $"BaoTools_Setup_{info.TagName}.exe");
+            await _gh.DownloadAsync(setupUrl, tempSetup, progress, ct);
+
+            if (!File.Exists(tempSetup)) return false;
+
+            // Launch setup silently so it overwrites existing installation and restarts
+            var psi = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = tempSetup,
+                Arguments = "/SILENT /SUPPRESSMSGBOXES /FORCECLOSEAPPLICATIONS",
+                UseShellExecute = true
+            };
+            System.Diagnostics.Process.Start(psi);
+
+            // Shutdown the current app to let installer finish
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                System.Windows.Application.Current.Shutdown();
+            });
+            return true;
+        }
+        else
+        {
+            // 2. Portable mode: download Portable ZIP or standalone BaoTools.exe
+            string portableUrl = info.PortableDownloadUrl
+                ?? $"https://github.com/DevBaor/BaoTools_1005/releases/download/{info.TagName}/BaoTools_{info.TagName}_Portable.zip";
+
+            string tempZip = Path.Combine(Path.GetTempPath(), $"BaoTools_Portable_{info.TagName}.zip");
+            await _gh.DownloadAsync(portableUrl, tempZip, progress, ct);
+
+            if (!File.Exists(tempZip)) return false;
+
+            string stagingDir = Path.Combine(Path.GetTempPath(), $"BaoTools_Staging_{info.TagName}");
+            if (Directory.Exists(stagingDir))
+            {
+                try { Directory.Delete(stagingDir, true); } catch { }
+            }
+            System.IO.Compression.ZipFile.ExtractToDirectory(tempZip, stagingDir);
+
+            // Create a small helper batch script to copy files over after current process exits
+            string batchPath = Path.Combine(Path.GetTempPath(), $"baotools_update_{info.TagName}.bat");
+            string currentExe = Environment.ProcessPath ?? Path.Combine(appDir, "BaoTools.exe");
+
+            string scriptContent = $@"@echo off
+chcp 65001 > nul
+timeout /t 1 /nobreak > nul
+:wait_exit
+tasklist /fi ""imagename eq BaoTools.exe"" 2>nul | find /i ""BaoTools.exe"" > nul
+if not errorlevel 1 (
+    timeout /t 1 /nobreak > nul
+    goto wait_exit
+)
+xcopy /y /s /e ""{stagingDir}\*"" ""{appDir}\"" > nul
+start """" ""{currentExe}""
+rd /s /q ""{stagingDir}"" > nul 2>&1
+del ""{tempZip}"" > nul 2>&1
+(goto) 2>nul & del ""%~f0""
+";
+            File.WriteAllText(batchPath, scriptContent, System.Text.Encoding.ASCII);
+
+            var psi = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = batchPath,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
+            };
+            System.Diagnostics.Process.Start(psi);
+
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                System.Windows.Application.Current.Shutdown();
+            });
+            return true;
+        }
     }
 }
