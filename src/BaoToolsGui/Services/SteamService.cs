@@ -82,9 +82,20 @@ public class SteamService(SettingsService settings)
     public static void OpenUrl(string url) =>
         Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
 
-    /// <summary>Open Explorer with the given file selected.</summary>
-    public static void RevealInExplorer(string filePath) =>
-        Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{filePath}\"") { UseShellExecute = true });
+    /// <summary>Open Explorer with the given file or its parent folder.</summary>
+    public static void RevealInExplorer(string filePath)
+    {
+        if (string.IsNullOrWhiteSpace(filePath)) return;
+        try
+        {
+            string? target = File.Exists(filePath) ? Path.GetDirectoryName(filePath) : filePath;
+            if (!string.IsNullOrEmpty(target) && Directory.Exists(target))
+            {
+                Process.Start(new ProcessStartInfo(target) { UseShellExecute = true });
+            }
+        }
+        catch { }
+    }
 
     /// <summary>
     /// Show a path in Explorer, picking the right gesture for what it is: a file gets selected inside
