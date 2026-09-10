@@ -19,7 +19,7 @@ public partial class MainViewModel : ObservableObject
     public OnboardingViewModel Onboarding { get; }
 
     /// <summary>App version shown in the nav pane footer, e.g. "v1.0.1". Read from the assembly.</summary>
-    public string VersionLabel { get; } = "v105.3";
+    public string VersionLabel { get; } = "v105.4";
 
     private static string ReadVersion()
     {

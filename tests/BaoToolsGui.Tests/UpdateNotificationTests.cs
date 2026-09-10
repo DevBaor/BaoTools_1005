@@ -160,30 +160,30 @@ public class UpdateNotificationTests
     public void UpdateHistoryService_LoadsDefaultsAndSetsFlags()
     {
         var service = new UpdateHistoryService();
-        var history = service.LoadHistory("v105.3");
+        var history = service.LoadHistory("v105.4");
 
         Assert.NotEmpty(history);
+        var v105_4 = history.FirstOrDefault(x => x.TagName == "v105.4");
+        Assert.NotNull(v105_4);
+        Assert.True(v105_4.IsCurrent);
+        Assert.False(v105_4.IsNew);
+
         var v105_3 = history.FirstOrDefault(x => x.TagName == "v105.3");
         Assert.NotNull(v105_3);
-        Assert.True(v105_3.IsCurrent);
+        Assert.False(v105_3.IsCurrent);
         Assert.False(v105_3.IsNew);
-
-        var v105_2 = history.FirstOrDefault(x => x.TagName == "v105.2");
-        Assert.NotNull(v105_2);
-        Assert.False(v105_2.IsCurrent);
-        Assert.False(v105_2.IsNew);
     }
 
     [Fact]
     public void UpdateHistoryService_DetectsNewerWhenOnOlderVersion()
     {
         var service = new UpdateHistoryService();
-        var history = service.LoadHistory("v105.2");
+        var history = service.LoadHistory("v105.3");
 
-        var v105_3 = history.FirstOrDefault(x => x.TagName == "v105.3");
-        Assert.NotNull(v105_3);
-        Assert.False(v105_3.IsCurrent);
-        Assert.True(v105_3.IsNew);
+        var v105_4 = history.FirstOrDefault(x => x.TagName == "v105.4");
+        Assert.NotNull(v105_4);
+        Assert.False(v105_4.IsCurrent);
+        Assert.True(v105_4.IsNew);
     }
 
     [Fact]
@@ -196,28 +196,30 @@ public class UpdateNotificationTests
             System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("vi-VN");
             var viHistory = UpdateHistoryService.GetDefaultHistory();
             Assert.NotEmpty(viHistory);
-            Assert.Contains("Gỡ Fix", viHistory[0].Title);
-            Assert.Contains("Hỗ trợ gỡ Fix sạch sẽ", viHistory[0].Body);
+            Assert.Contains("Tự động khởi động lại", viHistory[0].Title);
+            Assert.Contains("khởi động lại", viHistory[0].Body);
+            Assert.Contains("Gỡ Fix", viHistory[1].Title);
 
             // Test English / international culture
             System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             var enHistory = UpdateHistoryService.GetDefaultHistory();
             Assert.NotEmpty(enHistory);
-            Assert.Contains("Reverting Fixes Cleanly", enHistory[0].Title);
-            Assert.Contains("Clean fix reversion", enHistory[0].Body);
+            Assert.Contains("Auto-restart", enHistory[0].Title);
+            Assert.Contains("Auto-restart after update", enHistory[0].Body);
+            Assert.Contains("Reverting Fixes Cleanly", enHistory[1].Title);
 
             // Test LoadHistory updates cached default items when language changes
             var service = new UpdateHistoryService();
-            var loadedEn = service.LoadHistory("v105.3");
-            var itemEn = loadedEn.FirstOrDefault(x => x.TagName == "v105.3");
+            var loadedEn = service.LoadHistory("v105.4");
+            var itemEn = loadedEn.FirstOrDefault(x => x.TagName == "v105.4");
             Assert.NotNull(itemEn);
-            Assert.Contains("Reverting Fixes Cleanly", itemEn.Title);
+            Assert.Contains("Auto-restart", itemEn.Title);
 
             System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("vi-VN");
-            var loadedVi = service.LoadHistory("v105.3");
-            var itemVi = loadedVi.FirstOrDefault(x => x.TagName == "v105.3");
+            var loadedVi = service.LoadHistory("v105.4");
+            var itemVi = loadedVi.FirstOrDefault(x => x.TagName == "v105.4");
             Assert.NotNull(itemVi);
-            Assert.Contains("Gỡ Fix", itemVi.Title);
+            Assert.Contains("Tự động khởi động lại", itemVi.Title);
         }
         finally
         {

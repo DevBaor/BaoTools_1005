@@ -21,7 +21,7 @@ public class UpdateHistoryService
         PropertyNameCaseInsensitive = true
     };
 
-    private static readonly string[] DefaultTagList = ["v105.3", "v105.2", "v105.1", "v1005", "1005"];
+    private static readonly string[] DefaultTagList = ["v105.4", "v105.3", "v105.2", "v105.1", "v1005", "1005"];
 
     public static bool IsDefaultTag(string? tag)
     {
@@ -44,11 +44,19 @@ public class UpdateHistoryService
             {
                 new()
                 {
+                    TagName = "v105.4",
+                    Title = "BaoTools v105.4 - Tự động khởi động lại sau Cập nhật & Đồng bộ Chuông thông báo Đa ngôn ngữ",
+                    Body = "• Tự động khởi động lại sau cập nhật (Auto-restart): Sau khi nhấn 'Cập nhật ngay', ứng dụng tự tải, cài đặt và mở lại bản mới ngay lập tức (hỗ trợ cả Setup, Portable và Single-File exe).\n• Đồng bộ chuông thông báo 29 ngôn ngữ: Nút chuông, trạng thái và nội dung cập nhật tự chuyển đổi theo thời gian thực khi đổi ngôn ngữ trong Cài đặt.\n• Bảo vệ nội dung bản địa: Khóa ghi đè nội dung tiếng Anh từ GitHub vào các bản cập nhật gốc.\n• Sửa lỗi thoát sạch khi bật chế độ Thu nhỏ vào khay hệ thống (Minimize to Tray).",
+                    PublishedAt = "10/09/2026",
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                },
+                new()
+                {
                     TagName = "v105.3",
                     Title = "BaoTools v105.3 - Gỡ Fix sạch sẽ, Bộ lọc Trò chơi của tôi & Di chuyển DepotCache",
                     Body = "• Hỗ trợ gỡ Fix sạch sẽ (Revert fixes cleanly): tính hash SHA-256 đối chiếu an toàn, tự động khôi phục file gốc khi gỡ fix.\n• Bộ lọc 'My games' (Trò chơi của tôi) trong trang Fixes.\n• Tự động di chuyển thư mục depotcache chuẩn theo Steam.\n• Cập nhật thông báo và lưu trữ lịch sử phiên bản ngay trong chuông thông báo.",
                     PublishedAt = "10/09/2026",
-                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.3"
                 },
                 new()
                 {
@@ -83,11 +91,19 @@ public class UpdateHistoryService
             {
                 new()
                 {
+                    TagName = "v105.4",
+                    Title = "BaoTools v105.4 - 更新后自动重启 & 通知铃铛多语言即时同步",
+                    Body = "• 更新后自动重启应用：点击“立即更新”后，自动完成下载、覆盖更新并立即重新启动应用（支持安装版、便携版和单文件版）。\n• 通知铃铛多语言即时同步：通知铃铛、版本日志及按钮文本完全支持 29 种语言，切换语言无需重启即可即时更新。\n• 保护本地化更新日志：防止 GitHub 远程英文日志覆盖本地中文版本日志。\n• 修复托盘最小化冲突：解决更新时因最小化到托盘导致进程无法退出的问题。",
+                    PublishedAt = "2026-09-10",
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                },
+                new()
+                {
                     TagName = "v105.3",
                     Title = "BaoTools v105.3 - 纯净还原 Fix、我的游戏筛选与 DepotCache 迁移",
                     Body = "• 支持纯净还原 Fix (Revert fixes cleanly)：基于 SHA-256 哈希比对确保安全，还原时自动恢复原始文件。\n• Fixes 页面新增“我的游戏”筛选。\n• 自动将 depotcache 文件夹迁移至 Steam 标准路径。\n• 通知铃铛内置更新通知与版本历史记录。",
                     PublishedAt = "2026-09-10",
-                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.3"
                 },
                 new()
                 {
@@ -122,11 +138,19 @@ public class UpdateHistoryService
             {
                 new()
                 {
+                    TagName = "v105.4",
+                    Title = "BaoTools v105.4 - Автоперезапуск после обновления и синхронизация языков уведомлений",
+                    Body = "• Автоматический перезапуск после обновления: скачивание, установка и мгновенный перезапуск новой версии (Setup, Portable и Standalone).\n• Мгновенная синхронизация 29 языков: колокольчик, история релизов и кнопки обновляются на лету при смене языка в настройках.\n• Защита локализованных описаний: описания релизов защищены от перезаписи английским текстом с GitHub.\n• Чистый выход при сворачивании в трей: устранено зависание обновления при включенном сворачивании в трей.",
+                    PublishedAt = "10.09.2026",
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                },
+                new()
+                {
                     TagName = "v105.3",
                     Title = "BaoTools v105.3 - Чистый откат фиксов, фильтр Мои игры и миграция DepotCache",
                     Body = "• Чистый откат фиксов (Revert fixes cleanly): безопасное сравнение SHA-256 хэшей, автоматическое восстановление оригинальных файлов.\n• Фильтр «Мои игры» на странице фиксов.\n• Автоматическая миграция папки depotcache в стандартную папку Steam.\n• Уведомления об обновлениях и история версий в колокольчике.",
                     PublishedAt = "10.09.2026",
-                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.3"
                 },
                 new()
                 {
@@ -159,11 +183,19 @@ public class UpdateHistoryService
         {
             new()
             {
+                TagName = "v105.4",
+                Title = "BaoTools v105.4 - Auto-restart After Update & Multi-language Notification Sync",
+                Body = "• Auto-restart after update: Clicking 'Update Now' automatically downloads, installs, and relaunches the app seamlessly across Setup, Portable, and Single-File exe modes.\n• Multi-language real-time notification sync: Full 29-language support for notification bell, status text, and release history with instant UI culture updates.\n• Protected local changelogs: Prevents remote GitHub English releases from overwriting curated localized release notes.\n• Clean update termination: Eliminates process hang caused by the 'Minimize to Tray' background setting.",
+                PublishedAt = "Sep 10, 2026",
+                HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+            },
+            new()
+            {
                 TagName = "v105.3",
                 Title = "BaoTools v105.3 - Reverting Fixes Cleanly, My Games Filter & DepotCache Migration",
                 Body = "• Clean fix reversion: safe SHA-256 hash comparison, automatically restores original files when reverting fixes.\n• 'My games' filter in Fixes page.\n• Automatic depotcache folder migration to standard Steam location.\n• Persistent update notifications and update history in notification bell.",
                 PublishedAt = "Sep 10, 2026",
-                HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.3"
             },
             new()
             {

@@ -1,8 +1,8 @@
-# PowerShell script to build all BaoTools v105.3 release packages
+# PowerShell script to build all BaoTools v105.4 release packages
 $ErrorActionPreference = "Stop"
 
 Write-Host "===============================================" -ForegroundColor Cyan
-Write-Host " Building BaoTools v105.3 Release Packages" -ForegroundColor Cyan
+Write-Host " Building BaoTools v105.4 Release Packages" -ForegroundColor Cyan
 Write-Host "===============================================" -ForegroundColor Cyan
 
 # 1. Run Tests
@@ -30,14 +30,14 @@ if (Test-Path $iscc) {
 Write-Host "`n[4/4] Building standalone single-file BaoTools.exe (self-contained)..." -ForegroundColor Yellow
 dotnet publish src/BaoToolsGui/BaoToolsGui.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -o out_single_standalone --nologo -v q
 
-# 5. Assemble to release_v105.3
-Write-Host "`nAssembling release assets to release_v105.3/ ..." -ForegroundColor Green
-New-Item -ItemType Directory -Force -Path "release_v105.3" | Out-Null
-Copy-Item "out_single_standalone\BaoTools.exe" "release_v105.3\BaoTools.exe" -Force
+# 5. Assemble to release_v105.4
+Write-Host "`nAssembling release assets to release_v105.4/ ..." -ForegroundColor Green
+New-Item -ItemType Directory -Force -Path "release_v105.4" | Out-Null
+Copy-Item "out_single_standalone\BaoTools.exe" "release_v105.4\BaoTools.exe" -Force
 if (Test-Path "out_setup\BaoTools_Setup.exe") {
-    Copy-Item "out_setup\BaoTools_Setup.exe" "release_v105.3\BaoTools_Setup.exe" -Force
+    Copy-Item "out_setup\BaoTools_Setup.exe" "release_v105.4\BaoTools_Setup.exe" -Force
 }
-Compress-Archive -Path "out_portable\*" -DestinationPath "release_v105.3\BaoTools_v105.3_Portable.zip" -Force
+Compress-Archive -Path "out_portable\*" -DestinationPath "release_v105.4\BaoTools_v105.4_Portable.zip" -Force
 
-Write-Host "`nAll release assets successfully created in release_v105.3/:" -ForegroundColor Green
-Get-ChildItem "release_v105.3" | Select-Object Name, Length, LastWriteTime | Format-Table -AutoSize
+Write-Host "`nAll release assets successfully created in release_v105.4/:" -ForegroundColor Green
+Get-ChildItem "release_v105.4" | Select-Object Name, Length, LastWriteTime | Format-Table -AutoSize
