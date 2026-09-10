@@ -17,7 +17,7 @@ namespace BaoToolsGui.Services;
 /// </param>
 /// <param name="FilenamesEncrypted">
 /// Whether the payload's filenames are still encrypted with the depot key. Usually FALSE — Steam stores
-/// them decrypted in <c>config\depotcache</c> — which is exactly why key checking cannot rely on this.
+/// them decrypted in <c>depotcache</c> — which is exactly why key checking cannot rely on this.
 /// </param>
 /// <param name="GidManifest">
 /// The manifest's own id. Together with <paramref name="DepotId"/> this is the file's self-declared

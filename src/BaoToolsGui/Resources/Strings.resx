@@ -702,4 +702,98 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Tickets_ETicket_Title" xml:space="preserve"><value>Encrypted App Ticket (Denuvo)</value></data>
   <data name="Common_NotAvailable" xml:space="preserve"><value>Not available</value></data>
   <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+
+  <data name="Fixes_Applied_Hint" xml:space="preserve">
+    <value>This fix is already applied. Revert it if you want to install another.</value>
+  </data>
+  <data name="Fixes_MyGames" xml:space="preserve">
+    <value>My games</value>
+  </data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve">
+    <value>{0} of your games have fixes. Scroll the grid to browse the rest.</value>
+  </data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve">
+    <value>No luas added yet — add a game (or install one) to see it here.</value>
+  </data>
+  <data name="Fixes_Revert" xml:space="preserve">
+    <value>Revert</value>
+  </data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve">
+    <value>Revert &quot;{0}&quot;? Modified files will be restored from backup and files added by the fix will be deleted.</value>
+  </data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve">
+    <value>Revert fix for {0}?</value>
+  </data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve">
+    <value>Fix can't be reverted safely</value>
+  </data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve">
+    <value>{0} has changed since this fix was applied, so restoring it would overwrite those changes. If you applied another fix on top, revert that one first. {1} file(s) affected.</value>
+  </data>
+  <data name="Fixes_Revert_Done" xml:space="preserve">
+    <value>Fix reverted</value>
+  </data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve">
+    <value>{0} restored, {1} added files removed.</value>
+  </data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve">
+    <value>Couldn't revert fix</value>
+  </data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve">
+    <value>No record of this fix being applied. It may already have been reverted.</value>
+  </data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve">
+    <value>Fix partially reverted</value>
+  </data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve">
+    <value>{0} file(s) couldn't be restored. Close the game and try again.</value>
+  </data>
+  <data name="Notification_Title" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Notification_UpdateHistory" xml:space="preserve">
+    <value>Update History</value>
+  </data>
+  <data name="Notification_NewUpdateAvailable" xml:space="preserve">
+    <value>New Update Available</value>
+  </data>
+  <data name="Notification_WhatsNew" xml:space="preserve">
+    <value>What's New</value>
+  </data>
+  <data name="Notification_UpdateNow" xml:space="preserve">
+    <value>Update Now</value>
+  </data>
+  <data name="Notification_CheckForUpdates" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="Notification_Checking" xml:space="preserve">
+    <value>Checking for updates...</value>
+  </data>
+  <data name="Notification_UpToDate" xml:space="preserve">
+    <value>You're up to date!</value>
+  </data>
+  <data name="Notification_UpToDateDesc" xml:space="preserve">
+    <value>BaoTools {0} is currently the newest version.</value>
+  </data>
+  <data name="Notification_CheckFailed" xml:space="preserve">
+    <value>Check Failed</value>
+  </data>
+  <data name="Notification_TryAgain" xml:space="preserve">
+    <value>Try Again</value>
+  </data>
+  <data name="Notification_ViewNotes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Notification_Badge_New" xml:space="preserve">
+    <value>NEW</value>
+  </data>
+  <data name="Notification_Badge_Current" xml:space="preserve">
+    <value>CURRENT</value>
+  </data>
+  <data name="Notification_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>

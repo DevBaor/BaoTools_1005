@@ -19,6 +19,9 @@ public class UpdateNotificationTests
     [InlineData("v105.2", "v105.1", true)]
     [InlineData("v105.1", "v105.2", false)]
     [InlineData("105.1", "105.1", false)]
+    [InlineData("v105.3", "v105.2", true)]
+    [InlineData("v105.2", "v105.3", false)]
+    [InlineData("v105.3", "v105.3", false)]
     public void IsVersionNewer_DetectsNewerVersionsCorrectly(string latest, string current, bool expected)
     {
         bool result = UpdateService.IsVersionNewer(latest, current);
@@ -121,5 +124,65 @@ public class UpdateNotificationTests
             snippet, @"""(?:CellIDServerOverride|CellID)""\s+""(\d+)""", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         string? result = (match.Success && match.Groups[1].Value is { Length: > 0 } id && id != "0") ? id : null;
         Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void ParseGitHubReleasesList_ParsesMultipleReleasesCorrectly()
+    {
+        string json = """
+        [
+            {
+                "tag_name": "v105.3",
+                "name": "BaoTools v105.3 - Revert Update",
+                "body": "Revert fixes cleanly and My Games filter",
+                "html_url": "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.3",
+                "published_at": "2026-09-10T10:00:00Z"
+            },
+            {
+                "tag_name": "v105.2",
+                "name": "BaoTools v105.2 - Tickets Extractor",
+                "body": "Extract tickets from steam client",
+                "html_url": "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.2",
+                "published_at": "2026-09-07T10:00:00Z"
+            }
+        ]
+        """;
+
+        var list = UpdateService.ParseGitHubReleasesList(json, "v105.2");
+        Assert.Equal(2, list.Count);
+        Assert.Equal("v105.3", list[0].TagName);
+        Assert.True(list[0].IsNewer);
+        Assert.Equal("v105.2", list[1].TagName);
+        Assert.False(list[1].IsNewer);
+    }
+
+    [Fact]
+    public void UpdateHistoryService_LoadsDefaultsAndSetsFlags()
+    {
+        var service = new UpdateHistoryService();
+        var history = service.LoadHistory("v105.3");
+
+        Assert.NotEmpty(history);
+        var v105_3 = history.FirstOrDefault(x => x.TagName == "v105.3");
+        Assert.NotNull(v105_3);
+        Assert.True(v105_3.IsCurrent);
+        Assert.False(v105_3.IsNew);
+
+        var v105_2 = history.FirstOrDefault(x => x.TagName == "v105.2");
+        Assert.NotNull(v105_2);
+        Assert.False(v105_2.IsCurrent);
+        Assert.False(v105_2.IsNew);
+    }
+
+    [Fact]
+    public void UpdateHistoryService_DetectsNewerWhenOnOlderVersion()
+    {
+        var service = new UpdateHistoryService();
+        var history = service.LoadHistory("v105.2");
+
+        var v105_3 = history.FirstOrDefault(x => x.TagName == "v105.3");
+        Assert.NotNull(v105_3);
+        Assert.False(v105_3.IsCurrent);
+        Assert.True(v105_3.IsNew);
     }
 }

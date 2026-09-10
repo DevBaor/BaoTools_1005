@@ -16,3 +16,17 @@ public class GitHubReleaseInfo
     public DateTimeOffset? PublishedAt { get; set; }
     public bool IsNewer { get; set; }
 }
+
+/// <summary>
+/// Persisted item representing a release entry in update history.
+/// </summary>
+public class UpdateHistoryItem
+{
+    public string TagName { get; set; } = "";
+    public string Title { get; set; } = "";
+    public string Body { get; set; } = "";
+    public string HtmlUrl { get; set; } = "";
+    public string? PublishedAt { get; set; }
+    public bool IsNew { get; set; }
+    public bool IsCurrent { get; set; }
+}

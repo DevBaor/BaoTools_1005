@@ -20,12 +20,64 @@ public partial class SteamLibraryService(SteamService steam)
     [GeneratedRegex(@"""installdir""\s*""([^""]+)""", RegexOptions.IgnoreCase)]
     private static partial Regex InstallDirRegex();
 
-    /// <summary>
-    /// Full path to the game's install folder (…\steamapps\common\&lt;installdir&gt;) if it exists on
-    /// disk, else null (game not installed / Steam not found / unreadable).
-    /// </summary>
-    [GeneratedRegex(@"""name""\s*""([^""]+)""", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"""appid""\s*""(\d+)""", RegexOptions.IgnoreCase)]
+    private static partial Regex AppIdRegex();
+
+    [GeneratedRegex(@"""name""\s*""([^""]*)""", RegexOptions.IgnoreCase)]
     private static partial Regex NameRegex();
+
+    /// <summary>An installed game, as its appmanifest describes it.</summary>
+    public record InstalledGame(long AppId, string Name, string InstallDir);
+
+    /// <summary>
+    /// Every installed game across every library, from the appmanifests. Lazy, and skips anything whose
+    /// folder isn't actually on disk.
+    /// </summary>
+    /// <remarks>
+    /// Enumerating the .acf files is the cheap part (~39 ms across three drives here); what costs is
+    /// whatever the caller then does per game. Yields rather than returning a list so a caller looking
+    /// for one thing can stop early.
+    /// </remarks>
+    public IEnumerable<InstalledGame> EnumerateInstalled()
+    {
+        string? steamRoot = steam.EffectivePath;
+        if (steamRoot is null) yield break;
+
+        foreach (string library in GetLibraryRoots(steamRoot))
+        {
+            string steamapps = Path.Combine(library, "steamapps");
+            string[] acfs;
+            try
+            {
+                if (!Directory.Exists(steamapps)) continue;
+                acfs = Directory.GetFiles(steamapps, "appmanifest_*.acf");
+            }
+            catch { continue; }
+
+            foreach (string acf in acfs)
+            {
+                InstalledGame? game = null;
+                try
+                {
+                    string text = File.ReadAllText(acf);
+
+                    var idm = AppIdRegex().Match(text);
+                    var dirm = InstallDirRegex().Match(text);
+                    if (!idm.Success || !dirm.Success) continue;
+                    if (!long.TryParse(idm.Groups[1].Value, out long appId)) continue;
+
+                    string full = Path.Combine(steamapps, "common", Unescape(dirm.Groups[1].Value));
+                    if (!Directory.Exists(full)) continue;
+
+                    var nm = NameRegex().Match(text);
+                    game = new InstalledGame(appId, nm.Success ? nm.Groups[1].Value : appId.ToString(), full);
+                }
+                catch { /* unreadable or malformed acf: skip this one, not the whole library */ }
+
+                if (game is not null) yield return game;
+            }
+        }
+    }
 
     public IEnumerable<(long AppId, string Name, string InstallDir)> GetAllInstalledApps()
     {

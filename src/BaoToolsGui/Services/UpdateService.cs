@@ -133,16 +133,82 @@ public class UpdateService
         try
         {
             using var doc = System.Text.Json.JsonDocument.Parse(json);
-            if (!doc.RootElement.TryGetProperty("tag_name", out var tagProp)) return null;
+            return ParseSingleReleaseElement(doc.RootElement, currentVersion);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Checks GitHub Releases API for list of releases to display in update history.
+    /// </summary>
+    public async Task<List<GitHubReleaseInfo>> FetchReleasesHistoryAsync(string currentVersion)
+    {
+        string url = "https://api.github.com/repos/DevBaor/BaoTools_1005/releases?per_page=10";
+        using var client = new System.Net.Http.HttpClient();
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("BaoTools");
+        client.Timeout = TimeSpan.FromSeconds(5);
+
+        foreach (var candidate in GithubProxy.Candidates(url))
+        {
+            try
+            {
+                var res = await client.GetAsync(candidate);
+                if (res.IsSuccessStatusCode)
+                {
+                    var json = await res.Content.ReadAsStringAsync();
+                    var list = ParseGitHubReleasesList(json, currentVersion);
+                    if (list.Count > 0) return list;
+                }
+            }
+            catch
+            {
+                // Try next mirror
+            }
+        }
+        return new List<GitHubReleaseInfo>();
+    }
+
+    /// <summary>
+    /// Parses an array of GitHub releases from JSON.
+    /// </summary>
+    public static List<GitHubReleaseInfo> ParseGitHubReleasesList(string json, string currentVersion)
+    {
+        var result = new List<GitHubReleaseInfo>();
+        try
+        {
+            using var doc = System.Text.Json.JsonDocument.Parse(json);
+            if (doc.RootElement.ValueKind != System.Text.Json.JsonValueKind.Array) return result;
+
+            foreach (var elem in doc.RootElement.EnumerateArray())
+            {
+                var parsed = ParseSingleReleaseElement(elem, currentVersion);
+                if (parsed is not null) result.Add(parsed);
+            }
+        }
+        catch { }
+        return result;
+    }
+
+    /// <summary>
+    /// Parses a single release JsonElement into GitHubReleaseInfo.
+    /// </summary>
+    public static GitHubReleaseInfo? ParseSingleReleaseElement(System.Text.Json.JsonElement elem, string currentVersion)
+    {
+        try
+        {
+            if (!elem.TryGetProperty("tag_name", out var tagProp)) return null;
 
             string latestTag = tagProp.GetString()?.Trim() ?? "";
             if (string.IsNullOrEmpty(latestTag)) return null;
 
-            string title = doc.RootElement.TryGetProperty("name", out var nameProp) ? nameProp.GetString()?.Trim() ?? "" : "";
-            string body = doc.RootElement.TryGetProperty("body", out var bodyProp) ? bodyProp.GetString()?.Trim() ?? "" : "";
-            string htmlUrl = doc.RootElement.TryGetProperty("html_url", out var urlProp) ? urlProp.GetString()?.Trim() ?? "" : "";
+            string title = elem.TryGetProperty("name", out var nameProp) ? nameProp.GetString()?.Trim() ?? "" : "";
+            string body = elem.TryGetProperty("body", out var bodyProp) ? bodyProp.GetString()?.Trim() ?? "" : "";
+            string htmlUrl = elem.TryGetProperty("html_url", out var urlProp) ? urlProp.GetString()?.Trim() ?? "" : "";
             DateTimeOffset? publishedAt = null;
-            if (doc.RootElement.TryGetProperty("published_at", out var pubProp) && pubProp.TryGetDateTimeOffset(out var pubDate))
+            if (elem.TryGetProperty("published_at", out var pubProp) && pubProp.TryGetDateTimeOffset(out var pubDate))
             {
                 publishedAt = pubDate;
             }
@@ -153,7 +219,7 @@ public class UpdateService
             string? portableUrl = null;
             string? exeUrl = null;
 
-            if (doc.RootElement.TryGetProperty("assets", out var assetsProp) && assetsProp.ValueKind == System.Text.Json.JsonValueKind.Array)
+            if (elem.TryGetProperty("assets", out var assetsProp) && assetsProp.ValueKind == System.Text.Json.JsonValueKind.Array)
             {
                 foreach (var asset in assetsProp.EnumerateArray())
                 {

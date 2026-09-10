@@ -12,13 +12,14 @@ public partial class MainViewModel : ObservableObject
     private readonly AuthService _auth;
     private readonly SteamService _steam;
     private readonly UpdateService _updates;
+    private readonly UpdateHistoryService _historyService;
     private readonly ToastService _toast;
 
     /// <summary>The first-run welcome overlay VM (hosted at the window root, shown via its IsOpen).</summary>
     public OnboardingViewModel Onboarding { get; }
 
     /// <summary>App version shown in the nav pane footer, e.g. "v1.0.1". Read from the assembly.</summary>
-    public string VersionLabel { get; } = "v105.2";
+    public string VersionLabel { get; } = "v105.3";
 
     private static string ReadVersion()
     {
@@ -86,19 +87,44 @@ public partial class MainViewModel : ObservableObject
     public bool IsUpToDate => !HasUpdate && !IsCheckingUpdate && string.IsNullOrEmpty(UpdateError);
     public bool HasUpdateError => !string.IsNullOrEmpty(UpdateError) && !IsCheckingUpdate;
 
+    /// <summary>History of past updates displayed in the notification bell flyout.</summary>
+    public System.Collections.ObjectModel.ObservableCollection<UpdateHistoryItem> UpdateHistory { get; } = new();
+
+    [ObservableProperty]
+    private bool _hasUpdateHistory;
+
     public MainViewModel(
         AuthService auth,
         SteamService steam,
         OnboardingViewModel onboarding,
         UpdateService updates,
+        UpdateHistoryService historyService,
         ToastService toast)
     {
         _auth = auth;
         _steam = steam;
         Onboarding = onboarding;
         _updates = updates;
+        _historyService = historyService;
         _toast = toast;
         _auth.AuthStateChanged += () => IsGuest = _auth.IsGuest;
+
+        LoadLocalHistory();
+    }
+
+    private void LoadLocalHistory()
+    {
+        try
+        {
+            var items = _historyService.LoadHistory(VersionLabel);
+            UpdateHistory.Clear();
+            foreach (var it in items)
+            {
+                UpdateHistory.Add(it);
+            }
+            HasUpdateHistory = UpdateHistory.Count > 0;
+        }
+        catch { }
     }
 
     public async Task InitializeAsync()
@@ -177,6 +203,22 @@ public partial class MainViewModel : ObservableObject
         try
         {
             var info = await _updates.CheckGitHubReleaseFullAsync(VersionLabel);
+            try
+            {
+                var remoteHistory = await _updates.FetchReleasesHistoryAsync(VersionLabel);
+                var merged = _historyService.MergeWithRemoteReleases(remoteHistory, VersionLabel);
+                System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+                {
+                    UpdateHistory.Clear();
+                    foreach (var item in merged)
+                    {
+                        UpdateHistory.Add(item);
+                    }
+                    HasUpdateHistory = UpdateHistory.Count > 0;
+                });
+            }
+            catch { /* history fetch error doesn't block update check */ }
+
             if (info is null)
             {
                 UpdateError = "Unable to reach GitHub. Please check your internet connection.";

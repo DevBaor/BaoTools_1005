@@ -671,4 +671,98 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Tickets_ETicket_Title" xml:space="preserve"><value>加密應用程式票證 (Denuvo)</value></data>
   <data name="Common_NotAvailable" xml:space="preserve"><value>無法使用</value></data>
   <data name="Nav_Plugin" xml:space="preserve"><value>Plugin</value></data>
+
+  <data name="Fixes_Applied_Hint" xml:space="preserve">
+    <value>此修復已套用。若要安裝其他修復，請先還原。</value>
+  </data>
+  <data name="Fixes_MyGames" xml:space="preserve">
+    <value>我的遊戲</value>
+  </data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve">
+    <value>你的 {0} 款遊戲有可用修復。捲動清單可瀏覽其餘內容。</value>
+  </data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve">
+    <value>尚未新增 lua，新增或安裝一款遊戲後會顯示在這裡。</value>
+  </data>
+  <data name="Fixes_Revert" xml:space="preserve">
+    <value>還原</value>
+  </data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve">
+    <value>要還原「{0}」嗎？修改過的檔案將從備份復原，修復新增的檔案將被刪除。</value>
+  </data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve">
+    <value>還原 {0} 的修復？</value>
+  </data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve">
+    <value>無法安全還原此修復</value>
+  </data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve">
+    <value>自套用此修復以來，{0} 已被變更，還原會覆寫這些變更。如果你在其上套用了另一個修復，請先還原那一個。共影響 {1} 個檔案。</value>
+  </data>
+  <data name="Fixes_Revert_Done" xml:space="preserve">
+    <value>修復已還原</value>
+  </data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve">
+    <value>已復原 {0} 個，已刪除 {1} 個新增檔案。</value>
+  </data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve">
+    <value>無法還原修復</value>
+  </data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve">
+    <value>沒有套用此修復的紀錄，可能已經還原過了。</value>
+  </data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve">
+    <value>修復部分還原</value>
+  </data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve">
+    <value>有 {0} 個檔案無法復原。請關閉遊戲後重試。</value>
+  </data>
+  <data name="Notification_Title" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Notification_UpdateHistory" xml:space="preserve">
+    <value>Update History</value>
+  </data>
+  <data name="Notification_NewUpdateAvailable" xml:space="preserve">
+    <value>New Update Available</value>
+  </data>
+  <data name="Notification_WhatsNew" xml:space="preserve">
+    <value>What's New</value>
+  </data>
+  <data name="Notification_UpdateNow" xml:space="preserve">
+    <value>Update Now</value>
+  </data>
+  <data name="Notification_CheckForUpdates" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="Notification_Checking" xml:space="preserve">
+    <value>Checking for updates...</value>
+  </data>
+  <data name="Notification_UpToDate" xml:space="preserve">
+    <value>You're up to date!</value>
+  </data>
+  <data name="Notification_UpToDateDesc" xml:space="preserve">
+    <value>BaoTools {0} is currently the newest version.</value>
+  </data>
+  <data name="Notification_CheckFailed" xml:space="preserve">
+    <value>Check Failed</value>
+  </data>
+  <data name="Notification_TryAgain" xml:space="preserve">
+    <value>Try Again</value>
+  </data>
+  <data name="Notification_ViewNotes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Notification_Badge_New" xml:space="preserve">
+    <value>NEW</value>
+  </data>
+  <data name="Notification_Badge_Current" xml:space="preserve">
+    <value>CURRENT</value>
+  </data>
+  <data name="Notification_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>

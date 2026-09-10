@@ -16,3 +16,8 @@ innosetup.exe
 *.py
 *.log
 out_singlefile_compressed/
+out_single/
+out_single_selfcontained/
+out_single_standalone/
+release_*/
+release_v105.3/

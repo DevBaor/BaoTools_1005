@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.IO.Compression;
 using BaoToolsGui.Models;
 
@@ -24,7 +24,8 @@ public class ManifestJobFactory(
     ToastService toast,
     DepotDownloaderService depotTool,
     SteamDepotInfo depotInfo,
-    SteamAutoCrackService sac)
+    SteamAutoCrackService sac,
+    AppliedFixIndexService fixIndex)
 {
     // ── Job builders ─────────────────────────────────────────────────
 
@@ -105,7 +106,7 @@ public class ManifestJobFactory(
             },
             (file, _, _) => Task.FromResult(isManifestSlot
                 ? InstallDenuvoManifest(file, appId, gameName)
-                : ApplyDenuvoFix(file, appId, gameName)),
+                : ApplyDenuvoFix(file, appId, fixId, gameName)),
             ConfirmAsync: null,
             OnFinished: onFinished);
     }
@@ -561,8 +562,30 @@ public class ManifestJobFactory(
         }
     }
 
-    /// <summary>Denuvo fix slot: extract into the game folder. Only possible if the game is installed.</summary>
-    private JobResult ApplyDenuvoFix(DownloadedFile file, long appId, string gameName)
+    /// <summary>Denuvo fix slot: extract into the game folder. Only possible if the game is installed.
+    /// Existing files are backed up as .bak inside .luatools-fix/ so the fix can be reverted.</summary>
+    /// <remarks>
+    /// Runs in four phases, because the revert record is the ONLY thing that makes a fix undoable and
+    /// <c>FixesViewModel</c> keys the Revert button off that file existing:
+    ///
+    /// <list type="number">
+    /// <item><b>Plan</b> — decide modified-vs-added from <c>File.Exists</c> alone. Nothing is written.</item>
+    /// <item><b>Commit</b> — write a provisional record listing every planned entry. If this fails the
+    /// apply stops here, untouched. Previously the record was written LAST inside an empty
+    /// <c>catch {}</c>, so a locked or unwritable path silently "succeeded" and left .bak files with
+    /// nothing indexing them and no Revert button that would ever appear.</item>
+    /// <item><b>Apply</b> — back up, extract, and build the real entry list with hashes.</item>
+    /// <item><b>Settle</b> — rewrite the record with what actually happened.</item>
+    /// </list>
+    ///
+    /// Phase 4 is not tidiness. The provisional record describes INTENT, and an entry whose backup threw
+    /// would claim a <c>.bak</c> that was never written — which the revert now (correctly) treats as a
+    /// hard error, making a partial apply permanently un-revertable. It is also the only place
+    /// <c>HashAfter</c> can come from, since that is unknowable until the file has been extracted.
+    /// So the record starts as a promise and ends as a fact, and a crash in between still leaves
+    /// something the user can revert.
+    /// </remarks>
+    private JobResult ApplyDenuvoFix(DownloadedFile file, long appId, string fixId, string gameName)
     {
         try
         {
@@ -574,21 +597,111 @@ public class ManifestJobFactory(
                 return new JobResult(false, err);
             }
 
-            // Extract into the game folder, overwriting. Best-effort per entry so one locked file
-            // doesn't abandon the rest of the fix.
+            string fixKey = SafeFixKey(fixId);
+            string fixDir = Path.Combine(installDir, FixRecordDir);
+            string recordPath = Path.Combine(fixDir, $"{fixKey}.json");
+
+            var record = new DenuvoFixRecord
+            {
+                AppId = appId,
+                FixId = fixId,
+                AppliedAt = DateTimeOffset.UtcNow.ToString("o"),
+            };
+
+            // ── Phase 1: plan. File.Exists only; nothing on disk changes yet. ──────────────────────
             using var archive = ZipFile.OpenRead(file.FilePath);
+            var plan = new List<(string RelPath, string Dest, string? BakRel, ZipArchiveEntry Entry)>();
             int failed = 0;
+
             foreach (var entry in archive.Entries)
             {
-                if (string.IsNullOrEmpty(entry.Name)) continue; // directory entry
-                string dest = Path.Combine(installDir, entry.FullName);
+                if (string.IsNullOrEmpty(entry.Name)) continue;
+                string relPath = entry.FullName.Replace('\\', '/');
+
+                // A zip entry naming its way out of the game folder is never legitimate; skip it and
+                // count it, rather than writing wherever it points.
+                if (ResolveInside(installDir, entry.FullName) is not { } dest) { failed++; continue; }
+
+                // Backups are keyed by the FULL relative path, not just the file name: fix archives
+                // routinely ship the same name in several folders (steam_api64.dll, config.ini), and
+                // keying by name alone collapsed them onto one .bak. The !File.Exists guard in phase 3
+                // then skipped backing the second one up while still recording it as "modified" pointing
+                // at the first one's backup — so a revert restored one file with the other's contents,
+                // or silently restored nothing once the .bak was consumed.
+                plan.Add((relPath, dest, File.Exists(dest) ? $"{fixKey}/{relPath}.bak" : null, entry));
+            }
+
+            // ── Phase 2: commit. Nothing has been touched yet, so failing here costs nothing. ──────
+            foreach (var (relPath, _, bakRel, _) in plan)
+                record.Files.Add(new DenuvoFixRecordEntry
+                {
+                    RelativePath = relPath,
+                    Action = bakRel is null ? "added" : "modified",
+                    BackupPath = bakRel,
+                });
+
+            try
+            {
+                Directory.CreateDirectory(fixDir);
+                File.WriteAllText(recordPath, SerializeRecord(record));
+            }
+            catch (Exception ex)
+            {
+                toast.Show(Resources.Strings.Fixes_Toast_CouldntApply, ex.Message, error: true);
+                return new JobResult(false, ex.Message);
+            }
+
+            // ── Phase 3: apply, recording what really happened rather than what was planned. ───────
+            var applied = new List<DenuvoFixRecordEntry>(plan.Count);
+
+            foreach (var (relPath, dest, bakRel, entry) in plan)
+            {
                 try
                 {
+                    DenuvoFixRecordEntry recordEntry;
+                    if (bakRel is not null)
+                    {
+                        string bakAbs = Path.Combine(fixDir, bakRel);
+                        if (!File.Exists(bakAbs)) // never clobber a known-good .bak
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(bakAbs)!);
+                            File.Copy(dest, bakAbs, overwrite: false);
+                        }
+                        // Hash the ORIGINAL before it is overwritten; there is no second chance.
+                        recordEntry = new DenuvoFixRecordEntry
+                        {
+                            RelativePath = relPath,
+                            Action = "modified",
+                            BackupPath = bakRel,
+                            HashBefore = FileHash.Sha256(dest),
+                        };
+                    }
+                    else
+                    {
+                        recordEntry = new DenuvoFixRecordEntry { RelativePath = relPath, Action = "added" };
+                    }
+
                     Directory.CreateDirectory(Path.GetDirectoryName(dest)!);
                     entry.ExtractToFile(dest, overwrite: true);
+
+                    // Hash what we just wrote. This is what a later revert checks the file against to
+                    // prove nothing has replaced it since — another fix layered on top, a game update, a
+                    // hand-edit. Set after the extract so it describes the file as it really landed.
+                    recordEntry.HashAfter = FileHash.Sha256(dest);
+                    applied.Add(recordEntry);
                 }
-                catch { failed++; }
+                catch { failed++; } // entry stays OUT of `applied`, so the settled record won't claim it
             }
+
+            // ── Phase 4: settle. Replace the promise with the facts. ───────────────────────────────
+            record.Files = applied;
+            try { File.WriteAllText(recordPath, SerializeRecord(record)); }
+            catch { /* the provisional record from phase 2 stands: over-broad, but still revertable */ }
+
+            // Index it even on partial failure, for the same reason the record is written: files were
+            // backed up, so the fix IS applied and must be listable and revertable. The index is only a
+            // hint, so a failure to update it is not a failure to apply.
+            fixIndex.Add(appId, fixId, gameName, installDir, record.AppliedAt, record.Files.Count);
 
             if (failed > 0)
             {
@@ -608,7 +721,212 @@ public class ManifestJobFactory(
         }
         finally
         {
-            DeleteStaged(file.FilePath); // archive is disposed by now
+            DeleteStaged(file.FilePath);
+        }
+    }
+
+    // ── Fix revert ──────────────────────────────────────────────────
+
+    private static readonly System.Text.Json.JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
+
+    internal const string FixRecordDir = ".luatools-fix";
+
+    /// <summary>The revert record's on-disk form. Indented because users do open these by hand.</summary>
+    private static string SerializeRecord(DenuvoFixRecord record) =>
+        System.Text.Json.JsonSerializer.Serialize(
+            record, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+
+    /// <summary>
+    /// A fix id can carry `/`, `:`, and other characters that are illegal in a Windows path segment
+    /// (e.g. "online-fix:5e01e852-..."). Sanitise it for use as a folder/file name while keeping the
+    /// raw id in the record itself.
+    /// </summary>
+    internal static string SafeFixKey(string fixId) =>
+        string.Concat(fixId.Select(ch => Path.GetInvalidFileNameChars().Contains(ch) ? '_' : ch));
+
+    /// <summary>Resolve the revert-record path for a given fix inside a game's install folder.</summary>
+    internal static string GetFixRecordPath(string installDir, string fixId) =>
+        Path.Combine(installDir, FixRecordDir, $"{SafeFixKey(fixId)}.json");
+
+    /// <summary>
+    /// Resolve a relative path against the game folder, or null when it would escape it.
+    /// </summary>
+    /// <remarks>
+    /// Both callers take the relative part from data we do not control: zip entry names on apply, and the
+    /// revert record on revert. `Path.Combine(installDir, "../../../Windows/System32/x.dll")` happily
+    /// resolves outside the game — the classic zip-slip shape — and the revert path DELETES what it
+    /// resolves. The record also lives in a user-writable folder, and a fix archive can plant one for a
+    /// different fix key that we would not overwrite. So neither side is trusted; both go through here.
+    /// Same containment check as <c>DepotDownloaderService.TryDeleteCreatedFiles</c>.
+    /// </remarks>
+    private static string? ResolveInside(string root, string relative)
+    {
+        try
+        {
+            string rootFull = Path.TrimEndingDirectorySeparator(Path.GetFullPath(root));
+            string full = Path.GetFullPath(Path.Combine(rootFull, relative));
+            return full.StartsWith(rootFull + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)
+                ? full
+                : null;
+        }
+        catch { return null; } // malformed path (illegal chars, too long): treat as out of bounds
+    }
+
+    /// <summary>Read a fix's revert record from disk, or null if it doesn't exist.</summary>
+    internal static DenuvoFixRecord? ReadFixRecord(string recordPath)
+    {
+        try
+        {
+            if (!File.Exists(recordPath)) return null;
+            string json = File.ReadAllText(recordPath);
+            return System.Text.Json.JsonSerializer.Deserialize<DenuvoFixRecord>(json, JsonOpts);
+        }
+        catch { return null; }
+    }
+
+    /// <summary>
+    /// Revert a previously applied Denuvo fix: restore .bak files for modified entries, delete added
+    /// files, then clean up the backup directory and the revert record.
+    /// </summary>
+    /// <remarks>
+    /// This method is the SOLE emitter of revert feedback — done, partial, conflict, game-not-found,
+    /// no-record and the catch-all — matching the apply path. Callers must not add a toast of their own:
+    /// the view model used to show one on any failure, so every partial revert (the common case, from a
+    /// locked file while the game is running) fired two toasts for a single action.
+    /// </remarks>
+    public JobResult RevertDenuvoFix(long appId, string fixId, string gameName)
+    {
+        try
+        {
+            string? installDir = library.GetInstallDir(appId);
+            if (installDir is null)
+            {
+                string err = string.Format(Resources.Strings.Fixes_Toast_GameNotFound_Body, gameName);
+                toast.Show(Resources.Strings.Fixes_Toast_GameNotFound, err, error: true);
+                return new JobResult(false, err);
+            }
+
+            string recordPath = GetFixRecordPath(installDir, fixId);
+            var record = ReadFixRecord(recordPath);
+            if (record is null)
+            {
+                string err = Resources.Strings.Fixes_Revert_NoRecord;
+                toast.Show(Resources.Strings.Fixes_Revert_Failed, err, error: true);
+                return new JobResult(false, err);
+            }
+
+            int restored = 0, deleted = 0, errors = 0, conflicts = 0;
+            string? conflictFile = null;
+
+            foreach (var entry in record.Files)
+            {
+                // The record sits in a user-writable folder and a fix archive can plant one, so its
+                // paths get the same containment check the extract does. This branch DELETES.
+                if (ResolveInside(installDir, entry.RelativePath) is not { } dest) { errors++; continue; }
+
+                try
+                {
+                    if (entry.Action == "modified" && entry.BackupPath is { } bakRel)
+                    {
+                        if (ResolveInside(Path.Combine(installDir, FixRecordDir), bakRel)
+                            is not { } bakAbs) { errors++; continue; }
+                        if (!File.Exists(bakAbs))
+                        {
+                            // The record says this file was modified, so a backup MUST exist. Missing
+                            // means it was never written or something removed it, and the original is
+                            // gone for good — the one case where the fixed file silently stays in place.
+                            // Counting it as an error is the only honest outcome: reporting success here
+                            // would tell the user their game is clean when it is still patched.
+                            errors++;
+                            continue;
+                        }
+
+                        // Only put the original back if the file on disk is still the one THIS fix wrote.
+                        // Two hashes count as ours: HashAfter (untouched since we applied) and HashBefore
+                        // (an earlier attempt already restored it, so a retry must not treat it as
+                        // foreign). Anything else means something replaced the file after us — most
+                        // likely a second fix layered on top, whose own backup holds our version — and
+                        // restoring would throw that away. Both hashes null is an old record, and
+                        // FileHash.Matches reads null as "nothing to check", so those revert as before.
+                        if (File.Exists(dest)
+                            && !FileHash.Matches(dest, entry.HashAfter)
+                            && !FileHash.Matches(dest, entry.HashBefore))
+                        {
+                            conflicts++;
+                            conflictFile ??= entry.RelativePath;
+                            continue;
+                        }
+
+                        // The .bak is NOT deleted here, deliberately. Backups are removed as a group once
+                        // the whole revert succeeds (see below). Deleting per-file would make a retry
+                        // after a partial failure impossible to tell apart from a lost backup: every
+                        // already-restored entry would come back as a missing .bak and fail forever.
+                        // Leaving them means a retry just re-copies, which is idempotent.
+                        File.Copy(bakAbs, dest, overwrite: true);
+                        restored++;
+                    }
+                    else if (entry.Action == "added")
+                    {
+                        if (File.Exists(dest))
+                        {
+                            // This fix created the file, so deleting it is normally right — but not if
+                            // someone has since replaced it. Then the file is theirs, not ours.
+                            if (!FileHash.Matches(dest, entry.HashAfter))
+                            {
+                                conflicts++;
+                                conflictFile ??= entry.RelativePath;
+                                continue;
+                            }
+                            File.Delete(dest);
+                            deleted++;
+                        }
+                    }
+                }
+                catch { errors++; }
+            }
+
+            // Reported before plain errors because it is the only outcome the user can act on, and the
+            // action is specific: revert the fix that was applied later, then come back to this one.
+            if (conflicts > 0)
+            {
+                string conflictErr = string.Format(
+                    Resources.Strings.Fixes_Revert_Conflict_Body, conflictFile, conflicts);
+                toast.Show(Resources.Strings.Fixes_Revert_Conflict, conflictErr, error: true);
+                return new JobResult(false, conflictErr);
+            }
+
+            if (errors > 0)
+            {
+                // Backups and record stay put ON PURPOSE. The usual reason a revert fails is a locked
+                // file because the game is running, and deleting the .bak files here would leave the user
+                // half-reverted with no way to ever finish. Keeping them means the revert is simply
+                // retryable once the game is closed. Same principle the apply path already follows: it
+                // writes the record even on partial failure so the backups stay recoverable.
+                string err = string.Format(Resources.Strings.Fixes_Revert_Partial_Body, errors);
+                toast.Show(Resources.Strings.Fixes_Revert_Partial, err, error: true);
+                return new JobResult(false, err);
+            }
+
+            // Fully reverted, so the backups have served their purpose and the record is what makes the
+            // Revert button appear — both go, and the fix reads as un-applied again.
+            string backupDir = Path.Combine(installDir, FixRecordDir, SafeFixKey(fixId));
+            try { if (Directory.Exists(backupDir)) Directory.Delete(backupDir, recursive: true); } catch { }
+            try { if (File.Exists(recordPath)) File.Delete(recordPath); } catch { }
+
+            // Drop it from the index last, so the index is never emptier than the truth. If this fails the
+            // stale entry is pruned on the next read anyway, since its record file is now gone.
+            fixIndex.Remove(appId, fixId);
+
+            string message = string.Format(Resources.Strings.Fixes_Revert_Done_Body, restored, deleted);
+            toast.Show(Resources.Strings.Fixes_Revert_Done, message);
+            return new JobResult(true, message, installDir);
+        }
+        catch (Exception ex)
+        {
+            // "Couldn't revert", not "Couldn't apply" — this is the revert path, and the old title said
+            // the opposite of what had just happened.
+            toast.Show(Resources.Strings.Fixes_Revert_Failed, ex.Message, error: true);
+            return new JobResult(false, ex.Message);
         }
     }
 

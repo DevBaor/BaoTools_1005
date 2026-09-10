@@ -351,11 +351,32 @@ public partial class DepotDownloaderService(
         return ManifestFile.Matches(path, depotId, manifestId) ? path : null;
     }
 
-    /// <summary>The name a depot's manifest has in depotcache, whether or not it is there.</summary>
-    private string? CachedManifestPath(long depotId, string manifestId) =>
-        steam.DepotCacheDir is { } dir
-            ? Path.Combine(dir, $"{depotId}_{manifestId}.manifest")
-            : null;
+    /// <summary>
+    /// The name a depot's manifest has in depotcache, whether or not it is there.
+    /// </summary>
+    /// <remarks>
+    /// Prefers the real depotcache, then falls back to a file left in the old, wrong
+    /// <c>config\depotcache</c> (see <c>SteamService.DepotCacheDir</c>). The fallback is a read
+    /// convenience only — it keeps existing installs from re-fetching thousands of manifests at once —
+    /// so a hit there is still a real file the caller can hand to the downloader. Writes always go to
+    /// the real folder, which is the only one Steam itself reads.
+    /// </remarks>
+    private string? CachedManifestPath(long depotId, string manifestId)
+    {
+        string name = $"{depotId}_{manifestId}.manifest";
+
+        if (steam.DepotCacheDir is not { } dir) return null;
+        string path = Path.Combine(dir, name);
+        if (File.Exists(path)) return path;
+
+        if (steam.LegacyDepotCacheDir is { } legacyDir)
+        {
+            string legacy = Path.Combine(legacyDir, name);
+            if (File.Exists(legacy)) return legacy;
+        }
+
+        return path; // nothing on disk: name the real location, so callers report/fetch the right path
+    }
 
     /// <summary>
     /// Delete a cached manifest that failed validation, so a re-fetch can actually replace it.

@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Threading;
 using BaoToolsGui.Models;
 using BaoToolsGui.Services;
@@ -44,6 +44,8 @@ public partial class App : Application
                 services.AddSingleton<SteamAutoCrackService>();
                 services.AddSingleton<CloudRedirectService>();
                 services.AddSingleton<DepotDownloaderService>();
+                services.AddSingleton<DepotCacheMigrationService>();
+                services.AddSingleton<AppliedFixIndexService>();
                 services.AddSingleton<UnlockerService>();
                 services.AddSingleton<PluginInstallerService>();
                 services.AddTransient<DropInstallViewModel>(); // one per page (Home, Add)
@@ -51,6 +53,7 @@ public partial class App : Application
                 services.AddSingleton<BaoToolsApiClient>();
                 services.AddSingleton<HubcapService>();
                 services.AddSingleton<UpdateService>();
+                services.AddSingleton<UpdateHistoryService>();
                 // Central download queue. Singleton + hosted service (same pattern as HttpServerService
                 // below): the hosted lifetime runs the scheduler pump, and view models resolve the same
                 // instance to enqueue and observe.
@@ -486,6 +489,10 @@ public partial class App : Application
 
         // Warm the hardware-appid blacklist (refreshes from GitHub if the cache is stale). Fire-and-forget.
         _ = _host.Services.GetRequiredService<HardwareAppIdService>().EnsureFreshAsync();
+
+        // Rescue manifests this app used to write into config\depotcache, which Steam never reads. Silent,
+        // idempotent, and costs nothing once the folder is gone. See DepotCacheMigrationService.
+        _ = _host.Services.GetRequiredService<DepotCacheMigrationService>().RunAsync();
 
         // Check for new BaoTools release on startup (non-blocking)
         _ = System.Threading.Tasks.Task.Run(async () =>
