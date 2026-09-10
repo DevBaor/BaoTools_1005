@@ -185,4 +185,98 @@ public class UpdateNotificationTests
         Assert.False(v105_3.IsCurrent);
         Assert.True(v105_3.IsNew);
     }
+
+    [Fact]
+    public void UpdateHistoryService_SyncsLanguageWithCurrentCulture()
+    {
+        var prevCulture = System.Globalization.CultureInfo.CurrentUICulture;
+        try
+        {
+            // Test Vietnamese culture
+            System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("vi-VN");
+            var viHistory = UpdateHistoryService.GetDefaultHistory();
+            Assert.NotEmpty(viHistory);
+            Assert.Contains("Gỡ Fix", viHistory[0].Title);
+            Assert.Contains("Hỗ trợ gỡ Fix sạch sẽ", viHistory[0].Body);
+
+            // Test English / international culture
+            System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+            var enHistory = UpdateHistoryService.GetDefaultHistory();
+            Assert.NotEmpty(enHistory);
+            Assert.Contains("Reverting Fixes Cleanly", enHistory[0].Title);
+            Assert.Contains("Clean fix reversion", enHistory[0].Body);
+
+            // Test LoadHistory updates cached default items when language changes
+            var service = new UpdateHistoryService();
+            var loadedEn = service.LoadHistory("v105.3");
+            var itemEn = loadedEn.FirstOrDefault(x => x.TagName == "v105.3");
+            Assert.NotNull(itemEn);
+            Assert.Contains("Reverting Fixes Cleanly", itemEn.Title);
+
+            System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("vi-VN");
+            var loadedVi = service.LoadHistory("v105.3");
+            var itemVi = loadedVi.FirstOrDefault(x => x.TagName == "v105.3");
+            Assert.NotNull(itemVi);
+            Assert.Contains("Gỡ Fix", itemVi.Title);
+        }
+        finally
+        {
+            System.Globalization.CultureInfo.CurrentUICulture = prevCulture;
+        }
+    }
+
+    [Fact]
+    public void NotificationStrings_ExistInResources()
+    {
+        var prevCulture = System.Globalization.CultureInfo.CurrentUICulture;
+        try
+        {
+            System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("vi-VN");
+            Assert.Equal("Thông báo", BaoToolsGui.Resources.Strings.Notification_Title);
+            Assert.Equal("Cập nhật ngay", BaoToolsGui.Resources.Strings.Notification_UpdateNow);
+            Assert.Equal("Đang tải...", BaoToolsGui.Resources.Strings.Notification_Downloading);
+
+            System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+            Assert.Equal("Notifications", BaoToolsGui.Resources.Strings.Notification_Title);
+            Assert.Equal("Update Now", BaoToolsGui.Resources.Strings.Notification_UpdateNow);
+            Assert.Equal("Downloading...", BaoToolsGui.Resources.Strings.Notification_Downloading);
+        }
+        finally
+        {
+            System.Globalization.CultureInfo.CurrentUICulture = prevCulture;
+        }
+    }
+
+    [Fact]
+    public void MergeWithRemoteReleases_DoesNotOverwriteDefaultLocalizedContent()
+    {
+        var prevCulture = System.Globalization.CultureInfo.CurrentUICulture;
+        try
+        {
+            System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("vi-VN");
+            var service = new UpdateHistoryService();
+
+            var remoteReleases = new List<GitHubReleaseInfo>
+            {
+                new()
+                {
+                    TagName = "v105.3",
+                    Title = "Revert Fixes Cleanly English Title From GitHub",
+                    Body = "English markdown body from GitHub that should not overwrite Vietnamese",
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.3",
+                    PublishedAt = DateTimeOffset.UtcNow
+                }
+            };
+
+            var merged = service.MergeWithRemoteReleases(remoteReleases, "v105.3");
+            var item = merged.FirstOrDefault(x => x.TagName == "v105.3");
+            Assert.NotNull(item);
+            Assert.Contains("Gỡ Fix", item.Title);
+            Assert.Contains("Hỗ trợ gỡ Fix", item.Body);
+        }
+        finally
+        {
+            System.Globalization.CultureInfo.CurrentUICulture = prevCulture;
+        }
+    }
 }
