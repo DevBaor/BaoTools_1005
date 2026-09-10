@@ -680,4 +680,5 @@ public static class Strings
     public static string Notification_Badge_New => Get(nameof(Notification_Badge_New));
     public static string Notification_Badge_Current => Get(nameof(Notification_Badge_Current));
     public static string Notification_Close => Get(nameof(Notification_Close));
+    public static string Notification_Downloading => Get(nameof(Notification_Downloading));
 }

@@ -721,48 +721,51 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
     <value>{0} 個のファイルを復元できませんでした。ゲームを閉じてやり直してください。</value>
   </data>
   <data name="Notification_Title" xml:space="preserve">
-    <value>Notifications</value>
+    <value>通知</value>
   </data>
   <data name="Notification_UpdateHistory" xml:space="preserve">
-    <value>Update History</value>
+    <value>更新履歴</value>
   </data>
   <data name="Notification_NewUpdateAvailable" xml:space="preserve">
-    <value>New Update Available</value>
+    <value>新しいアップデートがあります</value>
   </data>
   <data name="Notification_WhatsNew" xml:space="preserve">
-    <value>What's New</value>
+    <value>更新内容</value>
   </data>
   <data name="Notification_UpdateNow" xml:space="preserve">
-    <value>Update Now</value>
+    <value>今すぐ更新</value>
   </data>
   <data name="Notification_CheckForUpdates" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>アップデートを確認</value>
   </data>
   <data name="Notification_Checking" xml:space="preserve">
-    <value>Checking for updates...</value>
+    <value>アップデートを確認中...</value>
   </data>
   <data name="Notification_UpToDate" xml:space="preserve">
-    <value>You're up to date!</value>
+    <value>最新バージョンです！</value>
   </data>
   <data name="Notification_UpToDateDesc" xml:space="preserve">
-    <value>BaoTools {0} is currently the newest version.</value>
+    <value>BaoTools {0} は現在最新バージョンです。</value>
   </data>
   <data name="Notification_CheckFailed" xml:space="preserve">
-    <value>Check Failed</value>
+    <value>確認に失敗しました</value>
   </data>
   <data name="Notification_TryAgain" xml:space="preserve">
-    <value>Try Again</value>
+    <value>再試行</value>
   </data>
   <data name="Notification_ViewNotes" xml:space="preserve">
-    <value>Notes</value>
+    <value>詳細</value>
   </data>
   <data name="Notification_Badge_New" xml:space="preserve">
     <value>NEW</value>
   </data>
   <data name="Notification_Badge_Current" xml:space="preserve">
-    <value>CURRENT</value>
+    <value>現在</value>
   </data>
   <data name="Notification_Close" xml:space="preserve">
-    <value>Close</value>
+    <value>閉じる</value>
+  </data>
+  <data name="Notification_Downloading" xml:space="preserve">
+    <value>ダウンロード中...</value>
   </data>
 </root>

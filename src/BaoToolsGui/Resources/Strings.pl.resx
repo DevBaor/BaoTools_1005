@@ -721,48 +721,51 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
     <value>Nie udało się przywrócić {0} plików. Zamknij grę i spróbuj ponownie.</value>
   </data>
   <data name="Notification_Title" xml:space="preserve">
-    <value>Notifications</value>
+    <value>Powiadomienia</value>
   </data>
   <data name="Notification_UpdateHistory" xml:space="preserve">
-    <value>Update History</value>
+    <value>Historia aktualizacji</value>
   </data>
   <data name="Notification_NewUpdateAvailable" xml:space="preserve">
-    <value>New Update Available</value>
+    <value>Dostępna nowa aktualizacja</value>
   </data>
   <data name="Notification_WhatsNew" xml:space="preserve">
-    <value>What's New</value>
+    <value>Co nowego</value>
   </data>
   <data name="Notification_UpdateNow" xml:space="preserve">
-    <value>Update Now</value>
+    <value>Zaktualizuj teraz</value>
   </data>
   <data name="Notification_CheckForUpdates" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>Sprawdź aktualizacje</value>
   </data>
   <data name="Notification_Checking" xml:space="preserve">
-    <value>Checking for updates...</value>
+    <value>Sprawdzanie aktualizacji...</value>
   </data>
   <data name="Notification_UpToDate" xml:space="preserve">
-    <value>You're up to date!</value>
+    <value>Masz najnowszą wersję!</value>
   </data>
   <data name="Notification_UpToDateDesc" xml:space="preserve">
-    <value>BaoTools {0} is currently the newest version.</value>
+    <value>BaoTools {0} to obecnie najnowsza wersja.</value>
   </data>
   <data name="Notification_CheckFailed" xml:space="preserve">
-    <value>Check Failed</value>
+    <value>Sprawdzanie nie powiodło się</value>
   </data>
   <data name="Notification_TryAgain" xml:space="preserve">
-    <value>Try Again</value>
+    <value>Spróbuj ponownie</value>
   </data>
   <data name="Notification_ViewNotes" xml:space="preserve">
-    <value>Notes</value>
+    <value>Informacje</value>
   </data>
   <data name="Notification_Badge_New" xml:space="preserve">
-    <value>NEW</value>
+    <value>NOWY</value>
   </data>
   <data name="Notification_Badge_Current" xml:space="preserve">
-    <value>CURRENT</value>
+    <value>AKTUALNY</value>
   </data>
   <data name="Notification_Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Zamknij</value>
+  </data>
+  <data name="Notification_Downloading" xml:space="preserve">
+    <value>Pobieranie...</value>
   </data>
 </root>

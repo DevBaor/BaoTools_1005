@@ -65,7 +65,7 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty] private string _updateUrl = "https://baotools.baotranduy666666.workers.dev/";
     [ObservableProperty] private string _releaseNotesUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest";
     [ObservableProperty] private string? _updatePublishedAt;
-    [ObservableProperty] private string _updateStatusMessage = "You're up to date!";
+    [ObservableProperty] private string _updateStatusMessage = Resources.Strings.Notification_UpToDate;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsUpToDate))]
@@ -79,7 +79,7 @@ public partial class MainViewModel : ObservableObject
     private bool _isDownloadingUpdate;
 
     [ObservableProperty]
-    private string _updateButtonText = "Update Now";
+    private string _updateButtonText = Resources.Strings.Notification_UpdateNow;
 
     public bool CanUpdate => !IsDownloadingUpdate;
 
@@ -108,8 +108,22 @@ public partial class MainViewModel : ObservableObject
         _historyService = historyService;
         _toast = toast;
         _auth.AuthStateChanged += () => IsGuest = _auth.IsGuest;
+        SettingsViewModel.LanguageChanged += OnLanguageChanged;
 
         LoadLocalHistory();
+    }
+
+    private void OnLanguageChanged()
+    {
+        System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+        {
+            LoadLocalHistory();
+            UpdateButtonText = Resources.Strings.Notification_UpdateNow;
+            UpdateStatusMessage = HasUpdate
+                ? $"{Resources.Strings.Notification_NewUpdateAvailable} ({LatestVersion})"
+                : string.Format(Resources.Strings.Notification_UpToDateDesc, VersionLabel);
+            OnPropertyChanged(nameof(FooterStatus));
+        });
     }
 
     private void LoadLocalHistory()
@@ -221,10 +235,10 @@ public partial class MainViewModel : ObservableObject
 
             if (info is null)
             {
-                UpdateError = "Unable to reach GitHub. Please check your internet connection.";
+                UpdateError = Resources.Strings.Notification_CheckFailed;
                 if (showToastIfUpToDate)
                 {
-                    _toast.Show("BaoTools Update", "Unable to check for updates. Please try again later.", error: true);
+                    _toast.Show(Resources.Strings.Notification_Title, Resources.Strings.Notification_CheckFailed, error: true);
                 }
                 return;
             }
@@ -240,22 +254,22 @@ public partial class MainViewModel : ObservableObject
                 UpdateUrl = string.IsNullOrWhiteSpace(info.DownloadUrl) ? "https://baotools.baotranduy666666.workers.dev/" : info.DownloadUrl;
                 ReleaseNotesUrl = string.IsNullOrWhiteSpace(info.HtmlUrl) ? "https://github.com/DevBaor/BaoTools_1005/releases/latest" : info.HtmlUrl;
                 UpdatePublishedAt = info.PublishedAt?.ToString("MMM dd, yyyy");
-                UpdateStatusMessage = $"New update available ({info.TagName})";
+                UpdateStatusMessage = $"{Resources.Strings.Notification_NewUpdateAvailable} ({info.TagName})";
 
                 _toast.ShowAction(
-                    "BaoTools Update",
-                    $"A new update is available ({info.TagName})! Click to update.",
-                    "Update Now",
+                    Resources.Strings.Notification_Title,
+                    $"{Resources.Strings.Notification_NewUpdateAvailable} ({info.TagName})!",
+                    Resources.Strings.Notification_UpdateNow,
                     () => _ = DownloadUpdateAsync());
             }
             else
             {
                 HasUpdate = false;
                 LatestVersion = info.TagName;
-                UpdateStatusMessage = $"BaoTools {VersionLabel} is up to date.";
+                UpdateStatusMessage = string.Format(Resources.Strings.Notification_UpToDateDesc, VersionLabel);
                 if (showToastIfUpToDate)
                 {
-                    _toast.Show("BaoTools Update", $"You're all up to date! ({VersionLabel})");
+                    _toast.Show(Resources.Strings.Notification_Title, $"{Resources.Strings.Notification_UpToDate} ({VersionLabel})");
                 }
             }
         }
@@ -280,7 +294,7 @@ public partial class MainViewModel : ObservableObject
         }
 
         IsDownloadingUpdate = true;
-        UpdateButtonText = "Downloading...";
+        UpdateButtonText = Resources.Strings.Notification_Downloading;
 
         try
         {
@@ -289,11 +303,11 @@ public partial class MainViewModel : ObservableObject
                 if (pct.HasValue)
                 {
                     double p = Math.Clamp(pct.Value * 100, 0, 100);
-                    UpdateButtonText = $"Downloading {p:0}%";
+                    UpdateButtonText = $"{Resources.Strings.Notification_Downloading} {p:0}%";
                 }
                 else
                 {
-                    UpdateButtonText = "Downloading...";
+                    UpdateButtonText = Resources.Strings.Notification_Downloading;
                 }
             });
 
@@ -305,13 +319,13 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            _toast.Show("Update Failed", ex.Message, error: true);
+            _toast.Show(Resources.Strings.Notification_Title, ex.Message, error: true);
             OpenBrowserUrl(UpdateUrl);
         }
         finally
         {
             IsDownloadingUpdate = false;
-            UpdateButtonText = "Update Now";
+            UpdateButtonText = Resources.Strings.Notification_UpdateNow;
         }
     }
 

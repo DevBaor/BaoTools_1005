@@ -721,48 +721,51 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
     <value>{0} soubor(ů) se nepodařilo obnovit. Zavřete hru a zkuste to znovu.</value>
   </data>
   <data name="Notification_Title" xml:space="preserve">
-    <value>Notifications</value>
+    <value>Oznámení</value>
   </data>
   <data name="Notification_UpdateHistory" xml:space="preserve">
-    <value>Update History</value>
+    <value>Historie aktualizací</value>
   </data>
   <data name="Notification_NewUpdateAvailable" xml:space="preserve">
-    <value>New Update Available</value>
+    <value>K dispozici je nová aktualizace</value>
   </data>
   <data name="Notification_WhatsNew" xml:space="preserve">
-    <value>What's New</value>
+    <value>Co je nového</value>
   </data>
   <data name="Notification_UpdateNow" xml:space="preserve">
-    <value>Update Now</value>
+    <value>Aktualizovat nyní</value>
   </data>
   <data name="Notification_CheckForUpdates" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>Zkontrolovat aktualizace</value>
   </data>
   <data name="Notification_Checking" xml:space="preserve">
-    <value>Checking for updates...</value>
+    <value>Kontrola aktualizací...</value>
   </data>
   <data name="Notification_UpToDate" xml:space="preserve">
-    <value>You're up to date!</value>
+    <value>Máte nejnovější verzi!</value>
   </data>
   <data name="Notification_UpToDateDesc" xml:space="preserve">
-    <value>BaoTools {0} is currently the newest version.</value>
+    <value>BaoTools {0} je v současnosti nejnovější verze.</value>
   </data>
   <data name="Notification_CheckFailed" xml:space="preserve">
-    <value>Check Failed</value>
+    <value>Kontrola selhala</value>
   </data>
   <data name="Notification_TryAgain" xml:space="preserve">
-    <value>Try Again</value>
+    <value>Zkusit znovu</value>
   </data>
   <data name="Notification_ViewNotes" xml:space="preserve">
-    <value>Notes</value>
+    <value>Poznámky</value>
   </data>
   <data name="Notification_Badge_New" xml:space="preserve">
-    <value>NEW</value>
+    <value>NOVÉ</value>
   </data>
   <data name="Notification_Badge_Current" xml:space="preserve">
-    <value>CURRENT</value>
+    <value>AKTUÁLNÍ</value>
   </data>
   <data name="Notification_Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Zavřít</value>
+  </data>
+  <data name="Notification_Downloading" xml:space="preserve">
+    <value>Stahování...</value>
   </data>
 </root>

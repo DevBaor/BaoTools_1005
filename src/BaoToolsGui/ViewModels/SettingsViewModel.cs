@@ -153,12 +153,33 @@ public partial class SettingsViewModel : ObservableObject
 
     private bool _suppressLanguagePrompt; // true during ctor init so we don't prompt on first bind
 
+    public static event Action? LanguageChanged;
+
     partial void OnSelectedLanguageChanged(LanguageOption value)
     {
         if (value is null || _suppressLanguagePrompt) return;
         _settings.Language = value.Tag; // null = follow system
+
+        ApplyRuntimeCulture(value.Tag);
+        LanguageChanged?.Invoke();
+
         // The whole UI is built with parse-time x:Static resources, so a relaunch is needed to re-read it.
         RequestRestartPrompt?.Invoke();
+    }
+
+    public static void ApplyRuntimeCulture(string? tag)
+    {
+        try
+        {
+            string resolvedTag = tag ?? Program.MatchOsLanguage(System.Globalization.CultureInfo.InstalledUICulture);
+            var culture = new System.Globalization.CultureInfo(resolvedTag);
+
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = culture;
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+        }
+        catch { }
     }
 
     // ── Hubcap API key ──────────────────────────────────────────────

@@ -721,48 +721,51 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
     <value>Δεν ήταν δυνατή η επαναφορά {0} αρχείων. Κλείστε το παιχνίδι και δοκιμάστε ξανά.</value>
   </data>
   <data name="Notification_Title" xml:space="preserve">
-    <value>Notifications</value>
+    <value>Ειδοποιήσεις</value>
   </data>
   <data name="Notification_UpdateHistory" xml:space="preserve">
-    <value>Update History</value>
+    <value>Ιστορικό ενημερώσεων</value>
   </data>
   <data name="Notification_NewUpdateAvailable" xml:space="preserve">
-    <value>New Update Available</value>
+    <value>Νέα ενημέρωση διαθέσιμη</value>
   </data>
   <data name="Notification_WhatsNew" xml:space="preserve">
-    <value>What's New</value>
+    <value>Τι νέο υπάρχει</value>
   </data>
   <data name="Notification_UpdateNow" xml:space="preserve">
-    <value>Update Now</value>
+    <value>Ενημέρωση τώρα</value>
   </data>
   <data name="Notification_CheckForUpdates" xml:space="preserve">
-    <value>Check for updates</value>
+    <value>Έλεγχος για ενημερώσεις</value>
   </data>
   <data name="Notification_Checking" xml:space="preserve">
-    <value>Checking for updates...</value>
+    <value>Έλεγχος για ενημερώσεις...</value>
   </data>
   <data name="Notification_UpToDate" xml:space="preserve">
-    <value>You're up to date!</value>
+    <value>Είστε ενημερωμένοι!</value>
   </data>
   <data name="Notification_UpToDateDesc" xml:space="preserve">
-    <value>BaoTools {0} is currently the newest version.</value>
+    <value>Το BaoTools {0} είναι αυτή τη στιγμή η νεότερη έκδοση.</value>
   </data>
   <data name="Notification_CheckFailed" xml:space="preserve">
-    <value>Check Failed</value>
+    <value>Ο έλεγχος απέτυχε</value>
   </data>
   <data name="Notification_TryAgain" xml:space="preserve">
-    <value>Try Again</value>
+    <value>Δοκιμάστε ξανά</value>
   </data>
   <data name="Notification_ViewNotes" xml:space="preserve">
-    <value>Notes</value>
+    <value>Σημειώσεις</value>
   </data>
   <data name="Notification_Badge_New" xml:space="preserve">
-    <value>NEW</value>
+    <value>ΝΕΟ</value>
   </data>
   <data name="Notification_Badge_Current" xml:space="preserve">
-    <value>CURRENT</value>
+    <value>ΤΡΕΧΟΥΣΑ</value>
   </data>
   <data name="Notification_Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Κλείσιμο</value>
+  </data>
+  <data name="Notification_Downloading" xml:space="preserve">
+    <value>Λήψη...</value>
   </data>
 </root>

@@ -765,4 +765,7 @@ B2: Bấm "Cài đặt" và chọn file ZIP vừa tải về để app tự gi�
   <data name="Notification_Close" xml:space="preserve">
     <value>Đóng</value>
   </data>
+  <data name="Notification_Downloading" xml:space="preserve">
+    <value>Đang tải...</value>
+  </data>
 </root>

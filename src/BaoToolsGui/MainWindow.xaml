@@ -42,7 +42,7 @@
                     BorderThickness="0"
                     BorderBrush="Transparent"
                     Command="{Binding ToggleNotificationCommand}"
-                    ToolTip="Notifications"
+                    ToolTip="{x:Static res:Strings.Notification_Title}"
                     Focusable="False"
                     Cursor="Hand">
                     <Button.Template>
