@@ -72,6 +72,18 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
         Application.Current.Shutdown();
     }
 
+    /// <summary>Allows graceful, non-blocking shutdown for auto-updates (bypasses minimize-to-tray).</summary>
+    public void PrepareForShutdown()
+    {
+        _reallyExiting = true;
+        if (_trayIcon is not null)
+        {
+            _trayIcon.Visible = false;
+            _trayIcon.Dispose();
+            _trayIcon = null;
+        }
+    }
+
     /// <summary>Quit for real from the tray "Exit" item (bypasses close-to-tray).</summary>
     private void ExitApp()
     {

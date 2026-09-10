@@ -24,4 +24,4 @@ Name: "{autodesktop}\BaoTools"; Filename: "{app}\BaoTools.exe"; Tasks: desktopic
 Name: "desktopicon"; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:"; Flags: unchecked
 
 [Run]
-Filename: "{app}\BaoTools.exe"; Description: "Launch BaoTools"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\BaoTools.exe"; Description: "Launch BaoTools"; Flags: nowait postinstall

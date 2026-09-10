@@ -309,18 +309,25 @@ public class UpdateService
 
     /// <summary>
     /// Downloads the latest release asset and automatically launches it to apply the update.
-    /// Supports both Inno Setup installations and Portable (folder) deployments.
+    /// Supports Inno Setup installations, Single-File standalone executables, and Portable folder deployments.
+    /// Ensures current process is gracefully closed and the updated application is automatically restarted.
     /// </summary>
     public async Task<bool> DownloadAndApplyUpdateAsync(GitHubReleaseInfo info, IProgress<double?>? progress = null, CancellationToken ct = default)
     {
         if (info is null) return false;
 
         string appDir = AppContext.BaseDirectory;
+        int currentPid = Environment.ProcessId;
+        string targetExe = File.Exists(Path.Combine(appDir, "BaoTools.exe"))
+            ? Path.Combine(appDir, "BaoTools.exe")
+            : (Environment.ProcessPath ?? Path.Combine(appDir, "BaoTools.exe"));
+
         bool isSetupInstall = File.Exists(Path.Combine(appDir, "unins000.exe"));
+        bool isLooseFolder = File.Exists(Path.Combine(appDir, "BaoToolsGui.dll"));
 
         if (isSetupInstall)
         {
-            // 1. Setup mode: download BaoTools_Setup.exe and execute with /SILENT
+            // 1. Setup mode: download BaoTools_Setup.exe and execute with supervisor script
             string setupUrl = info.SetupDownloadUrl
                 ?? $"https://github.com/DevBaor/BaoTools_1005/releases/download/{info.TagName}/BaoTools_Setup.exe";
 
@@ -329,25 +336,50 @@ public class UpdateService
 
             if (!File.Exists(tempSetup)) return false;
 
-            // Launch setup silently so it overwrites existing installation and restarts
+            string batchPath = Path.Combine(Path.GetTempPath(), $"baotools_update_setup_{info.TagName}.bat");
+            string scriptContent = BuildSetupBatchScript(currentPid, tempSetup, appDir, targetExe);
+            File.WriteAllText(batchPath, scriptContent, System.Text.Encoding.ASCII);
+
             var psi = new System.Diagnostics.ProcessStartInfo
             {
-                FileName = tempSetup,
-                Arguments = "/SILENT /SUPPRESSMSGBOXES /FORCECLOSEAPPLICATIONS",
-                UseShellExecute = true
+                FileName = batchPath,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
             };
             System.Diagnostics.Process.Start(psi);
 
-            // Shutdown the current app to let installer finish
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            ShutdownForUpdate();
+            return true;
+        }
+        else if (!isLooseFolder && !string.IsNullOrEmpty(info.StandaloneExeDownloadUrl))
+        {
+            // 2. Standalone single-file mode: download BaoTools.exe directly
+            string exeUrl = info.StandaloneExeDownloadUrl;
+            string tempExe = Path.Combine(Path.GetTempPath(), $"BaoTools_{info.TagName}.exe");
+            await _gh.DownloadAsync(exeUrl, tempExe, progress, ct);
+
+            if (!File.Exists(tempExe)) return false;
+
+            string batchPath = Path.Combine(Path.GetTempPath(), $"baotools_update_single_{info.TagName}.bat");
+            string scriptContent = BuildSingleExeBatchScript(currentPid, tempExe, appDir, targetExe);
+            File.WriteAllText(batchPath, scriptContent, System.Text.Encoding.ASCII);
+
+            var psi = new System.Diagnostics.ProcessStartInfo
             {
-                System.Windows.Application.Current.Shutdown();
-            });
+                FileName = batchPath,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
+            };
+            System.Diagnostics.Process.Start(psi);
+
+            ShutdownForUpdate();
             return true;
         }
         else
         {
-            // 2. Portable mode: download Portable ZIP or standalone BaoTools.exe
+            // 3. Portable folder mode: download Portable ZIP and extract over existing files
             string portableUrl = info.PortableDownloadUrl
                 ?? $"https://github.com/DevBaor/BaoTools_1005/releases/download/{info.TagName}/BaoTools_{info.TagName}_Portable.zip";
 
@@ -363,25 +395,8 @@ public class UpdateService
             }
             System.IO.Compression.ZipFile.ExtractToDirectory(tempZip, stagingDir);
 
-            // Create a small helper batch script to copy files over after current process exits
             string batchPath = Path.Combine(Path.GetTempPath(), $"baotools_update_{info.TagName}.bat");
-            string currentExe = Environment.ProcessPath ?? Path.Combine(appDir, "BaoTools.exe");
-
-            string scriptContent = $@"@echo off
-chcp 65001 > nul
-timeout /t 1 /nobreak > nul
-:wait_exit
-tasklist /fi ""imagename eq BaoTools.exe"" 2>nul | find /i ""BaoTools.exe"" > nul
-if not errorlevel 1 (
-    timeout /t 1 /nobreak > nul
-    goto wait_exit
-)
-xcopy /y /s /e ""{stagingDir}\*"" ""{appDir}\"" > nul
-start """" ""{currentExe}""
-rd /s /q ""{stagingDir}"" > nul 2>&1
-del ""{tempZip}"" > nul 2>&1
-(goto) 2>nul & del ""%~f0""
-";
+            string scriptContent = BuildPortableBatchScript(currentPid, stagingDir, tempZip, appDir, targetExe);
             File.WriteAllText(batchPath, scriptContent, System.Text.Encoding.ASCII);
 
             var psi = new System.Diagnostics.ProcessStartInfo
@@ -393,11 +408,85 @@ del ""{tempZip}"" > nul 2>&1
             };
             System.Diagnostics.Process.Start(psi);
 
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            {
-                System.Windows.Application.Current.Shutdown();
-            });
+            ShutdownForUpdate();
             return true;
         }
     }
+
+    internal static string BuildSetupBatchScript(int currentPid, string tempSetup, string appDir, string targetExe)
+    {
+        return $@"@echo off
+chcp 65001 > nul
+:wait_exit
+timeout /t 1 /nobreak > nul
+tasklist /fi ""PID eq {currentPid}"" 2>nul | find ""{currentPid}"" > nul
+if not errorlevel 1 goto wait_exit
+
+""{tempSetup}"" /SILENT /SUPPRESSMSGBOXES /FORCECLOSEAPPLICATIONS
+
+timeout /t 2 /nobreak > nul
+tasklist /fi ""imagename eq BaoTools.exe"" 2>nul | find /i ""BaoTools.exe"" > nul
+if errorlevel 1 (
+    cd /d ""{appDir}""
+    start """" ""{targetExe}""
+)
+
+del ""{tempSetup}"" > nul 2>&1
+(goto) 2>nul & del ""%~f0""
+";
+    }
+
+    internal static string BuildSingleExeBatchScript(int currentPid, string tempExe, string appDir, string targetExe)
+    {
+        return $@"@echo off
+chcp 65001 > nul
+:wait_exit
+timeout /t 1 /nobreak > nul
+tasklist /fi ""PID eq {currentPid}"" 2>nul | find ""{currentPid}"" > nul
+if not errorlevel 1 goto wait_exit
+
+move /y ""{tempExe}"" ""{targetExe}"" > nul
+if errorlevel 1 (
+    copy /y ""{tempExe}"" ""{targetExe}"" > nul
+    del ""{tempExe}"" > nul 2>&1
+)
+
+cd /d ""{appDir}""
+start """" ""{targetExe}""
+(goto) 2>nul & del ""%~f0""
+";
+    }
+
+    internal static string BuildPortableBatchScript(int currentPid, string stagingDir, string tempZip, string appDir, string targetExe)
+    {
+        return $@"@echo off
+chcp 65001 > nul
+:wait_exit
+timeout /t 1 /nobreak > nul
+tasklist /fi ""PID eq {currentPid}"" 2>nul | find ""{currentPid}"" > nul
+if not errorlevel 1 goto wait_exit
+
+xcopy /y /s /e ""{stagingDir}\*"" ""{appDir}\"" > nul
+
+cd /d ""{appDir}""
+start """" ""{targetExe}""
+
+rd /s /q ""{stagingDir}"" > nul 2>&1
+del ""{tempZip}"" > nul 2>&1
+(goto) 2>nul & del ""%~f0""
+";
+    }
+
+    private static void ShutdownForUpdate()
+    {
+        System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+        {
+            if (System.Windows.Application.Current.MainWindow is MainWindow mw)
+            {
+                mw.PrepareForShutdown();
+            }
+            System.Windows.Application.Current.Shutdown();
+        });
+    }
 }
+

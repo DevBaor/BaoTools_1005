@@ -279,4 +279,42 @@ public class UpdateNotificationTests
             System.Globalization.CultureInfo.CurrentUICulture = prevCulture;
         }
     }
+
+    [Fact]
+    public void BuildSetupBatchScript_IncludesPidWaitAndRelaunch()
+    {
+        string script = UpdateService.BuildSetupBatchScript(12345, @"C:\Temp\Setup.exe", @"C:\Program Files\BaoTools", @"C:\Program Files\BaoTools\BaoTools.exe");
+
+        Assert.Contains("PID eq 12345", script);
+        Assert.Contains(@"C:\Temp\Setup.exe", script);
+        Assert.Contains("/SILENT", script);
+        Assert.Contains(@"cd /d ""C:\Program Files\BaoTools""", script);
+        Assert.Contains(@"start """" ""C:\Program Files\BaoTools\BaoTools.exe""", script);
+        Assert.Contains(@"del ""C:\Temp\Setup.exe""", script);
+    }
+
+    [Fact]
+    public void BuildSingleExeBatchScript_IncludesPidWaitAndRelaunch()
+    {
+        string script = UpdateService.BuildSingleExeBatchScript(12345, @"C:\Temp\BaoTools_v105.3.exe", @"C:\Games\BaoTools", @"C:\Games\BaoTools\BaoTools.exe");
+
+        Assert.Contains("PID eq 12345", script);
+        Assert.Contains(@"C:\Temp\BaoTools_v105.3.exe", script);
+        Assert.Contains(@"C:\Games\BaoTools\BaoTools.exe", script);
+        Assert.Contains(@"cd /d ""C:\Games\BaoTools""", script);
+        Assert.Contains(@"start """" ""C:\Games\BaoTools\BaoTools.exe""", script);
+    }
+
+    [Fact]
+    public void BuildPortableBatchScript_IncludesPidWaitAndRelaunch()
+    {
+        string script = UpdateService.BuildPortableBatchScript(12345, @"C:\Temp\Staging", @"C:\Temp\Zip.zip", @"C:\Games\BaoTools", @"C:\Games\BaoTools\BaoTools.exe");
+
+        Assert.Contains("PID eq 12345", script);
+        Assert.Contains(@"C:\Temp\Staging", script);
+        Assert.Contains(@"cd /d ""C:\Games\BaoTools""", script);
+        Assert.Contains(@"start """" ""C:\Games\BaoTools\BaoTools.exe""", script);
+        Assert.Contains(@"rd /s /q ""C:\Temp\Staging""", script);
+    }
 }
+
