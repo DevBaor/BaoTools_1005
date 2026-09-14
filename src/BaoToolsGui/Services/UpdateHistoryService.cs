@@ -21,7 +21,7 @@ public class UpdateHistoryService
         PropertyNameCaseInsensitive = true
     };
 
-    private static readonly string[] DefaultTagList = ["v105.4", "v105.3", "v105.2", "v105.1", "v1005", "1005"];
+    private static readonly string[] DefaultTagList = ["v105.5", "v105.4", "v105.3", "v105.2", "v105.1", "v1005", "1005"];
 
     public static bool IsDefaultTag(string? tag)
     {
@@ -44,11 +44,19 @@ public class UpdateHistoryService
             {
                 new()
                 {
+                    TagName = "v105.5",
+                    Title = "BaoTools v105.5 - Cập nhật Giao diện (Themes), Sửa hiển thị Trang Add & Chạy nền Steam",
+                    Body = "• 6 Bộ chủ đề màu sắc cao cấp: Default Slate, Dracula, Cyberpunk, Forest Emerald, Nord Frost, Sunset Amber với hiệu ứng tức thì.\n• Sửa lỗi trang Add lúc hiện game lúc không: Lưu cache cục bộ và danh mục dự phòng 26+ game hot, đảm bảo hiển thị game 100% ngay cả khi mạng Việt Nam chặn Steam Store.\n• Chế độ chạy ngầm Steam Backend: BaoTools chỉ ẩn dưới khay hệ thống khi được Steam gọi, không tự hiện cửa sổ giao diện.\n• Nút Clear và Đóng chi tiết: Dễ dàng quay lại danh mục game nổi bật bất kỳ lúc nào.",
+                    PublishedAt = "14/09/2026",
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                },
+                new()
+                {
                     TagName = "v105.4",
                     Title = "BaoTools v105.4 - Tự động khởi động lại sau Cập nhật & Đồng bộ Chuông thông báo Đa ngôn ngữ",
                     Body = "• Tự động khởi động lại sau cập nhật (Auto-restart): Sau khi nhấn 'Cập nhật ngay', ứng dụng tự tải, cài đặt và mở lại bản mới ngay lập tức (hỗ trợ cả Setup, Portable và Single-File exe).\n• Đồng bộ chuông thông báo 29 ngôn ngữ: Nút chuông, trạng thái và nội dung cập nhật tự chuyển đổi theo thời gian thực khi đổi ngôn ngữ trong Cài đặt.\n• Bảo vệ nội dung bản địa: Khóa ghi đè nội dung tiếng Anh từ GitHub vào các bản cập nhật gốc.\n• Sửa lỗi thoát sạch khi bật chế độ Thu nhỏ vào khay hệ thống (Minimize to Tray).",
                     PublishedAt = "10/09/2026",
-                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.4"
                 },
                 new()
                 {
@@ -91,11 +99,19 @@ public class UpdateHistoryService
             {
                 new()
                 {
+                    TagName = "v105.5",
+                    Title = "BaoTools v105.5 - 主题切换、Add 页面显示修复与 Steam 后台模式",
+                    Body = "• 6 套精美色彩主题：Default Slate、Dracula、Cyberpunk、Forest Emerald、Nord Frost、Sunset Amber，即选即换。\n• 修复 Add 页面游戏偶尔消失问题：本地持久化缓存与 26+ 热门游戏离线目录，网络受阻也能 100% 秒开展示。\n• Steam 后台转发运行模式：由 Steam 调起时仅常驻系统托盘，不弹出前台主窗口。\n• 清空与关闭详情按钮：随时轻松返回热门游戏列表。",
+                    PublishedAt = "2026-09-14",
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                },
+                new()
+                {
                     TagName = "v105.4",
                     Title = "BaoTools v105.4 - 更新后自动重启 & 通知铃铛多语言即时同步",
                     Body = "• 更新后自动重启应用：点击“立即更新”后，自动完成下载、覆盖更新并立即重新启动应用（支持安装版、便携版和单文件版）。\n• 通知铃铛多语言即时同步：通知铃铛、版本日志及按钮文本完全支持 29 种语言，切换语言无需重启即可即时更新。\n• 保护本地化更新日志：防止 GitHub 远程英文日志覆盖本地中文版本日志。\n• 修复托盘最小化冲突：解决更新时因最小化到托盘导致进程无法退出的问题。",
                     PublishedAt = "2026-09-10",
-                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.4"
                 },
                 new()
                 {
@@ -138,11 +154,19 @@ public class UpdateHistoryService
             {
                 new()
                 {
+                    TagName = "v105.5",
+                    Title = "BaoTools v105.5 - Темы оформления, фикс страницы Add и фоновый режим Steam",
+                    Body = "• 6 премиальных тем оформления: Default Slate, Dracula, Cyberpunk, Forest Emerald, Nord Frost, Sunset Amber.\n• Устранена проблема с отображением игр на странице Add: локальный кэш и 26+ игр в резервном каталоге.\n• Фоновый режим бэкенда Steam: при запуске через Steam приложение скрывается в трей.\n• Кнопки сброса и закрытия деталей: быстрый возврат к списку игр.",
+                    PublishedAt = "14.09.2026",
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                },
+                new()
+                {
                     TagName = "v105.4",
                     Title = "BaoTools v105.4 - Автоперезапуск после обновления и синхронизация языков уведомлений",
                     Body = "• Автоматический перезапуск после обновления: скачивание, установка и мгновенный перезапуск новой версии (Setup, Portable и Standalone).\n• Мгновенная синхронизация 29 языков: колокольчик, история релизов и кнопки обновляются на лету при смене языка в настройках.\n• Защита локализованных описаний: описания релизов защищены от перезаписи английским текстом с GitHub.\n• Чистый выход при сворачивании в трей: устранено зависание обновления при включенном сворачивании в трей.",
                     PublishedAt = "10.09.2026",
-                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                    HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.4"
                 },
                 new()
                 {
@@ -183,11 +207,19 @@ public class UpdateHistoryService
         {
             new()
             {
+                TagName = "v105.5",
+                Title = "BaoTools v105.5 - Theme Switcher, Add Page Display Fix & Steam Background Mode",
+                Body = "• 6 curated color themes: Default Slate, Dracula, Cyberpunk, Forest Emerald, Nord Frost, Sunset Amber with instant switching.\n• Add page game display fix: persistent disk cache and curated 26+ fallback catalog ensure games always render instantly even when Steam store is ISP-blocked.\n• Steam headless backend mode: BaoTools stays hidden in system tray when invoked by Steam.\n• Search clear & dismiss buttons: easily return to featured game lists at any time.",
+                PublishedAt = "Sep 14, 2026",
+                HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+            },
+            new()
+            {
                 TagName = "v105.4",
                 Title = "BaoTools v105.4 - Auto-restart After Update & Multi-language Notification Sync",
                 Body = "• Auto-restart after update: Clicking 'Update Now' automatically downloads, installs, and relaunches the app seamlessly across Setup, Portable, and Single-File exe modes.\n• Multi-language real-time notification sync: Full 29-language support for notification bell, status text, and release history with instant UI culture updates.\n• Protected local changelogs: Prevents remote GitHub English releases from overwriting curated localized release notes.\n• Clean update termination: Eliminates process hang caused by the 'Minimize to Tray' background setting.",
                 PublishedAt = "Sep 10, 2026",
-                HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/latest"
+                HtmlUrl = "https://github.com/DevBaor/BaoTools_1005/releases/tag/v105.4"
             },
             new()
             {
