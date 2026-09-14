@@ -1,4 +1,4 @@
-﻿<UserControl
+<UserControl
     x:Class="BaoToolsGui.Views.DownloadView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -217,6 +217,7 @@
 
             <!-- Search -->
             <ui:TextBox
+                ClearButtonEnabled="True"
                 Icon="{ui:SymbolIcon Search24}"
                 PlaceholderText="{x:Static res:Strings.Add_SearchPlaceholder}"
                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
@@ -342,11 +343,24 @@
                 CornerRadius="8"
                 Visibility="{Binding HasDetails, Converter={StaticResource BoolToVis}}">
                 <StackPanel>
-                    <Border
-                        MaxHeight="180"
-                        CornerRadius="8,8,0,0">
-                        <Image Source="{Binding Details.HeaderImage}" Stretch="UniformToFill" />
-                    </Border>
+                    <Grid>
+                        <Border
+                            MaxHeight="180"
+                            CornerRadius="8,8,0,0">
+                            <Image Source="{Binding Details.HeaderImage}" Stretch="UniformToFill" />
+                        </Border>
+                        <ui:Button
+                            Margin="0,8,8,0"
+                            Padding="6"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Background="#80000000"
+                            BorderBrush="#33FFFFFF"
+                            BorderThickness="1"
+                            Command="{Binding ClearDetailsCommand}"
+                            Cursor="Hand"
+                            Icon="{ui:SymbolIcon Dismiss24}" />
+                    </Grid>
                     <StackPanel Margin="12,8,12,10">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock

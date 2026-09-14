@@ -43,9 +43,12 @@ public class AppSettings
     // sources stay locked until set. Stored locally. The app calls Hubcap directly with it.
     public string? HubcapApiKey { get; set; }
 
-    // When true, register the app to launch on Windows sign-in (HKCU …\Run). Nullable so "never set"
+    // When true, registering the app to launch on Windows sign-in (HKCU …\Run). Nullable so "never set"
     // (→ default OFF) is distinguishable from an explicit choice.
     public bool? StartWithWindows { get; set; }
+
+    // When true, launch the app silently into the system tray when Steam starts (via winmm.dll loader).
+    public bool? StartWithSteam { get; set; }
 
     // When true, minimizing hides the window to the system tray instead of the taskbar. Nullable so
     // "never set" (→ default OFF) is distinguishable from an explicit choice.
@@ -54,6 +57,9 @@ public class AppSettings
     // When true, FastFetch auto-picks the first available source and downloads immediately.
     // Nullable so "never set" (→ default OFF) is distinguishable from an explicit choice.
     public bool? FastFetch { get; set; }
+
+    // UI Theme ("Default" | "Dracula" | "Nord" | "Catppuccin" | "Cyberpunk" | "Midnight")
+    public string? Theme { get; set; }
 }
 
 public class SettingsService
@@ -158,6 +164,13 @@ public class SettingsService
         set { _settings.StartWithWindows = value; Save(); }
     }
 
+    /// <summary>When true, launch the app silently in tray when Steam starts.</summary>
+    public bool? StartWithSteam
+    {
+        get => _settings.StartWithSteam;
+        set { _settings.StartWithSteam = value; Save(); }
+    }
+
     /// <summary>When true, minimizing hides the window to the system tray (default OFF).</summary>
     public bool MinimizeToTray
     {
@@ -170,6 +183,12 @@ public class SettingsService
     {
         get => _settings.FastFetch ?? false; // default OFF
         set { _settings.FastFetch = value; Save(); }
+    }
+
+    public string Theme
+    {
+        get => _settings.Theme ?? "Default";
+        set { _settings.Theme = value; Save(); }
     }
 
     private static readonly string TmpPath = FilePath + ".tmp";
@@ -230,7 +249,8 @@ public class SettingsService
             && _settings.HubcapApiKey is null
             && _settings.StartWithWindows is null
             && _settings.MinimizeToTray is null
-            && _settings.FastFetch is null;
+            && _settings.FastFetch is null
+            && _settings.Theme is null;
         if (empty)
         {
             foreach (var p in new[] { FilePath, BakPath, TmpPath })

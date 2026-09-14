@@ -111,6 +111,9 @@
   <data name="Settings_Language" xml:space="preserve"><value>Language</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Choose the app's display language. Applies after a restart.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>System default</value></data>
+    <data name="Settings_Section_Appearance" xml:space="preserve"><value>APPEARANCE</value></data>
+    <data name="Settings_Theme" xml:space="preserve"><value>Color Theme</value></data>
+    <data name="Settings_Theme_Hint" xml:space="preserve"><value>Choose your color theme: Dracula, Nord, Cyberpunk, Catppuccin, Midnight OLED, or Classic.</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam location</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Change…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Open</value></data>
@@ -122,6 +125,8 @@
   <data name="Settings_Section_Startup" xml:space="preserve"><value>STARTUP</value></data>
   <data name="Settings_StartWithWindows" xml:space="preserve"><value>Start with Windows</value></data>
   <data name="Settings_StartWithWindows_Hint" xml:space="preserve"><value>Launch BaoTools automatically when Windows starts.</value></data>
+    <data name="Settings_StartWithSteam" xml:space="preserve"><value>Start with Steam</value></data>
+    <data name="Settings_StartWithSteam_Hint" xml:space="preserve"><value>Automatically launch BaoTools silently in the system tray when Steam starts.</value></data>
   <data name="Settings_MinimizeToTray" xml:space="preserve"><value>Minimize to System Tray</value></data>
   <data name="Settings_MinimizeToTray_Hint" xml:space="preserve"><value>When you close the window, keep BaoTools running in the system tray instead of quitting. Double-click the tray icon to restore.</value></data>
   <data name="Tray_Open" xml:space="preserve"><value>Open BaoTools</value></data>
@@ -799,4 +804,22 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Notification_Downloading" xml:space="preserve">
     <value>Downloading...</value>
   </data>
+
+  <data name="Theme_Default" xml:space="preserve"><value>BaoTools Classic</value></data>
+  <data name="Theme_Dracula" xml:space="preserve"><value>Dracula</value></data>
+  <data name="Theme_Nord" xml:space="preserve"><value>Nord</value></data>
+  <data name="Theme_Catppuccin" xml:space="preserve"><value>Catppuccin Mocha</value></data>
+  <data name="Theme_Cyberpunk" xml:space="preserve"><value>Cyberpunk</value></data>
+  <data name="Theme_Midnight" xml:space="preserve"><value>Midnight OLED</value></data>
+
+  <data name="Theme_TokyoNight" xml:space="preserve"><value>Tokyo Night</value></data>
+  <data name="Theme_Synthwave" xml:space="preserve"><value>Synthwave '84</value></data>
+  <data name="Theme_RosePine" xml:space="preserve"><value>Rosé Pine</value></data>
+  <data name="Theme_Sakura" xml:space="preserve"><value>Sakura Blossom</value></data>
+  <data name="Theme_Emerald" xml:space="preserve"><value>Emerald Matrix</value></data>
+  <data name="Theme_AmberSunset" xml:space="preserve"><value>Amber Horizon</value></data>
+  <data name="Theme_Amethyst" xml:space="preserve"><value>Amethyst Neon</value></data>
+  <data name="Theme_AbyssalOcean" xml:space="preserve"><value>Abyssal Ocean</value></data>
+  <data name="Theme_OneDark" xml:space="preserve"><value>One Dark Pro</value></data>
+  <data name="Theme_Gruvbox" xml:space="preserve"><value>Gruvbox Retro</value></data>
 </root>

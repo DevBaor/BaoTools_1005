@@ -19,6 +19,8 @@ public partial class SettingsViewModel : ObservableObject
     private readonly SteamService _steam;
     private readonly HubcapService _hubcap;
     private readonly BaoToolsApiClient _api;
+    private readonly SteamStartupService _steamStartup;
+    private readonly ThemeService _themeService;
 
     [ObservableProperty] private string? _displayName;
     [ObservableProperty] private string? _email;
@@ -99,6 +101,14 @@ public partial class SettingsViewModel : ObservableObject
         catch { /* registry write blocked. Setting is still saved, just not applied this run */ }
     }
 
+    /// <summary>Launch the app silently in the system tray when Steam starts. Persisted via SettingsService.</summary>
+    [ObservableProperty] private bool _startWithSteam;
+
+    partial void OnStartWithSteamChanged(bool value)
+    {
+        _ = _steamStartup.SetStartWithSteamAsync(value);
+    }
+
     /// <summary>Minimize to the system tray instead of the taskbar. Persisted via SettingsService.</summary>
     [ObservableProperty] private bool _minimizeToTray;
 
@@ -151,6 +161,18 @@ public partial class SettingsViewModel : ObservableObject
 
     [ObservableProperty] private LanguageOption _selectedLanguage = null!;
 
+    public IReadOnlyList<ThemeDefinition> ThemeOptions => ThemeService.AvailableThemes;
+
+    [ObservableProperty] private ThemeDefinition _selectedTheme = null!;
+
+    private bool _suppressThemeChange;
+
+    partial void OnSelectedThemeChanged(ThemeDefinition value)
+    {
+        if (value is null || _suppressThemeChange) return;
+        _themeService.ApplyTheme(value.Id);
+    }
+
     private bool _suppressLanguagePrompt; // true during ctor init so we don't prompt on first bind
 
     public static event Action? LanguageChanged;
@@ -162,6 +184,7 @@ public partial class SettingsViewModel : ObservableObject
 
         ApplyRuntimeCulture(value.Tag);
         LanguageChanged?.Invoke();
+        OnPropertyChanged(nameof(ThemeOptions));
 
         // The whole UI is built with parse-time x:Static resources, so a relaunch is needed to re-read it.
         RequestRestartPrompt?.Invoke();
@@ -246,13 +269,15 @@ public partial class SettingsViewModel : ObservableObject
     public Action? RequestRestartPrompt { get; set; }
 
     public SettingsViewModel(SettingsService settings, AuthService auth, SteamService steam,
-        HubcapService hubcap, BaoToolsApiClient api)
+        HubcapService hubcap, BaoToolsApiClient api, SteamStartupService steamStartup, ThemeService themeService)
     {
         _settings = settings;
         _auth = auth;
         _steam = steam;
         _hubcap = hubcap;
         _api = api;
+        _steamStartup = steamStartup;
+        _themeService = themeService;
         _auth.AuthStateChanged += RefreshAccount;
         RefreshAccount();
         RefreshSteam();
@@ -260,8 +285,14 @@ public partial class SettingsViewModel : ObservableObject
         _fastFetch = settings.FastFetch;
         _donateKeys = settings.DonateKeys;
         _startWithWindows = settings.StartWithWindows; // default OFF. Init without triggering the registry write
+        _startWithSteam = steamStartup.IsStartWithSteamActive;
         _minimizeToTray = settings.MinimizeToTray;
         _hubcapIsKeyConfigured = !string.IsNullOrEmpty(settings.HubcapApiKey);
+
+        // Select the saved theme without re-triggering save
+        _suppressThemeChange = true;
+        _selectedTheme = ThemeService.AvailableThemes.Find(t => string.Equals(t.Id, settings.Theme, StringComparison.OrdinalIgnoreCase)) ?? ThemeService.AvailableThemes[0];
+        _suppressThemeChange = false;
 
         // Select the saved language (or "System default") without firing the restart prompt.
         _suppressLanguagePrompt = true;

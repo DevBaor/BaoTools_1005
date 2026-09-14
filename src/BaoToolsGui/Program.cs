@@ -13,6 +13,7 @@ public static class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        Services.PluginLog.Log($"[Program.Main] Started. Args: {string.Join(' ', args)}");
         // MUST run before any WPF/UI work: handles Velopack install/update hooks,
         // then no-ops on a normal launch.
         VelopackApp.Build().Run();

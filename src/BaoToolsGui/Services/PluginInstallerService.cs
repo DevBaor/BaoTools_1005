@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
@@ -282,11 +282,11 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             return new PluginStatus(frontend, loader, false, manifest?.Tag, null, UpdateAvailable: false,
                 MillenniumPresent, Offline: true, port8080Busy);
 
-        // dllMatches = true only when EVERY slot's proxy is present and matches its release asset digest.
+        // dllMatches = true only when EVERY slot's proxy is present and matches its release asset digest (or patched BaoTools counterpart).
         bool dllMatches = Slots.All(slot =>
             SlotPath(slot) is { } p && File.Exists(p) &&
             AssetDigest(latest, slot.DllAsset) is { } digest &&
-            AssetHash.OfFile(p) == digest);
+            (AssetHash.OfFile(p) == digest || SteamStartupService.MatchesPatchedWinmm(p, digest)));
         bool installed = frontend && loader;
         // `|| legacy` keeps a leftover/locked legacy dll getting swept on subsequent auto-updates until gone.
         bool updateAvailable = installed && (manifest?.Tag != latest.TagName || !dllMatches || legacy);
@@ -365,7 +365,8 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             // (so hand-placed test builds aren't clobbered), and thus never stop/restart Steam for it either.
             bool legacyPresent = LegacyDllPaths.Any(File.Exists);
             bool anySlotNeedsUpdate = Slots.Any(slot =>
-                SlotPath(slot) is not { } cur || !File.Exists(cur) || AssetHash.OfFile(cur) != slotShas[slot]);
+                SlotPath(slot) is not { } cur || !File.Exists(cur) ||
+                (AssetHash.OfFile(cur) != slotShas[slot] && !SteamStartupService.MatchesPatchedWinmm(cur, slotShas[slot])));
             bool dllNeedsUpdate = !DllUpdateDisabled && (anySlotNeedsUpdate || legacyPresent);
             if (dllNeedsUpdate)
             {
@@ -375,7 +376,9 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
                 foreach (var slot in Slots)
                 {
-                    File.Copy(slotDlPaths[slot], Path.Combine(steamDir, slot.DllAsset), overwrite: true);
+                    string target = Path.Combine(steamDir, slot.DllAsset);
+                    File.Copy(slotDlPaths[slot], target, overwrite: true);
+                    SteamStartupService.PatchWinmmDll(target);
                     // Each proxy forwards to <name>_real.dll. A copy of the machine's own matching
                     // System32 file. Refresh it on every DLL update so it always matches the current OS build.
                     if (SlotRealPath(slot) is { } real && File.Exists(slot.SystemSourcePath))

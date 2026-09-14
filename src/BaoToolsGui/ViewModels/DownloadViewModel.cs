@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -515,25 +515,71 @@ public partial class DownloadViewModel : ObservableObject
         catch { Details = null; }
     }
 
-    /// <summary>Fetch the Steam featured strips once (top sellers + new releases). Best-effort: on failure
-    /// the collections stay empty and the strips simply don't render. Steam hardware (Deck, Index, …) is
-    /// filtered out via the hardware blacklist.</summary>
+    /// <summary>Fetch the Steam featured strips (top sellers + new releases).
+    /// 1. Immediately renders from disk cache / curated fallback catalog (0ms latency, 100% reliable).
+    /// 2. Asynchronously refreshes from live Steam store in the background if possible.</summary>
     public async Task LoadFeaturedAsync()
     {
-        if (TopSellers.Count > 0 || NewReleases.Count > 0) return; // already loaded
-        await _hardware.EnsureFreshAsync(); // make sure the blacklist is current before filtering
-        var (top, fresh) = await _api.GetFeaturedAsync();
-        foreach (var i in top)
-            if (!_hardware.IsBlacklisted(i.Id)) TopSellers.Add(new FeaturedItem(i.Id, i.Name, i.LargeCapsuleImage));
-        foreach (var i in fresh)
-            if (!_hardware.IsBlacklisted(i.Id)) NewReleases.Add(new FeaturedItem(i.Id, i.Name, i.LargeCapsuleImage));
-        OnPropertyChanged(nameof(HasTopSellers));
-        OnPropertyChanged(nameof(HasNewReleases));
-        OnPropertyChanged(nameof(ShowFeatured));
+        await _hardware.EnsureFreshAsync();
+
+        // 1. Instant populate if strips are currently empty
+        if (TopSellers.Count == 0 && NewReleases.Count == 0)
+        {
+            var (fastTop, fastFresh) = _api.GetCachedOrFallbackFeatured();
+            foreach (var i in fastTop)
+                if (!_hardware.IsBlacklisted(i.Id)) TopSellers.Add(new FeaturedItem(i.Id, i.Name, i.LargeCapsuleImage));
+            foreach (var i in fastFresh)
+                if (!_hardware.IsBlacklisted(i.Id)) NewReleases.Add(new FeaturedItem(i.Id, i.Name, i.LargeCapsuleImage));
+            OnPropertyChanged(nameof(HasTopSellers));
+            OnPropertyChanged(nameof(HasNewReleases));
+            OnPropertyChanged(nameof(ShowFeatured));
+        }
+
+        // 2. Background live revalidation (stale-while-revalidate)
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                var (liveTop, liveFresh) = await _api.FetchLiveFeaturedAsync();
+                if (liveTop.Count > 0 || liveFresh.Count > 0)
+                {
+                    System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+                    {
+                        TopSellers.Clear();
+                        NewReleases.Clear();
+                        foreach (var i in liveTop)
+                            if (!_hardware.IsBlacklisted(i.Id)) TopSellers.Add(new FeaturedItem(i.Id, i.Name, i.LargeCapsuleImage));
+                        foreach (var i in liveFresh)
+                            if (!_hardware.IsBlacklisted(i.Id)) NewReleases.Add(new FeaturedItem(i.Id, i.Name, i.LargeCapsuleImage));
+                        OnPropertyChanged(nameof(HasTopSellers));
+                        OnPropertyChanged(nameof(HasNewReleases));
+                        OnPropertyChanged(nameof(ShowFeatured));
+                    });
+                }
+            }
+            catch { /* best-effort live refresh */ }
+        });
     }
 
     [RelayCommand]
     private void CloseResults() => IsResultsOpen = false;
+
+    /// <summary>Clear the selected game details and return to the featured games strip.</summary>
+    [RelayCommand]
+    public void ClearDetails()
+    {
+        _searchCts?.Cancel();
+        _detailsCts?.Cancel();
+        _suppressSearch = true;
+        SearchText = "";
+        _suppressSearch = false;
+        SearchResults.Clear();
+        IsResultsOpen = false;
+        Details = null;
+        InstallStatus = null;
+        ResetResults();
+        OnPropertyChanged(nameof(ShowFeatured));
+    }
 
     // ── Fetch (sources or DLC info, depending on app type) ─────────
 

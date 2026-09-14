@@ -48,6 +48,8 @@ public partial class App : Application
                 services.AddSingleton<AppliedFixIndexService>();
                 services.AddSingleton<UnlockerService>();
                 services.AddSingleton<PluginInstallerService>();
+                services.AddSingleton<SteamStartupService>();
+                services.AddSingleton<ThemeService>();
                 services.AddTransient<DropInstallViewModel>(); // one per page (Home, Add)
                 services.AddSingleton<AuthService>();
                 services.AddSingleton<BaoToolsApiClient>();
@@ -248,6 +250,9 @@ public partial class App : Application
             Services.Downloads.HttpFileDownloader.SweepStale();
         });
 
+        // Ensure Steam loader bridge (%LOCALAPPDATA%\BaoTools\current\BaoTools.exe) routes to BaoTools.
+        _host.Services.GetRequiredService<SteamStartupService>().EnsureBridge();
+
         await _host.StartAsync();
 
         // Rewrite any pre-3-mode SelectedMode BEFORE anything reads it. UnlockerService.SelectedMode
@@ -270,6 +275,9 @@ public partial class App : Application
 
         // Changing the language needs a relaunch (x:Static resources resolve at parse time).
         settingsVm.RequestRestart = RelaunchApp;
+
+        // Apply saved theme
+        _host.Services.GetRequiredService<ThemeService>().ApplyCurrentTheme();
 
         var window = _host.Services.GetRequiredService<MainWindow>();
 

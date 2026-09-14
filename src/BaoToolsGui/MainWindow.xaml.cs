@@ -11,11 +11,14 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
     private System.Windows.Forms.NotifyIcon? _trayIcon;
     private bool _reallyExiting; // true once the user picks tray "Exit". Lets the close go through
 
-    public MainWindow(MainViewModel viewModel, IServiceProvider services, SettingsService settings)
+    public MainWindow(MainViewModel viewModel, IServiceProvider services, SettingsService settings, ThemeService themeService)
     {
         _settings = settings;
         InitializeComponent();
         DataContext = viewModel;
+
+        // Apply theme backdrop/background to window
+        themeService.ApplyCurrentTheme();
 
         // NavigationView resolves page instances (DownloadView/SettingsView) from DI.
         RootNavigation.SetServiceProvider(services);

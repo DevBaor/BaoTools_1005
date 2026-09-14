@@ -1,4 +1,5 @@
-﻿using System.Net;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -51,20 +52,84 @@ public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
             .ToList();
     }
 
-    /// <summary>Steam's featured "top sellers" + "new releases" lists for the Add page strips. Public,
-    /// no auth. Returns empty lists on any failure (the strips just don't show). Each list keeps only real
-    /// games (type 0) that have a capsule image, capped to keep the strips light.</summary>
-    public async Task<(List<SteamFeaturedItem> TopSellers, List<SteamFeaturedItem> NewReleases)> GetFeaturedAsync(
+    private static readonly string FeaturedCachePath =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BaoToolsGui", "featured_cache.json");
+
+    private class CachedFeaturedData
+    {
+        public List<SteamFeaturedItem> TopSellers { get; set; } = [];
+        public List<SteamFeaturedItem> NewReleases { get; set; } = [];
+        public DateTime CachedAtUtc { get; set; } = DateTime.UtcNow;
+    }
+
+    private static readonly List<SteamFeaturedItem> FallbackTopSellers =
+    [
+        new() { Id = 2358720, Name = "Black Myth: Wukong", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1091500, Name = "Cyberpunk 2077", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1245620, Name = "ELDEN RING", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1086940, Name = "Baldur's Gate 3", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1623730, Name = "Palworld", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1623730/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 582010, Name = "Monster Hunter: World", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/582010/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 271590, Name = "Grand Theft Auto V", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1174180, Name = "Red Dead Redemption 2", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 990080, Name = "Hogwarts Legacy", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/990080/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 553850, Name = "HELLDIVERS™ 2", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/553850/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1551360, Name = "Forza Horizon 5", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1551360/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 814380, Name = "Sekiro™: Shadows Die Twice", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/814380/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1593500, Name = "God of War", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1593500/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 292030, Name = "The Witcher 3: Wild Hunt", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 2050650, Name = "Resident Evil 4", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 413150, Name = "Stardew Valley", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/413150/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 252490, Name = "Rust", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/252490/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1145350, Name = "Hades II", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145350/capsule_616x353.jpg", Type = 0 },
+    ];
+
+    private static readonly List<SteamFeaturedItem> FallbackNewReleases =
+    [
+        new() { Id = 2183900, Name = "Warhammer 40,000: Space Marine 2", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2183900/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 2124490, Name = "SILENT HILL 2", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2124490/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 2620600, Name = "Metaphor: ReFantazio", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2620600/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1601580, Name = "Frostpunk 2", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1601580/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 2054970, Name = "Dragon's Dogma 2", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2054970/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1934680, Name = "Age of Mythology: Retold", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1934680/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1643320, Name = "S.T.A.L.K.E.R. 2: Heart of Chornobyl", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1643320/capsule_616x353.jpg", Type = 0 },
+        new() { Id = 1771300, Name = "Kingdom Come: Deliverance II", LargeCapsuleImage = "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1771300/capsule_616x353.jpg", Type = 0 },
+    ];
+
+    /// <summary>Immediately returns local cached featured data if present, or curated fallback catalog (0ms latency).</summary>
+    public (List<SteamFeaturedItem> TopSellers, List<SteamFeaturedItem> NewReleases) GetCachedOrFallbackFeatured()
+    {
+        try
+        {
+            if (File.Exists(FeaturedCachePath))
+            {
+                var json = File.ReadAllText(FeaturedCachePath);
+                var cached = System.Text.Json.JsonSerializer.Deserialize<CachedFeaturedData>(json);
+                if (cached is { TopSellers.Count: > 0 })
+                {
+                    return (cached.TopSellers, cached.NewReleases);
+                }
+            }
+        }
+        catch { /* ignore cache read issues */ }
+
+        return (FallbackTopSellers, FallbackNewReleases);
+    }
+
+    /// <summary>Attempts to fetch live top-sellers and new-releases from Steam store API with a 5s timeout.
+    /// Saves to disk cache on success.</summary>
+    public async Task<(List<SteamFeaturedItem> TopSellers, List<SteamFeaturedItem> NewReleases)> FetchLiveFeaturedAsync(
         CancellationToken ct = default)
     {
         try
         {
-            var res = await _http.GetAsync($"{AppConfig.SteamFeaturedUrl}?cc=us&l=english", ct);
-            if (!res.IsSuccessStatusCode) return ([], []);
-            var data = await ReadJsonAsync<SteamFeaturedResponse>(res, ct);
+            using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            timeoutCts.CancelAfter(TimeSpan.FromSeconds(5));
 
-            // Steam's featuredcategories genuinely repeats appids within a list (e.g. top_sellers returns
-            // the same game 2–3×), so DistinctBy the appid. Keeps the first, preserving Steam's order.
+            var res = await _http.GetAsync($"{AppConfig.SteamFeaturedUrl}?cc=us&l=english", timeoutCts.Token);
+            if (!res.IsSuccessStatusCode) return ([], []);
+            var data = await ReadJsonAsync<SteamFeaturedResponse>(res, timeoutCts.Token);
+
             static List<SteamFeaturedItem> Clean(SteamFeaturedCategory? c) =>
                 (c?.Items ?? [])
                     .Where(i => i.Type == 0 && i.Id > 0 && !string.IsNullOrEmpty(i.LargeCapsuleImage))
@@ -72,9 +137,43 @@ public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
                     .Take(20)
                     .ToList();
 
-            return (Clean(data?.TopSellers), Clean(data?.NewReleases));
+            var liveTop = Clean(data?.TopSellers);
+            var liveNew = Clean(data?.NewReleases);
+
+            if (liveTop.Count > 0 || liveNew.Count > 0)
+            {
+                try
+                {
+                    var dir = Path.GetDirectoryName(FeaturedCachePath);
+                    if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
+                    var toSave = new CachedFeaturedData { TopSellers = liveTop, NewReleases = liveNew };
+                    var json = System.Text.Json.JsonSerializer.Serialize(toSave);
+                    await File.WriteAllTextAsync(FeaturedCachePath, json);
+                }
+                catch { /* best-effort disk cache */ }
+
+                return (liveTop, liveNew);
+            }
+
+            return ([], []);
         }
-        catch { return ([], []); }
+        catch
+        {
+            return ([], []);
+        }
+    }
+
+    /// <summary>Steam's featured "top sellers" + "new releases" lists for the Add page strips.
+    /// Uses persistent local caching and a curated fallback catalog so the Add page ALWAYS displays games,
+    /// even if store.steampowered.com is temporarily blocked or timed out by the user's ISP.</summary>
+    public async Task<(List<SteamFeaturedItem> TopSellers, List<SteamFeaturedItem> NewReleases)> GetFeaturedAsync(
+        CancellationToken ct = default)
+    {
+        var cached = GetCachedOrFallbackFeatured();
+        var (liveTop, liveNew) = await FetchLiveFeaturedAsync(ct);
+        if (liveTop.Count > 0 || liveNew.Count > 0)
+            return (liveTop, liveNew);
+        return cached;
     }
 
     /// <summary>Public endpoint, no auth required.</summary>

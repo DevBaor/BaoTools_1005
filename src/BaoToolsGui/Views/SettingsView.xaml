@@ -399,6 +399,51 @@
                 </StackPanel>
             </Border>
 
+            <!-- Appearance / Theme -->
+            <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_Appearance}" />
+            <Border Style="{StaticResource SettingsCard}">
+                <StackPanel Margin="14,12">
+                    <TextBlock
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Text="{x:Static res:Strings.Settings_Theme}" />
+                    <TextBlock
+                        Margin="0,4,0,8"
+                        FontSize="12"
+                        Foreground="#6b7280"
+                        Text="{x:Static res:Strings.Settings_Theme_Hint}"
+                        TextWrapping="Wrap" />
+                    <ComboBox
+                        Margin="0,4,0,0"
+                        MinWidth="340"
+                        HorizontalAlignment="Left"
+                        ItemsSource="{Binding ThemeOptions}"
+                        SelectedItem="{Binding SelectedTheme}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Grid Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center">
+                                        <Border Width="20" Height="20" CornerRadius="10"
+                                                BorderThickness="1.5" BorderBrush="#44FFFFFF">
+                                            <Border.Background>
+                                                <SolidColorBrush Color="{Binding BackgroundColor}" />
+                                            </Border.Background>
+                                        </Border>
+                                        <Border Width="10" Height="10" CornerRadius="5"
+                                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Border.Background>
+                                                <SolidColorBrush Color="{Binding AccentColor}" />
+                                            </Border.Background>
+                                        </Border>
+                                    </Grid>
+                                    <TextBlock Text="{Binding Display}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+
             <!-- General (language) -->
             <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_General}" />
             <Border Style="{StaticResource SettingsCard}">
@@ -501,6 +546,31 @@
                             Margin="12,0,0,0"
                             VerticalAlignment="Center"
                             IsChecked="{Binding StartWithWindows, Mode=TwoWay}" />
+                    </Grid>
+                    <Border Style="{StaticResource RowDivider}" />
+                    <!-- Start with Steam -->
+                    <Grid Margin="14,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Medium"
+                                Text="{x:Static res:Strings.Settings_StartWithSteam}" />
+                            <TextBlock
+                                Margin="0,4,0,0"
+                                FontSize="12"
+                                Foreground="#6b7280"
+                                Text="{x:Static res:Strings.Settings_StartWithSteam_Hint}"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ui:ToggleSwitch
+                            Grid.Column="1"
+                            Margin="12,0,0,0"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding StartWithSteam, Mode=TwoWay}" />
                     </Grid>
                     <Border Style="{StaticResource RowDivider}" />
                     <!-- Minimize to System Tray -->
