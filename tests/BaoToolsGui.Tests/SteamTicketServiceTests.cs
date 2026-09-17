@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.IO.Compression;
 using BaoToolsGui.Services;
 using Xunit;
@@ -16,7 +16,7 @@ public class SteamTicketServiceTests : IDisposable
     {
         _tempDir = Path.Combine(Path.GetTempPath(), "BaoTools_TicketTests_" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(_tempDir);
-        _settings = new SettingsService();
+        _settings = new SettingsService(Path.Combine(_tempDir, "test_settings.json"));
         _originalOverride = _settings.SteamPathOverride;
         _settings.SteamPathOverride = _tempDir;
         _steam = new SteamService(_settings);

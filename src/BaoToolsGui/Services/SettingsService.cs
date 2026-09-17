@@ -66,11 +66,23 @@ public class SettingsService
 {
     private static readonly string Dir =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BaoToolsGui");
-    private static readonly string FilePath = Path.Combine(Dir, "settings.json");
+    private static readonly string DefaultFilePath = Path.Combine(Dir, "settings.json");
+
+    private readonly string _filePath;
+    private readonly string _dir;
+    private readonly string _bakPath;
+    private readonly string _tmpPath;
 
     private AppSettings _settings = new();
 
-    public SettingsService() => Load();
+    public SettingsService(string? customFilePath = null)
+    {
+        _filePath = customFilePath ?? DefaultFilePath;
+        _dir = Path.GetDirectoryName(_filePath) ?? Dir;
+        _bakPath = _filePath + ".bak";
+        _tmpPath = _filePath + ".tmp";
+        Load();
+    }
 
     public bool CanAddGame()
     {
@@ -191,17 +203,14 @@ public class SettingsService
         set { _settings.Theme = value; Save(); }
     }
 
-    private static readonly string TmpPath = FilePath + ".tmp";
-    private static readonly string BakPath = FilePath + ".bak";
-
     private void Load()
     {
         // Prefer the primary file; fall back to the last-good .bak. Crucially, NEVER silently reset a
         // corrupt-but-present file to defaults (a later Save would then overwrite it and lose real data).
         // Move it aside to .corrupt so it's preserved and can't be clobbered.
-        if (TryLoad(FilePath)) return;
-        PreserveCorrupt(FilePath);
-        if (TryLoad(BakPath)) return;
+        if (TryLoad(_filePath)) return;
+        PreserveCorrupt(_filePath);
+        if (TryLoad(_bakPath)) return;
         _settings = new AppSettings();
     }
 
@@ -253,20 +262,20 @@ public class SettingsService
             && _settings.Theme is null;
         if (empty)
         {
-            foreach (var p in new[] { FilePath, BakPath, TmpPath })
+            foreach (var p in new[] { _filePath, _bakPath, _tmpPath })
                 try { if (File.Exists(p)) File.Delete(p); } catch { /* best effort */ }
             return;
         }
 
-        Directory.CreateDirectory(Dir);
+        Directory.CreateDirectory(_dir);
         string json = JsonSerializer.Serialize(_settings, new JsonSerializerOptions { WriteIndented = true });
 
         // Atomic write: fill a temp file, then rename it over the target. A crash/kill mid-write can only
         // ever truncate the .tmp. The live settings.json is replaced by an atomic move (same-volume rename)
         // and is therefore never left half-written. (This class of loss is exactly what a forced kill during
         // a plain WriteAllText caused.) A .bak of the last good file is kept as a second recovery source.
-        File.WriteAllText(TmpPath, json);
-        try { if (File.Exists(FilePath)) File.Copy(FilePath, BakPath, overwrite: true); } catch { /* best effort */ }
-        File.Move(TmpPath, FilePath, overwrite: true);
+        File.WriteAllText(_tmpPath, json);
+        try { if (File.Exists(_filePath)) File.Copy(_filePath, _bakPath, overwrite: true); } catch { /* best effort */ }
+        File.Move(_tmpPath, _filePath, overwrite: true);
     }
 }
