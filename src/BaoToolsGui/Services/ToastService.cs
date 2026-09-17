@@ -75,18 +75,24 @@ public class ToastService
             var actionBtn = new Wpf.Ui.Controls.Button
             {
                 Content = actionLabel,
-                Height = 32,
-                Padding = new Thickness(16, 4, 16, 4),
-                Margin = new Thickness(0, 10, 0, 2),
+                Height = 34,
+                Padding = new Thickness(18, 0, 18, 0),
+                Margin = new Thickness(0, 10, 0, 3),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 Background = new SolidColorBrush(Color.FromRgb(0x25, 0x63, 0xeb)),
                 Foreground = Brushes.White,
                 FontWeight = FontWeights.SemiBold,
-                BorderThickness = new Thickness(0),
-                CornerRadius = new CornerRadius(6),
+                FontSize = 13,
+                BorderThickness = new Thickness(1),
+                BorderBrush = new SolidColorBrush(Color.FromArgb(0x55, 0x60, 0xa5, 0xfa)),
+                CornerRadius = new CornerRadius(7),
+                Cursor = System.Windows.Input.Cursors.Hand,
             };
-            // The action tears down the app or applies update; close button handles manual dismiss.
-            actionBtn.Click += (_, _) => onAction();
+            actionBtn.Click += (_, _) =>
+            {
+                try { bar.Timeout = TimeSpan.Zero; } catch { }
+                onAction();
+            };
 
             bar.Content = new StackPanel
             {

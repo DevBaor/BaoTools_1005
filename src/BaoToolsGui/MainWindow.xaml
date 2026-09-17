@@ -224,49 +224,137 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <!-- Primary: Update Now / Downloading -->
-                                    <ui:Button
+                                    <!-- Primary: Update Now / Downloading / Restart Now -->
+                                    <Button
                                         Grid.Row="0"
-                                        Height="36"
-                                        Appearance="Primary"
+                                        Height="38"
                                         HorizontalAlignment="Stretch"
                                         Command="{Binding DownloadUpdateCommand}"
-                                        IsEnabled="{Binding CanUpdate}">
-                                        <Grid HorizontalAlignment="Center">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <ui:ProgressRing
-                                                Width="15"
-                                                Height="15"
-                                                Margin="0,0,8,0"
-                                                IsIndeterminate="True"
-                                                Visibility="{Binding IsDownloadingUpdate, Converter={StaticResource BoolToVis}}" />
-                                            <ui:SymbolIcon
-                                                Symbol="ArrowDownload24"
-                                                FontSize="15"
-                                                Margin="0,0,8,0"
-                                                Visibility="{Binding IsDownloadingUpdate, Converter={StaticResource InverseBoolToVis}}" />
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                Text="{Binding UpdateButtonText}"
-                                                FontWeight="SemiBold"
-                                                FontSize="13"
-                                                VerticalAlignment="Center" />
-                                        </Grid>
-                                    </ui:Button>
+                                        IsEnabled="{Binding CanUpdate}"
+                                        Cursor="Hand">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border
+                                                    x:Name="BtnBorder"
+                                                    CornerRadius="8"
+                                                    BorderThickness="1"
+                                                    SnapsToDevicePixels="True">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#2563eb" Offset="0" />
+                                                            <GradientStop Color="#1d4ed8" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                    <Border.BorderBrush>
+                                                        <SolidColorBrush Color="#3b82f6" Opacity="0.5" />
+                                                    </Border.BorderBrush>
+                                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <ui:ProgressRing
+                                                            Grid.Column="0"
+                                                            Width="15"
+                                                            Height="15"
+                                                            Margin="0,0,8,0"
+                                                            Foreground="#ffffff"
+                                                            IsIndeterminate="True"
+                                                            Visibility="{Binding Path=DataContext.IsDownloadingUpdate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource BoolToVis}}" />
+                                                        <ui:SymbolIcon
+                                                            Grid.Column="0"
+                                                            Symbol="ArrowDownload24"
+                                                            FontSize="16"
+                                                            Margin="0,0,8,0"
+                                                            Foreground="#ffffff"
+                                                            Visibility="{Binding Path=DataContext.IsDownloadingUpdate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Converter={StaticResource InverseBoolToVis}}" />
+                                                        <TextBlock
+                                                            Grid.Column="1"
+                                                            Text="{Binding Path=DataContext.UpdateButtonText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                            FontWeight="SemiBold"
+                                                            FontSize="13"
+                                                            Foreground="#ffffff"
+                                                            VerticalAlignment="Center" />
+                                                    </Grid>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="BtnBorder" Property="Background">
+                                                            <Setter.Value>
+                                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                                    <GradientStop Color="#3b82f6" Offset="0" />
+                                                                    <GradientStop Color="#2563eb" Offset="1" />
+                                                                </LinearGradientBrush>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter TargetName="BtnBorder" Property="BorderBrush">
+                                                            <Setter.Value>
+                                                                <SolidColorBrush Color="#60a5fa" Opacity="0.8" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="BtnBorder" Property="Background" Value="#1e40af" />
+                                                        <Setter TargetName="BtnBorder" Property="BorderBrush" Value="#1d4ed8" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter TargetName="BtnBorder" Property="Opacity" Value="0.55" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
 
                                     <!-- Secondary: View Release Notes -->
-                                    <ui:Button
+                                    <Button
                                         Grid.Row="1"
-                                        Margin="0,6,0,0"
-                                        Height="32"
-                                        Appearance="Secondary"
+                                        Margin="0,7,0,0"
+                                        Height="33"
                                         HorizontalAlignment="Stretch"
                                         Command="{Binding OpenReleaseNotesCommand}"
-                                        Content="{x:Static res:Strings.Notification_ViewNotes}"
-                                        Icon="{ui:SymbolIcon Open24}" />
+                                        Cursor="Hand">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border
+                                                    x:Name="SecBorder"
+                                                    CornerRadius="8"
+                                                    Background="#20202d"
+                                                    BorderBrush="#353549"
+                                                    BorderThickness="1"
+                                                    SnapsToDevicePixels="True">
+                                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <ui:SymbolIcon
+                                                            Grid.Column="0"
+                                                            Symbol="Open20"
+                                                            FontSize="14"
+                                                            Margin="0,0,7,0"
+                                                            Foreground="#a1a1aa"
+                                                            VerticalAlignment="Center" />
+                                                        <TextBlock
+                                                            Grid.Column="1"
+                                                            Text="{x:Static res:Strings.Notification_ViewNotes}"
+                                                            FontWeight="Medium"
+                                                            FontSize="12.5"
+                                                            Foreground="#d4d4d8"
+                                                            VerticalAlignment="Center" />
+                                                    </Grid>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="SecBorder" Property="Background" Value="#29293a" />
+                                                        <Setter TargetName="SecBorder" Property="BorderBrush" Value="#4e4e66" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="SecBorder" Property="Background" Value="#191924" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
                                 </Grid>
                             </StackPanel>
 
