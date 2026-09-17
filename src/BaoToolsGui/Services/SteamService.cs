@@ -21,17 +21,21 @@ public class SteamService(SettingsService settings)
     /// <summary>Steam path detected from the registry (confirmed via steam.exe), or null.</summary>
     public string? AutoDetectedPath => DetectFromRegistry();
 
-    /// <summary>The effective path: user override if set, otherwise the auto-detected one.</summary>
+    /// <summary>The effective path: user override if set and valid, otherwise the auto-detected one.</summary>
     public string? EffectivePath
     {
         get
         {
             string? overridePath = settings.SteamPathOverride;
-            return !string.IsNullOrWhiteSpace(overridePath) ? Normalize(overridePath) : AutoDetectedPath;
+            if (!string.IsNullOrWhiteSpace(overridePath) && Directory.Exists(overridePath))
+            {
+                return Normalize(overridePath);
+            }
+            return AutoDetectedPath;
         }
     }
 
-    public bool IsOverridden => !string.IsNullOrWhiteSpace(settings.SteamPathOverride);
+    public bool IsOverridden => !string.IsNullOrWhiteSpace(settings.SteamPathOverride) && Directory.Exists(settings.SteamPathOverride);
 
     /// <summary>
     /// The Steam client's UI language ("english", "schinese", "brazilian", ...), or null if unreadable.
