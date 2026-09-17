@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -438,7 +438,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     {
         if (tile is null || IsBusy) return;
 
-        var confirm = MessageBox.Show(
+        var confirm = ModernMessageBox.Show(
             Resources.Strings.Manage_Steamless_Confirm_Body,
             Resources.Strings.Manage_Steamless_Confirm_Title,
             MessageBoxButton.OKCancel, MessageBoxImage.Warning);
@@ -488,7 +488,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     [RelayCommand]
     private void Delete(LuaTileViewModel tile)
     {
-        var result = MessageBox.Show(
+        var result = ModernMessageBox.Show(
             string.Format(Resources.Strings.Manage_Delete_Body, tile.Name, tile.AppId),
             Resources.Strings.Manage_Delete_Title,
             MessageBoxButton.OKCancel,
@@ -501,7 +501,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         }
         catch (Exception ex)
         {
-            MessageBox.Show(string.Format(Resources.Strings.Manage_RemoveFailed_File, ex.Message), Resources.Strings.Manage_RemoveFailed_Title,
+            ModernMessageBox.Show(string.Format(Resources.Strings.Manage_RemoveFailed_File, ex.Message), Resources.Strings.Manage_RemoveFailed_Title,
                 MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
@@ -526,7 +526,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         var targets = _all.Where(t => t.IsSelected).ToList();
         if (targets.Count == 0) return;
 
-        var result = MessageBox.Show(
+        var result = ModernMessageBox.Show(
             string.Format(Resources.Strings.Manage_DeleteMany_Body, targets.Count),
             Resources.Strings.Manage_DeleteMany_Title,
             MessageBoxButton.OKCancel,
@@ -550,7 +550,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         SelectedCount = _all.Count(t => t.IsSelected);
 
         if (failed > 0)
-            MessageBox.Show(string.Format(Resources.Strings.Manage_RemoveFailed_Count, failed),
+            ModernMessageBox.Show(string.Format(Resources.Strings.Manage_RemoveFailed_Count, failed),
                 Resources.Strings.Manage_RemoveFailed_Title, MessageBoxButton.OK, MessageBoxImage.Warning);
 
         // No restart prompt: OST/BST watch config/stplug-in, so deleting a lua un-applies it live.
@@ -567,7 +567,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         catch (Exception ex)
         {
             if (!silent)
-                MessageBox.Show(string.Format(Resources.Strings.Manage_RemoveFailed_Named, name, ex.Message), Resources.Strings.Manage_RemoveFailed_Title,
+                ModernMessageBox.Show(string.Format(Resources.Strings.Manage_RemoveFailed_Named, name, ex.Message), Resources.Strings.Manage_RemoveFailed_Title,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }

@@ -101,7 +101,7 @@ public partial class PluginViewModel : ObservableObject
 
     private bool ConfirmSteamRestart()
     {
-        var result = System.Windows.MessageBox.Show(
+        var result = ModernMessageBox.Show(
             Resources.Strings.Plugin_Confirm_RestartBody,
             Resources.Strings.Plugin_Confirm_RestartCaption,
             System.Windows.MessageBoxButton.OKCancel,

@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BaoToolsGui.Services;
@@ -112,7 +112,7 @@ public partial class DownloadsViewModel : ObservableObject
         // Yes = stop and delete (the default), No = stop and keep, Cancel = keep downloading.
         // Escape lands on Cancel, so the accidental keypress is the harmless one even though the
         // destructive option is what Enter selects.
-        var choice = MessageBox.Show(
+        var choice = ModernMessageBox.Show(
             string.Format(Resources.Strings.Depot_Cancel_Body, ByteFormat.Size(item.BytesRead), outDir),
             Resources.Strings.Depot_Cancel_Title,
             MessageBoxButton.YesNoCancel,
@@ -187,9 +187,9 @@ public partial class DownloadsViewModel : ObservableObject
     [RelayCommand]
     private void ClearHistory()
     {
-        // Deliberately NOT async: MessageBox.Show already blocks and returns a result, and an async
+        // Deliberately NOT async: ModernMessageBox.Show already blocks and returns a result, and an async
         // command would become an AsyncRelayCommand, which disables itself while running.
-        var choice = MessageBox.Show(
+        var choice = ModernMessageBox.Show(
             string.Format(Resources.Strings.Downloads_ClearHistory_Confirm, _queue.History.Count),
             Resources.Strings.Downloads_Action_ClearHistory,
             MessageBoxButton.YesNo,

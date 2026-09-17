@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -109,7 +109,7 @@ public partial class HomeViewModel : ObservableObject
     private async Task InstallPlugin()
     {
         if (IsInstallingPlugin) return;
-        var confirm = System.Windows.MessageBox.Show(
+        var confirm = ModernMessageBox.Show(
             Resources.Strings.Plugin_Confirm_RestartBody,
             Resources.Strings.Plugin_Confirm_RestartCaption,
             System.Windows.MessageBoxButton.OKCancel,

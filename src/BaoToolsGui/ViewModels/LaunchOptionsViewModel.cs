@@ -335,5 +335,5 @@ public partial class LaunchOptionsViewModel : ObservableObject
     }
 
     private static bool Confirm(string body, string title) =>
-        MessageBox.Show(body, title, MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK;
+        ModernMessageBox.Show(body, title, MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK;
 }

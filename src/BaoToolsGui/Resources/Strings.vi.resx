@@ -773,6 +773,48 @@ B2: Bấm "Cài đặt" và chọn file ZIP vừa tải về để app tự gi�
   <data name="Notification_Downloading" xml:space="preserve">
     <value>Đang tải...</value>
   </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Cập nhật ứng dụng</value>
+  </data>
+  <data name="UpdateDialog_DownloadingHeader" xml:space="preserve">
+    <value>Đang tải bản cập nhật</value>
+  </data>
+  <data name="UpdateDialog_DownloadingSub" xml:space="preserve">
+    <value>Đang tải gói cập nhật phiên bản {0}... Vui lòng giữ BaoTools mở.</value>
+  </data>
+  <data name="UpdateDialog_DownloadingStatus" xml:space="preserve">
+    <value>Đang tải xuống</value>
+  </data>
+  <data name="UpdateDialog_ReadyHeader" xml:space="preserve">
+    <value>Đã tải xong bản cập nhật</value>
+  </data>
+  <data name="UpdateDialog_ReadySub" xml:space="preserve">
+    <value>BaoTools {0} đã sẵn sàng cài đặt. Bấm Khởi động lại ngay để hoàn tất cập nhật và sử dụng bản mới.</value>
+  </data>
+  <data name="UpdateDialog_ReadyStatus" xml:space="preserve">
+    <value>Sẵn sàng cài đặt</value>
+  </data>
+  <data name="UpdateDialog_RestartNow" xml:space="preserve">
+    <value>Khởi động lại ngay</value>
+  </data>
+  <data name="UpdateDialog_Restarting" xml:space="preserve">
+    <value>Đang khởi động lại...</value>
+  </data>
+  <data name="UpdateDialog_Later" xml:space="preserve">
+    <value>Để sau</value>
+  </data>
+  <data name="UpdateDialog_Cancel" xml:space="preserve">
+    <value>Hủy tải</value>
+  </data>
+  <data name="UpdateDialog_FailedHeader" xml:space="preserve">
+    <value>Tải bản cập nhật thất bại</value>
+  </data>
+  <data name="UpdateDialog_FailedSub" xml:space="preserve">
+    <value>Đã xảy ra lỗi trong quá trình tải. Bạn có thể tải file cài đặt mới thủ công qua trình duyệt.</value>
+  </data>
+  <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
+    <value>Mở trình duyệt</value>
+  </data>
 
   <data name="Theme_Default" xml:space="preserve"><value>BaoTools Classic</value></data>
   <data name="Theme_Dracula" xml:space="preserve"><value>Dracula</value></data>

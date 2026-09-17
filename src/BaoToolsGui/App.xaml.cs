@@ -156,7 +156,7 @@ public partial class App : Application
     {
         // Same wording as the dialog's own prompt: closing Steam should never read as a different
         // decision depending on where it was triggered from.
-        if (MessageBox.Show(
+        if (ModernMessageBox.Show(
                 BaoToolsGui.Resources.Strings.Launch_ApplyNow_Body,
                 BaoToolsGui.Resources.Strings.Launch_ApplyNow_Title,
                 MessageBoxButton.OKCancel, MessageBoxImage.Question) != MessageBoxResult.OK)

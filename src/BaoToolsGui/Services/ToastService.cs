@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
@@ -49,34 +50,56 @@ public class ToastService
         void Post()
         {
             if (_presenter is null) return;
+            var isUpdate = (title + message + actionLabel).Contains("update", StringComparison.OrdinalIgnoreCase)
+                        || (title + message + actionLabel).Contains("cập nhật", StringComparison.OrdinalIgnoreCase);
+
+            var icon = new SymbolIcon(isUpdate ? SymbolRegular.ArrowDownload24 : SymbolRegular.ArrowSync24)
+            {
+                Foreground = new SolidColorBrush(Color.FromRgb(0x60, 0xa5, 0xfa)),
+                FontSize = 20
+            };
+
             var bar = new Snackbar(_presenter)
             {
                 Title = title,
                 Appearance = error ? ControlAppearance.Caution : ControlAppearance.Secondary,
-                Icon = new SymbolIcon(SymbolRegular.ArrowSync24),
+                Icon = icon,
                 // No "infinite" sentinel exists: Timeout is how long it's VISIBLE (Zero = dismiss
                 // instantly), so use a very large value to effectively persist until acted on / closed.
                 Timeout = TimeSpan.FromDays(1),
                 IsCloseButtonEnabled = true,
+                MaxWidth = 440,
             };
 
-            // Build the body: message + a real action button we fully control (TemplateButtonCommand
-            // is read-only in this Wpf.Ui version, and its label isn't settable, so use our own button).
+            // Build the body: message + a real action button with proper padding and height
             var actionBtn = new Wpf.Ui.Controls.Button
             {
                 Content = actionLabel,
-                Appearance = ControlAppearance.Primary,
-                Margin = new Thickness(0, 8, 0, 0),
+                Height = 32,
+                Padding = new Thickness(16, 4, 16, 4),
+                Margin = new Thickness(0, 10, 0, 2),
                 HorizontalAlignment = HorizontalAlignment.Left,
+                Background = new SolidColorBrush(Color.FromRgb(0x25, 0x63, 0xeb)),
+                Foreground = Brushes.White,
+                FontWeight = FontWeights.SemiBold,
+                BorderThickness = new Thickness(0),
+                CornerRadius = new CornerRadius(6),
             };
-            // The action (restart) tears down the app anyway; the close button handles manual dismiss.
+            // The action tears down the app or applies update; close button handles manual dismiss.
             actionBtn.Click += (_, _) => onAction();
 
             bar.Content = new StackPanel
             {
+                Margin = new Thickness(0, 2, 0, 4),
                 Children =
                 {
-                    new System.Windows.Controls.TextBlock { Text = message, TextWrapping = TextWrapping.Wrap },
+                    new System.Windows.Controls.TextBlock
+                    {
+                        Text = message,
+                        TextWrapping = TextWrapping.Wrap,
+                        LineHeight = 19,
+                        FontSize = 13,
+                    },
                     actionBtn,
                 },
             };

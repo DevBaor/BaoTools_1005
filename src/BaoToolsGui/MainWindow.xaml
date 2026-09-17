@@ -102,13 +102,13 @@
             IsOpen="{Binding IsNotificationOpen, Mode=TwoWay}"
             PlacementTarget="{Binding ElementName=NotificationBellButton}"
             Placement="Bottom"
-            HorizontalOffset="-320"
+            HorizontalOffset="-365"
             VerticalOffset="4"
             AllowsTransparency="True"
             StaysOpen="False">
             <Border
-                Width="370"
-                MaxHeight="540"
+                Width="410"
+                MaxHeight="560"
                 Background="#23232b"
                 BorderBrush="#383844"
                 BorderThickness="1"
@@ -217,38 +217,51 @@
                                     </Grid>
                                 </Border>
 
-                                <!-- Action buttons -->
-                                <Grid Margin="0,2,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
+                                <!-- Action buttons (stacked full-width to prevent any text cut-off in all languages) -->
+                                <Grid Margin="0,4,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
+                                    <!-- Primary: Update Now / Downloading -->
                                     <ui:Button
-                                        Grid.Column="0"
-                                        Margin="0,0,4,0"
+                                        Grid.Row="0"
+                                        Height="36"
                                         Appearance="Primary"
                                         HorizontalAlignment="Stretch"
                                         Command="{Binding DownloadUpdateCommand}"
                                         IsEnabled="{Binding CanUpdate}">
-                                        <StackPanel Orientation="Horizontal">
+                                        <Grid HorizontalAlignment="Center">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
                                             <ui:ProgressRing
-                                                Width="14"
-                                                Height="14"
-                                                Margin="0,0,6,0"
+                                                Width="15"
+                                                Height="15"
+                                                Margin="0,0,8,0"
                                                 IsIndeterminate="True"
                                                 Visibility="{Binding IsDownloadingUpdate, Converter={StaticResource BoolToVis}}" />
                                             <ui:SymbolIcon
                                                 Symbol="ArrowDownload24"
-                                                Margin="0,0,6,0"
+                                                FontSize="15"
+                                                Margin="0,0,8,0"
                                                 Visibility="{Binding IsDownloadingUpdate, Converter={StaticResource InverseBoolToVis}}" />
-                                            <TextBlock Text="{Binding UpdateButtonText}" VerticalAlignment="Center" />
-                                        </StackPanel>
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                Text="{Binding UpdateButtonText}"
+                                                FontWeight="SemiBold"
+                                                FontSize="13"
+                                                VerticalAlignment="Center" />
+                                        </Grid>
                                     </ui:Button>
 
+                                    <!-- Secondary: View Release Notes -->
                                     <ui:Button
-                                        Grid.Column="1"
-                                        Margin="4,0,0,0"
+                                        Grid.Row="1"
+                                        Margin="0,6,0,0"
+                                        Height="32"
                                         Appearance="Secondary"
                                         HorizontalAlignment="Stretch"
                                         Command="{Binding OpenReleaseNotesCommand}"
@@ -556,15 +569,23 @@
                  persistent "update ready" prompt with a Restart action. -->
             <ui:SnackbarPresenter
                 x:Name="RootSnackbar"
-                Margin="0,0,24,18"
+                Margin="0,0,24,20"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Bottom" />
+                VerticalAlignment="Bottom"
+                MaxWidth="460" />
             </Grid>
 
             <!-- First-run welcome overlay (last child = top Z-order; covers the nav + page area). -->
             <views:OnboardingView
                 DataContext="{Binding Onboarding}"
                 Visibility="{Binding IsOpen, Converter={StaticResource BoolToVis}}" />
+
+            <!-- Smooth modal dialog dim scrim -->
+            <Grid
+                x:Name="DialogDimScrim"
+                Background="#8809090F"
+                Visibility="Collapsed"
+                IsHitTestVisible="True" />
         </Grid>
     </Grid>
 </ui:FluentWindow>

@@ -73,6 +73,7 @@ public partial class MainViewModel : ObservableObject
     private string? _updateError;
 
     private GitHubReleaseInfo? _latestReleaseInfo;
+    private PreparedUpdate? _preparedUpdate;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanUpdate))]
@@ -118,7 +119,9 @@ public partial class MainViewModel : ObservableObject
         System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
         {
             LoadLocalHistory();
-            UpdateButtonText = Resources.Strings.Notification_UpdateNow;
+            UpdateButtonText = (_preparedUpdate != null && _preparedUpdate.IsValid)
+                ? Resources.Strings.UpdateDialog_RestartNow
+                : Resources.Strings.Notification_UpdateNow;
             UpdateStatusMessage = HasUpdate
                 ? $"{Resources.Strings.Notification_NewUpdateAvailable} ({LatestVersion})"
                 : string.Format(Resources.Strings.Notification_UpToDateDesc, VersionLabel);
@@ -171,7 +174,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void RestartSteam()
     {
-        var result = MessageBox.Show(
+        var result = ModernMessageBox.Show(
             Resources.Strings.Main_RestartSteam_Ask,
             Resources.Strings.Manage_RestartSteam_Title,
             MessageBoxButton.OKCancel,
@@ -179,7 +182,7 @@ public partial class MainViewModel : ObservableObject
         if (result != MessageBoxResult.OK) return;
 
         if (!_steam.RestartSteam())
-            MessageBox.Show(
+            ModernMessageBox.Show(
                 Resources.Strings.Manage_RestartSteam_Failed,
                 Resources.Strings.Manage_RestartSteam_Title,
                 MessageBoxButton.OK,
@@ -293,28 +296,28 @@ public partial class MainViewModel : ObservableObject
             return;
         }
 
-        IsDownloadingUpdate = true;
-        UpdateButtonText = Resources.Strings.Notification_Downloading;
+        // Close notification popup when opening progress dialog
+        IsNotificationOpen = false;
 
+        IsDownloadingUpdate = true;
         try
         {
-            var progress = new Progress<double?>(pct =>
-            {
-                if (pct.HasValue)
-                {
-                    double p = Math.Clamp(pct.Value * 100, 0, 100);
-                    UpdateButtonText = $"{Resources.Strings.Notification_Downloading} {p:0}%";
-                }
-                else
-                {
-                    UpdateButtonText = Resources.Strings.Notification_Downloading;
-                }
-            });
+            await Task.Yield();
 
-            bool applied = await _updates.DownloadAndApplyUpdateAsync(_latestReleaseInfo, progress);
-            if (!applied)
+            var prep = Views.UpdateProgressDialog.ShowDialog(
+                _latestReleaseInfo,
+                _updates,
+                _preparedUpdate,
+                UpdateUrl);
+
+            if (prep != null && prep.IsValid)
             {
-                OpenBrowserUrl(UpdateUrl);
+                _preparedUpdate = prep;
+                UpdateButtonText = Resources.Strings.UpdateDialog_RestartNow;
+            }
+            else if (_preparedUpdate == null)
+            {
+                UpdateButtonText = Resources.Strings.Notification_UpdateNow;
             }
         }
         catch (Exception ex)
@@ -325,7 +328,6 @@ public partial class MainViewModel : ObservableObject
         finally
         {
             IsDownloadingUpdate = false;
-            UpdateButtonText = Resources.Strings.Notification_UpdateNow;
         }
     }
 

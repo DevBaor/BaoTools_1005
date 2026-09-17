@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -607,7 +607,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     {
         if (ActiveGame is not { } game || SelectedVariant?.Variant is not { } variant) return;
 
-        var result = MessageBox.Show(
+        var result = ModernMessageBox.Show(
             string.Format(Resources.Strings.Builds_Delete_Body, variant.DisplayLabel),
             Resources.Strings.Builds_Delete_Title,
             MessageBoxButton.OKCancel, MessageBoxImage.Warning);

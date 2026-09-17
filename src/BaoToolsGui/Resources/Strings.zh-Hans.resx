@@ -811,4 +811,47 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Theme_AbyssalOcean" xml:space="preserve"><value>Abyssal Ocean</value></data>
   <data name="Theme_OneDark" xml:space="preserve"><value>One Dark Pro</value></data>
   <data name="Theme_Gruvbox" xml:space="preserve"><value>Gruvbox Retro</value></data>
+
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>软件更新</value>
+  </data>
+  <data name="UpdateDialog_DownloadingHeader" xml:space="preserve">
+    <value>正在下载更新</value>
+  </data>
+  <data name="UpdateDialog_DownloadingSub" xml:space="preserve">
+    <value>正在下载 {0} 更新包... 请保持应用开启。</value>
+  </data>
+  <data name="UpdateDialog_DownloadingStatus" xml:space="preserve">
+    <value>正在下载</value>
+  </data>
+  <data name="UpdateDialog_ReadyHeader" xml:space="preserve">
+    <value>更新已准备就绪</value>
+  </data>
+  <data name="UpdateDialog_ReadySub" xml:space="preserve">
+    <value>BaoTools {0} 已下载完成。点击“立即重启”以应用更新并启动新版本。</value>
+  </data>
+  <data name="UpdateDialog_ReadyStatus" xml:space="preserve">
+    <value>准备安装</value>
+  </data>
+  <data name="UpdateDialog_RestartNow" xml:space="preserve">
+    <value>立即重启</value>
+  </data>
+  <data name="UpdateDialog_Restarting" xml:space="preserve">
+    <value>正在重启...</value>
+  </data>
+  <data name="UpdateDialog_Later" xml:space="preserve">
+    <value>稍后</value>
+  </data>
+  <data name="UpdateDialog_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="UpdateDialog_FailedHeader" xml:space="preserve">
+    <value>下载失败</value>
+  </data>
+  <data name="UpdateDialog_FailedSub" xml:space="preserve">
+    <value>下载更新时发生错误。您可以前往浏览器手动下载最新安装包。</value>
+  </data>
+  <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
+    <value>打开浏览器</value>
+  </data>
 </root>

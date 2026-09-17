@@ -30,3 +30,11 @@ public class UpdateHistoryItem
     public bool IsNew { get; set; }
     public bool IsCurrent { get; set; }
 }
+
+/// <summary>
+/// Represents a downloaded and staged update ready to be applied on restart.
+/// </summary>
+public record PreparedUpdate(string TagName, string BatchPath)
+{
+    public bool IsValid => !string.IsNullOrEmpty(BatchPath) && System.IO.File.Exists(BatchPath);
+}

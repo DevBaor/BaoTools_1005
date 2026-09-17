@@ -1,0 +1,258 @@
+<Window
+    x:Class="BaoToolsGui.Views.ModernDialogWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:res="clr-namespace:BaoToolsGui.Resources"
+    Title="BaoTools"
+    Width="440"
+    SizeToContent="Height"
+    WindowStyle="None"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner"
+    ShowInTaskbar="False">
+
+    <!-- Outer margin gives space for DropShadowEffect -->
+    <Grid Margin="20">
+        <Border
+            x:Name="CardBorder"
+            Background="#171720"
+            BorderBrush="#323242"
+            BorderThickness="1"
+            CornerRadius="14"
+            Padding="22,20,22,20"
+            MouseLeftButtonDown="CardBorder_MouseLeftButtonDown">
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="32"
+                    ShadowDepth="6"
+                    Direction="270"
+                    Opacity="0.75"
+                    Color="#000000" />
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Row 0: Header with Icon, Title, and Close Button -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Logo Badge -->
+                    <Border
+                        x:Name="IconBadge"
+                        Grid.Column="0"
+                        Width="36"
+                        Height="36"
+                        Margin="0,0,12,0"
+                        VerticalAlignment="Center"
+                        CornerRadius="9"
+                        Background="#181824"
+                        BorderBrush="#36364a"
+                        BorderThickness="1">
+                        <Image
+                            x:Name="LogoImage"
+                            Width="24"
+                            Height="24"
+                            Source="pack://application:,,,/icon.ico"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+                    </Border>
+
+                    <!-- Title -->
+                    <TextBlock
+                        x:Name="TitleBlock"
+                        Grid.Column="1"
+                        Text="Restart Steam"
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Foreground="#f4f4f5"
+                        VerticalAlignment="Center"
+                        TextTrimming="CharacterEllipsis" />
+
+                    <!-- Close (X) button -->
+                    <Button
+                        x:Name="BtnCloseX"
+                        Grid.Column="2"
+                        Width="28"
+                        Height="28"
+                        Margin="6,0,0,0"
+                        Padding="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="BtnCloseX_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    x:Name="CloseBorder"
+                                    Background="Transparent"
+                                    CornerRadius="6">
+                                    <ui:SymbolIcon
+                                        Symbol="Dismiss20"
+                                        FontSize="14"
+                                        Foreground="#71717a"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="CloseBorder" Property="Background" Value="#22ffffff" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <!-- Row 1: Message Body -->
+                <TextBlock
+                    x:Name="MessageBlock"
+                    Grid.Row="1"
+                    Margin="48,12,4,20"
+                    FontSize="13"
+                    Foreground="#a1a1aa"
+                    TextWrapping="Wrap"
+                    LineHeight="19"
+                    Text="Restart Steam now? This closes Steam and any running games, then relaunches it." />
+
+                <!-- Row 2: Action Buttons -->
+                <StackPanel
+                    Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+                    <!-- Cancel Button -->
+                    <Button
+                        x:Name="BtnCancel"
+                        Height="32"
+                        MinWidth="80"
+                        Margin="0,0,10,0"
+                        Padding="14,0"
+                        FontSize="12.5"
+                        FontWeight="Medium"
+                        Foreground="#e4e4e7"
+                        Background="#232330"
+                        BorderBrush="#38384d"
+                        BorderThickness="1"
+                        Cursor="Hand"
+                        Click="BtnCancel_Click"
+                        Visibility="Collapsed">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    x:Name="BtnBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="7">
+                                    <ContentPresenter
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BtnBorder" Property="Background" Value="#2e2e40" />
+                                        <Setter TargetName="BtnBorder" Property="BorderBrush" Value="#4e4e66" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="BtnBorder" Property="Background" Value="#1b1b24" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- No Button -->
+                    <Button
+                        x:Name="BtnNo"
+                        Height="32"
+                        MinWidth="80"
+                        Margin="0,0,10,0"
+                        Padding="14,0"
+                        FontSize="12.5"
+                        FontWeight="Medium"
+                        Foreground="#e4e4e7"
+                        Background="#232330"
+                        BorderBrush="#38384d"
+                        BorderThickness="1"
+                        Cursor="Hand"
+                        Click="BtnNo_Click"
+                        Visibility="Collapsed">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    x:Name="BtnBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="7">
+                                    <ContentPresenter
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BtnBorder" Property="Background" Value="#2e2e40" />
+                                        <Setter TargetName="BtnBorder" Property="BorderBrush" Value="#4e4e66" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="BtnBorder" Property="Background" Value="#1b1b24" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Action Button (OK / Yes / Restart / Delete) -->
+                    <Button
+                        x:Name="BtnAction"
+                        Height="32"
+                        MinWidth="84"
+                        Padding="16,0"
+                        FontSize="12.5"
+                        FontWeight="SemiBold"
+                        Foreground="#ffffff"
+                        Background="#2563eb"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="BtnAction_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    x:Name="BtnBorder"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="7">
+                                    <ContentPresenter
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BtnBorder" Property="Opacity" Value="0.9" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="BtnBorder" Property="Opacity" Value="0.75" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

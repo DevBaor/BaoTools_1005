@@ -702,4 +702,19 @@ public static class Strings
     public static string Notification_Badge_Current => Get(nameof(Notification_Badge_Current));
     public static string Notification_Close => Get(nameof(Notification_Close));
     public static string Notification_Downloading => Get(nameof(Notification_Downloading));
+
+    public static string UpdateDialog_Title => Get(nameof(UpdateDialog_Title));
+    public static string UpdateDialog_DownloadingHeader => Get(nameof(UpdateDialog_DownloadingHeader));
+    public static string UpdateDialog_DownloadingSub => Get(nameof(UpdateDialog_DownloadingSub));
+    public static string UpdateDialog_DownloadingStatus => Get(nameof(UpdateDialog_DownloadingStatus));
+    public static string UpdateDialog_ReadyHeader => Get(nameof(UpdateDialog_ReadyHeader));
+    public static string UpdateDialog_ReadySub => Get(nameof(UpdateDialog_ReadySub));
+    public static string UpdateDialog_ReadyStatus => Get(nameof(UpdateDialog_ReadyStatus));
+    public static string UpdateDialog_RestartNow => Get(nameof(UpdateDialog_RestartNow));
+    public static string UpdateDialog_Restarting => Get(nameof(UpdateDialog_Restarting));
+    public static string UpdateDialog_Later => Get(nameof(UpdateDialog_Later));
+    public static string UpdateDialog_Cancel => Get(nameof(UpdateDialog_Cancel));
+    public static string UpdateDialog_FailedHeader => Get(nameof(UpdateDialog_FailedHeader));
+    public static string UpdateDialog_FailedSub => Get(nameof(UpdateDialog_FailedSub));
+    public static string UpdateDialog_OpenBrowser => Get(nameof(UpdateDialog_OpenBrowser));
 }

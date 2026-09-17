@@ -791,4 +791,47 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="Theme_AbyssalOcean" xml:space="preserve"><value>Abyssal Ocean</value></data>
   <data name="Theme_OneDark" xml:space="preserve"><value>One Dark Pro</value></data>
   <data name="Theme_Gruvbox" xml:space="preserve"><value>Gruvbox Retro</value></data>
+
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Software Update</value>
+  </data>
+  <data name="UpdateDialog_DownloadingHeader" xml:space="preserve">
+    <value>Downloading Update</value>
+  </data>
+  <data name="UpdateDialog_DownloadingSub" xml:space="preserve">
+    <value>Downloading update package for {0}... Please keep BaoTools open.</value>
+  </data>
+  <data name="UpdateDialog_DownloadingStatus" xml:space="preserve">
+    <value>Downloading</value>
+  </data>
+  <data name="UpdateDialog_ReadyHeader" xml:space="preserve">
+    <value>Update Ready to Install</value>
+  </data>
+  <data name="UpdateDialog_ReadySub" xml:space="preserve">
+    <value>BaoTools {0} has been downloaded. Click Restart Now to apply the update and start using the new version.</value>
+  </data>
+  <data name="UpdateDialog_ReadyStatus" xml:space="preserve">
+    <value>Ready to install</value>
+  </data>
+  <data name="UpdateDialog_RestartNow" xml:space="preserve">
+    <value>Restart Now</value>
+  </data>
+  <data name="UpdateDialog_Restarting" xml:space="preserve">
+    <value>Restarting...</value>
+  </data>
+  <data name="UpdateDialog_Later" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="UpdateDialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="UpdateDialog_FailedHeader" xml:space="preserve">
+    <value>Download Failed</value>
+  </data>
+  <data name="UpdateDialog_FailedSub" xml:space="preserve">
+    <value>An error occurred while downloading the update. You can download the latest installer manually from your browser.</value>
+  </data>
+  <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
+    <value>Open Browser</value>
+  </data>
 </root>

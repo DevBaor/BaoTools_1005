@@ -312,9 +312,9 @@ public class UpdateService
     /// Supports Inno Setup installations, Single-File standalone executables, and Portable folder deployments.
     /// Ensures current process is gracefully closed and the updated application is automatically restarted.
     /// </summary>
-    public async Task<bool> DownloadAndApplyUpdateAsync(GitHubReleaseInfo info, IProgress<double?>? progress = null, CancellationToken ct = default)
+    public async Task<PreparedUpdate?> PrepareUpdateAsync(GitHubReleaseInfo info, IProgress<double?>? progress = null, CancellationToken ct = default)
     {
-        if (info is null) return false;
+        if (info is null) return null;
 
         string appDir = AppContext.BaseDirectory;
         int currentPid = Environment.ProcessId;
@@ -334,23 +334,13 @@ public class UpdateService
             string tempSetup = Path.Combine(Path.GetTempPath(), $"BaoTools_Setup_{info.TagName}.exe");
             await _gh.DownloadAsync(setupUrl, tempSetup, progress, ct);
 
-            if (!File.Exists(tempSetup)) return false;
+            if (!File.Exists(tempSetup)) return null;
 
             string batchPath = Path.Combine(Path.GetTempPath(), $"baotools_update_setup_{info.TagName}.bat");
             string scriptContent = BuildSetupBatchScript(currentPid, tempSetup, appDir, targetExe);
             File.WriteAllText(batchPath, scriptContent, System.Text.Encoding.ASCII);
 
-            var psi = new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = batchPath,
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
-            };
-            System.Diagnostics.Process.Start(psi);
-
-            ShutdownForUpdate();
-            return true;
+            return new PreparedUpdate(info.TagName, batchPath);
         }
         else if (!isLooseFolder && !string.IsNullOrEmpty(info.StandaloneExeDownloadUrl))
         {
@@ -359,23 +349,13 @@ public class UpdateService
             string tempExe = Path.Combine(Path.GetTempPath(), $"BaoTools_{info.TagName}.exe");
             await _gh.DownloadAsync(exeUrl, tempExe, progress, ct);
 
-            if (!File.Exists(tempExe)) return false;
+            if (!File.Exists(tempExe)) return null;
 
             string batchPath = Path.Combine(Path.GetTempPath(), $"baotools_update_single_{info.TagName}.bat");
             string scriptContent = BuildSingleExeBatchScript(currentPid, tempExe, appDir, targetExe);
             File.WriteAllText(batchPath, scriptContent, System.Text.Encoding.ASCII);
 
-            var psi = new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = batchPath,
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
-            };
-            System.Diagnostics.Process.Start(psi);
-
-            ShutdownForUpdate();
-            return true;
+            return new PreparedUpdate(info.TagName, batchPath);
         }
         else
         {
@@ -386,7 +366,7 @@ public class UpdateService
             string tempZip = Path.Combine(Path.GetTempPath(), $"BaoTools_Portable_{info.TagName}.zip");
             await _gh.DownloadAsync(portableUrl, tempZip, progress, ct);
 
-            if (!File.Exists(tempZip)) return false;
+            if (!File.Exists(tempZip)) return null;
 
             string stagingDir = Path.Combine(Path.GetTempPath(), $"BaoTools_Staging_{info.TagName}");
             if (Directory.Exists(stagingDir))
@@ -399,19 +379,34 @@ public class UpdateService
             string scriptContent = BuildPortableBatchScript(currentPid, stagingDir, tempZip, appDir, targetExe);
             File.WriteAllText(batchPath, scriptContent, System.Text.Encoding.ASCII);
 
-            var psi = new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = batchPath,
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
-            };
-            System.Diagnostics.Process.Start(psi);
-
-            ShutdownForUpdate();
-            return true;
+            return new PreparedUpdate(info.TagName, batchPath);
         }
     }
+
+    public void ApplyPreparedUpdate(PreparedUpdate prepared)
+    {
+        if (prepared is null || !prepared.IsValid) return;
+
+        var psi = new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = prepared.BatchPath,
+            CreateNoWindow = true,
+            UseShellExecute = false,
+            WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
+        };
+        System.Diagnostics.Process.Start(psi);
+
+        ShutdownForUpdate();
+    }
+
+    public async Task<bool> DownloadAndApplyUpdateAsync(GitHubReleaseInfo info, IProgress<double?>? progress = null, CancellationToken ct = default)
+    {
+        var prep = await PrepareUpdateAsync(info, progress, ct);
+        if (prep is null) return false;
+        ApplyPreparedUpdate(prep);
+        return true;
+    }
+
 
     internal static string BuildSetupBatchScript(int currentPid, string tempSetup, string appDir, string targetExe)
     {
