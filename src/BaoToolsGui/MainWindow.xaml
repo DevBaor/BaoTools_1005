@@ -10,10 +10,13 @@
     xmlns:views="clr-namespace:BaoToolsGui.Views"
     Title="BaoTools"
     Icon="icon.ico"
-    Width="1080"
-    Height="720"
-    MinWidth="760"
-    MinHeight="560"
+    Width="1180"
+    Height="740"
+    MinWidth="1180"
+    MinHeight="740"
+    MaxWidth="1180"
+    MaxHeight="740"
+    ResizeMode="CanMinimize"
     d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
     ExtendsContentIntoTitleBar="True"
     WindowBackdropType="Mica"
@@ -21,13 +24,65 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
+    <ui:FluentWindow.Resources>
+        <!-- Navigation Item Active & Hover tokens fallback -->
+        <SolidColorBrush x:Key="NavigationViewSelectionIndicatorForeground" Color="#A855F7" />
+        <SolidColorBrush x:Key="NavigationViewItemBackgroundSelected" Color="#33A855F7" />
+        <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedLeftFluent" Color="#33A855F7" />
+        <SolidColorBrush x:Key="NavigationViewItemBackgroundPointerOver" Color="#18FFFFFF" />
+
+        <!-- Navigation item styling: consistent, comfortable spacing and border padding -->
+        <Style TargetType="{x:Type ui:NavigationViewItem}" BasedOn="{StaticResource {x:Type ui:NavigationViewItem}}">
+            <Setter Property="Margin" Value="4,1.5" />
+            <Setter Property="MinHeight" Value="36" />
+        </Style>
+
+        <!-- Custom sleek section header: clear contrast & refined spacing -->
+        <Style TargetType="{x:Type ui:NavigationViewItemHeader}">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ui:NavigationViewItemHeader}">
+                        <TextBlock
+                            Margin="14,4,0,6"
+                            FontSize="11"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Opacity="0.85"
+                            Text="{TemplateBinding Text}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Custom sleek 1px separator: thin, crisp, clean separation -->
+        <SolidColorBrush x:Key="LeftNavigationViewSeparatorBrush" Color="Transparent" />
+        <Style TargetType="{x:Type ui:NavigationViewItemSeparator}">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ui:NavigationViewItemSeparator}">
+                        <Border
+                            Height="1"
+                            Margin="10,8,10,8"
+                            Background="{DynamicResource ControlStrokeColorDefaultBrush}"
+                            SnapsToDevicePixels="True" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </ui:FluentWindow.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Title="BaoTools">
+        <ui:TitleBar Grid.Row="0" Title="BaoTools" Height="34" ShowMaximize="False" CanMaximize="False">
             <ui:TitleBar.Icon>
                 <ui:ImageIcon
                     Width="22"
@@ -37,62 +92,68 @@
                     Source="pack://application:,,,/icon.ico" />
             </ui:TitleBar.Icon>
             <ui:TitleBar.TrailingContent>
-                <Button
-                    x:Name="NotificationBellButton"
-                    Width="46"
-                    Height="48"
-                    Margin="0"
-                    Padding="0"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    BorderBrush="Transparent"
-                    Command="{Binding ToggleNotificationCommand}"
-                    ToolTip="{x:Static res:Strings.Notification_Title}"
-                    Focusable="False"
-                    Cursor="Hand">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border
-                                x:Name="ButtonBorder"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                SnapsToDevicePixels="True">
-                                <Grid
-                                    Width="20"
-                                    Height="20"
-                                    Margin="0,-7,0,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                    <ui:SymbolIcon
-                                        Symbol="Alert24"
-                                        FontSize="16"
-                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                <StackPanel
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Height="32">
+                    <Button
+                        x:Name="NotificationBellButton"
+                        Width="38"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        Margin="0,0,4,0"
+                        Padding="0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        BorderBrush="Transparent"
+                        Command="{Binding ToggleNotificationCommand}"
+                        ToolTip="{x:Static res:Strings.Notification_Title}"
+                        Focusable="False"
+                        Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    x:Name="ButtonBorder"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    CornerRadius="4"
+                                    SnapsToDevicePixels="True">
+                                    <Grid
+                                        Width="20"
+                                        Height="20"
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" />
-                                    <!-- Unread notification indicator badge -->
-                                    <Ellipse
-                                        Width="8"
-                                        Height="8"
-                                        Margin="0,-1,-1,0"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top"
-                                        Fill="#ef4444"
-                                        Stroke="#1c1c20"
-                                        StrokeThickness="1.5"
-                                        Visibility="{Binding HasUnreadNotification, Converter={StaticResource BoolToVis}}" />
-                                </Grid>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="ButtonBorder" Property="Background" Value="#1FFFFFFF" />
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="ButtonBorder" Property="Background" Value="#12FFFFFF" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                                        VerticalAlignment="Center">
+                                        <ui:SymbolIcon
+                                            Symbol="Alert24"
+                                            FontSize="16"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" />
+                                        <!-- Unread notification indicator badge -->
+                                        <Ellipse
+                                            Width="8"
+                                            Height="8"
+                                            Margin="0,-1,-1,0"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Fill="#ef4444"
+                                            Stroke="#1c1c20"
+                                            StrokeThickness="1.5"
+                                            Visibility="{Binding HasUnreadNotification, Converter={StaticResource BoolToVis}}" />
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ButtonBorder" Property="Background" Value="#1FFFFFFF" />
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="ButtonBorder" Property="Background" Value="#12FFFFFF" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
             </ui:TitleBar.TrailingContent>
         </ui:TitleBar>
 
@@ -554,9 +615,18 @@
                     </ui:NavigationViewItem>
                     <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Builds}" TargetPageType="{x:Type views:BuildsView}">
                         <ui:NavigationViewItem.Icon>
-                            <ui:SymbolIcon Symbol="BranchFork24" />
+                            <ui:SymbolIcon Symbol="Database24" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
+                    <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Downloads}" TargetPageType="{x:Type views:DownloadsView}">
+                        <ui:NavigationViewItem.Icon>
+                            <ui:SymbolIcon Symbol="ArrowDownload24" />
+                        </ui:NavigationViewItem.Icon>
+                    </ui:NavigationViewItem>
+
+                    <ui:NavigationViewItemSeparator />
+                    <ui:NavigationViewItemHeader Text="{x:Static res:Strings.Nav_Section_Tools}" />
+
                     <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Mode}" TargetPageType="{x:Type views:ModeView}">
                         <ui:NavigationViewItem.Icon>
                             <ui:SymbolIcon Symbol="Options24" />
@@ -564,7 +634,7 @@
                     </ui:NavigationViewItem>
                     <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Fixes}" TargetPageType="{x:Type views:FixesView}">
                         <ui:NavigationViewItem.Icon>
-                            <ui:SymbolIcon Symbol="ShieldTask24" />
+                            <ui:SymbolIcon Symbol="Wrench24" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
                     <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_OnlineFixes}" TargetPageType="{x:Type views:OnlineFixesView}">
@@ -573,9 +643,9 @@
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
 
-                                        <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Tickets}" TargetPageType="{x:Type views:TicketsView}">
+                    <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Tickets}" TargetPageType="{x:Type views:TicketsView}">
                         <ui:NavigationViewItem.Icon>
-                            <ui:SymbolIcon Symbol="Key24" />
+                            <ui:SymbolIcon Symbol="TicketDiagonal24" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
 
@@ -584,19 +654,11 @@
                             <ui:SymbolIcon Symbol="PuzzlePiece24" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
+
                 </ui:NavigationView.MenuItems>
 
                 <ui:NavigationView.FooterMenuItems>
-                    <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_RestartSteam}" Click="RestartSteam_Click">
-                        <ui:NavigationViewItem.Icon>
-                            <ui:SymbolIcon Symbol="ArrowClockwise24" />
-                        </ui:NavigationViewItem.Icon>
-                    </ui:NavigationViewItem>
-                    <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Downloads}" TargetPageType="{x:Type views:DownloadsView}">
-                        <ui:NavigationViewItem.Icon>
-                            <ui:SymbolIcon Symbol="ArrowDownload24" />
-                        </ui:NavigationViewItem.Icon>
-                    </ui:NavigationViewItem>
+                    <ui:NavigationViewItemSeparator />
                     <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Settings}" TargetPageType="{x:Type views:SettingsView}">
                         <ui:NavigationViewItem.Icon>
                             <ui:SymbolIcon Symbol="Settings24" />
@@ -653,14 +715,21 @@
                 </ui:NavigationView.PaneFooter>
             </ui:NavigationView>
 
-            <!-- Bottom-right toasts (attached to ToastService in App.OnStartup). Also hosts the
-                 persistent "update ready" prompt with a Restart action. -->
+            <!-- Bottom-right toasts (attached to ToastService in App.OnStartup) -->
             <ui:SnackbarPresenter
                 x:Name="RootSnackbar"
-                Margin="0,0,24,20"
+                Margin="0,0,24,80"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 MaxWidth="460" />
+
+            <!-- Floating AI Assistant Widget (Bottom-right corner) -->
+            <views:AiChatWidget
+                DataContext="{Binding AiChat}"
+                Margin="0,0,24,20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Panel.ZIndex="100" />
             </Grid>
 
             <!-- First-run welcome overlay (last child = top Z-order; covers the nav + page area). -->

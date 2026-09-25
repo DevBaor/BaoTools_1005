@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Nyelv</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Válaszd ki az alkalmazás megjelenítési nyelvét. Újraindítás után lép érvénybe.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Rendszer alapértelmezett</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS-feloldás</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Ha a szolgáltatód blokkolja a BaoTools-t, az alkalmazás a rendszer feloldója helyett a Cloudflare-en (1.1.1.1) keresztül oldhatja fel a címeket. Az „Automatikus” csak a szokásos DNS hibája után vált át.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automatikus</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Mindig a Cloudflare használata</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Csak a rendszer DNS-e</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam helye</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Módosítás…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Megnyitás</value></data>
@@ -370,8 +375,8 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Automatikus letöltés az első elérhető forrásból</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Nem található elérhető forrás ehhez a játékhoz</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· innen: {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>BaoTools bővítmény</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>A BaoTools Steam bővítmény! — Mostantól LuaLoader a Shittenium helyett</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>bővítmény</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>A Steam bővítmény! — Mostantól LuaLoader a Shittenium helyett</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Állapot</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Frissítés érhető el</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Telepített verzió</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>ESZKÖZÖK</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>RENDSZER</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>Jó reggelt</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>Jó napot</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>Jó estét</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Könnyen kezelheti Steam-játékait, eszközeit és feloldott erőforrásait.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Gyorsműveletek</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Játék hozzáadása</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Lua fájlok keresése és letöltése</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Játékok javítása</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Hibaelhárítás és javítások alkalmazása</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>Letöltések</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>Letöltési sor megtekintése</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Összes megtekintése</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Rendszer állapota</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Könyvtár megtekintése</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Mód váltása</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Bővítmény kezelése</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Kezelés</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Még nincsenek telepített játékok</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Adjon hozzá játékokat a Hozzáadás fülről, vagy húzzon fájlokat jobbra.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Gyors tipp</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Húzzon bármilyen .lua, .manifest fájlt vagy játékmappát a zónába az automatikus telepítéshez.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Játékkönyvtár és eszközök</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Rendezés</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Nézet</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Rács nézet</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Lista nézet</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Telepítve</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Nincs telepítve</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>Hiányzó fájlok</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>PLATFORM</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>ÁLLAPOT</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>MŰFAJ</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>SZŰRŐK VISSZAÁLLÍTÁSA</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Játék részletei</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} játék</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>{0} – {1} megjelenítése {2} játékból</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 játék</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>Hozzáadva: {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Bezárás (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Támogatás és diagnosztika</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Diagnosztikai asszisztens engedélyezése</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Lebegő asszisztens gomb megjelenítése az automatikus hibaelhárításhoz.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>BaoTools asszisztens</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Kérdezzen játékokról, hibákról, diagnosztikáról...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Gondolkodom...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Csevegési előzmények törlése</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Kicsinyítés</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Kérdés küldése (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Javasolt témák:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Kérdezz bármit...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Segítségre van szüksége?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Nem indul a játék?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Javításra van szüksége?</value></data>
 </root>

@@ -1,5 +1,9 @@
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Net.Http;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BaoToolsGui.Services;
@@ -22,6 +26,8 @@ public partial class HomeViewModel : ObservableObject
     public Action? NavigateToSettings { get; set; }
     public Action? NavigateToMode { get; set; }
     public Action? NavigateToAdd { get; set; }
+    public Action? NavigateToFixes { get; set; }
+    public Action? NavigateToDownloads { get; set; }
 
     private readonly SteamService _steam;
     private readonly AuthService _auth;
@@ -32,6 +38,7 @@ public partial class HomeViewModel : ObservableObject
     private readonly UnlockerService _unlocker;
     private readonly PluginInstallerService _plugin;
     private readonly ToastService _toast;
+    private readonly System.Windows.Threading.DispatcherTimer _greetingTimer;
 
     /// <summary>Drag-and-drop installer shown on the page; refreshes the library after a drop.</summary>
     public DropInstallViewModel Drop { get; }
@@ -69,6 +76,11 @@ public partial class HomeViewModel : ObservableObject
     [ObservableProperty] private string _accountStatus = Resources.Strings.Home_BrowsingAsGuest;
     [ObservableProperty] private string _dailyQuotaStatus = Resources.Strings.Home_DailyQuota_Guest;
 
+    [ObservableProperty] private string _greetingTitle = Resources.Strings.Home_Welcome;
+    [ObservableProperty] private string? _avatarUrl;
+    [ObservableProperty] private bool _hasAvatar;
+    [ObservableProperty] private ImageSource? _avatarSource;
+
     // ── Active unlocker mode ────────────────────────────────────────
     [ObservableProperty] private string _modeStatus = Resources.Strings.Home_NoModeSelected;
 
@@ -87,9 +99,23 @@ public partial class HomeViewModel : ObservableObject
         _toast = toast;
         Drop = drop;
         _auth.AuthStateChanged += RefreshAccount;
-        _ = RefreshQuotaAsync();
+        RefreshAccount();
+
+        // Keep greeting in sync with local time in real-time (every 1 minute)
+        _greetingTimer = new System.Windows.Threading.DispatcherTimer
+        {
+            Interval = TimeSpan.FromMinutes(1)
+        };
+        _greetingTimer.Tick += (_, _) => UpdateGreeting();
+        _greetingTimer.Start();
         // Library refresh on any install (drag-drop, plugin, Add page, Fixes) is driven by
         // LuaInstaller.Installed, wired in App → RefreshLibraryAsync.
+    }
+
+    public async Task InitializeAsync()
+    {
+        await _auth.InitializeAsync();
+        RefreshAccount();
     }
 
     /// <summary>Open a recently-added game in the Manage detail view.</summary>
@@ -102,6 +128,22 @@ public partial class HomeViewModel : ObservableObject
     [RelayCommand] private void OpenSettings() => NavigateToSettings?.Invoke();
     [RelayCommand] private void OpenMode() => NavigateToMode?.Invoke();
     [RelayCommand] private void OpenAdd() => NavigateToAdd?.Invoke();
+    [RelayCommand] private void OpenFixes() => NavigateToFixes?.Invoke();
+    [RelayCommand] private void OpenDownloads() => NavigateToDownloads?.Invoke();
+
+    [RelayCommand]
+    private void OpenDiscord()
+    {
+        try
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "https://discord.com/channels/1543559756504113152",
+                UseShellExecute = true
+            });
+        }
+        catch { }
+    }
 
     /// <summary>Inline install of the store-page plugin from the Home tile (mirrors PluginViewModel.Install):
     /// confirm the Steam restart, install, toast the outcome, then refresh the tile.</summary>
@@ -206,18 +248,112 @@ public partial class HomeViewModel : ObservableObject
 
         GameCount = tiles.Count;
 
-        var recent = tiles.Take(4).ToList();
+        var recent = tiles.Take(8).ToList();
+        for (int i = 0; i < recent.Count; i++)
+        {
+            var t = recent[i];
+            t.UpdateCategory(_appInfo);
+            t.IsNew = (DateTime.Now - t.AddedAt).TotalDays <= 7 || i < 2;
+        }
         Recent = new ObservableCollection<LuaTileViewModel>(recent);
         foreach (var t in recent) _ = t.EnsureResolvedAsync(_appInfo, _covers); // warm covers
+    }
+
+    private static string GetTimeGreeting()
+    {
+        int hour = DateTime.Now.Hour;
+        if (hour >= 5 && hour < 12) return Resources.Strings.Home_Greeting_Morning;
+        if (hour >= 12 && hour < 18) return Resources.Strings.Home_Greeting_Afternoon;
+        return Resources.Strings.Home_Greeting_Evening;
+    }
+
+    public void UpdateGreeting()
+    {
+        var greeting = GetTimeGreeting();
+        GreetingTitle = IsSignedIn && !string.IsNullOrWhiteSpace(_auth.DisplayName)
+            ? $"{greeting}, {_auth.DisplayName}!"
+            : $"{greeting}!";
     }
 
     private void RefreshAccount()
     {
         IsSignedIn = _auth.IsSignedIn;
+        AvatarUrl = _auth.AvatarUrl;
         AccountStatus = IsSignedIn
             ? (_auth.DisplayName is { } n ? string.Format(Resources.Strings.Home_SignedInAs, n) : Resources.Strings.Home_SignedIn)
             : Resources.Strings.Home_BrowsingAsGuest;
+
+        UpdateGreeting();
         _ = RefreshQuotaAsync();
+        _ = LoadAvatarAsync(AvatarUrl);
+    }
+
+    private static void OnUi(Action action)
+    {
+        var dispatcher = Application.Current?.Dispatcher;
+        if (dispatcher is null || dispatcher.CheckAccess()) action();
+        else dispatcher.Invoke(action);
+    }
+
+    private async Task LoadAvatarAsync(string? url)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            OnUi(() =>
+            {
+                AvatarSource = null;
+                HasAvatar = false;
+            });
+            return;
+        }
+
+        try
+        {
+            var client = AppHttp.Create(TimeSpan.FromSeconds(10));
+            using var req = new HttpRequestMessage(HttpMethod.Get, url);
+            req.Headers.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+            using var resp = await client.SendAsync(req);
+            if (!resp.IsSuccessStatusCode)
+            {
+                OnUi(() =>
+                {
+                    AvatarSource = null;
+                    HasAvatar = false;
+                });
+                return;
+            }
+            byte[] bytes = await resp.Content.ReadAsByteArrayAsync();
+            if (bytes is null || bytes.Length == 0)
+            {
+                OnUi(() =>
+                {
+                    AvatarSource = null;
+                    HasAvatar = false;
+                });
+                return;
+            }
+
+            var bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.CacheOption = BitmapCacheOption.OnLoad;
+            bmp.StreamSource = new MemoryStream(bytes);
+            bmp.EndInit();
+            bmp.Freeze();
+
+            OnUi(() =>
+            {
+                AvatarSource = bmp;
+                HasAvatar = true;
+            });
+        }
+        catch
+        {
+            OnUi(() =>
+            {
+                AvatarSource = null;
+                HasAvatar = false;
+            });
+        }
     }
 
     public async Task RefreshQuotaAsync()

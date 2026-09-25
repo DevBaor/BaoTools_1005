@@ -113,4 +113,14 @@ public class LanguageDetectionTests
     [InlineData("")]        // invariant culture
     public void Unsupported_FallsBackToEnglish(string os) =>
         Assert.Equal("en", Match(os));
+    [Fact]
+    public void LanguageOption_FlagsLoadSuccessfully()
+    {
+        _ = System.IO.Packaging.PackUriHelper.UriSchemePack;
+        if (System.Windows.Application.ResourceAssembly == null)
+            System.Windows.Application.ResourceAssembly = typeof(BaoToolsGui.ViewModels.LanguageOption).Assembly;
+        var opt = new BaoToolsGui.ViewModels.LanguageOption("Tiếng Việt", "vi");
+        Xunit.Assert.NotNull(opt.ResolvedFlagCode);
+        Xunit.Assert.True(opt.HasFlag);
+    }
 }

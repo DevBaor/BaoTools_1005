@@ -496,6 +496,13 @@
                                                             <Setter Property="Foreground" Value="#c9ced6" />
                                                             <Setter Property="PagePadding" Value="0" />
                                                         </Style>
+                                                        <Style TargetType="{x:Type List}">
+                                                            <Setter Property="Margin" Value="18,2,0,4" />
+                                                            <Setter Property="Padding" Value="0" />
+                                                        </Style>
+                                                        <Style TargetType="{x:Type ListItem}">
+                                                            <Setter Property="Margin" Value="0,1,0,2" />
+                                                        </Style>
                                                         <Style x:Key="{x:Static markdig:Styles.ParagraphStyleKey}" TargetType="{x:Type Paragraph}">
                                                             <Setter Property="Margin" Value="0,0,0,6" />
                                                             <Setter Property="LineHeight" Value="18" />

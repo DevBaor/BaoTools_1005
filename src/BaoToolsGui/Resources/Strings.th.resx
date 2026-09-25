@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>ภาษา</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>เลือกภาษาที่แสดงของแอป จะมีผลหลังจากรีสตาร์ท</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>ค่าเริ่มต้นของระบบ</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>การแปลงชื่อ DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>หากผู้ให้บริการของคุณบล็อก BaoTools แอปสามารถค้นหาที่อยู่ผ่าน Cloudflare (1.1.1.1) แทนตัวแปลงของระบบได้ โหมด “อัตโนมัติ” จะสลับเมื่อ DNS ปกติล้มเหลวเท่านั้น</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>อัตโนมัติ</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>ใช้ Cloudflare เสมอ</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>ใช้ DNS ของระบบเท่านั้น</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>ตำแหน่ง Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>เปลี่ยน…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>เปิด</value></data>
@@ -370,8 +375,8 @@
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>ดาวน์โหลดอัตโนมัติจากแหล่งแรกที่พร้อมใช้งาน</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>ไม่พบแหล่งที่พร้อมใช้งานสำหรับเกมนี้</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· ผ่าน {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>ปลั๊กอิน BaoTools</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>ปลั๊กอิน BaoTools สำหรับ Steam! — ตอนนี้ใช้ LuaLoader แทน Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>ปลั๊กอิน</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>ปลั๊กอิน สำหรับ Steam! — ตอนนี้ใช้ LuaLoader แทน Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>สถานะ</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>มีอัปเดต</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>เวอร์ชันที่ติดตั้ง</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>เครื่องมือ</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>ระบบ</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>สวัสดีตอนเช้า</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>สวัสดีตอนบ่าย</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>สวัสดีตอนเย็น</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>จัดการเกม Steam เครื่องมือ และทรัพยากรที่ปลดล็อกของคุณได้อย่างง่ายดาย</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>การดำเนินการด่วน</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>เพิ่มเกม</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>ค้นหาและดาวน์โหลดไฟล์ lua</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>แก้ไขเกม</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>แก้ไขปัญหาและใช้แพตช์</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>ดาวน์โหลด</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>ดูคิวดาวน์โหลด</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>ดูทั้งหมด</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>สถานะระบบ</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>ดูคลังเกม</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>เปลี่ยนโหมด</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>จัดการปลั๊กอิน</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>จัดการ</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>ยังไม่มีเกมที่ติดตั้ง</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>เพิ่มเกมจากแท็บเพิ่ม หรือลากไฟล์มาทางขวาเพื่อเริ่มต้น</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>เคล็ดลับด่วน</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>ลากและวางไฟล์ .lua, .manifest หรือโฟลเดอร์เกมลงในพื้นที่วางเพื่อติดตั้งโดยอัตโนมัติ</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>คลังเกมและเครื่องมือของคุณ</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>เรียงลำดับ</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>มุมมอง</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>มุมมองตาราง</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>มุมมองรายการ</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>ติดตั้งแล้ว</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>ยังไม่ได้ติดตั้ง</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>ไฟล์ไม่ครบ</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>แพลตฟอร์ม</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>สถานะ</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>ประเภท</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>รีเซ็ตตัวกรอง</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>รายละเอียดเกม</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} เกม</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>กำลังแสดง {0} – {1} จาก {2} เกม</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 เกม</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>เพิ่มเมื่อ {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>ปิด (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>การสนับสนุนและการวินิจฉัย</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>เปิดใช้งานผู้ช่วยวินิจฉัย</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>แสดงปุ่มผู้ช่วยแบบลอยสำหรับการแก้ไขปัญหาอัตโนมัติและคำแนะนำการตั้งค่า</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>ผู้ช่วย BaoTools</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>ถามเกี่ยวกับเกม ข้อผิดพลาด หรือการวินิจฉัย...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>กำลังคิด...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>ล้างประวัติการสนทนา</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>ย่อเล็กสุด</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>ส่งคำถาม (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>หัวข้อที่แนะนำ:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>ถามฉันได้ทุกเรื่อง...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>ต้องการความช่วยเหลือไหม?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>เกมเล่นไม่ได้?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>ต้องการแก้ปัญหาไหม?</value></data>
 </root>

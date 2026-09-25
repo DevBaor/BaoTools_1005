@@ -1,0 +1,200 @@
+[
+  {
+    "Id": "setting_steam_path",
+    "Property": "SteamPathOverride",
+    "NameVi": "Thư mục cài đặt Steam",
+    "NameEn": "Steam Installation Folder",
+    "PurposeVi": "Chỉ định thủ công đường dẫn thư mục Steam nếu hệ thống không tự phát hiện được qua Registry.",
+    "PurposeEn": "Manually specify Steam folder path if registry auto-detection fails.",
+    "Type": "string?",
+    "DefaultValue": "Auto-detected from Windows Registry",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Steam",
+    "LocationEn": "Settings -\u003E Steam Section",
+    "AvailableValues": [
+      "Valid Steam directory path containing steam.exe"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_language",
+    "Property": "Language",
+    "NameVi": "Ngôn ngữ giao diện",
+    "NameEn": "Interface Language",
+    "PurposeVi": "Chuyển đổi ngôn ngữ hiển thị toàn bộ giao diện BaoTools.",
+    "PurposeEn": "Switch display language across the entire BaoTools UI.",
+    "Type": "string?",
+    "DefaultValue": "Follow Windows Display Language",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Giao diện (Appearance)",
+    "LocationEn": "Settings -\u003E Appearance Section",
+    "AvailableValues": [
+      "en (English)",
+      "vi (Tiếng Việt)",
+      "zh-Hans",
+      "zh-Hant",
+      "ru",
+      "es",
+      "fr",
+      "de",
+      "ja",
+      "ko",
+      "pt-BR"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_theme",
+    "Property": "Theme",
+    "NameVi": "Chủ đề giao diện (Theme)",
+    "NameEn": "UI Theme",
+    "PurposeVi": "Chọn phối màu cho giao diện ứng dụng.",
+    "PurposeEn": "Select color palette for the app interface.",
+    "Type": "string?",
+    "DefaultValue": "Default (Dark Purple)",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Giao diện (Appearance)",
+    "LocationEn": "Settings -\u003E Appearance Section",
+    "AvailableValues": [
+      "Default",
+      "Dracula",
+      "Nord",
+      "Catppuccin",
+      "Cyberpunk",
+      "Midnight"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_enable_ai_assistant",
+    "Property": "EnableAiAssistant",
+    "NameVi": "Bật Trợ lý AI BaoTools",
+    "NameEn": "Enable AI Assistant",
+    "PurposeVi": "Bật hoặc ẩn biểu tượng Trợ lý AI nổi ở góc phải dưới.",
+    "PurposeEn": "Toggle visibility of the floating AI Assistant on the bottom right.",
+    "Type": "bool?",
+    "DefaultValue": "true",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Trợ lý AI (AI Assistant)",
+    "LocationEn": "Settings -\u003E AI Assistant Section",
+    "AvailableValues": [
+      "true",
+      "false"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_hubcap_api_key",
+    "Property": "HubcapApiKey",
+    "NameVi": "Mã API Hubcap Manifest",
+    "NameEn": "Hubcap Manifest API Key",
+    "PurposeVi": "Mã API dịch vụ Hubcap Manifest (hubcapmanifest.com) để mở khóa các nguồn tải depot riêng.",
+    "PurposeEn": "Hubcap Manifest service API key for accessing restricted depot sources.",
+    "Type": "string?",
+    "DefaultValue": "null",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Hubcap",
+    "LocationEn": "Settings -\u003E Hubcap Section",
+    "AvailableValues": [
+      "smm_..."
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_auto_update_apps",
+    "Property": "AutoUpdateApps",
+    "NameVi": "Tự động cập nhật game qua Steam",
+    "NameEn": "Keep Games Updated via Steam",
+    "PurposeVi": "Khi bật, file .lua không ghim manifest cố định để Steam tự động cập nhật game lên phiên bản mới nhất.",
+    "PurposeEn": "When true, .lua configs avoid pinning manifests so Steam keeps games up-to-date.",
+    "Type": "bool?",
+    "DefaultValue": "true",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Cài đặt chung",
+    "LocationEn": "Settings -\u003E General Section",
+    "AvailableValues": [
+      "true",
+      "false"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_donate_keys",
+    "Property": "DonateKeys",
+    "NameVi": "Đóng góp key giải mã Steam",
+    "NameEn": "Donate Steam Decryption Keys",
+    "PurposeVi": "Chia sẻ key giải mã game dư thừa ẩn danh vào kho dữ liệu chung của cộng đồng.",
+    "PurposeEn": "Anonymously contribute spare Steam decryption keys to the community pool.",
+    "Type": "bool?",
+    "DefaultValue": "true",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Cài đặt chung",
+    "LocationEn": "Settings -\u003E General Section",
+    "AvailableValues": [
+      "true",
+      "false"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_start_with_windows",
+    "Property": "StartWithWindows",
+    "NameVi": "Khởi động cùng Windows",
+    "NameEn": "Start with Windows",
+    "PurposeVi": "Tự động chạy ứng dụng khi đăng nhập vào hệ điều hành Windows.",
+    "PurposeEn": "Automatically launch the application on Windows login.",
+    "Type": "bool?",
+    "DefaultValue": "false",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Khởi động (Startup)",
+    "LocationEn": "Settings -\u003E Startup Section",
+    "AvailableValues": [
+      "true",
+      "false"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_start_with_steam",
+    "Property": "StartWithSteam",
+    "NameVi": "Khởi động cùng Steam",
+    "NameEn": "Start with Steam",
+    "PurposeVi": "Chạy BaoTools ẩn dưới khay hệ thống mỗi khi Steam được mở thông qua winmm.dll loader.",
+    "PurposeEn": "Silently launch BaoTools into tray when Steam starts via winmm.dll loader.",
+    "Type": "bool?",
+    "DefaultValue": "false",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Khởi động (Startup)",
+    "LocationEn": "Settings -\u003E Startup Section",
+    "AvailableValues": [
+      "true",
+      "false"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_minimize_to_tray",
+    "Property": "MinimizeToTray",
+    "NameVi": "Thu nhỏ xuống khay hệ thống",
+    "NameEn": "Minimize to System Tray",
+    "PurposeVi": "Khi đóng hoặc thu nhỏ, ẩn ứng dụng vào System Tray thay vì taskbar.",
+    "PurposeEn": "Hides the app window into system tray instead of taskbar on close/minimize.",
+    "Type": "bool?",
+    "DefaultValue": "false",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Khởi động \u0026 Khay",
+    "LocationEn": "Settings -\u003E Startup \u0026 Tray Section",
+    "AvailableValues": [
+      "true",
+      "false"
+    ],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Id": "setting_fast_fetch",
+    "Property": "FastFetch",
+    "NameVi": "Tự động chọn nguồn tải nhanh (FastFetch)",
+    "NameEn": "FastFetch Automatic Source",
+    "PurposeVi": "Tự động chọn nguồn tải nhanh nhất có sẵn và bắt đầu tải tức thì.",
+    "PurposeEn": "Automatically pick first available download source and start immediately.",
+    "Type": "bool?",
+    "DefaultValue": "false",
+    "LocationVi": "Cài đặt (Settings) -\u003E Mục Tải game",
+    "LocationEn": "Settings -\u003E Download Section",
+    "AvailableValues": [
+      "true",
+      "false"
+    ],
+    "SourceFile": "SettingsService.cs"
+  }
+]

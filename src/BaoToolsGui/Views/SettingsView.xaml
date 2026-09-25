@@ -9,156 +9,195 @@
     xmlns:vm="clr-namespace:BaoToolsGui.ViewModels"
     d:DataContext="{d:DesignInstance Type=vm:SettingsViewModel}"
     TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-        mc:Ignorable="d">
+    mc:Ignorable="d">
 
     <UserControl.Resources>
-        <!-- Section card: one bordered container that groups a section's rows. -->
-        <Style x:Key="SettingsCard" TargetType="Border">
-            <Setter Property="Background" Value="#08FFFFFF" />
-            <Setter Property="BorderBrush" Value="#12FFFFFF" />
+        <!-- Modern card container for settings sections -->
+        <Style x:Key="ModernSettingsCard" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="20,16" />
         </Style>
-        <!-- Section header (small grey uppercase label above each card). -->
-        <Style x:Key="SectionHeader" TargetType="TextBlock">
-            <Setter Property="Margin" Value="0,24,0,8" />
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="#9ca3af" />
-        </Style>
-        <!-- Thin divider between rows inside a card. -->
-        <Style x:Key="RowDivider" TargetType="Border">
+
+        <!-- Subtle row divider within a card -->
+        <Style x:Key="ModernRowDivider" TargetType="Border">
             <Setter Property="Height" Value="1" />
-            <Setter Property="Background" Value="#10FFFFFF" />
-            <Setter Property="Margin" Value="14,0" />
+            <Setter Property="Background" Value="{DynamicResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="Margin" Value="0,14" />
+        </Style>
+
+        <!-- Uppercase section label above each card group -->
+        <Style x:Key="ModernSectionLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+            <Setter Property="Margin" Value="2,28,0,8" />
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel MaxWidth="640" Margin="8,16,8,24">
-            <TextBlock
-                FontSize="22"
-                FontWeight="Bold"
-                Text="{x:Static res:Strings.Settings_Title}" />
+    <!-- Single smooth scrollable page with no tabs and no sidebar -->
+    <ScrollViewer
+        x:Name="PageScroller"
+        HorizontalScrollBarVisibility="Disabled"
+        VerticalScrollBarVisibility="Auto">
 
-            <!-- Account -->
+        <StackPanel
+            MaxWidth="980"
+            Margin="28,22,28,40"
+            HorizontalAlignment="Center">
+
+            <!-- ── 1. Page Header ────────────────────────────────────────── -->
+            <StackPanel Margin="0,0,0,8">
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                    Text="{x:Static res:Strings.Settings_Title}" />
+                <TextBlock
+                    Margin="0,4,0,0"
+                    FontSize="12.5"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                    Text="{x:Static res:Strings.Settings_Subtitle}" />
+            </StackPanel>
+
+            <!-- ── 2. ACCOUNT & SERVICES ──────────────────────────────────── -->
             <TextBlock
-                Margin="0,20,0,8"
-                Style="{StaticResource SectionHeader}"
+                Style="{StaticResource ModernSectionLabel}"
                 Text="{x:Static res:Strings.Settings_Section_Account}" />
-            <!-- One card holds the account row(s) + the lua.tools hint. -->
-            <Border Style="{StaticResource SettingsCard}">
+
+            <Border Style="{StaticResource ModernSettingsCard}">
                 <StackPanel>
-                    <!-- Signed-in account -->
-                    <StackPanel
-                        Margin="14,12"
-                        Visibility="{Binding IsRealUser, Converter={StaticResource BoolToVis}}">
-                    <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Border
-                        Width="40"
-                        Height="40"
-                        CornerRadius="20">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding AvatarUrl}" Stretch="UniformToFill" />
-                        </Border.Background>
-                    </Border>
-                    <StackPanel
-                        Grid.Column="1"
-                        Margin="12,0"
-                        VerticalAlignment="Center">
-                        <TextBlock
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            Text="{Binding DisplayName}" />
-                        <TextBlock
-                            FontSize="12"
-                            Foreground="#6b7280"
-                            Text="{Binding Email}" />
-                        <TextBlock
-                            Margin="0,4,0,0"
-                            FontSize="12"
-                            Foreground="#a78bfa"
-                            Text="{Binding QuotaText}"
-                            Visibility="{Binding HasQuotaText, Converter={StaticResource BoolToVis}}" />
-                    </StackPanel>
-                        <ui:Button
-                            Grid.Column="2"
-                            Command="{Binding SignOutCommand}"
-                            Content="{x:Static res:Strings.Settings_SignOut}"
-                            Icon="{ui:SymbolIcon SignOut24}" />
-                    </Grid>
+                    <!-- Signed-in user profile -->
+                    <StackPanel Visibility="{Binding IsRealUser, Converter={StaticResource BoolToVis}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                    <!-- Bot-provisioned: prompt to re-link the full lua.tools account. -->
-                    <Border
-                        Margin="0,10,0,0"
-                        Padding="12"
-                        Background="#1Aeab308"
-                        BorderBrush="#33eab308"
-                        BorderThickness="1"
-                        CornerRadius="8"
-                        Visibility="{Binding ShowBotLinkBanner, Converter={StaticResource BoolToVis}}">
-                        <StackPanel>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel>
+                            <!-- User Avatar -->
+                            <Border
+                                Width="46"
+                                Height="46"
+                                CornerRadius="23"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1">
+                                <Grid>
+                                    <ui:SymbolIcon
+                                        Symbol="Person24"
+                                        FontSize="20"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                    <Ellipse Width="46" Height="46">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding AvatarUrl}" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+                            </Border>
+
+                            <!-- User Details -->
+                            <StackPanel Grid.Column="1" Margin="14,0" VerticalAlignment="Center">
+                                <TextBlock
+                                    FontSize="14.5"
+                                    FontWeight="SemiBold"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="{Binding DisplayName}" />
+                                <TextBlock
+                                    Margin="0,2,0,0"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="{Binding Email}" />
+                                <Border
+                                    Margin="0,5,0,0"
+                                    Padding="7,2"
+                                    HorizontalAlignment="Left"
+                                    Background="#208b5cf6"
+                                    BorderBrush="#408b5cf6"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Visibility="{Binding HasQuotaText, Converter={StaticResource BoolToVis}}">
                                     <TextBlock
+                                        FontSize="11"
                                         FontWeight="SemiBold"
-                                        Text="{x:Static res:Strings.Settings_BotLink_Title}" />
-                                    <TextBlock
-                                        Margin="0,2,0,0"
-                                        FontSize="12"
-                                        Foreground="#9ca3af"
-                                        Text="{x:Static res:Strings.Settings_BotLink_Body}"
-                                        TextWrapping="Wrap" />
-                                </StackPanel>
-                                <ui:Button
-                                    Grid.Column="1"
-                                    Margin="8,0,0,0"
-                                    VerticalAlignment="Top"
-                                    Command="{Binding DismissBotBannerCommand}"
-                                    Content="{x:Static res:Strings.Settings_BotLink_Dismiss}" />
-                            </Grid>
-                            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                                <ui:TextBox
-                                    Width="120"
-                                    CharacterCasing="Upper"
-                                    MaxLength="6"
-                                    PlaceholderText="{x:Static res:Strings.Settings_BotCode_Placeholder}"
-                                    Text="{Binding CodeInput, UpdateSourceTrigger=PropertyChanged}" />
-                                <ui:Button
-                                    Margin="8,0,0,0"
-                                    Command="{Binding SignInWithCodeCommand}"
-                                    Content="{x:Static res:Strings.Settings_BotCode_Redeem}"
-                                    Icon="{ui:SymbolIcon Link24}"
-                                    IsEnabled="{Binding CanRedeemCode}" />
+                                        Foreground="#a78bfa"
+                                        Text="{Binding QuotaText}" />
+                                </Border>
                             </StackPanel>
-                            <TextBlock
-                                Margin="0,8,0,0"
-                                FontSize="11.5"
-                                Foreground="#f87171"
-                                Text="{Binding CodeError}"
-                                TextWrapping="Wrap"
-                                Visibility="{Binding CodeError, Converter={StaticResource NullToCollapsed}}" />
-                        </StackPanel>
-                    </Border>
+
+                            <!-- Sign Out Button -->
+                            <ui:Button
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Appearance="Secondary"
+                                Command="{Binding SignOutCommand}"
+                                Content="{x:Static res:Strings.Settings_SignOut}"
+                                Icon="{ui:SymbolIcon SignOut24}" />
+                        </Grid>
+
+                        <!-- Bot-provisioned re-link banner -->
+                        <Border
+                            Margin="0,14,0,0"
+                            Padding="14"
+                            Background="#1Aeab308"
+                            BorderBrush="#33eab308"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Visibility="{Binding ShowBotLinkBanner, Converter={StaticResource BoolToVis}}">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_BotLink_Title}" />
+                                        <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_BotLink_Body}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                    <ui:Button
+                                        Grid.Column="1"
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Top"
+                                        Appearance="Transparent"
+                                        Command="{Binding DismissBotBannerCommand}"
+                                        Content="✕" />
+                                </Grid>
+                                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                                    <ui:TextBox
+                                        Width="130"
+                                        CharacterCasing="Upper"
+                                        MaxLength="6"
+                                        PlaceholderText="{x:Static res:Strings.Settings_BotCode_Placeholder}"
+                                        Text="{Binding CodeInput, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:Button
+                                        Margin="8,0,0,0"
+                                        Appearance="Primary"
+                                        Command="{Binding SignInWithCodeCommand}"
+                                        Content="{x:Static res:Strings.Settings_BotCode_Redeem}"
+                                        Icon="{ui:SymbolIcon Link24}"
+                                        IsEnabled="{Binding CanRedeemCode}" />
+                                </StackPanel>
+                                <TextBlock
+                                    Margin="0,8,0,0"
+                                    FontSize="11.5"
+                                    Foreground="#f87171"
+                                    Text="{Binding CodeError}"
+                                    TextWrapping="Wrap"
+                                    Visibility="{Binding CodeError, Converter={StaticResource NullToCollapsed}}" />
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
 
-                    <!-- Guest -->
-                    <StackPanel
-                        Margin="14,12"
-                        Visibility="{Binding IsGuest, Converter={StaticResource BoolToVis}}">
-
-                        <!-- Login-required banner: shown when redirected from a protected action. -->
+                    <!-- Guest mode UI -->
+                    <StackPanel Visibility="{Binding IsGuest, Converter={StaticResource BoolToVis}}">
+                        <!-- Login Required Redirect Banner -->
                         <Border
-                            Margin="0,0,0,10"
+                            Margin="0,0,0,14"
                             Padding="12"
                             Background="#1A3b82f6"
                             BorderBrush="#333b82f6"
@@ -171,70 +210,65 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <ui:SymbolIcon
-                                        Margin="0,0,8,0"
-                                        FontSize="16"
-                                        Foreground="#60a5fa"
-                                        Symbol="Info24" />
-                                    <TextBlock
-                                        VerticalAlignment="Center"
-                                        FontSize="13"
-                                        Text="{Binding LoginRequiredMessage}"
-                                        TextWrapping="Wrap" />
+                                    <ui:SymbolIcon Margin="0,0,10,0" FontSize="18" Foreground="#60a5fa" Symbol="Info24" />
+                                    <TextBlock VerticalAlignment="Center" FontSize="13" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{Binding LoginRequiredMessage}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <ui:Button
                                     Grid.Column="1"
                                     Margin="8,0,0,0"
-                                    Appearance="Secondary"
+                                    Appearance="Transparent"
                                     Command="{Binding DismissLoginRequiredCommand}"
                                     Content="✕" />
                             </Grid>
                         </Border>
 
+                        <!-- Guest sign in row -->
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="14"
-                                    FontWeight="SemiBold"
-                                    Text="{x:Static res:Strings.Settings_BrowsingAsGuest}" />
-                                <TextBlock
-                                    FontSize="12"
-                                    Foreground="#6b7280"
-                                    Text="{x:Static res:Strings.Settings_GuestHint}" />
+                                <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_BrowsingAsGuest}" />
+                                <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_GuestHint}" TextWrapping="Wrap" />
                             </StackPanel>
                             <ui:Button
                                 Grid.Column="1"
+                                Margin="16,0,0,0"
                                 Appearance="Primary"
                                 Command="{Binding SignInCommand}"
                                 Content="{x:Static res:Strings.Settings_SignInDiscord}"
                                 Icon="{ui:SymbolIcon Person24}" />
                         </Grid>
 
-                        <!-- Discord bot code: redeem a /login code without the browser flow. -->
-                        <Border Style="{StaticResource RowDivider}" Margin="0,12,0,0" />
-                        <TextBlock
-                            Margin="0,12,0,0"
-                            FontSize="12"
-                            Foreground="#9ca3af"
-                            Text="{x:Static res:Strings.Settings_BotCode_Hint}" />
-                        <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
-                            <ui:TextBox
-                                Width="120"
-                                CharacterCasing="Upper"
-                                MaxLength="6"
-                                PlaceholderText="{x:Static res:Strings.Settings_BotCode_Placeholder}"
-                                Text="{Binding CodeInput, UpdateSourceTrigger=PropertyChanged}" />
-                            <ui:Button
-                                Margin="8,0,0,0"
-                                Command="{Binding SignInWithCodeCommand}"
-                                Content="{x:Static res:Strings.Settings_BotCode_Redeem}"
-                                Icon="{ui:SymbolIcon Key24}"
-                                IsEnabled="{Binding CanRedeemCode}" />
-                        </StackPanel>
+                        <Border Style="{StaticResource ModernRowDivider}" />
+
+                        <!-- Discord Bot Code Redeem -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_BotCode_Redeem}" />
+                                <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_BotCode_Hint}" TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="16,0,0,0" VerticalAlignment="Center">
+                                <ui:TextBox
+                                    Width="120"
+                                    CharacterCasing="Upper"
+                                    MaxLength="6"
+                                    PlaceholderText="{x:Static res:Strings.Settings_BotCode_Placeholder}"
+                                    Text="{Binding CodeInput, UpdateSourceTrigger=PropertyChanged}" />
+                                <ui:Button
+                                    Margin="8,0,0,0"
+                                    Appearance="Secondary"
+                                    Command="{Binding SignInWithCodeCommand}"
+                                    Content="{x:Static res:Strings.Settings_BotCode_Redeem}"
+                                    Icon="{ui:SymbolIcon Key24}"
+                                    IsEnabled="{Binding CanRedeemCode}" />
+                            </StackPanel>
+                        </Grid>
                         <TextBlock
                             Margin="0,8,0,0"
                             FontSize="11.5"
@@ -243,240 +277,371 @@
                             TextWrapping="Wrap"
                             Visibility="{Binding CodeError, Converter={StaticResource NullToCollapsed}}" />
                     </StackPanel>
-                </StackPanel>
-            </Border>
 
-            <!-- Hubcap API key -->
-            <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_Hubcap}" />
-            <Border Style="{StaticResource SettingsCard}">
-                <StackPanel Margin="14,12">
-                    <!-- Active key: stats card -->
-                    <StackPanel Visibility="{Binding HubcapIsKeyConfigured, Converter={StaticResource BoolToVis}}">
-                        <!-- Active badge + Refresh -->
-                        <Grid Margin="0,0,0,10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:Button
-                                HorizontalAlignment="Left"
-                                Appearance="Secondary"
-                                Command="{Binding RefreshHubcapStatsCommand}"
-                                Content="{x:Static res:Strings.Settings_HubcapRefresh}"
-                                Icon="{ui:SymbolIcon ArrowSync24}" />
-                            <ui:Button
-                                Grid.Column="1"
-                                Command="{Binding ClearHubcapKeyCommand}"
-                                Content="{x:Static res:Strings.Settings_HubcapClear}"
-                                Icon="{ui:SymbolIcon Dismiss24}" />
-                        </Grid>
-                        <!-- Usage progress card -->
-                        <Border Margin="0,0,0,10" Padding="12" Background="#08FFFFFF" BorderBrush="#12FFFFFF" BorderThickness="1" CornerRadius="6"
-                                Visibility="{Binding ShowHubcapStats, Converter={StaticResource BoolToVis}}">
-                            <StackPanel>
-                                <!-- Real ProgressBar (Fluent-styled, same as PluginView/ModeView/FixesView).
-                                     HubcapUsagePercent is 0.0–1.0, so Maximum="1"; ProgressBar clamps past it.
-                                     Indeterminate (animated) until stats load, so the card is never blank. -->
-                                <ProgressBar
-                                    Height="6"
-                                    IsIndeterminate="{Binding HubcapStatsPending}"
-                                    Maximum="1"
-                                    Minimum="0"
-                                    Value="{Binding HubcapUsagePercent, Mode=OneWay}" />
-                                <TextBlock Margin="0,8,0,0" FontSize="13"
-                                           Text="{Binding HubcapStatsText}"
-                                           TextWrapping="Wrap" />
+                    <!-- Row Divider separating Account and Hubcap -->
+                    <Border Style="{StaticResource ModernRowDivider}" Margin="0,18" />
+
+                    <!-- Hubcap API Integration -->
+                    <StackPanel>
+                        <!-- Service Header -->
+                        <Grid Margin="0,0,0,12">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <ui:SymbolIcon Symbol="Key24" FontSize="15" Foreground="{DynamicResource SystemAccentColorPrimaryBrush}" Margin="0,0,8,0" VerticalAlignment="Center" />
+                                <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_Section_Hubcap}" VerticalAlignment="Center" />
                             </StackPanel>
-                        </Border>
-                    </StackPanel>
-
-                    <!-- Key input: only while NO key is saved. Once configured, the Refresh/Clear buttons +
-                         usage card above are the whole story; "Clear" is how you swap keys (it resets
-                         HubcapIsKeyConfigured, bringing this block back). The onboarding copy below reads
-                         wrong when a key already exists, hence the collapse. -->
-                    <StackPanel Visibility="{Binding HubcapIsKeyConfigured, Converter={StaticResource InverseBoolToVis}}">
-                        <TextBlock
-                            FontSize="13"
-                            FontWeight="Medium"
-                            Text="{x:Static res:Strings.Settings_HubcapKey}" />
-                        <TextBlock
-                            Margin="0,4,0,0"
-                            FontSize="12"
-                            Foreground="#6b7280"
-                            Text="{x:Static res:Strings.Settings_HubcapKey_Hint}"
-                            TextWrapping="Wrap" />
-                        <Grid Margin="0,8,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ui:TextBox
-                                FontFamily="Consolas"
-                                PlaceholderText="{x:Static res:Strings.Settings_HubcapKeyPlaceholder}"
-                                Text="{Binding HubcapKeyInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <ui:Button
-                                Grid.Column="1"
-                                Margin="8,0,0,0"
-                                Appearance="Primary"
-                                Command="{Binding ValidateAndSaveHubcapKeyCommand}"
-                                Content="{x:Static res:Strings.Settings_HubcapValidate}"
-                                IsEnabled="{Binding CanEditHubcapKey}" />
+                            <!-- Active Status Badge when Configured -->
+                            <Border
+                                HorizontalAlignment="Right"
+                                Padding="7,2"
+                                Background="#1A10b981"
+                                BorderBrush="#4010b981"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Visibility="{Binding HubcapIsKeyConfigured, Converter={StaticResource BoolToVis}}">
+                                <TextBlock FontSize="11" FontWeight="SemiBold" Foreground="#34d399" Text="{x:Static res:Strings.Settings_HubcapActive}" />
+                            </Border>
                         </Grid>
-                        <!-- Error text (only ever set by the two ValidateAndSaveHubcapKeyAsync failure paths,
-                             so it can never be orphaned by this collapse). -->
-                        <TextBlock
-                            Margin="0,8,0,0"
-                            FontSize="12"
-                            Foreground="{Binding HubcapKeyStatusColor}"
-                            Text="{Binding HubcapKeyStatus}"
-                            TextWrapping="Wrap"
-                            Visibility="{Binding HubcapKeyStatus, Converter={StaticResource NullToCollapsed}}" />
-                        <!-- "Get a key" link -->
-                        <TextBlock
-                            Margin="0,8,0,0"
-                            FontSize="12"
-                            Foreground="#6b7280">
-                            <Run Text="{x:Static res:Strings.Settings_HubcapGetKey}" />
-                            <Hyperlink Command="{Binding OpenHubcapCommand}" Foreground="#a78bfa">hubcapmanifest.com</Hyperlink>
-                        </TextBlock>
+
+                        <!-- When Key is Configured: Stats + Refresh + Clear -->
+                        <StackPanel Visibility="{Binding HubcapIsKeyConfigured, Converter={StaticResource BoolToVis}}">
+                            <Border
+                                Padding="14,12"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Visibility="{Binding ShowHubcapStats, Converter={StaticResource BoolToVis}}">
+                                <StackPanel>
+                                    <ProgressBar
+                                        Height="6"
+                                        IsIndeterminate="{Binding HubcapStatsPending}"
+                                        Maximum="1"
+                                        Minimum="0"
+                                        Value="{Binding HubcapUsagePercent, Mode=OneWay}" />
+                                    <TextBlock Margin="0,8,0,0" FontSize="12.5" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{Binding HubcapStatsText}" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                <ui:Button
+                                    Appearance="Secondary"
+                                    Command="{Binding RefreshHubcapStatsCommand}"
+                                    Content="{x:Static res:Strings.Settings_HubcapRefresh}"
+                                    Icon="{ui:SymbolIcon ArrowSync24}" />
+                                <ui:Button
+                                    Margin="8,0,0,0"
+                                    Appearance="Transparent"
+                                    Command="{Binding ClearHubcapKeyCommand}"
+                                    Content="{x:Static res:Strings.Settings_HubcapClear}"
+                                    Icon="{ui:SymbolIcon Dismiss24}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- When Key is NOT Configured: Input & Validation -->
+                        <StackPanel Visibility="{Binding HubcapIsKeyConfigured, Converter={StaticResource InverseBoolToVis}}">
+                            <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_HubcapKey_Hint}" TextWrapping="Wrap" />
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ui:TextBox
+                                    FontFamily="Consolas"
+                                    PlaceholderText="{x:Static res:Strings.Settings_HubcapKeyPlaceholder}"
+                                    Text="{Binding HubcapKeyInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <ui:Button
+                                    Grid.Column="1"
+                                    Margin="8,0,0,0"
+                                    Appearance="Primary"
+                                    Command="{Binding ValidateAndSaveHubcapKeyCommand}"
+                                    Content="{x:Static res:Strings.Settings_HubcapValidate}"
+                                    IsEnabled="{Binding CanEditHubcapKey}" />
+                            </Grid>
+
+                            <TextBlock
+                                Margin="0,8,0,0"
+                                FontSize="12"
+                                Foreground="{Binding HubcapKeyStatusColor}"
+                                Text="{Binding HubcapKeyStatus}"
+                                TextWrapping="Wrap"
+                                Visibility="{Binding HubcapKeyStatus, Converter={StaticResource NullToCollapsed}}" />
+
+                            <TextBlock Margin="0,8,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                                <Run Text="{x:Static res:Strings.Settings_HubcapGetKey}" />
+                                <Hyperlink Command="{Binding OpenHubcapCommand}" Foreground="{DynamicResource SystemAccentColorPrimaryBrush}">hubcapmanifest.com</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Border>
 
-            <!-- Install behavior (Auto Update Apps + FastFetch) -->
-            <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_Install}" />
-            <Border Style="{StaticResource SettingsCard}">
+            <!-- ── 3. APPEARANCE & GENERAL ────────────────────────────────── -->
+            <TextBlock
+                Style="{StaticResource ModernSectionLabel}"
+                Text="{x:Static res:Strings.Settings_Section_Appearance}" />
+
+            <Border Style="{StaticResource ModernSettingsCard}">
                 <StackPanel>
-                    <!-- Auto Update Apps -->
-                    <Grid Margin="14,12">
+                    <!-- Theme Selector Row -->
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock
-                                FontSize="13"
-                                FontWeight="Medium"
-                                Text="{x:Static res:Strings.Settings_AutoUpdateApps}" />
-                            <TextBlock
-                                Margin="0,4,0,0"
-                                FontSize="12"
-                                Foreground="#6b7280"
-                                Text="{x:Static res:Strings.Settings_AutoUpdateApps_Hint}"
-                                TextWrapping="Wrap" />
+                            <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_Theme}" />
+                            <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_Theme_Hint}" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ComboBox
+                            Grid.Column="1"
+                            Margin="16,0,0,0"
+                            Width="230"
+                            MinHeight="35"
+                            MaxDropDownHeight="320"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            ItemsSource="{Binding ThemeOptions}"
+                            SelectedItem="{Binding SelectedTheme}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <!-- Dual-Color Theme Swatch Badge (Base tone + Accent tone) -->
+                                        <Grid Width="20" Height="14" Margin="0,0,10,0" VerticalAlignment="Center">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="10" />
+                                                <ColumnDefinition Width="10" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" CornerRadius="3,0,0,3">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="{Binding BackgroundColor}" />
+                                                </Border.Background>
+                                            </Border>
+                                            <Border Grid.Column="1" CornerRadius="0,3,3,0">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="{Binding AccentColor}" />
+                                                </Border.Background>
+                                            </Border>
+                                            <Border
+                                                Grid.ColumnSpan="2"
+                                                CornerRadius="3"
+                                                BorderThickness="1"
+                                                BorderBrush="#40FFFFFF" />
+                                        </Grid>
+                                        <TextBlock
+                                            Text="{Binding Display}"
+                                            FontSize="12.5"
+                                            VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+
+                    <Border Style="{StaticResource ModernRowDivider}" />
+
+                    <!-- Language Selector Row -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_Language}" />
+                            <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_Language_Hint}" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ComboBox
+                            Grid.Column="1"
+                            Margin="16,0,0,0"
+                            Width="230"
+                            MinHeight="35"
+                            MaxDropDownHeight="320"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            ItemsSource="{Binding LanguageOptions}"
+                            SelectedItem="{Binding SelectedLanguage}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <!-- Country Flag or System Default Globe -->
+                                        <Grid Width="20" Height="14" Margin="0,0,10,0" VerticalAlignment="Center">
+                                            <!-- Fallback Globe for System default -->
+                                            <ui:SymbolIcon
+                                                Symbol="Globe16"
+                                                FontSize="14"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                Visibility="{Binding HasFlag, Converter={StaticResource InverseBoolToVis}}" />
+
+                                            <!-- Country Flag with subtle rounded border -->
+                                            <Border
+                                                Width="20"
+                                                Height="14"
+                                                CornerRadius="2.5"
+                                                BorderThickness="1"
+                                                BorderBrush="#35FFFFFF"
+                                                ClipToBounds="True"
+                                                Visibility="{Binding HasFlag, Converter={StaticResource BoolToVis}}">
+                                                <Image
+                                                    Source="{Binding FlagIcon}"
+                                                    Stretch="UniformToFill"
+                                                    RenderOptions.BitmapScalingMode="HighQuality" />
+                                            </Border>
+                                        </Grid>
+                                        <TextBlock
+                                            Text="{Binding Display}"
+                                            FontSize="12.5"
+                                            VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+
+                    <Border Style="{StaticResource ModernRowDivider}" />
+
+                    <!-- DNS Resolution Row -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_Dns}" />
+                            <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_Dns_Hint}" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ComboBox
+                            Grid.Column="1"
+                            Margin="16,0,0,0"
+                            Width="230"
+                            MinHeight="35"
+                            MaxDropDownHeight="320"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            DisplayMemberPath="Display"
+                            ItemsSource="{Binding DnsModeOptions}"
+                            SelectedItem="{Binding SelectedDnsMode}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- ── 4. BEHAVIOR & STARTUP ──────────────────────────────────── -->
+            <TextBlock
+                Style="{StaticResource ModernSectionLabel}"
+                Text="{x:Static res:Strings.Settings_Section_Install}" />
+
+            <Border Style="{StaticResource ModernSettingsCard}">
+                <StackPanel>
+                    <!-- Auto Update Apps Row -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_AutoUpdateApps}" />
+                            <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_AutoUpdateApps_Hint}" TextWrapping="Wrap" />
                         </StackPanel>
                         <ui:ToggleSwitch
                             Grid.Column="1"
-                            Margin="12,0,0,0"
+                            Margin="16,0,0,0"
                             VerticalAlignment="Center"
                             IsChecked="{Binding AutoUpdateApps, Mode=TwoWay}" />
                     </Grid>
-                    <Border Style="{StaticResource RowDivider}" />
-                    <!-- FastFetch (same persisted setting as the Add screen's toggle) -->
-                    <Grid Margin="14,12">
+
+                    <Border Style="{StaticResource ModernRowDivider}" />
+
+                    <!-- FastFetch Row -->
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock
-                                FontSize="13"
-                                FontWeight="Medium"
-                                Text="{x:Static res:Strings.Add_FastFetch}" />
-                            <TextBlock
-                                Margin="0,4,0,0"
-                                FontSize="12"
-                                Foreground="#6b7280"
-                                Text="{x:Static res:Strings.Add_FastFetch_Hint}"
-                                TextWrapping="Wrap" />
+                            <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Add_FastFetch}" />
+                            <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Add_FastFetch_Hint}" TextWrapping="Wrap" />
                         </StackPanel>
                         <ui:ToggleSwitch
                             Grid.Column="1"
-                            Margin="12,0,0,0"
+                            Margin="16,0,0,0"
                             VerticalAlignment="Center"
                             IsChecked="{Binding FastFetch, Mode=TwoWay}" />
+                    </Grid>
+
+                    <Border Style="{StaticResource ModernRowDivider}" />
+
+                    <!-- Start with Windows Row -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_StartWithWindows}" />
+                            <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_StartWithWindows_Hint}" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ui:ToggleSwitch
+                            Grid.Column="1"
+                            Margin="16,0,0,0"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding StartWithWindows, Mode=TwoWay}" />
+                    </Grid>
+
+                    <Border Style="{StaticResource ModernRowDivider}" />
+
+                    <!-- Start with Steam Row -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_StartWithSteam}" />
+                            <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_StartWithSteam_Hint}" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ui:ToggleSwitch
+                            Grid.Column="1"
+                            Margin="16,0,0,0"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding StartWithSteam, Mode=TwoWay}" />
+                    </Grid>
+
+                    <Border Style="{StaticResource ModernRowDivider}" />
+
+                    <!-- Minimize to Tray Row -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_MinimizeToTray}" />
+                            <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_MinimizeToTray_Hint}" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ui:ToggleSwitch
+                            Grid.Column="1"
+                            Margin="16,0,0,0"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding MinimizeToTray, Mode=TwoWay}" />
                     </Grid>
                 </StackPanel>
             </Border>
 
-            <!-- Appearance / Theme -->
-            <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_Appearance}" />
-            <Border Style="{StaticResource SettingsCard}">
-                <StackPanel Margin="14,12">
-                    <TextBlock
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Text="{x:Static res:Strings.Settings_Theme}" />
-                    <TextBlock
-                        Margin="0,4,0,8"
-                        FontSize="12"
-                        Foreground="#6b7280"
-                        Text="{x:Static res:Strings.Settings_Theme_Hint}"
-                        TextWrapping="Wrap" />
-                    <ComboBox
-                        Margin="0,4,0,0"
-                        MinWidth="340"
-                        HorizontalAlignment="Left"
-                        ItemsSource="{Binding ThemeOptions}"
-                        SelectedItem="{Binding SelectedTheme}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Grid Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center">
-                                        <Border Width="20" Height="20" CornerRadius="10"
-                                                BorderThickness="1.5" BorderBrush="#44FFFFFF">
-                                            <Border.Background>
-                                                <SolidColorBrush Color="{Binding BackgroundColor}" />
-                                            </Border.Background>
-                                        </Border>
-                                        <Border Width="10" Height="10" CornerRadius="5"
-                                                HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <Border.Background>
-                                                <SolidColorBrush Color="{Binding AccentColor}" />
-                                            </Border.Background>
-                                        </Border>
-                                    </Grid>
-                                    <TextBlock Text="{Binding Display}" VerticalAlignment="Center" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </StackPanel>
-            </Border>
+            <!-- ── 5. STEAM ──────────────────────────────────────────────── -->
+            <TextBlock
+                Style="{StaticResource ModernSectionLabel}"
+                Text="{x:Static res:Strings.Settings_Section_Steam}" />
 
-            <!-- General (language) -->
-            <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_General}" />
-            <Border Style="{StaticResource SettingsCard}">
-                <StackPanel Margin="14,12">
-                    <TextBlock
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Text="{x:Static res:Strings.Settings_Language}" />
-                    <ComboBox
-                        Margin="0,8,0,0"
-                        MinWidth="220"
-                        HorizontalAlignment="Left"
-                        DisplayMemberPath="Display"
-                        ItemsSource="{Binding LanguageOptions}"
-                        SelectedItem="{Binding SelectedLanguage}" />
-                    <TextBlock
-                        Margin="0,8,0,0"
-                        FontSize="12"
-                        Foreground="#6b7280"
-                        Text="{x:Static res:Strings.Settings_Language_Hint}"
-                        TextWrapping="Wrap" />
-                </StackPanel>
-            </Border>
+            <Border Style="{StaticResource ModernSettingsCard}">
+                <StackPanel>
+                    <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_SteamLocation}" />
+                    <TextBlock Margin="0,3,0,10" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{Binding SteamSource}" />
 
-            <!-- Steam -->
-            <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_Steam}" />
-            <Border Style="{StaticResource SettingsCard}">
-                <StackPanel Margin="14,12">
-                    <TextBlock
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Text="{x:Static res:Strings.Settings_SteamLocation}" />
-                    <Grid Margin="0,8,0,0">
+                    <!-- Path & Action Buttons -->
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -489,144 +654,122 @@
                         <ui:Button
                             Grid.Column="1"
                             Margin="8,0,0,0"
+                            Appearance="Secondary"
                             Command="{Binding OverrideSteamFolderCommand}"
                             Content="{x:Static res:Strings.Settings_Change}" />
                         <ui:Button
                             Grid.Column="2"
                             Margin="8,0,0,0"
+                            Appearance="Secondary"
                             Command="{Binding OpenSteamFolderCommand}"
                             Content="{x:Static res:Strings.Settings_Open}"
                             Icon="{ui:SymbolIcon FolderOpen24}" />
                         <ui:Button
                             Grid.Column="3"
                             Margin="8,0,0,0"
+                            Appearance="Transparent"
                             Command="{Binding ClearSteamOverrideCommand}"
                             Content="{x:Static res:Strings.Settings_ResetToAuto}"
                             Visibility="{Binding IsSteamOverridden, Converter={StaticResource BoolToVis}}" />
                     </Grid>
-                    <TextBlock
-                        Margin="0,8,0,0"
-                        FontSize="12"
-                        Foreground="#6b7280"
-                        Text="{Binding SteamSource}" />
-                    <TextBlock
-                        Margin="0,6,0,0"
-                        FontSize="12"
-                        Foreground="#f87171"
-                        Text="{Binding SteamWarning}"
-                        TextWrapping="Wrap"
-                        Visibility="{Binding SteamWarning, Converter={StaticResource NullToCollapsed}}" />
+
+                    <!-- Warning if steam path is unverified -->
+                    <Border
+                        Margin="0,12,0,0"
+                        Padding="12,10"
+                        Background="#1Af87171"
+                        BorderBrush="#33f87171"
+                        BorderThickness="1"
+                        CornerRadius="6"
+                        Visibility="{Binding SteamWarning, Converter={StaticResource NullToCollapsed}}">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <ui:SymbolIcon Symbol="Warning24" FontSize="16" Foreground="#f87171" Margin="0,0,8,0" VerticalAlignment="Center" />
+                            <TextBlock FontSize="12" Foreground="#f87171" Text="{Binding SteamWarning}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </Border>
 
-            <!-- Startup -->
-            <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_Startup}" />
-            <Border Style="{StaticResource SettingsCard}">
+            <!-- ── 6. BAOTOOLS ASSISTANT ─────────────────────────────────── -->
+            <TextBlock
+                Style="{StaticResource ModernSectionLabel}"
+                Text="{x:Static res:Strings.Settings_Section_AiAssistant}" />
+
+            <Border Style="{StaticResource ModernSettingsCard}">
                 <StackPanel>
-                    <!-- Start with Windows -->
-                    <Grid Margin="14,12">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <StackPanel VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <ui:SymbolIcon Symbol="Bot24" FontSize="18" Foreground="{DynamicResource SystemAccentColorPrimaryBrush}" Margin="0,0,8,0" VerticalAlignment="Center" />
+                                <TextBlock FontSize="14" FontWeight="Bold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.AiChat_Title}" VerticalAlignment="Center" />
+                                <Border
+                                    Margin="10,0,0,0"
+                                    Padding="7,2"
+                                    Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Ellipse Width="6" Height="6" Fill="{DynamicResource SystemAccentColorPrimaryBrush}" Margin="0,0,5,0" VerticalAlignment="Center" />
+                                        <TextBlock FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_AiAssistant_LocalOffline}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
                             <TextBlock
-                                FontSize="13"
-                                FontWeight="Medium"
-                                Text="{x:Static res:Strings.Settings_StartWithWindows}" />
+                                Margin="0,6,0,0"
+                                FontSize="12.5"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                LineHeight="17"
+                                Text="{x:Static res:Strings.Settings_AiAssistant_CardDesc}"
+                                TextWrapping="Wrap" />
                             <TextBlock
-                                Margin="0,4,0,0"
-                                FontSize="12"
-                                Foreground="#6b7280"
-                                Text="{x:Static res:Strings.Settings_StartWithWindows_Hint}"
+                                Margin="0,3,0,0"
+                                FontSize="11.5"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                LineHeight="16"
+                                Text="{x:Static res:Strings.Settings_AiAssistant_Enable_Hint}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
+
                         <ui:ToggleSwitch
                             Grid.Column="1"
-                            Margin="12,0,0,0"
+                            Margin="16,0,0,0"
                             VerticalAlignment="Center"
-                            IsChecked="{Binding StartWithWindows, Mode=TwoWay}" />
+                            IsChecked="{Binding EnableAiAssistant, Mode=TwoWay}" />
                     </Grid>
-                    <Border Style="{StaticResource RowDivider}" />
-                    <!-- Start with Steam -->
-                    <Grid Margin="14,12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock
-                                FontSize="13"
-                                FontWeight="Medium"
-                                Text="{x:Static res:Strings.Settings_StartWithSteam}" />
-                            <TextBlock
-                                Margin="0,4,0,0"
-                                FontSize="12"
-                                Foreground="#6b7280"
-                                Text="{x:Static res:Strings.Settings_StartWithSteam_Hint}"
-                                TextWrapping="Wrap" />
-                        </StackPanel>
-                        <ui:ToggleSwitch
-                            Grid.Column="1"
-                            Margin="12,0,0,0"
-                            VerticalAlignment="Center"
-                            IsChecked="{Binding StartWithSteam, Mode=TwoWay}" />
-                    </Grid>
-                    <Border Style="{StaticResource RowDivider}" />
-                    <!-- Minimize to System Tray -->
-                    <Grid Margin="14,12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock
-                                FontSize="13"
-                                FontWeight="Medium"
-                                Text="{x:Static res:Strings.Settings_MinimizeToTray}" />
-                            <TextBlock
-                                Margin="0,4,0,0"
-                                FontSize="12"
-                                Foreground="#6b7280"
-                                Text="{x:Static res:Strings.Settings_MinimizeToTray_Hint}"
-                                TextWrapping="Wrap" />
-                        </StackPanel>
-                        <ui:ToggleSwitch
-                            Grid.Column="1"
-                            Margin="12,0,0,0"
-                            VerticalAlignment="Center"
-                            IsChecked="{Binding MinimizeToTray, Mode=TwoWay}" />
-                    </Grid>
+
+
                 </StackPanel>
             </Border>
 
-            <!-- Community -->
-            <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_Community}" />
-            <Border Style="{StaticResource SettingsCard}">
-                <Grid Margin="14,12">
+            <!-- ── 7. COMMUNITY ──────────────────────────────────────────── -->
+            <TextBlock
+                Style="{StaticResource ModernSectionLabel}"
+                Text="{x:Static res:Strings.Settings_Section_Community}" />
+
+            <Border Style="{StaticResource ModernSettingsCard}">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock
-                            FontSize="13"
-                            FontWeight="Medium"
-                            Text="{x:Static res:Strings.Settings_DonateKeys}" />
-                        <TextBlock
-                            Margin="0,4,0,0"
-                            FontSize="12"
-                            Foreground="#6b7280"
-                            Text="{x:Static res:Strings.Settings_DonateKeys_Hint}"
-                            TextWrapping="Wrap" />
+                        <TextBlock FontSize="13.5" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="{x:Static res:Strings.Settings_DonateKeys}" />
+                        <TextBlock Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{x:Static res:Strings.Settings_DonateKeys_Hint}" TextWrapping="Wrap" />
                     </StackPanel>
                     <ui:ToggleSwitch
                         Grid.Column="1"
-                        Margin="12,0,0,0"
+                        Margin="16,0,0,0"
                         VerticalAlignment="Center"
                         IsChecked="{Binding DonateKeys, Mode=TwoWay}" />
                 </Grid>
             </Border>
+
         </StackPanel>
     </ScrollViewer>
 </UserControl>

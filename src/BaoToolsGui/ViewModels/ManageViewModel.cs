@@ -18,14 +18,26 @@ public partial class LuaTileViewModel : ObservableObject
     // Invariant culture so the month is always the 3-letter abbreviation ("Jun", not "June" or a
     // localized long form), 2-digit year ("'26"). Keeps the combined "Added … • Released …" line
     // short enough to fit the card.
-    public string AddedLabel =>
-        "Added " + AddedAt.ToString(@"MMM d, \'yy", System.Globalization.CultureInfo.InvariantCulture);
+    public string AddedLabel
+    {
+        get
+        {
+            bool isVi = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.Equals("vi", StringComparison.OrdinalIgnoreCase);
+            string dateStr = isVi
+                ? AddedAt.ToString("dd/MM/yyyy")
+                : AddedAt.ToString(@"MMM d, \'yy", System.Globalization.CultureInfo.CurrentUICulture);
+            return string.Format(Resources.Strings.Manage_AddedDate, dateStr);
+        }
+    }
 
     /// <summary>Steam release date for the card (e.g. "Released Feb 24, 2022"), or "" until details
     /// are cached. Set by <see cref="UpdateReleaseLabel"/> once the appdetails blob is available.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(AddedReleaseLabel))]
+    [NotifyPropertyChangedFor(nameof(HasReleaseLabel))]
     private string _releaseLabel = "";
+
+    public bool HasReleaseLabel => !string.IsNullOrWhiteSpace(ReleaseLabel);
 
     /// <summary>Single-line combined label for the card: "Added … • Released …" (just the Added part
     /// until the release date is known). Keeps both dates on one row so they don't clip the card.</summary>
@@ -46,18 +58,85 @@ public partial class LuaTileViewModel : ObservableObject
     /// on the Builds page's game list. Null on the Manage page, which doesn't display it.</summary>
     [ObservableProperty] private string? _variantBadge;
 
+    /// <summary>Flag for "NEW" badge on dashboard recent strip.</summary>
+    [ObservableProperty] private bool _isNew;
+
+    /// <summary>Genre or category line for recent card (e.g. "Action • Steam").</summary>
+    [ObservableProperty] private string _categoryLabel = "Steam";
+
     /// <summary>Populate <see cref="ReleaseLabel"/> from cached app-details (no-op until they exist).
     /// Shows Steam's own date string ("Released 24 Feb, 2022"); blank for unreleased/unknown.</summary>
     public void UpdateReleaseLabel(SteamAppInfoCache appInfo)
     {
         var data = appInfo.GetFilterData(AppId);
-        string? text = data?.ReleaseDateText;
+        if (data is null) { ReleaseLabel = ""; return; }
+
+        bool isVi = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.Equals("vi", StringComparison.OrdinalIgnoreCase);
+        if (data.ReleaseDate.HasValue)
+        {
+            string dateStr = isVi
+                ? data.ReleaseDate.Value.ToString("dd/MM/yyyy")
+                : data.ReleaseDate.Value.ToString(@"MMM d, \'yy", System.Globalization.CultureInfo.CurrentUICulture);
+            ReleaseLabel = string.Format(Resources.Strings.Add_Released, dateStr);
+            return;
+        }
+
+        string? text = data.ReleaseDateText;
         if (string.IsNullOrWhiteSpace(text)) { ReleaseLabel = ""; return; }
 
         // Shorten a 4-digit year to 2 digits ("May 26, 2025" → "May 26, '25") to keep the combined
         // line on one row. Leaves non-date wording ("Coming soon") untouched.
         text = System.Text.RegularExpressions.Regex.Replace(text, @"\b(19|20)(\d{2})\b", "'$2");
-        ReleaseLabel = $"Released {text}";
+        ReleaseLabel = string.Format(Resources.Strings.Add_Released, text);
+    }
+
+    /// <summary>Populate <see cref="CategoryLabel"/> from cached genres (e.g. "RPG • Steam").</summary>
+    public void UpdateCategory(SteamAppInfoCache appInfo)
+    {
+        var data = appInfo.GetFilterData(AppId);
+        string primaryGenre = SteamAppInfoCache.ResolvePrimaryGenre(data?.Genres);
+        CategoryLabel = primaryGenre != "Steam" ? $"{primaryGenre} • Steam" : "Steam";
+        OnPropertyChanged(nameof(GenreText));
+        OnPropertyChanged(nameof(LocalizedGenreText));
+    }
+
+    [ObservableProperty] private bool _isInstalled = true;
+    [ObservableProperty] private bool _isMissingFiles;
+
+    /// <summary>Clean single metadata row for card: "App ID: 123456 • Added Sep 18, '26"</summary>
+    public string MetadataLine => $"App ID: {AppId}  •  {AddedLabel}";
+    public string AppIdText => $"App ID: {AppId}";
+    public string AddedDateText
+    {
+        get
+        {
+            bool isVi = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.Equals("vi", StringComparison.OrdinalIgnoreCase);
+            string dateStr = isVi
+                ? AddedAt.ToString("dd/MM/yyyy")
+                : AddedAt.ToString("MMM d, yyyy", System.Globalization.CultureInfo.CurrentUICulture);
+            return string.Format(Resources.Strings.Manage_AddedDate, dateStr);
+        }
+    }
+    public string GenreText
+    {
+        get
+        {
+            if (CategoryLabel.Contains(" • ")) return CategoryLabel.Split(" • ")[0];
+            if (CategoryLabel != "Steam" && !string.IsNullOrWhiteSpace(CategoryLabel)) return CategoryLabel;
+            return "Steam";
+        }
+    }
+    public string LocalizedGenreText => GenreLocalizationHelper.GetLocalized(GenreText);
+
+    public void RefreshLabels()
+    {
+        OnPropertyChanged(nameof(AddedLabel));
+        OnPropertyChanged(nameof(AddedReleaseLabel));
+        OnPropertyChanged(nameof(AddedDateText));
+        OnPropertyChanged(nameof(MetadataLine));
+        OnPropertyChanged(nameof(LocalizedGenreText));
+        OnPropertyChanged(nameof(ReleaseLabel));
+        OnPropertyChanged(nameof(HasReleaseLabel));
     }
 
     /// <summary>Raised when IsSelected changes so the page can update its selection count/bar.</summary>
@@ -71,6 +150,7 @@ public partial class LuaTileViewModel : ObservableObject
         AddedAt = addedAt;
         _name = name;
         _nameIsPlaceholder = nameIsPlaceholder;
+        _isNew = (DateTime.Now - addedAt).TotalDays <= 7;
         // Cover stays blank until resolved: avoids flashing Steam's "Header Capsule" placeholder.
     }
 
@@ -83,6 +163,7 @@ public partial class LuaTileViewModel : ObservableObject
         // Refresh the release label whenever a card is (re)shown. Its details may have backfilled
         // since the last ApplyFilter pass. Cheap (reads the memoized filter cache).
         if (string.IsNullOrEmpty(ReleaseLabel)) OnUi(() => UpdateReleaseLabel(appInfo));
+        if (CategoryLabel == "Steam") OnUi(() => UpdateCategory(appInfo));
 
         if (Cover is not null) return;
         if (Interlocked.Exchange(ref _resolving, 1) == 1) return;
@@ -121,8 +202,11 @@ public partial class LuaTileViewModel : ObservableObject
         if (local is not null) return local;
         if (covers.IsKnownMissing(appId)) return null;
 
-        // Fast path: predictable CDN URL. The grey "Header Capsule" placeholder it can serve for newer
-        // apps is fingerprinted + rejected by CoverCache, so this falls through to header_image below.
+        // Fast path 1: Try high-resolution capsule (616x353) first for sharpest display.
+        local = await covers.EnsureAsync(appId, SteamAppInfoCache.GuessCapsuleImageUrl(appId));
+        if (local is not null) return local;
+
+        // Fast path 2: Standard header.jpg (460x215).
         local = await covers.EnsureAsync(appId, SteamAppInfoCache.GuessHeaderImageUrl(appId));
         if (local is not null) return local;
 
@@ -138,7 +222,7 @@ public partial class LuaTileViewModel : ObservableObject
         return local;
     }
 
-    /// <summary>Decode a local image file into a frozen, thumbnail-sized bitmap (off-UI, lock-free).</summary>
+    /// <summary>Decode a local image file into a frozen bitmap at full native resolution (off-UI, lock-free).</summary>
     private static ImageSource? LoadFrozen(string path)
     {
         try
@@ -146,7 +230,6 @@ public partial class LuaTileViewModel : ObservableObject
             var bmp = new BitmapImage();
             bmp.BeginInit();
             bmp.CacheOption = BitmapCacheOption.OnLoad; // load fully, release the file handle
-            bmp.DecodePixelWidth = 248;                 // tile width. Faster decode, less memory
             bmp.UriSource = new Uri(path, UriKind.Absolute);
             bmp.EndInit();
             bmp.Freeze();
@@ -175,6 +258,12 @@ public partial class LuaTileViewModel : ObservableObject
         Name.Contains(q, StringComparison.OrdinalIgnoreCase) || AppId.ToString().Contains(q);
 }
 
+public class QuickPill(string key, string label)
+{
+    public string Key { get; } = key;
+    public string Label { get; } = label;
+}
+
 public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 {
     private readonly SteamService _steam;
@@ -185,6 +274,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     private readonly SettingsService _settings;
     private readonly SteamlessService _steamless;
     private readonly SteamTicketService _tickets;
+    private readonly SteamLibraryService _library;
 
     private List<LuaTileViewModel> _all = [];
     private CancellationTokenSource? _prefetchCts;
@@ -195,13 +285,98 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     /// <summary>Set by App so "Manage Build" can open this game on the Builds page.</summary>
     public Action<long>? NavigateToBuilds { get; set; }
 
+    /// <summary>Set by App so "+ Add Game" navigates to the Add page.</summary>
+    public Action? RequestAddGame { get; set; }
+    [RelayCommand] private void AddGame() => RequestAddGame?.Invoke();
+
+    public int TotalGamesCount => _all.Count;
+    public string TotalGamesLabel => string.Format(Resources.Strings.Manage_TotalGames, _all.Count);
+
+    [ObservableProperty]
+    private string _selectedQuickPill = AnyOption;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowGridView))]
+    [NotifyPropertyChangedFor(nameof(ShowListView))]
+    private bool _isGridView = true;
+
+    public bool ShowGridView => ShowItems && IsGridView;
+    public bool ShowListView => ShowItems && !IsGridView;
+
+    [RelayCommand]
+    private void SetViewMode(string mode)
+    {
+        IsGridView = mode == "Grid";
+    }
+
+    [ObservableProperty]
+    private ObservableCollection<QuickPill> _quickPillItems =
+    [
+        new(AnyOption, "All"),
+        new("Steam", "Steam"),
+        new("RPG", "RPG"),
+        new("Action", "Action"),
+        new("Strategy", "Strategy"),
+        new("Survival", "Survival")
+    ];
+
+    public void UpdateQuickPills()
+    {
+        int total = _all.Count;
+        int action = _all.Count(t => TileMatchesGenre(t, "Action"));
+        int rpg = _all.Count(t => TileMatchesGenre(t, "RPG"));
+        int strategy = _all.Count(t => TileMatchesGenre(t, "Strategy"));
+        int survival = _all.Count(t => TileMatchesGenre(t, "Survival"));
+
+        QuickPillItems =
+        [
+            new(AnyOption, $"{Resources.Strings.Manage_PageSize_All} ({total})"),
+            new("Steam", $"Steam ({total})"),
+            new("RPG", $"RPG ({rpg})"),
+            new("Action", $"Action ({action})"),
+            new("Strategy", $"Strategy ({strategy})"),
+            new("Survival", $"Survival ({survival})")
+        ];
+    }
+
+    [RelayCommand]
+    private void QuickFilterGenre(string genre)
+    {
+        if (string.IsNullOrEmpty(genre) || genre == AnyOption)
+        {
+            SelectedQuickPill = AnyOption;
+            SelectedGenre = AnyOption;
+        }
+        else if (SelectedQuickPill == genre)
+        {
+            // Toggle off
+            SelectedQuickPill = AnyOption;
+            SelectedGenre = AnyOption;
+        }
+        else
+        {
+            SelectedQuickPill = genre;
+            SelectedGenre = genre;
+        }
+        ApplyFilter();
+    }
+
+    [RelayCommand]
+    private void SetSort(string sort)
+    {
+        if (!string.IsNullOrEmpty(sort))
+        {
+            SelectedSort = sort;
+        }
+    }
+
     // Paging (Items/PageSize/CurrentPage/…), the filtered slice, refresh cooldown, IsLoading/EmptyMessage
     // and the empty-state gating all live in PagedListViewModel<LuaTileViewModel>.
 
     [ObservableProperty] private string _searchText = "";
 
     // ── Filters & sort (Manage page) ─────────────────────────────────
-    [ObservableProperty] private bool _isFilterPanelOpen;
+    [ObservableProperty] private bool _isFilterPanelOpen = true;
 
     // "Any" sentinel = no filter for that category.
     public const string AnyOption = "Any";
@@ -210,6 +385,8 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     // (PopulateFilterOptions re-adds the real values, keeping "Any" first).
     public ObservableCollection<string> TypeOptions { get; } = [AnyOption];
     public ObservableCollection<string> GenreOptions { get; } = [AnyOption];
+    public ObservableCollection<string> QuickGenreOptions { get; } =
+        [AnyOption, "Action", "RPG", "Strategy", "Survival", "Adventure", "Simulation"];
     public ObservableCollection<string> YearOptions { get; } = [AnyOption];
     public ObservableCollection<string> PriceOptions { get; } = [AnyOption, "Free", "Paid"];
     // Static like Price: stored VALUES stay English (localized for display via FilterOptionDisplayConverter).
@@ -228,9 +405,47 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     // inherited from PagedListViewModel<LuaTileViewModel>; page size persists via SavePageSizeSetting below.
     protected override void SavePageSizeSetting(int size) => _settings.ManagePageSize = size;
 
+    // ── Sidebar Checkbox Filters matching mockup ───────────────────
+    [ObservableProperty] private bool _filterPlatformSteam = true;
+    [ObservableProperty] private bool _filterPlatformEpic;
+    [ObservableProperty] private bool _filterPlatformOther;
+
+    [ObservableProperty] private bool _filterStatusInstalled;
+    [ObservableProperty] private bool _filterStatusNotInstalled;
+    [ObservableProperty] private bool _filterStatusMissingFiles;
+
+    [ObservableProperty] private bool _filterGenreAction;
+    [ObservableProperty] private bool _filterGenreRpg;
+    [ObservableProperty] private bool _filterGenreStrategy;
+    [ObservableProperty] private bool _filterGenreSurvival;
+    [ObservableProperty] private bool _filterGenreRacing;
+    [ObservableProperty] private bool _filterGenreSimulation;
+    [ObservableProperty] private bool _filterGenreSports;
+    [ObservableProperty] private bool _filterGenreOther;
+
+    partial void OnFilterPlatformSteamChanged(bool value) => ApplyFilter();
+    partial void OnFilterPlatformEpicChanged(bool value) => ApplyFilter();
+    partial void OnFilterPlatformOtherChanged(bool value) => ApplyFilter();
+    partial void OnFilterStatusInstalledChanged(bool value) => ApplyFilter();
+    partial void OnFilterStatusNotInstalledChanged(bool value) => ApplyFilter();
+    partial void OnFilterStatusMissingFilesChanged(bool value) => ApplyFilter();
+    partial void OnFilterGenreActionChanged(bool value) => ApplyFilter();
+    partial void OnFilterGenreRpgChanged(bool value) => ApplyFilter();
+    partial void OnFilterGenreStrategyChanged(bool value) => ApplyFilter();
+    partial void OnFilterGenreSurvivalChanged(bool value) => ApplyFilter();
+    partial void OnFilterGenreRacingChanged(bool value) => ApplyFilter();
+    partial void OnFilterGenreSimulationChanged(bool value) => ApplyFilter();
+    partial void OnFilterGenreSportsChanged(bool value) => ApplyFilter();
+    partial void OnFilterGenreOtherChanged(bool value) => ApplyFilter();
+
     public bool HasActiveFilters =>
-        SelectedType != AnyOption || SelectedGenre != AnyOption || SelectedYear != AnyOption ||
-        SelectedPrice != AnyOption || SelectedContent != AnyOption;
+        !FilterPlatformSteam || FilterPlatformEpic || FilterPlatformOther ||
+        FilterStatusInstalled || FilterStatusNotInstalled || FilterStatusMissingFiles ||
+        FilterGenreAction || FilterGenreRpg || FilterGenreStrategy || FilterGenreSurvival ||
+        FilterGenreRacing || FilterGenreSimulation || FilterGenreSports || FilterGenreOther ||
+        (SelectedQuickPill != AnyOption) ||
+        SelectedType != AnyOption || (SelectedGenre != AnyOption && SelectedGenre != "Steam") ||
+        SelectedYear != AnyOption || SelectedPrice != AnyOption || SelectedContent != AnyOption;
 
     // How many library apps still lack cached details while a filter is active (can't be filtered yet).
     // The text updates as the count ticks down. HasPendingDetails (which drives the spinner's
@@ -241,8 +456,16 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     private int _pendingDetailsCount;
 
     [ObservableProperty] private bool _hasPendingDetails;
+    [ObservableProperty] private bool _isBackfilling;
 
-    partial void OnPendingDetailsCountChanged(int value) => HasPendingDetails = value > 0;
+    partial void OnPendingDetailsCountChanged(int value) => UpdatePendingState();
+
+    private void UpdatePendingState()
+    {
+        bool detailFiltersActive = SelectedType != AnyOption || SelectedYear != AnyOption ||
+                                   SelectedPrice != AnyOption || SelectedContent != AnyOption;
+        HasPendingDetails = IsBackfilling && PendingDetailsCount > 0 && detailFiltersActive;
+    }
 
     public string FilterPendingText =>
         string.Format(Resources.Strings.Manage_FetchingDetails, PendingDetailsCount);
@@ -263,6 +486,14 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     [NotifyPropertyChangedFor(nameof(IsDetailOpen))]
     private LuaTileViewModel? _selectedTile;
 
+    partial void OnSelectedTileChanged(LuaTileViewModel? value)
+    {
+        if (value is not null)
+        {
+            AiChatViewModel.SetGlobalInspectedGame((uint)value.AppId, value.Name);
+        }
+    }
+
     public bool IsDetailOpen => SelectedTile is not null;
 
     // ── Multi-select ────────────────────────────────────────────────
@@ -276,7 +507,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
     public ManageViewModel(SteamService steam, SteamAppListCache appList, SteamAppInfoCache appInfo,
         CoverCache covers, ToastService toast, SettingsService settings,
-        SteamlessService steamless, SteamTicketService tickets)
+        SteamlessService steamless, SteamTicketService tickets, SteamLibraryService library)
     {
         _steam = steam;
         _appList = appList;
@@ -286,7 +517,30 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         _settings = settings;
         _steamless = steamless;
         _tickets = tickets;
+        _library = library;
         InitPageSize(settings.ManagePageSize);
+        SettingsViewModel.LanguageChanged += OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        OnUi(() =>
+        {
+            foreach (var tile in _all)
+            {
+                tile.UpdateCategory(_appInfo);
+                tile.UpdateReleaseLabel(_appInfo);
+                tile.RefreshLabels();
+            }
+
+            if (SelectedTile is not null)
+            {
+                SetupDescription(Overview?.ShortDescription, SelectedTile.AppId);
+            }
+
+            OnPropertyChanged(nameof(SelectionLabel));
+            ApplyFilter();
+        });
     }
 
     partial void OnSearchTextChanged(string value) => ApplyFilter();
@@ -317,6 +571,98 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     /// <summary>Blurb + studio + genres for the open flyout, read from the cached appdetails blob.
     /// Null when this game has no details cached (the section collapses).</summary>
     [ObservableProperty] private AppOverview? _overview;
+    [ObservableProperty] private string? _effectiveDescription;
+    [ObservableProperty] private bool _isShowingTranslation;
+    [ObservableProperty] private bool _canToggleDescriptionLanguage;
+    [ObservableProperty] private string _descriptionLanguageToggleText = "";
+
+    private void SetupDescription(string? desc, long appId)
+    {
+        if (string.IsNullOrWhiteSpace(desc))
+        {
+            EffectiveDescription = null;
+            CanToggleDescriptionLanguage = false;
+            DescriptionLanguageToggleText = "";
+            return;
+        }
+
+        string targetLang = GameDescriptionTranslator.GetTargetLanguageCode();
+        if (targetLang == "en")
+        {
+            EffectiveDescription = desc;
+            CanToggleDescriptionLanguage = false;
+            DescriptionLanguageToggleText = "";
+            return;
+        }
+
+        if (GameDescriptionTranslator.TryGetCached(desc, targetLang, out var cached) && !string.IsNullOrWhiteSpace(cached))
+        {
+            EffectiveDescription = cached;
+            IsShowingTranslation = true;
+            CanToggleDescriptionLanguage = true;
+            DescriptionLanguageToggleText = GameDescriptionTranslator.GetOriginalLabel(targetLang);
+        }
+        else
+        {
+            EffectiveDescription = desc;
+            IsShowingTranslation = false;
+            CanToggleDescriptionLanguage = true;
+            DescriptionLanguageToggleText = GameDescriptionTranslator.GetTranslateLabel(targetLang);
+
+            _ = Task.Run(async () =>
+            {
+                string translated = await GameDescriptionTranslator.TranslateAsync(desc, targetLang);
+                if (!string.IsNullOrWhiteSpace(translated) && translated != desc && SelectedTile?.AppId == appId)
+                {
+                    OnUi(() =>
+                    {
+                        EffectiveDescription = translated;
+                        IsShowingTranslation = true;
+                        DescriptionLanguageToggleText = GameDescriptionTranslator.GetOriginalLabel(targetLang);
+                    });
+                }
+            });
+        }
+    }
+
+    [RelayCommand]
+    private async Task ToggleDescriptionLanguageAsync()
+    {
+        string? original = Overview?.ShortDescription;
+        if (string.IsNullOrWhiteSpace(original)) return;
+
+        string targetLang = GameDescriptionTranslator.GetTargetLanguageCode();
+        if (IsShowingTranslation)
+        {
+            EffectiveDescription = original;
+            IsShowingTranslation = false;
+            DescriptionLanguageToggleText = GameDescriptionTranslator.GetTranslateLabel(targetLang);
+        }
+        else
+        {
+            if (GameDescriptionTranslator.TryGetCached(original, targetLang, out var cached) && !string.IsNullOrWhiteSpace(cached))
+            {
+                EffectiveDescription = cached;
+                IsShowingTranslation = true;
+                DescriptionLanguageToggleText = GameDescriptionTranslator.GetOriginalLabel(targetLang);
+            }
+            else
+            {
+                DescriptionLanguageToggleText = GameDescriptionTranslator.GetTranslatingLabel(targetLang);
+                string translated = await GameDescriptionTranslator.TranslateAsync(original, targetLang);
+                if (!string.IsNullOrWhiteSpace(translated))
+                {
+                    EffectiveDescription = translated;
+                    IsShowingTranslation = true;
+                    DescriptionLanguageToggleText = GameDescriptionTranslator.GetOriginalLabel(targetLang);
+                }
+                else
+                {
+                    DescriptionLanguageToggleText = GameDescriptionTranslator.GetTranslateLabel(targetLang);
+                }
+            }
+        }
+    }
 
     /// <summary>Open the detail flyout for a tile (cover, title, game info, actions).</summary>
     [RelayCommand]
@@ -324,6 +670,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     {
         SelectedTile = tile;
         Overview = _appInfo.GetOverview(tile.AppId); // instant when the blob is already on disk
+        SetupDescription(Overview?.ShortDescription, tile.AppId);
 
         // The flyout binds its cover to SelectedTile.Cover. When opened from outside Manage
         // (Home → game detail) the tile was never rendered/scrolled into view, so its cover
@@ -334,7 +681,10 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         // interactive priority, then fill the section in. Re-checked afterwards because the user can
         // close the flyout or switch games while that request is in flight.
         if (Overview is null && await _appInfo.EnsureFullDetailsAsync(tile.AppId) && SelectedTile == tile)
+        {
             Overview = _appInfo.GetOverview(tile.AppId);
+            SetupDescription(Overview?.ShortDescription, tile.AppId);
+        }
     }
 
     [RelayCommand]
@@ -342,6 +692,8 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     {
         SelectedTile = null;
         Overview = null;
+        EffectiveDescription = null;
+        CanToggleDescriptionLanguage = false;
     }
 
     /// <summary>Open this game on the Builds page (switch build, inspect depots/manifests, edit).</summary>
@@ -610,6 +962,20 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
             // Bulk game-name list (downloaded once, cached). Gives every game a name with no rate limit.
             await _appList.EnsureLoadedAsync();
 
+            HashSet<long> installedAppIds = [];
+            HashSet<long> missingAppIds = [];
+            try
+            {
+                installedAppIds = new HashSet<long>(_library.EnumerateInstalled().Select(g => g.AppId));
+                var allManifests = _library.GetAllInstalledApps().ToList();
+                foreach (var m in allManifests)
+                {
+                    if (!installedAppIds.Contains(m.AppId))
+                        missingAppIds.Add(m.AppId);
+                }
+            }
+            catch { /* best-effort */ }
+
             var tiles = await Task.Run(() =>
                 LuaInstaller.EnumerateInstalled(dir) // shared scan rule (skips Steamtools.lua etc.)
                     .Select(f =>
@@ -619,7 +985,10 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
                         bool placeholder = name is null;
                         // Base = when added to the folder; if edited since (LastWrite later), use that. Newer is more relevant.
                         var added = info.LastWriteTime > info.CreationTime ? info.LastWriteTime : info.CreationTime;
-                        return new LuaTileViewModel(f.AppId, f.Path, added, name ?? string.Format(Resources.Strings.Common_AppFallback, f.AppId), placeholder);
+                        var t = new LuaTileViewModel(f.AppId, f.Path, added, name ?? string.Format(Resources.Strings.Common_AppFallback, f.AppId), placeholder);
+                        t.IsInstalled = installedAppIds.Contains(f.AppId);
+                        t.IsMissingFiles = missingAppIds.Contains(f.AppId);
+                        return t;
                     })
                     .OrderByDescending(t => t.AddedAt)
                     .ToList());
@@ -628,6 +997,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
             _all = tiles;
             SelectedCount = 0; // fresh scan clears any prior selection
             PopulateFilterOptions();
+            UpdateQuickPills();
             ApplyFilter();
             if (_all.Count == 0) SetEmpty(Resources.Strings.Manage_Empty_NoLuas);
 
@@ -652,6 +1022,12 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         {
             try
             {
+                OnUi(() =>
+                {
+                    IsBackfilling = true;
+                    UpdatePendingState();
+                });
+
                 // 1. Priority: warm cover images + names for the whole library (CDN-first, fast).
                 await Parallel.ForEachAsync(
                     appids,
@@ -671,15 +1047,23 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
                     if (cts.Token.IsCancellationRequested) return;
                     if (DateTime.UtcNow - lastUi < TimeSpan.FromSeconds(2)) return;
                     lastUi = DateTime.UtcNow;
-                    OnUi(() => { PopulateFilterOptions(); RefreshPendingCount(); });
+                    OnUi(() => { PopulateFilterOptions(); RefreshPendingCount(); UpdateQuickPills(); });
                 }, cts.Token);
 
                 // Final refresh once backfill completes (dropdowns + counts + re-apply current filters).
                 // resetPage:false so a user who's paged away isn't yanked back to page 1.
                 if (!cts.Token.IsCancellationRequested)
-                    OnUi(() => { PopulateFilterOptions(); ApplyFilter(resetPage: false); });
+                    OnUi(() => { PopulateFilterOptions(); UpdateQuickPills(); ApplyFilter(resetPage: false); });
             }
             catch (OperationCanceledException) { /* superseded by a newer load */ }
+            finally
+            {
+                OnUi(() =>
+                {
+                    IsBackfilling = false;
+                    HasPendingDetails = false;
+                });
+            }
         });
     }
 
@@ -702,8 +1086,11 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     private void SetEmpty(string message) => EmptyMessage = message;
 
     /// <summary>Recount library apps still missing details (drives the "fetching details" notice).</summary>
-    private void RefreshPendingCount() =>
+    private void RefreshPendingCount()
+    {
         PendingDetailsCount = _all.Count(t => _appInfo.GetFilterData(t.AppId) is null);
+        UpdatePendingState();
+    }
 
     /// <param name="resetPage">True (default) for a user-initiated filter/search/sort/page-size change.
     /// Jump back to page 1. False for passive re-renders (backfill completing) so the user stays on
@@ -711,50 +1098,136 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     private void ApplyFilter(bool resetPage = true)
     {
         string q = SearchText.Trim();
-        bool filtersActive = HasActiveFilters;
 
         IEnumerable<LuaTileViewModel> result = _all;
 
-        // Text search (name / appid).
+        // 1. Text search (name / appid).
         if (!string.IsNullOrEmpty(q)) result = result.Where(t => t.Matches(q));
 
-        // Detail-based filters. A tile with no cached details yet can't be confirmed to match. Keep
-        // it visible while details are still being fetched.
-        result = result.Where(t =>
+        // 2. Platform filter (Steam, Epic, Other)
+        // All installed .lua files in stplug-in belong to Steam.
+        if (!FilterPlatformSteam)
+        {
+            result = Enumerable.Empty<LuaTileViewModel>();
+        }
+
+        // 3. Status filter (Installed, Not Installed, Missing Files)
+        bool hasStatus = FilterStatusInstalled || FilterStatusNotInstalled || FilterStatusMissingFiles;
+        if (hasStatus)
+        {
+            result = result.Where(t =>
+                (FilterStatusInstalled && t.IsInstalled && !t.IsMissingFiles) ||
+                (FilterStatusNotInstalled && !t.IsInstalled && !t.IsMissingFiles) ||
+                (FilterStatusMissingFiles && t.IsMissingFiles));
+        }
+
+        // 4. Quick Pills filter (All, Steam, RPG, Action, Strategy, Survival)
+        if (!string.IsNullOrEmpty(SelectedQuickPill) && SelectedQuickPill != AnyOption)
+        {
+            if (SelectedQuickPill != "Steam")
+            {
+                result = result.Where(t => TileMatchesGenre(t, SelectedQuickPill));
+            }
+        }
+        else if (SelectedGenre != AnyOption && SelectedGenre != "Steam")
+        {
+            result = result.Where(t => TileMatchesGenre(t, SelectedGenre));
+        }
+
+        // 5. Sidebar Genre checkboxes filter
+        List<string> checkedGenres = [];
+        if (FilterGenreAction) checkedGenres.Add("Action");
+        if (FilterGenreRpg) checkedGenres.Add("RPG");
+        if (FilterGenreStrategy) checkedGenres.Add("Strategy");
+        if (FilterGenreSurvival) checkedGenres.Add("Survival");
+        if (FilterGenreRacing) checkedGenres.Add("Racing");
+        if (FilterGenreSimulation) checkedGenres.Add("Simulation");
+        if (FilterGenreSports) checkedGenres.Add("Sports");
+        if (FilterGenreOther) checkedGenres.Add("Other");
+
+        if (checkedGenres.Count > 0)
+        {
+            result = result.Where(t => checkedGenres.Any(cg => TileMatchesGenre(t, cg)));
+        }
+
+        // 6. Secondary detail filters (Type, Year, Price, Content) - ONLY when changed from Any
+        bool detailFiltersActive = SelectedType != AnyOption || SelectedYear != AnyOption ||
+                                   SelectedPrice != AnyOption || SelectedContent != AnyOption;
+        if (detailFiltersActive)
+        {
+            result = result.Where(t =>
+            {
+                var data = _appInfo.GetFilterData(t.AppId);
+                if (data is null) return false;
+                return MatchesDetailFilters(data);
+            });
+        }
+
+        // Update tile metadata
+        foreach (var t in _all)
         {
             var data = _appInfo.GetFilterData(t.AppId);
             t.DetailsLoaded = data is not null;
-            t.UpdateReleaseLabel(_appInfo);
-            if (!filtersActive) return true;             // no filter → show everything
-            if (data is null) return false;              // filter active but details unknown → can't
-                                                         // confirm a match, so HIDE it (appears once
-                                                         // its details load and actually match)
-            return MatchesFilters(data);
-        });
+            if (data is not null)
+            {
+                t.UpdateReleaseLabel(_appInfo);
+                t.UpdateCategory(_appInfo);
+            }
+        }
 
         var list = result.ToList();
         list = SortTiles(list);
 
-        // How many library apps still lack details: shown always while backfilling (even with no
-        // filters), since on startup nothing's filtered but details are still loading.
         PendingDetailsCount = _all.Count(t => _appInfo.GetFilterData(t.AppId) is null);
+        UpdatePendingState();
 
         EmptyMessage = _all.Count > 0
             ? Resources.Strings.Manage_Empty_NoMatch
             : Resources.Strings.Manage_Empty_NoLuas;
 
-        // Hand the filtered+sorted list to the base, which re-slices the visible page (clamping the
-        // current page into range for the resetPage:false backfill path).
         SetFiltered(list, resetPage);
+        OnPropertyChanged(nameof(TotalGamesCount));
+        OnPropertyChanged(nameof(TotalGamesLabel));
+        OnPropertyChanged(nameof(HasActiveFilters));
+        OnPropertyChanged(nameof(ShowGridView));
+        OnPropertyChanged(nameof(ShowListView));
     }
 
-    private bool MatchesFilters(AppFilterData d)
+    private bool TileMatchesGenre(LuaTileViewModel t, string genre)
+    {
+        var data = _appInfo.GetFilterData(t.AppId);
+        if (data?.Genres is { } genres && genres.Count > 0)
+        {
+            if (genre.Equals("RPG", StringComparison.OrdinalIgnoreCase))
+                return genres.Any(g => g.Contains("RPG", StringComparison.OrdinalIgnoreCase) || g.Contains("Role-Playing", StringComparison.OrdinalIgnoreCase));
+            if (genre.Equals("Action", StringComparison.OrdinalIgnoreCase))
+                return genres.Any(g => g.Contains("Action", StringComparison.OrdinalIgnoreCase));
+            if (genre.Equals("Strategy", StringComparison.OrdinalIgnoreCase))
+                return genres.Any(g => g.Contains("Strategy", StringComparison.OrdinalIgnoreCase));
+            if (genre.Equals("Survival", StringComparison.OrdinalIgnoreCase))
+                return genres.Any(g => g.Contains("Survival", StringComparison.OrdinalIgnoreCase));
+            if (genre.Equals("Racing", StringComparison.OrdinalIgnoreCase))
+                return genres.Any(g => g.Contains("Racing", StringComparison.OrdinalIgnoreCase));
+            if (genre.Equals("Simulation", StringComparison.OrdinalIgnoreCase))
+                return genres.Any(g => g.Contains("Simulation", StringComparison.OrdinalIgnoreCase));
+            if (genre.Equals("Sports", StringComparison.OrdinalIgnoreCase))
+                return genres.Any(g => g.Contains("Sports", StringComparison.OrdinalIgnoreCase));
+            if (genre.Equals("Other", StringComparison.OrdinalIgnoreCase))
+            {
+                string[] known = ["Action", "RPG", "Role-Playing", "Strategy", "Survival", "Racing", "Simulation", "Sports"];
+                return genres.Any(g => !known.Any(k => g.Contains(k, StringComparison.OrdinalIgnoreCase)));
+            }
+            return genres.Any(g => g.Contains(genre, StringComparison.OrdinalIgnoreCase));
+        }
+
+        // Fallback before full details are loaded: check CategoryLabel
+        return t.CategoryLabel.Contains(genre, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private bool MatchesDetailFilters(AppFilterData d)
     {
         if (SelectedType != AnyOption &&
             !string.Equals(d.Type, SelectedType, StringComparison.OrdinalIgnoreCase)) return false;
-
-        if (SelectedGenre != AnyOption &&
-            !d.Genres.Any(g => string.Equals(g, SelectedGenre, StringComparison.OrdinalIgnoreCase))) return false;
 
         if (SelectedYear != AnyOption &&
             (d.ReleaseYear is null || d.ReleaseYear.Value.ToString() != SelectedYear)) return false;
@@ -787,6 +1260,22 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     [RelayCommand]
     private void ClearFilters()
     {
+        FilterPlatformSteam = true;
+        FilterPlatformEpic = false;
+        FilterPlatformOther = false;
+        FilterStatusInstalled = false;
+        FilterStatusNotInstalled = false;
+        FilterStatusMissingFiles = false;
+        FilterGenreAction = false;
+        FilterGenreRpg = false;
+        FilterGenreStrategy = false;
+        FilterGenreSurvival = false;
+        FilterGenreRacing = false;
+        FilterGenreSimulation = false;
+        FilterGenreSports = false;
+        FilterGenreOther = false;
+
+        SelectedQuickPill = AnyOption;
         SelectedType = AnyOption;
         SelectedGenre = AnyOption;
         SelectedYear = AnyOption;

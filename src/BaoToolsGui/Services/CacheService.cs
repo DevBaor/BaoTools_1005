@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Text.Json;
 
 namespace BaoToolsGui.Services;
@@ -34,6 +34,10 @@ public class CacheData
     // True once the user has seen (and dismissed) the welcome overlay, or the app decided they're
     // already set up. Kept in cache (not settings). It's app bookkeeping, not a user preference.
     public bool OnboardingComplete { get; set; }
+
+    // ── BaoTools Assistant discovery state ──
+    public bool AssistantHasBeenOpened { get; set; }
+    public bool AssistantHintDismissed { get; set; }
 
     // ── Downloads tab history ────────────────────────────────────────
     // Finished downloads shown in the Downloads tab, newest first, capped. Records only: a queued job
@@ -222,6 +226,20 @@ public class CacheService
     {
         get => _cache.OnboardingComplete;
         set { _cache.OnboardingComplete = value; Save(); }
+    }
+
+    /// <summary>True once the user has opened the Assistant at least once. Persisted in cache.</summary>
+    public bool AssistantHasBeenOpened
+    {
+        get => _cache.AssistantHasBeenOpened;
+        set { _cache.AssistantHasBeenOpened = value; Save(); }
+    }
+
+    /// <summary>True once the first-time discovery hint has been dismissed. Persisted in cache.</summary>
+    public bool AssistantHintDismissed
+    {
+        get => _cache.AssistantHintDismissed;
+        set { _cache.AssistantHintDismissed = value; Save(); }
     }
 
     private void Load()

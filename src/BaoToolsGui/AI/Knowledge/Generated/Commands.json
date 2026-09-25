@@ -1,0 +1,142 @@
+[
+  {
+    "Name": "RestartSteamCommand",
+    "OwnerViewModel": "MainViewModel",
+    "PurposeVi": "Khởi động lại tiến trình Steam để áp dụng cấu hình game hoặc plugin.",
+    "PurposeEn": "Restarts Steam process to apply new game configs or plugins.",
+    "IsMutating": true,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "MainViewModel.cs"
+  },
+  {
+    "Name": "SignInCommand",
+    "OwnerViewModel": "MainViewModel",
+    "PurposeVi": "Đăng nhập tài khoản Discord để đồng bộ quyền lợi và hạn mức.",
+    "PurposeEn": "Signs in via Discord to sync privileges and download quotas.",
+    "IsMutating": false,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "MainViewModel.cs"
+  },
+  {
+    "Name": "SignOutCommand",
+    "OwnerViewModel": "MainViewModel",
+    "PurposeVi": "Đăng xuất tài khoản người dùng về chế độ khách (Guest).",
+    "PurposeEn": "Signs out current user to Guest mode.",
+    "IsMutating": true,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "MainViewModel.cs"
+  },
+  {
+    "Name": "RemoveDrmCommand",
+    "OwnerViewModel": "ManageViewModel",
+    "PurposeVi": "Chạy Steamless giải mã file .exe gốc để gỡ Steam DRM chống văng crash.",
+    "PurposeEn": "Runs Steamless unpacker on game exe to strip Steam DRM and prevent crashes.",
+    "IsMutating": true,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "ManageViewModel.cs"
+  },
+  {
+    "Name": "DeleteGameCommand",
+    "OwnerViewModel": "ManageViewModel",
+    "PurposeVi": "Xóa cấu hình .lua của game để gỡ game khỏi Steam.",
+    "PurposeEn": "Deletes game .lua config to unlink game from Steam.",
+    "IsMutating": true,
+    "RequiresConfirmation": true,
+    "RelatedFeature": "",
+    "SourceFile": "ManageViewModel.cs"
+  },
+  {
+    "Name": "OpenFolderCommand",
+    "OwnerViewModel": "ManageViewModel",
+    "PurposeVi": "Mở thư mục cài đặt thực tế của game trên ổ cứng trong Windows Explorer.",
+    "PurposeEn": "Opens game installation folder on disk in Windows Explorer.",
+    "IsMutating": false,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "ManageViewModel.cs"
+  },
+  {
+    "Name": "ConfigureLaunchOptionsCommand",
+    "OwnerViewModel": "ManageViewModel",
+    "PurposeVi": "Mở hộp thoại đặt tham số khởi chạy game (-dx11, -novid, v.v.).",
+    "PurposeEn": "Opens dialog to set game launch options (-dx11, -novid, etc.).",
+    "IsMutating": true,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "ManageViewModel.cs"
+  },
+  {
+    "Name": "InstallPluginCommand",
+    "OwnerViewModel": "PluginViewModel",
+    "PurposeVi": "Cài đặt Millennium Loader và BaoTools Plugin vào Steam.",
+    "PurposeEn": "Installs Millennium Loader and BaoTools Plugin into Steam.",
+    "IsMutating": true,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "PluginViewModel.cs"
+  },
+  {
+    "Name": "UninstallPluginCommand",
+    "OwnerViewModel": "PluginViewModel",
+    "PurposeVi": "Gỡ bỏ hoàn toàn Millennium Loader và BaoTools Plugin khỏi Steam.",
+    "PurposeEn": "Completely uninstalls Millennium Loader and BaoTools Plugin from Steam.",
+    "IsMutating": true,
+    "RequiresConfirmation": true,
+    "RelatedFeature": "",
+    "SourceFile": "PluginViewModel.cs"
+  },
+  {
+    "Name": "ApplyFixCommand",
+    "OwnerViewModel": "FixesViewModel",
+    "PurposeVi": "Cài đặt bản vá lỗi crash hoặc thiếu file DLL vào thư mục game.",
+    "PurposeEn": "Applies crash fix or missing DLL patch into game folder.",
+    "IsMutating": true,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "FixesViewModel.cs"
+  },
+  {
+    "Name": "RevertFixCommand",
+    "OwnerViewModel": "FixesViewModel",
+    "PurposeVi": "Gỡ bỏ bản vá lỗi và khôi phục lại các file gốc nguyên bản của game.",
+    "PurposeEn": "Reverts applied fix and restores original pristine game files.",
+    "IsMutating": true,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "FixesViewModel.cs"
+  },
+  {
+    "Name": "ChangeSteamFolderCommand",
+    "OwnerViewModel": "SettingsViewModel",
+    "PurposeVi": "Mở hộp thoại chọn thư mục Steam thủ công trên máy.",
+    "PurposeEn": "Opens folder dialog to pick custom Steam folder path.",
+    "IsMutating": true,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "SettingsViewModel.cs"
+  },
+  {
+    "Name": "ClearChatCommand",
+    "OwnerViewModel": "AiChatViewModel",
+    "PurposeVi": "Làm mới toàn bộ cuộc trò chuyện với Trợ lý AI.",
+    "PurposeEn": "Refreshes the conversation with the AI Assistant.",
+    "IsMutating": false,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "AiChatViewModel.cs"
+  },
+  {
+    "Name": "CopyMessageCommand",
+    "OwnerViewModel": "AiChatViewModel",
+    "PurposeVi": "Sao chép nội dung tin nhắn bot vào Clipboard.",
+    "PurposeEn": "Copies bot message text to clipboard.",
+    "IsMutating": false,
+    "RequiresConfirmation": false,
+    "RelatedFeature": "",
+    "SourceFile": "AiChatViewModel.cs"
+  }
+]

@@ -35,9 +35,11 @@
     <Page Include="App.xaml" />
   </ItemGroup>
 
-  <!-- Embed icon.ico as a resource so the Window Icon="icon.ico" can resolve it at runtime -->
+  <!-- Embed icon.ico, AI_img.jpg, and country flags as resources so they resolve at runtime -->
   <ItemGroup>
     <Resource Include="icon.ico" />
+    <Resource Include="AI_img.jpg" />
+    <Resource Include="Resources\Flags\*.png" />
   </ItemGroup>
 
   <!-- Nothing in public/ is bundled anymore. The frontend (baotools.js) is fetched from GitHub releases
@@ -52,6 +54,7 @@
     <EmbeddedResource Update="Resources\Strings*.resx">
       <Generator></Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="AI\Knowledge\Generated\*.json" />
   </ItemGroup>
 
   <ItemGroup>

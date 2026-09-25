@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Kieli</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Valitse sovelluksen näyttökieli. Otetaan käyttöön uudelleenkäynnistyksen jälkeen.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Järjestelmän oletus</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS-selvitys</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Jos operaattorisi estää BaoTools-sivuston, sovellus voi selvittää osoitteet Cloudflaren (1.1.1.1) kautta järjestelmän selvittäjän sijaan. ”Automaattinen” vaihtaa vasta, kun tavallinen DNS epäonnistuu.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automaattinen</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Käytä aina Cloudflarea</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Käytä vain järjestelmän DNS:ää</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steamin sijainti</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Muuta…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Avaa</value></data>
@@ -370,8 +375,8 @@ Tämä poistaa .lua-tiedostot kansiosta Steam\config\stplug-in.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Automaattinen lataus ensimmäisestä saatavilla olevasta lähteestä</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Tälle pelille ei löytynyt saatavilla olevia lähteitä</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· kautta {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>BaoTools-laajennus</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>BaoTools-Steam-laajennus! — Käyttää nyt LuaLoaderia Shitteniumin sijaan</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>laajennus</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>Steam-laajennus! — Käyttää nyt LuaLoaderia Shitteniumin sijaan</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Tila</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Päivitys saatavilla</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Asennettu versio</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>TYÖKALUT</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>JÄRJESTELMÄ</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>Hyvää huomenta</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>Hyvää iltapäivää</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>Hyvää iltaa</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Hallitse Steam-pelejäsi, työkalujasi ja avattuja resurssejasi helposti.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Pikatoiminnot</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Lisää peli</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Etsi ja lataa lua-tiedostoja</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Korjaa pelejä</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Vianmääritys ja korjaukset</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>Lataukset</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>Näytä latausjono</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Näytä kaikki</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Järjestelmän tila</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Näytä kirjasto</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Vaihda tilaa</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Hallitse liitännäistä</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Hallitse</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Ei vielä asennettuja pelejä</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Lisää pelejä Lisää-välilehdeltä tai pudota tiedostoja oikealle.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Pikavinkki</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Vedä ja pudota mikä tahansa .lua-, .manifest-tiedosto tai pelikansio suoraan alueelle asentaaksesi automaattisesti.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Pelikirjastosi ja työkalut</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Järjestä</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Näkymä</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Ruudukkonäkymä</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Luettelonäkymä</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Asennettu</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Ei asennettu</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>Puuttuvat tiedostot</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>ALUSTA</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>TILA</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>GENRE</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>NOLLAA SUODATTIMET</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Pelin tiedot</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} peliä</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>Näytetään {0} – {1} / {2} pelistä</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 peliä</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>Lisätty {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Sulje (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Tuki ja diagnostiikka</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Ota diagnostiikka-avustaja käyttöön</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Näytä kelluva avustajapainike automaattista vianmääritystä varten.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>BaoTools-avustaja</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Kysy peleistä, virheistä, diagnostiikasta...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Mietitään...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Tyhjennä keskusteluhistoria</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Pienennä</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Lähetä kysymys (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Ehdotetut aiheet:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Kysy minulta mitä vain...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Tarvitsetko apua?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Peli ei toimi?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Tarvitsetko korjauksen?</value></data>
 </root>

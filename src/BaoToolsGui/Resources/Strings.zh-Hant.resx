@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>語言</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>選擇應用程式的顯示語言。重新啟動後生效。</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>跟隨系統</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS 解析</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>如果你的網路業者封鎖了 BaoTools，應用程式可以改用 Cloudflare (1.1.1.1) 查詢位址，而不使用系統解析器。「自動」僅在一般 DNS 失敗後才切換。</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>自動</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>一律使用 Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>僅使用系統 DNS</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam 位置</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>變更…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>開啟</value></data>
@@ -370,8 +375,8 @@
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>自動從首個可用來源下載</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>未找到此遊戲的可用來源</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· 來源：{0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>BaoTools 外掛</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>BaoTools 的 Steam 外掛！ — 現已改用 LuaLoader 取代 Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>外掛</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>的 Steam 外掛！ — 現已改用 LuaLoader 取代 Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>狀態</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>有可用更新</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>已安裝版本</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>開啟瀏覽器</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>工具</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>系統</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>早安</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>午安</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>晚安</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>輕鬆管理您的 Steam 遊戲、實用工具與解鎖資源。</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>快速操作</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>新增遊戲</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>搜尋並下載 lua 檔案</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>修復遊戲</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>疑難排解與套用修復</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>下載管理</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>檢視下載佇列</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>檢視全部</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>系統狀態</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>檢視收藏庫</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>切換模式</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>管理外掛模組</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>管理</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>尚未安裝任何遊戲</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>從「新增」分頁新增遊戲，或直接將檔案拖曳至右側開始。</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>實用小秘訣</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>直接將任何 .lua、.manifest 或遊戲資料夾拖入放置區域即可自動安裝。</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>您的遊戲收藏庫與工具</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>排序</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>檢視</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>圖示檢視</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>清單檢視</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>已安裝</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>未安裝</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>檔案遺失</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>平台</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>狀態</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>類型</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>重設篩選</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>遊戲詳細資訊</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} 款遊戲</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>顯示第 {0} – {1} 款，共 {2} 款遊戲</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 款遊戲</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>已於 {0} 新增</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>關閉 (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>支援與診斷</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>啟用診斷小幫手</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>顯示浮動助理按鈕，提供自動化故障排除與遊戲配置教學。</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>BaoTools 助理</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>詢問有關遊戲、錯誤代碼或系統診斷...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>正在思考...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>清除對話紀錄</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>最小化</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>傳送問題 (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>推薦主題：</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>複製訊息</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>已複製！</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>重新生成回答</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>正在檢視：{0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>取消釘選遊戲上下文</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>隨時問我...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>需要協助嗎？</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>遊戲無法執行？</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>需要修復嗎？</value></data>
 </root>

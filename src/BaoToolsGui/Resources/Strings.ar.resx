@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>اللغة</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>اختر لغة عرض التطبيق. تُطبَّق بعد إعادة التشغيل.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>افتراضي النظام</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>تحليل DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>إذا كان مزوّد خدمتك يحجب BaoTools، يمكن للتطبيق تحليل العناوين عبر Cloudflare (1.1.1.1) بدلاً من محلّل النظام. الوضع «تلقائي» لا ينتقل إلا بعد فشل DNS المعتاد.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>تلقائي</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>استخدم Cloudflare دائمًا</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>استخدم DNS النظام فقط</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>موقع Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>تغيير…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>فتح</value></data>
@@ -396,8 +401,8 @@
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>التنزيل التلقائي من أول مصدر متاح</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>لم يتم العثور على مصادر متاحة لهذه اللعبة</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· عبر {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>إضافة BaoTools</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>إضافة BaoTools لمتجر Steam! — تستخدم الآن LuaLoader بدلًا من Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>إضافة</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>إضافة لمتجر Steam! — تستخدم الآن LuaLoader بدلًا من Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>الحالة</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>تحديث متاح</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>الإصدار المثبَّت</value></data>
@@ -860,4 +865,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>الأدوات</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>النظام</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>صباح الخير</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>مساء الخير</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>مساء الخير</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>إدارة ألعاب Steam والأدوات والموارد غير المقفلة بسهولة.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>إجراءات سريعة</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>إضافة لعبة</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>البحث عن ملفات lua وتنزيلها</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>إصلاح الألعاب</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>استكشاف الأخطاء وتطبيق الإصلاحات</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>التنزيلات</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>عرض قائمة الانتظار</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>عرض الكل</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>حالة النظام</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>عرض المكتبة</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>تغيير الوضع</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>إدارة الإضافة</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>إدارة</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>لم يتم تثبيت أي ألعاب بعد</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>أضف ألعابًا من علامة التبويب إضافة أو اسحب الملفات إلى اليمين للبدء.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>نصيحة سريعة</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>اسحب وأفلت أي ملف .lua أو .manifest أو مجلد لعبة مباشرة في منطقة الإفلات للتثبيت التلقائي.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>مكتبة ألعابك وأدواتك</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>فرز</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>عرض</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>عرض شبكي</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>عرض قائمة</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>مثبت</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>غير مثبت</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>ملفات مفقودة</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>المنصة</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>الحالة</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>النوع</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>إعادة تعيين الفلاتر</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>تفاصيل اللعبة</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} ألعاب</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>عرض {0} – {1} من أصل {2} ألعاب</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 لعبة</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>تمت الإضافة في {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>إغلاق (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>الدعم والتشخيص</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>تمكين مساعد التشخيص</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>إظهار زر مساعد عائم لاستكشاف الأخطاء وإصلاحها تلقائيًا.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>مساعد BaoTools</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>اسأل عن الألعاب والأخطاء والتشخيص...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>جارٍ التفكير...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>مسح سجل الدردشة</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>تصغير</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>إرسال السؤال (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>مواضيع مقترحة:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>اسألني أي شيء...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>هل تحتاج مساعدة؟</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>اللعبة لا تعمل؟</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>هل تحتاج إلى حل؟</value></data>
 </root>

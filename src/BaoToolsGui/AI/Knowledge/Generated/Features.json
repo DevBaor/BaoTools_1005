@@ -1,0 +1,302 @@
+[
+  {
+    "Id": "home_injection",
+    "NameVi": "Nạp game siêu tốc (Drop Zone)",
+    "NameEn": "Fast Game Injection (Drop Zone)",
+    "DescriptionVi": "Kéo thả file .lua, .manifest hoặc .zip vào Trang chủ để tự động nạp cấu hình bản quyền vào Steam.",
+    "DescriptionEn": "Drag and drop .lua, .manifest, or .zip into Home to automatically inject licenses into Steam.",
+    "Keywords": [
+      "nạp game",
+      "kéo thả",
+      "drop zone",
+      "thêm game",
+      "inject",
+      "lua",
+      "zip"
+    ],
+    "RelatedScreens": [
+      "screen_home"
+    ],
+    "RelatedSettings": [],
+    "RelatedCommands": [
+      "InstallDroppedItemCommand"
+    ],
+    "RelatedTools": [],
+    "RelatedServices": [],
+    "Workflows": [],
+    "Limitations": [],
+    "SourceReferences": [
+      {
+        "File": "HomeView.xaml",
+        "Symbol": null
+      },
+      {
+        "File": "LuaVault.cs",
+        "Symbol": null
+      }
+    ]
+  },
+  {
+    "Id": "game_management",
+    "NameVi": "Quản lý Game đã nạp (Manage)",
+    "NameEn": "Unlocked Games Management",
+    "DescriptionVi": "Xem danh sách game, lọc game đã cài, mở thư mục game, đặt Launch Options (-dx11, -novid) và xóa game.",
+    "DescriptionEn": "View game list, filter installed titles, open game folders, set Launch Options (-dx11, -novid), and delete games.",
+    "Keywords": [
+      "quản lý",
+      "manage",
+      "danh sách game",
+      "mở thư mục",
+      "launch options",
+      "xóa game"
+    ],
+    "RelatedScreens": [
+      "screen_manage"
+    ],
+    "RelatedSettings": [],
+    "RelatedCommands": [
+      "OpenFolderCommand",
+      "DeleteGameCommand",
+      "ConfigureLaunchOptionsCommand"
+    ],
+    "RelatedTools": [],
+    "RelatedServices": [],
+    "Workflows": [],
+    "Limitations": [],
+    "SourceReferences": [
+      {
+        "File": "ManageView.xaml",
+        "Symbol": null
+      },
+      {
+        "File": "ManageViewModel.cs",
+        "Symbol": null
+      }
+    ]
+  },
+  {
+    "Id": "steamless_drm",
+    "NameVi": "Gỡ Steam DRM (Steamless)",
+    "NameEn": "Remove Steam DRM (Steamless)",
+    "DescriptionVi": "Tự động giải mã file .exe của game để gỡ bỏ lớp bảo vệ SteamStub DRM, khắc phục triệt để lỗi game mở lên bị văng.",
+    "DescriptionEn": "Automatically unpacks game .exe to strip SteamStub DRM, permanently solving launch crash issues.",
+    "Keywords": [
+      "steamless",
+      "gỡ drm",
+      "văng",
+      "crash",
+      "steamstub",
+      "không mở được"
+    ],
+    "RelatedScreens": [
+      "screen_manage",
+      "screen_fixes"
+    ],
+    "RelatedSettings": [],
+    "RelatedCommands": [
+      "RemoveDrmCommand"
+    ],
+    "RelatedTools": [
+      "apply_game_fix"
+    ],
+    "RelatedServices": [
+      "SteamlessService"
+    ],
+    "Workflows": [],
+    "Limitations": [],
+    "SourceReferences": [
+      {
+        "File": "SteamlessService.cs",
+        "Symbol": null
+      }
+    ]
+  },
+  {
+    "Id": "steam_plugin",
+    "NameVi": "Steam Store Plugin (Millennium)",
+    "NameEn": "Steam Store Plugin (Millennium)",
+    "DescriptionVi": "Tích hợp nút bấm nạp game 1-click trực tiếp trên giao diện web Steam Store thông qua Millennium.",
+    "DescriptionEn": "Integrates 1-click game addition button directly on Steam Store web interface via Millennium.",
+    "Keywords": [
+      "plugin",
+      "millennium",
+      "steam store",
+      "cài plugin",
+      "thêm 1-click"
+    ],
+    "RelatedScreens": [
+      "screen_plugin"
+    ],
+    "RelatedSettings": [],
+    "RelatedCommands": [
+      "InstallPluginCommand",
+      "UninstallPluginCommand"
+    ],
+    "RelatedTools": [
+      "get_plugin_status",
+      "remove_plugin"
+    ],
+    "RelatedServices": [
+      "PluginInstallerService"
+    ],
+    "Workflows": [],
+    "Limitations": [],
+    "SourceReferences": [
+      {
+        "File": "PluginInstallerService.cs",
+        "Symbol": null
+      }
+    ]
+  },
+  {
+    "Id": "fast_downloads",
+    "NameVi": "Tải game tốc độ cao (Downloads)",
+    "NameEn": "High-Speed Game Downloads",
+    "DescriptionVi": "Tải dữ liệu game và depot tốc độ cao trực tiếp từ kho lưu trữ và tự động giải nén vào thư mục Steam.",
+    "DescriptionEn": "High-speed direct game and depot downloads automatically extracted into Steam library.",
+    "Keywords": [
+      "tải game",
+      "download",
+      "hàng đợi",
+      "depot",
+      "tốc độ cao"
+    ],
+    "RelatedScreens": [
+      "screen_add",
+      "screen_downloads"
+    ],
+    "RelatedSettings": [],
+    "RelatedCommands": [
+      "AddGameCommand",
+      "PauseDownloadCommand"
+    ],
+    "RelatedTools": [
+      "get_download_status"
+    ],
+    "RelatedServices": [],
+    "Workflows": [],
+    "Limitations": [],
+    "SourceReferences": [
+      {
+        "File": "DownloadView.xaml",
+        "Symbol": null
+      },
+      {
+        "File": "DownloadsView.xaml",
+        "Symbol": null
+      }
+    ]
+  },
+  {
+    "Id": "game_fixes",
+    "NameVi": "Kho Bản sửa lỗi (Fixes)",
+    "NameEn": "Game Fixes \u0026 Patches",
+    "DescriptionVi": "Kho tổng hợp các bản patch sửa lỗi crash, lỗi thiếu file DLL, lỗi DirectX và fix màn hình đen cho từng tựa game.",
+    "DescriptionEn": "Comprehensive repository of crash fixes, missing DLLs, DirectX repairs, and black screen patches.",
+    "Keywords": [
+      "fixes",
+      "bản sửa lỗi",
+      "patch",
+      "thiếu file",
+      "dll",
+      "màn hình đen"
+    ],
+    "RelatedScreens": [
+      "screen_fixes"
+    ],
+    "RelatedSettings": [],
+    "RelatedCommands": [
+      "ApplyFixCommand",
+      "RevertFixCommand"
+    ],
+    "RelatedTools": [
+      "apply_game_fix"
+    ],
+    "RelatedServices": [],
+    "Workflows": [],
+    "Limitations": [],
+    "SourceReferences": [
+      {
+        "File": "FixesView.xaml",
+        "Symbol": null
+      }
+    ]
+  },
+  {
+    "Id": "online_coop_fixes",
+    "NameVi": "Chơi Online Co-op (Online-Fix)",
+    "NameEn": "Online Co-op Multiplayer Fixes",
+    "DescriptionVi": "Bản patch giả lập Steam Spacewar để kết nối chơi nhiều người trực tuyến miễn phí.",
+    "DescriptionEn": "Online-Fix patches using Steam Spacewar emulation for free co-op and multiplayer gaming.",
+    "Keywords": [
+      "online",
+      "chơi online",
+      "online-fix",
+      "multiplayer",
+      "co-op",
+      "spacewar"
+    ],
+    "RelatedScreens": [
+      "screen_online_fixes"
+    ],
+    "RelatedSettings": [],
+    "RelatedCommands": [
+      "ApplyOnlineFixCommand"
+    ],
+    "RelatedTools": [],
+    "RelatedServices": [],
+    "Workflows": [],
+    "Limitations": [],
+    "SourceReferences": [
+      {
+        "File": "OnlineFixesView.xaml",
+        "Symbol": null
+      }
+    ]
+  },
+  {
+    "Id": "ai_assistant",
+    "NameVi": "Trợ lý AI Kỹ thuật BaoTools",
+    "NameEn": "BaoTools AI Technical Assistant",
+    "DescriptionVi": "Trợ lý kỹ thuật chẩn đoán phần cứng, kiểm tra lỗi game, hướng dẫn tính năng ứng dụng và đề xuất giải pháp sửa lỗi an toàn.",
+    "DescriptionEn": "Technical assistant diagnosing hardware specs, troubleshooting game errors, guiding features, and applying safe fixes.",
+    "Keywords": [
+      "ai",
+      "trợ lý",
+      "bot",
+      "chẩn đoán",
+      "hỏi đáp",
+      "hỗ trợ"
+    ],
+    "RelatedScreens": [
+      "screen_ai_assistant"
+    ],
+    "RelatedSettings": [],
+    "RelatedCommands": [
+      "SendMessageCommand",
+      "ClearChatCommand",
+      "CopyMessageCommand"
+    ],
+    "RelatedTools": [
+      "diagnose_game",
+      "get_system_info",
+      "check_game_files"
+    ],
+    "RelatedServices": [
+      "AiChatService",
+      "AiToolExecutor"
+    ],
+    "Workflows": [],
+    "Limitations": [],
+    "SourceReferences": [
+      {
+        "File": "AiChatWidget.xaml",
+        "Symbol": null
+      },
+      {
+        "File": "AiChatService.cs",
+        "Symbol": null
+      }
+    ]
+  }
+]

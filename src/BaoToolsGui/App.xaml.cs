@@ -19,6 +19,15 @@ public partial class App : Application
 
     public App()
     {
+        DispatcherUnhandledException += (_, e) =>
+        {
+            Services.PluginLog.Log($"[FATAL] DispatcherUnhandledException: {e.Exception}");
+        };
+        AppDomain.CurrentDomain.UnhandledException += (_, e) =>
+        {
+            Services.PluginLog.Log($"[FATAL] UnhandledException: {e.ExceptionObject}");
+        };
+
         _host = Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
@@ -82,6 +91,8 @@ public partial class App : Application
                 services.AddSingleton<DownloadsViewModel>();
                 services.AddSingleton<PluginViewModel>();
                 services.AddSingleton<TicketsViewModel>();
+                services.AddSingleton<AiChatService>();
+                services.AddSingleton<AiChatViewModel>();
                 services.AddSingleton<OnboardingViewModel>();
                 services.AddSingleton<MainViewModel>();
                 // Pages resolved by NavigationView via the DI service provider.
@@ -233,6 +244,12 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
+        // Point the shared HTTP handler at the DNS setting before anything makes a request. It calls
+        // this per connection rather than reading it now, so the order is not load-bearing — but doing
+        // it first means the very first call of the session already honours the user's choice.
+        var dnsSettings = _host.Services.GetRequiredService<SettingsService>();
+        AppHttp.ModeProvider = () => dnsSettings.DnsMode;
+
         // Legacy cleanup: older builds staged downloads in ~/Downloads/BaoTools (they now stage in
         // %TEMP% and self-delete). Remove any leftovers from that user-visible folder, best-effort.
         // Also sweep the current %TEMP% staging folder: a crash mid-download, or an overwrite confirm
@@ -356,6 +373,7 @@ public partial class App : Application
         // Manage page "Update" → go to the Add page pre-seeded with that appid.
         manage.NavigateToAdd = appId =>
             Dispatcher.Invoke(() => { window.NavigateToAdd(); download.SeedSearch(appId); });
+        manage.RequestAddGame = () => Dispatcher.Invoke(window.NavigateToAdd);
 
         // Manage flyout "Manage Build" → go to the Builds page with that game selected.
         var builds = _host.Services.GetRequiredService<BuildsViewModel>();
@@ -413,6 +431,8 @@ public partial class App : Application
         home.NavigateToSettings = () => Dispatcher.Invoke(window.NavigateToSettings);
         home.NavigateToMode = () => Dispatcher.Invoke(window.NavigateToMode);
         home.NavigateToAdd = () => Dispatcher.Invoke(window.NavigateToAdd);
+        home.NavigateToFixes = () => Dispatcher.Invoke(window.NavigateToFixes);
+        home.NavigateToDownloads = () => Dispatcher.Invoke(window.NavigateToDownloads);
 
         // Onboarding finished applying its actions → refresh the Home dashboard tiles (mode + plugin status).
         main.Onboarding.RefreshHome = () => Dispatcher.Invoke(() => home.LoadAsync());
@@ -459,6 +479,7 @@ public partial class App : Application
         else
         {
             window.Show();
+            _host.Services.GetRequiredService<ThemeService>().ApplyCurrentTheme(window);
 
             // First-run onboarding: show the welcome overlay on a fresh install. Skip it (and mark done)
             // when the user is already set up (a managed mode selected AND the plugin installed), so

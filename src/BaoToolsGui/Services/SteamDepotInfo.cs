@@ -54,7 +54,7 @@ public class SteamDepotInfo
     private readonly ConcurrentDictionary<long, (AppDepotInfo? Info, DateTime At)> _cache = new(); // memory-only
     private readonly ConcurrentDictionary<long, Task<AppDepotInfo?>> _inFlight = new();
 
-    public SteamDepotInfo() : this(new HttpClientHandler()) { }
+    public SteamDepotInfo() : this(AppHttp.SharedHandler) { }
 
     /// <summary>Test seam: swap in a stub handler so caching behaviour can be checked by counting the
     /// requests that actually go out, rather than by hitting the real API.</summary>

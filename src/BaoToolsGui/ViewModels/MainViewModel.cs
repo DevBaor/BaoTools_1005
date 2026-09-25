@@ -94,13 +94,16 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private bool _hasUpdateHistory;
 
+    public AiChatViewModel AiChat { get; }
+
     public MainViewModel(
         AuthService auth,
         SteamService steam,
         OnboardingViewModel onboarding,
         UpdateService updates,
         UpdateHistoryService historyService,
-        ToastService toast)
+        ToastService toast,
+        AiChatViewModel aiChat)
     {
         _auth = auth;
         _steam = steam;
@@ -108,6 +111,7 @@ public partial class MainViewModel : ObservableObject
         _updates = updates;
         _historyService = historyService;
         _toast = toast;
+        AiChat = aiChat;
         _auth.AuthStateChanged += () => IsGuest = _auth.IsGuest;
         SettingsViewModel.LanguageChanged += OnLanguageChanged;
 

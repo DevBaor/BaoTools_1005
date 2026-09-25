@@ -44,7 +44,7 @@ public class ThemeService
             Color.FromRgb(0x28, 0x2a, 0x36), // #282a36 Dracula Base
             Color.FromRgb(0x44, 0x47, 0x5a), // #44475a Current Line / Card
             Color.FromRgb(0xf8, 0xf8, 0xf2), // #f8f8f2 Foreground
-            Color.FromRgb(0x62, 0x72, 0xa4), // #6272a4 Comment / Secondary
+            Color.FromRgb(0xa4, 0xb1, 0xd6), // #a4b1d6 Readable Lavender-Blue Secondary
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -54,7 +54,7 @@ public class ThemeService
             Color.FromRgb(0x1a, 0x1b, 0x26), // #1a1b26 Night Base
             Color.FromRgb(0x24, 0x28, 0x3b), // #24283b Card Surface
             Color.FromRgb(0xc0, 0xca, 0xf5), // #c0caf5 Text
-            Color.FromRgb(0x79, 0x82, 0xa9), // #7982a9 Secondary
+            Color.FromRgb(0x9a, 0xa5, 0xce), // #9aa5ce High Contrast Subtext
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -64,7 +64,7 @@ public class ThemeService
             Color.FromRgb(0x26, 0x23, 0x35), // #262335 Synthwave Deep Space
             Color.FromRgb(0x34, 0x29, 0x4f), // #34294f Purple Card
             Color.FromRgb(0xf4, 0xee, 0xe4), // #f4eee4 Text
-            Color.FromRgb(0xff, 0x7e, 0xdb), // #ff7edb Hot Pink
+            Color.FromRgb(0xe0, 0xa6, 0xd8), // #e0a6d8 Readable Soft Neon Pink
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -74,7 +74,7 @@ public class ThemeService
             Color.FromRgb(0x19, 0x17, 0x24), // #191724 SoHo Base
             Color.FromRgb(0x26, 0x23, 0x3a), // #26233a Card Surface
             Color.FromRgb(0xe0, 0xde, 0xf4), // #e0def4 Text
-            Color.FromRgb(0x90, 0x8c, 0xaa), // #908caa Secondary
+            Color.FromRgb(0xa8, 0xa4, 0xc6), // #a8a4c6 Muted Secondary
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -84,7 +84,7 @@ public class ThemeService
             Color.FromRgb(0x1f, 0x16, 0x27), // #1f1627 Velvet Plum Base
             Color.FromRgb(0x2d, 0x20, 0x38), // #2d2038 Plum Card
             Color.FromRgb(0xfc, 0xe7, 0xf3), // #fce7f3 Text
-            Color.FromRgb(0xc0, 0x84, 0xfc), // #c084fc Lavender
+            Color.FromRgb(0xd6, 0xa4, 0xfc), // #d6a4fc Bright Lavender
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -104,7 +104,7 @@ public class ThemeService
             Color.FromRgb(0x18, 0x15, 0x12), // #181512 Dark Wood Base
             Color.FromRgb(0x26, 0x20, 0x1a), // #26201a Roasted Card
             Color.FromRgb(0xfe, 0xf3, 0xc7), // #fef3c7 Warm Text
-            Color.FromRgb(0xd9, 0x77, 0x06), // #d97706 Copper Secondary
+            Color.FromRgb(0xf5, 0xd0, 0x85), // #f5d085 Warm Amber Secondary (Fixed contrast)
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -114,7 +114,7 @@ public class ThemeService
             Color.FromRgb(0x12, 0x0d, 0x1d), // #120d1d Deep Violet Base
             Color.FromRgb(0x1e, 0x15, 0x30), // #1e1530 Card
             Color.FromRgb(0xfa, 0xf5, 0xff), // #faf5ff Text
-            Color.FromRgb(0xc0, 0x84, 0xfc), // #c084fc Lavender
+            Color.FromRgb(0xc8, 0x98, 0xfc), // #c898fc Lavender Secondary
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -133,8 +133,8 @@ public class ThemeService
             Color.FromRgb(0x00, 0xf0, 0xff), // #00f0ff Neon Cyan
             Color.FromRgb(0x0d, 0x0d, 0x15), // #0d0d15 Deep Dark
             Color.FromRgb(0x1a, 0x1a, 0x2e), // #1a1a2e Card
-            Color.FromRgb(0xfe, 0xe7, 0x15), // #fee715 Neon Gold
-            Color.FromRgb(0x94, 0xa3, 0xb8), // #94a3b8
+            Color.FromRgb(0xf8, 0xfa, 0xfc), // #f8fafc Crisp Clean White Text
+            Color.FromRgb(0x00, 0xe5, 0xff), // #00e5ff Cyber Neon Secondary
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -164,7 +164,7 @@ public class ThemeService
             Color.FromRgb(0x21, 0x25, 0x2b), // #21252b Atom Deep Gray
             Color.FromRgb(0x28, 0x2c, 0x34), // #282c34 Atom Card
             Color.FromRgb(0xab, 0xb2, 0xbf), // #abb2bf Text
-            Color.FromRgb(0x5c, 0x63, 0x70), // #5c6370 Secondary
+            Color.FromRgb(0x8b, 0x94, 0x9e), // #8b949e Readable Subtext (Fixed contrast)
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -174,7 +174,7 @@ public class ThemeService
             Color.FromRgb(0x28, 0x28, 0x28), // #282828 Warm Retro Dark
             Color.FromRgb(0x3c, 0x38, 0x36), // #3c3836 Gruvbox Surface
             Color.FromRgb(0xeb, 0xdb, 0xb2), // #ebdbb2 Text
-            Color.FromRgb(0xa8, 0x99, 0x84), // #a89984 Secondary
+            Color.FromRgb(0xbd, 0xae, 0x93), // #bdae93 Readable Secondary
             WindowBackdropType.None),
 
         new ThemeDefinition(
@@ -195,12 +195,12 @@ public class ThemeService
 
     public string CurrentThemeId => _settings.Theme;
 
-    public void ApplyCurrentTheme()
+    public void ApplyCurrentTheme(Window? window = null)
     {
-        ApplyTheme(_settings.Theme);
+        ApplyTheme(_settings.Theme, window);
     }
 
-    public void ApplyTheme(string themeId)
+    public void ApplyTheme(string themeId, Window? window = null)
     {
         var theme = AvailableThemes.Find(t => string.Equals(t.Id, themeId, StringComparison.OrdinalIgnoreCase))
                     ?? AvailableThemes[0];
@@ -222,7 +222,7 @@ public class ThemeService
 
         var dict = _themeResourceDict;
 
-        // Theme brushes
+        // Theme core brushes
         var bgBrush = new SolidColorBrush(theme.BackgroundColor);
         var cardBrush = new SolidColorBrush(theme.CardColor);
         var textBrush = new SolidColorBrush(theme.TextColor);
@@ -240,59 +240,106 @@ public class ThemeService
         dict["AppForegroundBrush"] = textBrush;
         dict["AppSecondaryForegroundBrush"] = secTextBrush;
         dict["AppAccentBrush"] = accentBrush;
+        dict["SystemAccentColorPrimaryBrush"] = accentBrush;
 
-        // Override Wpf.Ui standard dark tokens if not default
-        if (theme.Id != "Default")
+        // Distinct control fill for buttons, inputs, headers inside cards (+16 luminance)
+        byte ctrlR = (byte)Math.Clamp(theme.CardColor.R + 16, 0, 255);
+        byte ctrlG = (byte)Math.Clamp(theme.CardColor.G + 16, 0, 255);
+        byte ctrlB = (byte)Math.Clamp(theme.CardColor.B + 16, 0, 255);
+        var ctrlFillBrush = new SolidColorBrush(Color.FromRgb(ctrlR, ctrlG, ctrlB));
+        ctrlFillBrush.Freeze();
+
+        // Secondary control fill for hover states, bubbles (+28 luminance)
+        byte ctrlSecR = (byte)Math.Clamp(theme.CardColor.R + 28, 0, 255);
+        byte ctrlSecG = (byte)Math.Clamp(theme.CardColor.G + 28, 0, 255);
+        byte ctrlSecB = (byte)Math.Clamp(theme.CardColor.B + 28, 0, 255);
+        var ctrlSecBrush = new SolidColorBrush(Color.FromRgb(ctrlSecR, ctrlSecG, ctrlSecB));
+        ctrlSecBrush.Freeze();
+
+        // Card stroke: clear and visible border
+        var cardStrokeBrush = new SolidColorBrush(Color.FromArgb(0x55, theme.AccentColor.R, theme.AccentColor.G, theme.AccentColor.B));
+        cardStrokeBrush.Freeze();
+
+        // Control stroke brush for subtle button borders
+        var ctrlStrokeBrush = new SolidColorBrush(Color.FromArgb(0x30, 255, 255, 255));
+        ctrlStrokeBrush.Freeze();
+
+        // Tertiary text brush for chevron icons, subtle labels
+        byte terR = (byte)Math.Clamp((theme.SecondaryTextColor.R + theme.CardColor.R) / 2 + 15, 0, 255);
+        byte terG = (byte)Math.Clamp((theme.SecondaryTextColor.G + theme.CardColor.G) / 2 + 15, 0, 255);
+        byte terB = (byte)Math.Clamp((theme.SecondaryTextColor.B + theme.CardColor.B) / 2 + 15, 0, 255);
+        var terTextBrush = new SolidColorBrush(Color.FromRgb(terR, terG, terB));
+        terTextBrush.Freeze();
+
+        // Navigation pane background (slightly darker than base)
+        byte paneR = (byte)Math.Max(0, theme.BackgroundColor.R - 6);
+        byte paneG = (byte)Math.Max(0, theme.BackgroundColor.G - 6);
+        byte paneB = (byte)Math.Max(0, theme.BackgroundColor.B - 6);
+        var paneBrush = new SolidColorBrush(Color.FromRgb(paneR, paneG, paneB));
+        paneBrush.Freeze();
+
+        dict["ControlFillColorDefaultBrush"] = ctrlFillBrush;
+        dict["ControlFillColorSecondaryBrush"] = ctrlSecBrush;
+        dict["ControlStrokeColorDefaultBrush"] = ctrlStrokeBrush;
+        dict["CardStrokeColorDefaultBrush"] = cardStrokeBrush;
+        dict["TextFillColorTertiaryBrush"] = terTextBrush;
+
+        // Apply solid, consistent tokens across the entire application for all themes
+        dict["ApplicationBackgroundBrush"] = bgBrush;
+        dict["WindowBackgroundFillColorDefaultBrush"] = bgBrush;
+        dict["SolidBackgroundFillColorBaseBrush"] = bgBrush;
+        dict["CardBackgroundFillColorDefaultBrush"] = cardBrush;
+        dict["CardBackgroundFillColorSecondaryBrush"] = ctrlFillBrush;
+        dict["NavigationViewDefaultPaneBackground"] = paneBrush;
+        dict["NavigationViewContentBackground"] = bgBrush;
+        dict["ControlElevationBorderBrush"] = cardStrokeBrush;
+        dict["TextFillColorPrimaryBrush"] = textBrush;
+        dict["TextFillColorSecondaryBrush"] = secTextBrush;
+
+        // Navigation active state: vivid accent indicator bar + elegant accent-tinted background
+        dict["NavigationViewSelectionIndicatorForeground"] = accentBrush;
+        var activeNavBg = new SolidColorBrush(Color.FromArgb(0x33, theme.AccentColor.R, theme.AccentColor.G, theme.AccentColor.B));
+        activeNavBg.Freeze();
+        var hoverNavBg = new SolidColorBrush(Color.FromArgb(0x18, 255, 255, 255));
+        hoverNavBg.Freeze();
+        dict["NavigationViewItemBackgroundSelected"] = activeNavBg;
+        dict["NavigationViewItemBackgroundSelectedLeftFluent"] = activeNavBg;
+        dict["NavigationViewItemBackgroundPointerOver"] = hoverNavBg;
+        dict["NavigationViewItemForegroundSelected"] = textBrush;
+        dict["LeftNavigationViewSeparatorBrush"] = Brushes.Transparent;
+
+        // Apply backdrop and background to all applicable fluent windows
+        var targetWindows = new HashSet<Window>();
+        if (window is not null)
         {
-            var cardStrokeBrush = new SolidColorBrush(Color.FromArgb(0x35, theme.AccentColor.R, theme.AccentColor.G, theme.AccentColor.B));
-            cardStrokeBrush.Freeze();
-
-            byte paneR = (byte)Math.Max(0, theme.BackgroundColor.R - 8);
-            byte paneG = (byte)Math.Max(0, theme.BackgroundColor.G - 8);
-            byte paneB = (byte)Math.Max(0, theme.BackgroundColor.B - 8);
-            var paneBrush = new SolidColorBrush(Color.FromRgb(paneR, paneG, paneB));
-            paneBrush.Freeze();
-
-            dict["ApplicationBackgroundBrush"] = bgBrush;
-            dict["WindowBackgroundFillColorDefaultBrush"] = bgBrush;
-            dict["SolidBackgroundFillColorBaseBrush"] = bgBrush;
-            dict["CardBackgroundFillColorDefaultBrush"] = cardBrush;
-            dict["CardBackgroundFillColorSecondaryBrush"] = cardBrush;
-            dict["CardStrokeColorDefaultBrush"] = cardStrokeBrush;
-            dict["NavigationViewDefaultPaneBackground"] = paneBrush;
-            dict["NavigationViewContentBackground"] = bgBrush;
-            dict["ControlElevationBorderBrush"] = cardStrokeBrush;
-            dict["TextFillColorPrimaryBrush"] = textBrush;
-            dict["TextFillColorSecondaryBrush"] = secTextBrush;
-            dict["SystemAccentColorPrimaryBrush"] = accentBrush;
+            targetWindows.Add(window);
         }
-        else
+        if (app.MainWindow is not null)
         {
-            dict.Remove("ApplicationBackgroundBrush");
-            dict.Remove("WindowBackgroundFillColorDefaultBrush");
-            dict.Remove("SolidBackgroundFillColorBaseBrush");
-            dict.Remove("CardBackgroundFillColorDefaultBrush");
-            dict.Remove("CardBackgroundFillColorSecondaryBrush");
-            dict.Remove("CardStrokeColorDefaultBrush");
-            dict.Remove("NavigationViewDefaultPaneBackground");
-            dict.Remove("NavigationViewContentBackground");
-            dict.Remove("ControlElevationBorderBrush");
-            dict.Remove("TextFillColorPrimaryBrush");
-            dict.Remove("TextFillColorSecondaryBrush");
-            dict.Remove("SystemAccentColorPrimaryBrush");
+            targetWindows.Add(app.MainWindow);
         }
-
-        // Apply backdrop to main window if open
-        if (app.MainWindow is FluentWindow win)
+        foreach (Window w in app.Windows)
         {
-            win.WindowBackdropType = theme.BackdropType;
-            if (theme.Id != "Default")
+            if (w is not null)
             {
-                win.Background = bgBrush;
+                targetWindows.Add(w);
             }
-            else
+        }
+
+        foreach (var w in targetWindows)
+        {
+            if (w is FluentWindow win)
             {
-                win.ClearValue(Window.BackgroundProperty);
+                win.WindowBackdropType = theme.BackdropType;
+                if (theme.BackdropType == WindowBackdropType.None)
+                {
+                    win.Background = bgBrush;
+                }
+                else
+                {
+                    // Mica (Default theme) requires clearing explicit background for the compositor
+                    win.ClearValue(Window.BackgroundProperty);
+                }
             }
         }
     }

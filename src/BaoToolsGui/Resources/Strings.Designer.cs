@@ -32,6 +32,8 @@ public static class Strings
     public static string OnlineFixes_Search => Get(nameof(OnlineFixes_Search));
     public static string OnlineFixes_Help => Get(nameof(OnlineFixes_Help));
 
+    public static string Nav_Section_Tools => Get(nameof(Nav_Section_Tools));
+    public static string Nav_Section_System => Get(nameof(Nav_Section_System));
     public static string Nav_RestartSteam => Get(nameof(Nav_RestartSteam));
     public static string Nav_Settings => Get(nameof(Nav_Settings));
     public static string Nav_SignInDiscord => Get(nameof(Nav_SignInDiscord));
@@ -42,6 +44,7 @@ public static class Strings
 
     // -- Settings --
     public static string Settings_Title => Get(nameof(Settings_Title));
+    public static string Settings_Subtitle => Get(nameof(Settings_Subtitle));
     public static string Settings_Section_Account => Get(nameof(Settings_Section_Account));
     public static string Settings_Section_General => Get(nameof(Settings_Section_General));
     public static string Settings_Section_Steam => Get(nameof(Settings_Section_Steam));
@@ -78,6 +81,11 @@ public static class Strings
     public static string Settings_Language => Get(nameof(Settings_Language));
     public static string Settings_Language_Hint => Get(nameof(Settings_Language_Hint));
     public static string Settings_Language_SystemDefault => Get(nameof(Settings_Language_SystemDefault));
+    public static string Settings_Dns => Get(nameof(Settings_Dns));
+    public static string Settings_Dns_Hint => Get(nameof(Settings_Dns_Hint));
+    public static string Settings_Dns_Auto => Get(nameof(Settings_Dns_Auto));
+    public static string Settings_Dns_Always => Get(nameof(Settings_Dns_Always));
+    public static string Settings_Dns_Never => Get(nameof(Settings_Dns_Never));
     public static string Settings_Section_Appearance => Get(nameof(Settings_Section_Appearance));
     public static string Settings_Theme => Get(nameof(Settings_Theme));
     public static string Settings_Theme_Hint => Get(nameof(Settings_Theme_Hint));
@@ -128,6 +136,9 @@ public static class Strings
 
     // -- Home --
     public static string Home_Welcome => Get(nameof(Home_Welcome));
+    public static string Home_Greeting_Morning => Get(nameof(Home_Greeting_Morning));
+    public static string Home_Greeting_Afternoon => Get(nameof(Home_Greeting_Afternoon));
+    public static string Home_Greeting_Evening => Get(nameof(Home_Greeting_Evening));
     public static string Home_LuasOnBoard => Get(nameof(Home_LuasOnBoard));
     public static string Home_LastAdded => Get(nameof(Home_LastAdded));
     public static string Home_PluginStatus => Get(nameof(Home_PluginStatus));
@@ -141,6 +152,27 @@ public static class Strings
     public static string Home_SignedInAs => Get(nameof(Home_SignedInAs));
     public static string Home_NoModeSelected => Get(nameof(Home_NoModeSelected));
     public static string Home_ModeIs => Get(nameof(Home_ModeIs));
+    public static string Home_WelcomeSubtitle => Get(nameof(Home_WelcomeSubtitle));
+    public static string Home_QuickActions => Get(nameof(Home_QuickActions));
+    public static string Home_AddGame => Get(nameof(Home_AddGame));
+    public static string Home_AddGame_Sub => Get(nameof(Home_AddGame_Sub));
+    public static string Home_FixGame => Get(nameof(Home_FixGame));
+    public static string Home_FixGame_Sub => Get(nameof(Home_FixGame_Sub));
+    public static string Home_Downloads => Get(nameof(Home_Downloads));
+    public static string Home_Downloads_Sub => Get(nameof(Home_Downloads_Sub));
+    public static string Home_ViewAll => Get(nameof(Home_ViewAll));
+    public static string Home_SystemStatus => Get(nameof(Home_SystemStatus));
+    public static string Home_ViewLibrary => Get(nameof(Home_ViewLibrary));
+    public static string Home_ChangeMode => Get(nameof(Home_ChangeMode));
+    public static string Home_ManagePlugin => Get(nameof(Home_ManagePlugin));
+    public static string Home_ManageGame => Get(nameof(Home_ManageGame));
+    public static string Home_NoRecentGames => Get(nameof(Home_NoRecentGames));
+    public static string Home_NoRecentGames_Sub => Get(nameof(Home_NoRecentGames_Sub));
+    public static string Home_Tip_Title => Get(nameof(Home_Tip_Title));
+    public static string Home_Tip_Body => Get(nameof(Home_Tip_Body));
+    public static string Home_Discord_Title => Get(nameof(Home_Discord_Title));
+    public static string Home_Discord_Desc => Get(nameof(Home_Discord_Desc));
+    public static string Home_Discord_Join => Get(nameof(Home_Discord_Join));
 
     // -- Mode --
     public static string Mode_Title => Get(nameof(Mode_Title));
@@ -298,6 +330,24 @@ public static class Strings
     public static string Manage_RemoveFailed_Count => Get(nameof(Manage_RemoveFailed_Count));
     public static string Manage_RestartSteam_Title => Get(nameof(Manage_RestartSteam_Title));
     public static string Manage_RestartSteam_Failed => Get(nameof(Manage_RestartSteam_Failed));
+    public static string Manage_Subtitle => Get(nameof(Manage_Subtitle));
+    public static string Manage_Sort_Title => Get(nameof(Manage_Sort_Title));
+    public static string Manage_View => Get(nameof(Manage_View));
+    public static string Manage_View_Grid => Get(nameof(Manage_View_Grid));
+    public static string Manage_View_List => Get(nameof(Manage_View_List));
+    public static string Manage_Status_Installed => Get(nameof(Manage_Status_Installed));
+    public static string Manage_Status_NotInstalled => Get(nameof(Manage_Status_NotInstalled));
+    public static string Manage_Status_MissingFiles => Get(nameof(Manage_Status_MissingFiles));
+    public static string Manage_Filter_Platform => Get(nameof(Manage_Filter_Platform));
+    public static string Manage_Filter_Status => Get(nameof(Manage_Filter_Status));
+    public static string Manage_Filter_GenreUpper => Get(nameof(Manage_Filter_GenreUpper));
+    public static string Manage_ClearFiltersUpper => Get(nameof(Manage_ClearFiltersUpper));
+    public static string Manage_GameDetails_Title => Get(nameof(Manage_GameDetails_Title));
+    public static string Manage_TotalGames => Get(nameof(Manage_TotalGames));
+    public static string Manage_ShowingSummary => Get(nameof(Manage_ShowingSummary));
+    public static string Manage_ShowingZero => Get(nameof(Manage_ShowingZero));
+    public static string Manage_AddedDate => Get(nameof(Manage_AddedDate));
+    public static string Manage_CloseTooltip => Get(nameof(Manage_CloseTooltip));
 
     // -- Fixes --
     public static string Fixes_Title => Get(nameof(Fixes_Title));
@@ -717,4 +767,35 @@ public static class Strings
     public static string UpdateDialog_FailedHeader => Get(nameof(UpdateDialog_FailedHeader));
     public static string UpdateDialog_FailedSub => Get(nameof(UpdateDialog_FailedSub));
     public static string UpdateDialog_OpenBrowser => Get(nameof(UpdateDialog_OpenBrowser));
+
+    // -- AI Assistant --
+    public static string Settings_Section_AiAssistant => Get(nameof(Settings_Section_AiAssistant));
+    public static string Settings_AiAssistant_Enable => Get(nameof(Settings_AiAssistant_Enable));
+    public static string Settings_AiAssistant_Enable_Hint => Get(nameof(Settings_AiAssistant_Enable_Hint));
+    public static string Settings_AiAssistant_Key => Get(nameof(Settings_AiAssistant_Key));
+    public static string Settings_AiAssistant_Key_Hint => Get(nameof(Settings_AiAssistant_Key_Hint));
+    public static string Settings_AiAssistant_KeyPlaceholder => Get(nameof(Settings_AiAssistant_KeyPlaceholder));
+    public static string Settings_AiAssistant_GetKey => Get(nameof(Settings_AiAssistant_GetKey));
+    public static string Settings_AiAssistant_LocalOffline => Get(nameof(Settings_AiAssistant_LocalOffline));
+    public static string Settings_AiAssistant_CardDesc => Get(nameof(Settings_AiAssistant_CardDesc));
+    public static string AiChat_Title => Get(nameof(AiChat_Title));
+    public static string AiChat_Subtitle => Get(nameof(AiChat_Subtitle));
+    public static string AiChat_NoApiKeyHint => Get(nameof(AiChat_NoApiKeyHint));
+    public static string AiChat_InputPlaceholder => Get(nameof(AiChat_InputPlaceholder));
+    public static string AiChat_Thinking => Get(nameof(AiChat_Thinking));
+    public static string AiChat_ClearChat => Get(nameof(AiChat_ClearChat));
+    public static string AiChat_Close => Get(nameof(AiChat_Close));
+    public static string AiChat_Send => Get(nameof(AiChat_Send));
+    public static string AiChat_SuggestionsHeader => Get(nameof(AiChat_SuggestionsHeader));
+    public static string AiChat_CopyMessage => Get(nameof(AiChat_CopyMessage));
+    public static string AiChat_Copied => Get(nameof(AiChat_Copied));
+    public static string AiChat_Regenerate => Get(nameof(AiChat_Regenerate));
+
+    public static string AiChat_InspectingGame => Get(nameof(AiChat_InspectingGame));
+    public static string AiChat_ClearGameContext => Get(nameof(AiChat_ClearGameContext));
+
+    public static string AssistantAskAnything => Get(nameof(AssistantAskAnything));
+    public static string AssistantNeedHelp => Get(nameof(AssistantNeedHelp));
+    public static string AssistantGameNotWorking => Get(nameof(AssistantGameNotWorking));
+    public static string AssistantNeedFix => Get(nameof(AssistantNeedFix));
 }

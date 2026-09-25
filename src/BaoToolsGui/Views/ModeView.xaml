@@ -26,15 +26,16 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel>
+                    <StackPanel Margin="0,0,16,0">
                         <TextBlock
                             FontSize="22"
                             FontWeight="Bold"
                             Text="{x:Static res:Strings.Mode_Title}" />
                         <TextBlock
-                            Margin="0,2,0,0"
+                            Margin="0,4,0,0"
                             FontSize="13"
                             Foreground="#9ca3af"
+                            TextWrapping="Wrap"
                             Text="{x:Static res:Strings.Mode_Subtitle}" />
                     </StackPanel>
                     <ui:Button

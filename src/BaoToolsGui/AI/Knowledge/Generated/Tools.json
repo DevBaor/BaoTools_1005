@@ -1,0 +1,342 @@
+[
+  {
+    "Name": "get_selected_game",
+    "DescriptionVi": "Đọc thông tin game hiện đang được chọn trong thư viện BaoTools.",
+    "DescriptionEn": "Gets the currently selected game info in BaoTools library.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "get_game_info",
+    "DescriptionVi": "Tra cứu chi tiết cấu hình và cấu trúc tệp của game theo AppID.",
+    "DescriptionEn": "Gets information and file structure of a game by AppID.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "get_game_path",
+    "DescriptionVi": "Xác định đường dẫn cài đặt game trong thư mục Steam common.",
+    "DescriptionEn": "Finds the local install path of a game by AppID in Steam common directory.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "get_installed_games",
+    "DescriptionVi": "Liệt kê danh sách tất cả các game đã nạp trong thư viện BaoTools.",
+    "DescriptionEn": "Lists all games loaded into BaoTools Lua library.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "check_game_files",
+    "DescriptionVi": "Kiểm tra file thực thi (.exe), DLC và depot của game có đầy đủ không.",
+    "DescriptionEn": "Checks if executable, DLCs, and depots exist for the game.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "scan_game_dependencies",
+    "DescriptionVi": "Quét các runtime phụ thuộc cần thiết (DirectX, VC\u002B\u002B Redistributable, .NET).",
+    "DescriptionEn": "Scans required game runtimes (DirectX, VC\u002B\u002B Redistributable, .NET).",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "check_directx",
+    "DescriptionVi": "Kiểm tra phiên bản DirectX và Direct3D feature level của máy.",
+    "DescriptionEn": "Checks the system DirectX version and Direct3D feature levels.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "SYSTEM_DIAGNOSTIC",
+      "PERFORMANCE"
+    ],
+    "RelatedFeatures": [
+      "system_diagnostics"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "check_vcredist",
+    "DescriptionVi": "Kiểm tra phiên bản Visual C\u002B\u002B 2015-2022 (x64 và x86) đã cài chưa.",
+    "DescriptionEn": "Checks installed Visual C\u002B\u002B Runtimes (2015-2022 x64 and x86).",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "SYSTEM_DIAGNOSTIC",
+      "PERFORMANCE"
+    ],
+    "RelatedFeatures": [
+      "system_diagnostics"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "get_gpu_info",
+    "DescriptionVi": "Đọc thông tin card màn hình (GPU), VRAM và phiên bản Driver.",
+    "DescriptionEn": "Retrieves GPU model name, dedicated VRAM, and driver details.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "SYSTEM_DIAGNOSTIC",
+      "PERFORMANCE"
+    ],
+    "RelatedFeatures": [
+      "system_diagnostics"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "get_system_info",
+    "DescriptionVi": "Đọc toàn bộ cấu hình phần cứng OS, CPU, RAM, GPU của máy tính.",
+    "DescriptionEn": "Retrieves full OS, RAM, GPU, and architecture diagnostic information.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "SYSTEM_DIAGNOSTIC",
+      "PERFORMANCE"
+    ],
+    "RelatedFeatures": [
+      "system_diagnostics"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "diagnose_game",
+    "DescriptionVi": "Chạy quy trình chẩn đoán tự động toàn diện về đường dẫn, Steam DRM, runtime và patch.",
+    "DescriptionEn": "Runs comprehensive automated diagnostic on game path, Steam DRM, dependencies, and fixes.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_DIAGNOSTIC",
+      "GAME_FIX"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "get_plugin_status",
+    "DescriptionVi": "Kiểm tra tình trạng hoạt động của Steam Store Plugin.",
+    "DescriptionEn": "Checks if BaoTools Steam Plugin is installed and working.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "PLUGIN"
+    ],
+    "RelatedFeatures": [
+      "steam_plugin"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "get_download_status",
+    "DescriptionVi": "Kiểm tra hàng đợi tải và giới hạn quota tải trong ngày.",
+    "DescriptionEn": "Checks active download queue and daily quota limit.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "DOWNLOAD"
+    ],
+    "RelatedFeatures": [
+      "fast_downloads"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "verify_game_files",
+    "DescriptionVi": "Xác minh tính toàn vẹn của tệp game và kiểm tra tệp depot bị thiếu.",
+    "DescriptionEn": "Verifies game integrity and checks for missing depot files.",
+    "ReadOnly": true,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "repair_game_configuration",
+    "DescriptionVi": "Sửa chữa cấu hình .lua hoặc cấu hình unlocker bị lỗi.",
+    "DescriptionEn": "Repairs corrupted Lua or unlocker configuration for the game.",
+    "ReadOnly": false,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_fixes",
+      "steamless_drm"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "clear_safe_cache",
+    "DescriptionVi": "Dọn dẹp bộ nhớ đệm tạm thời an toàn (manifests và fastfetch cache).",
+    "DescriptionEn": "Clears temporary manifests and fastfetch cache safely.",
+    "ReadOnly": false,
+    "RequiresConfirmation": false,
+    "Parameters": [],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "apply_game_fix",
+    "DescriptionVi": "Áp dụng bản vá gỡ DRM Steamless hoặc patch sửa lỗi tương thích.",
+    "DescriptionEn": "Applies Steamless DRM unpacking or game compatibility fix.",
+    "ReadOnly": false,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId",
+      "fixType"
+    ],
+    "RelatedIntents": [
+      "GAME_DIAGNOSTIC",
+      "GAME_FIX"
+    ],
+    "RelatedFeatures": [
+      "game_fixes",
+      "steamless_drm"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "launch_game",
+    "DescriptionVi": "Khởi động game thông qua giao thức Steam (steam://run/{appId}).",
+    "DescriptionEn": "Launches the game via Steam protocol (steam://run/{appId}).",
+    "ReadOnly": false,
+    "RequiresConfirmation": false,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "delete_game",
+    "DescriptionVi": "Xóa cấu hình game khỏi thư viện BaoTools (yêu cầu xác nhận).",
+    "DescriptionEn": "Deletes game unlock configuration from BaoTools Lua library.",
+    "ReadOnly": false,
+    "RequiresConfirmation": true,
+    "Parameters": [
+      "appId"
+    ],
+    "RelatedIntents": [
+      "GAME_CONFIGURATION",
+      "GAME_COMPATIBILITY"
+    ],
+    "RelatedFeatures": [
+      "game_management"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  },
+  {
+    "Name": "remove_plugin",
+    "DescriptionVi": "Gỡ cài đặt hoàn toàn plugin BaoTools khỏi Steam (yêu cầu xác nhận).",
+    "DescriptionEn": "Uninstalls the BaoTools plugin from Steam.",
+    "ReadOnly": false,
+    "RequiresConfirmation": true,
+    "Parameters": [],
+    "RelatedIntents": [
+      "PLUGIN"
+    ],
+    "RelatedFeatures": [
+      "steam_plugin"
+    ],
+    "SourceFile": "AiToolDefinition.cs"
+  }
+]

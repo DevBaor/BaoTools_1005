@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "limit_daily_quota",
+    "DescriptionVi": "Người dùng miễn phí có hạn mức nạp/tải tối đa 10 game mỗi ngày.",
+    "DescriptionEn": "Free guest users have a daily limit of 10 game additions per day.",
+    "Scope": "Add / Download",
+    "WorkaroundVi": "Đăng nhập tài khoản Discord để mở rộng hạn mức hoặc chờ sang ngày hôm sau.",
+    "WorkaroundEn": "Sign in via Discord or wait until the next day."
+  },
+  {
+    "Id": "limit_steam_running_required",
+    "DescriptionVi": "Cần có Steam đã cài đặt trên máy để chơi và đồng bộ game.",
+    "DescriptionEn": "Steam must be installed on the host PC to sync and play games.",
+    "Scope": "All game operations",
+    "WorkaroundVi": "Cài đặt ứng dụng Steam chính thức từ store.steampowered.com.",
+    "WorkaroundEn": "Install official Steam client from store.steampowered.com."
+  },
+  {
+    "Id": "limit_admin_permission_fixes",
+    "DescriptionVi": "Một số bản sửa lỗi can thiệp vào thư mục Program Files cần quyền Administrator để ghi file.",
+    "DescriptionEn": "Certain game patches modifying Program Files directories require Administrator privileges.",
+    "Scope": "Game Fixes",
+    "WorkaroundVi": "Chạy BaoTools dưới quyền \u0027Run as Administrator\u0027.",
+    "WorkaroundEn": "Launch BaoTools with \u0027Run as Administrator\u0027."
+  },
+  {
+    "Id": "limit_offline_ai",
+    "DescriptionVi": "Trợ lý AI hoạt động 100% offline cục bộ trên thiết bị, bảo đảm quyền riêng tư tuyệt đối.",
+    "DescriptionEn": "The AI Assistant operates 100% locally offline on your device, ensuring complete privacy.",
+    "Scope": "AI Assistant",
+    "WorkaroundVi": "Trợ lý được nạp sẵn kho tri thức hệ thống toàn diện của BaoTools và bộ công cụ chẩn đoán chuyên sâu trực tiếp.",
+    "WorkaroundEn": "The assistant is pre-grounded with BaoTools\u0027 comprehensive system knowledge base and native diagnostic tools."
+  }
+]

@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <!-- Clickable stat tile: the card look, with a hover brighten (same idiom as the recent cards). -->
+        <!-- Clickable stat tile: dynamic theme colors -->
         <Style x:Key="CardTileButton" TargetType="Button">
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -21,32 +21,239 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="B" Padding="16,14" Background="#0DFFFFFF" BorderBrush="#14FFFFFF" BorderThickness="1" CornerRadius="10">
+                        <Border
+                            x:Name="B"
+                            Padding="16,14"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="B" Property="Background" Value="#18FFFFFF" />
-                                <Setter TargetName="B" Property="BorderBrush" Value="#33FFFFFF" />
+                                <Setter TargetName="B" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                <Setter TargetName="B" Property="BorderBrush" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <!-- Clickable status row: transparent, hover brighten. -->
+
+        <!-- Quick Action button style -->
+        <Style x:Key="QuickActionButton" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="B"
+                            Padding="14,12"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                <Setter TargetName="B" Property="BorderBrush" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Clickable status row: transparent, hover brighten -->
         <Style x:Key="StatusRowButton" TargetType="Button">
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="B" Padding="6,5" Background="Transparent" CornerRadius="6">
+                        <Border
+                            x:Name="B"
+                            Padding="6,5"
+                            Background="Transparent"
+                            CornerRadius="6">
                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="B" Property="Background" Value="#14FFFFFF" />
+                                <Setter TargetName="B" Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Manage button inside game card (full-width, balanced) -->
+        <Style x:Key="ManagePillButton" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="B"
+                            Padding="8,0"
+                            Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
+                                <Setter TargetName="B" Property="BorderBrush" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
+                                <Setter Property="TextElement.Foreground" Value="#FFFFFF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Manage Plugin Button: sleek secondary with punchy, high-contrast accent hover feedback -->
+        <Style x:Key="ManagePluginButtonStyle" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="B"
+                            Padding="12,0"
+                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="7">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ui:SymbolIcon
+                                    x:Name="Icon"
+                                    Margin="0,0,6,0"
+                                    FontSize="14"
+                                    Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                    Symbol="PuzzlePiece24" />
+                                <ContentPresenter
+                                    x:Name="Content"
+                                    VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
+                                <Setter TargetName="B" Property="BorderBrush" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
+                                <Setter TargetName="Icon" Property="Foreground" Value="#FFFFFF" />
+                                <Setter Property="Foreground" Value="#FFFFFF" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="B" Property="Opacity" Value="0.85" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Install Plugin Button: accent action button -->
+        <Style x:Key="InstallPluginButtonStyle" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="B"
+                            Padding="12,0"
+                            Background="{DynamicResource SystemAccentColorPrimaryBrush}"
+                            BorderBrush="{DynamicResource SystemAccentColorPrimaryBrush}"
+                            BorderThickness="1"
+                            CornerRadius="7">
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Opacity" Value="0.9" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="B" Property="Opacity" Value="0.75" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Discord Community Button: refined modern Discord glassmorphism & gradient hover -->
+        <Style x:Key="DiscordButtonStyle" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#D9E0FF" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="B"
+                            Padding="14,0"
+                            Background="#185865F2"
+                            BorderBrush="#3D5865F2"
+                            BorderThickness="1"
+                            CornerRadius="7">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ui:SymbolIcon
+                                    x:Name="Icon"
+                                    Margin="0,0,7,0"
+                                    FontSize="15"
+                                    Foreground="#7289DA"
+                                    Symbol="Chat24" />
+                                <ContentPresenter
+                                    x:Name="Content"
+                                    VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Offset="0" Color="#5865F2" />
+                                            <GradientStop Offset="1" Color="#4752C4" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="B" Property="BorderBrush" Value="#7983F5" />
+                                <Setter TargetName="Icon" Property="Foreground" Value="#FFFFFF" />
+                                <Setter Property="Foreground" Value="#FFFFFF" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#3C45A5" />
+                                <Setter TargetName="B" Property="BorderBrush" Value="#4752C4" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -56,245 +263,677 @@
     </UserControl.Resources>
 
     <Grid>
-    <ScrollViewer x:Name="Root" VerticalScrollBarVisibility="Auto">
-        <StackPanel MaxWidth="760" Margin="8,16,16,24">
+        <ScrollViewer
+            x:Name="Root"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <Grid Margin="18,14,18,24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="360" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="310" />
+                </Grid.ColumnDefinitions>
 
-            <!-- Greeting -->
-            <TextBlock
-                FontSize="22"
-                FontWeight="Bold"
-                Text="{x:Static res:Strings.Home_Welcome}" />
+                <!-- ==================== LEFT COLUMN ==================== -->
+                <StackPanel Grid.Column="0">
 
-            <!-- Stat tiles (clickable) -->
-            <UniformGrid Margin="0,18,0,0" Columns="2" Rows="1">
-                <!-- Luas on board → Manage -->
-                <Button Margin="0,0,6,0" Command="{Binding OpenManageCommand}" Style="{StaticResource CardTileButton}">
-                    <StackPanel>
+                    <!-- Welcome Banner with Time-based Greeting & Discord Avatar -->
+                    <Border
+                        Padding="20,16"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="{Binding GreetingTitle}" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    FontSize="12.5"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="{x:Static res:Strings.Home_WelcomeSubtitle}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <!-- User Avatar (Discord) or App Logo Fallback -->
+                            <Grid Grid.Column="1" Width="52" Height="52" Margin="16,0,0,0">
+                                <!-- Background Circle -->
+                                <Ellipse
+                                    Width="52"
+                                    Height="52"
+                                    Fill="{DynamicResource ControlFillColorDefaultBrush}" />
+
+                                <!-- Fallback Cat Logo (when no avatar or guest) -->
+                                <Image
+                                    Width="30"
+                                    Height="30"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="pack://application:,,,/icon.ico"
+                                    Visibility="{Binding HasAvatar, Converter={StaticResource InverseBoolToVis}}" />
+
+                                <!-- Discord Avatar Image (circular clipped via Ellipse ImageBrush) -->
+                                <Ellipse
+                                    Width="52"
+                                    Height="52"
+                                    Visibility="{Binding HasAvatar, Converter={StaticResource BoolToVis}}">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding AvatarSource}" Stretch="UniformToFill" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+
+                                <!-- Outer Accent Ring -->
+                                <Ellipse
+                                    Width="52"
+                                    Height="52"
+                                    Stroke="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                    StrokeThickness="2"
+                                    IsHitTestVisible="False" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <!-- Stat tiles (2 items: Game count & Mode) -->
+                    <UniformGrid Margin="0,14,0,0" Columns="2" Rows="1">
+                        <!-- Installed Games → Manage -->
+                        <Button
+                            Margin="0,0,7,0"
+                            Command="{Binding OpenManageCommand}"
+                            Style="{StaticResource CardTileButton}">
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{x:Static res:Strings.Home_LuasOnBoard}" />
+                                    <ui:SymbolIcon
+                                        HorizontalAlignment="Right"
+                                        FontSize="16"
+                                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                        Symbol="Games24" />
+                                </Grid>
+                                <TextBlock
+                                    Margin="0,8,0,4"
+                                    FontSize="28"
+                                    FontWeight="Bold"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="{Binding GameCount}" />
+                                <TextBlock
+                                    FontSize="11.5"
+                                    Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                    Text="{x:Static res:Strings.Home_ViewLibrary}" />
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Unlocker Mode → Mode -->
+                        <Button
+                            Margin="7,0,0,0"
+                            Command="{Binding OpenModeCommand}"
+                            Style="{StaticResource CardTileButton}">
+                            <StackPanel>
+                                <Grid>
+                                    <TextBlock
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{x:Static res:Strings.Mode_Title}" />
+                                    <ui:SymbolIcon
+                                        HorizontalAlignment="Right"
+                                        FontSize="16"
+                                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                        Symbol="Options24" />
+                                </Grid>
+                                <TextBlock
+                                    Margin="0,8,0,4"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="{Binding ModeStatus}"
+                                    TextTrimming="CharacterEllipsis" />
+                                <TextBlock
+                                    FontSize="11.5"
+                                    Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                    Text="{x:Static res:Strings.Home_ChangeMode}" />
+                            </StackPanel>
+                        </Button>
+                    </UniformGrid>
+
+                    <!-- Quick Actions -->
+                    <StackPanel Margin="0,20,0,0">
                         <TextBlock
-                            FontSize="28"
-                            FontWeight="Bold"
-                            Foreground="#a78bfa"
-                            Text="{Binding GameCount}" />
-                        <TextBlock
-                            Margin="0,2,0,0"
-                            FontSize="12"
-                            Foreground="#9ca3af"
-                            Text="{x:Static res:Strings.Home_LuasOnBoard}" />
-                    </StackPanel>
-                </Button>
-                <!-- Plugin status → Plugin page (+ inline Install when not installed) -->
-                <Button Margin="6,0,0,0" Command="{Binding OpenPluginCommand}" Style="{StaticResource CardTileButton}">
-                    <StackPanel>
-                        <TextBlock
-                            FontSize="12"
-                            Foreground="#6b7280"
-                            Text="{x:Static res:Strings.Home_PluginStatus}" />
-                        <TextBlock
-                            Margin="0,4,0,0"
-                            FontSize="15"
+                            FontSize="14"
                             FontWeight="SemiBold"
-                            Foreground="{Binding PluginStatusColor}"
-                            Text="{Binding PluginStatusText}"
-                            TextTrimming="CharacterEllipsis" />
-                        <ui:Button
-                            Margin="0,10,0,0"
-                            Padding="10,4"
-                            Appearance="Primary"
-                            Command="{Binding InstallPluginCommand}"
-                            Content="{x:Static res:Strings.Plugin_Btn_Install}"
-                            IsEnabled="{Binding NotInstallingPlugin}"
-                            Visibility="{Binding ShowPluginInstall, Converter={StaticResource BoolToVis}}" />
-                    </StackPanel>
-                </Button>
-            </UniformGrid>
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="{x:Static res:Strings.Home_QuickActions}" />
 
-            <!-- Status: Steam + account -->
-            <Border
-                Margin="0,12,0,0"
-                Padding="10,8"
-                Background="#0DFFFFFF"
-                BorderBrush="#14FFFFFF"
-                BorderThickness="1"
-                CornerRadius="10">
-                <StackPanel>
-                    <!-- Steam → Settings -->
-                    <Button Command="{Binding OpenSettingsCommand}" Style="{StaticResource StatusRowButton}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="22" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ui:SymbolIcon
-                                Margin="0,1,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="16"
-                                Symbol="Games24">
-                                <ui:SymbolIcon.Style>
-                                    <Style TargetType="ui:SymbolIcon">
-                                        <Setter Property="Foreground" Value="#f87171" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SteamFound}" Value="True">
-                                                <Setter Property="Foreground" Value="#34d399" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ui:SymbolIcon.Style>
-                            </ui:SymbolIcon>
-                            <TextBlock
-                                Grid.Column="1"
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="12.5"
-                                Foreground="#d1d5db"
-                                Text="{Binding SteamStatus}"
-                                TextTrimming="CharacterEllipsis" />
-                        </Grid>
-                    </Button>
-
-                    <Separator Margin="0,10" Background="#14FFFFFF" />
-
-                    <!-- Account → Settings -->
-                    <Button Command="{Binding OpenSettingsCommand}" Style="{StaticResource StatusRowButton}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="22" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ui:SymbolIcon
-                                Margin="0,1,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="16"
-                                Foreground="#a78bfa"
-                                Symbol="Person24" />
-                            <TextBlock
-                                Grid.Column="1"
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="12.5"
-                                Foreground="#d1d5db"
-                                Text="{Binding AccountStatus}" />
-                        </Grid>
-                    </Button>
-
-                    <Separator Margin="0,10" Background="#14FFFFFF" />
-
-                    <!-- Quota → Add page -->
-                    <Button Command="{Binding OpenAddCommand}" Style="{StaticResource StatusRowButton}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="22" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ui:SymbolIcon
-                                Margin="0,1,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="16"
-                                Foreground="#a78bfa"
-                                Symbol="ArrowDownload24" />
-                            <TextBlock
-                                Grid.Column="1"
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="12.5"
-                                Foreground="#d1d5db"
-                                Text="{Binding DailyQuotaStatus}" />
-                        </Grid>
-                    </Button>
-
-                    <Separator Margin="0,10" Background="#14FFFFFF" />
-
-                    <!-- Active mode → Mode -->
-                    <Button Command="{Binding OpenModeCommand}" Style="{StaticResource StatusRowButton}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="22" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ui:SymbolIcon
-                                Margin="0,1,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="16"
-                                Foreground="#a78bfa"
-                                Symbol="Options24" />
-                            <TextBlock
-                                Grid.Column="1"
-                                Margin="10,0,0,0"
-                                VerticalAlignment="Center"
-                                FontSize="12.5"
-                                Foreground="#d1d5db"
-                                Text="{Binding ModeStatus}"
-                                TextTrimming="CharacterEllipsis" />
-                        </Grid>
-                    </Button>
-                </StackPanel>
-            </Border>
-
-            <!-- Drag-and-drop install -->
-            <views:DropZone Margin="0,12,0,0" DataContext="{Binding Drop}" />
-
-            <!-- Recently added -->
-            <StackPanel Margin="0,22,0,0" Visibility="{Binding HasRecent, Converter={StaticResource BoolToVis}}">
-                <TextBlock
-                    FontSize="15"
-                    FontWeight="SemiBold"
-                    Text="{x:Static res:Strings.Home_RecentlyAdded}" />
-                <ItemsControl Margin="0,12,0,0" ItemsSource="{Binding Recent}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
+                        <UniformGrid Margin="0,10,0,0" Columns="3" Rows="1">
+                            <!-- Add Game -->
                             <Button
-                                Margin="0,0,12,12"
-                                Padding="0"
-                                Command="{Binding DataContext.OpenGameCommand, ElementName=Root}"
-                                CommandParameter="{Binding}"
-                                Cursor="Hand"
-                                ToolTip="{x:Static res:Strings.Home_ViewDetails}">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border
-                                            x:Name="Card"
-                                            Width="170"
-                                            Background="#0DFFFFFF"
-                                            BorderBrush="#14FFFFFF"
-                                            BorderThickness="1"
-                                            CornerRadius="10">
-                                            <StackPanel>
-                                                <Border
-                                                    Height="80"
-                                                    Background="#11FFFFFF"
-                                                    ClipToBounds="True"
-                                                    CornerRadius="10,10,0,0">
-                                                    <Image Source="{Binding Cover}" Stretch="UniformToFill" />
-                                                </Border>
-                                                <TextBlock
-                                                    Margin="10,8,10,10"
-                                                    FontSize="12.5"
-                                                    FontWeight="SemiBold"
-                                                    Text="{Binding Name}"
-                                                    TextTrimming="CharacterEllipsis" />
-                                            </StackPanel>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="Card" Property="Background" Value="#18FFFFFF" />
-                                                <Setter TargetName="Card" Property="BorderBrush" Value="#33FFFFFF" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Button.Template>
+                                Margin="0,0,6,0"
+                                Command="{Binding OpenAddCommand}"
+                                Style="{StaticResource QuickActionButton}">
+                                <StackPanel>
+                                    <ui:SymbolIcon
+                                        HorizontalAlignment="Left"
+                                        FontSize="20"
+                                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                        Symbol="Add24" />
+                                    <TextBlock
+                                        Margin="0,8,0,2"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{x:Static res:Strings.Home_AddGame}" />
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{x:Static res:Strings.Home_AddGame_Sub}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
                             </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </StackPanel>
-    </ScrollViewer>
 
-    <!-- Drag-and-drop overwrite confirm (the DropZone's own flow), page-spanning. -->
-    <views:ConfirmOverlay DataContext="{Binding Drop}" />
+                            <!-- Fixes -->
+                            <Button
+                                Margin="3,0,3,0"
+                                Command="{Binding OpenFixesCommand}"
+                                Style="{StaticResource QuickActionButton}">
+                                <StackPanel>
+                                    <ui:SymbolIcon
+                                        HorizontalAlignment="Left"
+                                        FontSize="20"
+                                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                        Symbol="Wrench24" />
+                                    <TextBlock
+                                        Margin="0,8,0,2"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{x:Static res:Strings.Home_FixGame}" />
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{x:Static res:Strings.Home_FixGame_Sub}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Downloads -->
+                            <Button
+                                Margin="6,0,0,0"
+                                Command="{Binding OpenDownloadsCommand}"
+                                Style="{StaticResource QuickActionButton}">
+                                <StackPanel>
+                                    <ui:SymbolIcon
+                                        HorizontalAlignment="Left"
+                                        FontSize="20"
+                                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                        Symbol="ArrowDownload24" />
+                                    <TextBlock
+                                        Margin="0,8,0,2"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{x:Static res:Strings.Home_Downloads}" />
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{x:Static res:Strings.Home_Downloads_Sub}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                            </Button>
+                        </UniformGrid>
+                    </StackPanel>
+
+                    <!-- Recently Added Games -->
+                    <Border
+                        Margin="0,22,0,0"
+                        Padding="16,14,16,16"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="16">
+                        <StackPanel>
+                            <!-- Header: Icon + Recently Added + View all -->
+                            <Grid>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <ui:SymbolIcon
+                                        FontSize="18"
+                                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                        Symbol="Games24" />
+                                    <TextBlock
+                                        Margin="8,0,0,0"
+                                        FontSize="15"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{x:Static res:Strings.Home_RecentlyAdded}" />
+                                </StackPanel>
+
+                                <Button
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding OpenManageCommand}"
+                                    Cursor="Hand"
+                                    Visibility="{Binding HasRecent, Converter={StaticResource BoolToVis}}">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock
+                                                    x:Name="Txt"
+                                                    FontSize="12.5"
+                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                    Text="{x:Static res:Strings.Home_ViewAll}" />
+                                                <TextBlock
+                                                    x:Name="Arrow"
+                                                    Margin="4,0,0,0"
+                                                    FontSize="12.5"
+                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                    Text="→" />
+                                            </StackPanel>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Txt" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                    <Setter TargetName="Arrow" Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Grid>
+
+                            <!-- Games List: 4 cards in a row with guaranteed uniform height -->
+                            <ItemsControl
+                                Margin="0,14,0,0"
+                                ItemsSource="{Binding Recent}"
+                                Visibility="{Binding HasRecent, Converter={StaticResource BoolToVis}}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="4" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border
+                                            Margin="4,0,4,12"
+                                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="12"
+                                            Cursor="Hand">
+                                            <Border.InputBindings>
+                                                <MouseBinding
+                                                    Gesture="LeftClick"
+                                                    Command="{Binding DataContext.OpenGameCommand, ElementName=Root}"
+                                                    CommandParameter="{Binding}" />
+                                            </Border.InputBindings>
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
+                                                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+
+                                                <!-- Cover Image Banner with smoothly rounded top corners -->
+                                                <Grid Grid.Row="0" Height="95">
+                                                    <!-- Fallback background & icon (always rounded) -->
+                                                    <Border
+                                                        Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                                                        CornerRadius="11,11,0,0">
+                                                        <ui:SymbolIcon
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            FontSize="26"
+                                                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                            Symbol="Games24" />
+                                                    </Border>
+
+                                                    <!-- Cover Image as Background -> natively clips to CornerRadius -->
+                                                    <Border CornerRadius="11,11,0,0" RenderOptions.BitmapScalingMode="HighQuality">
+                                                        <Border.Background>
+                                                            <ImageBrush ImageSource="{Binding Cover}" Stretch="UniformToFill" />
+                                                        </Border.Background>
+                                                    </Border>
+
+                                                    <!-- NEW Badge (Top-Right, theme synced) -->
+                                                    <Border
+                                                        Margin="0,7,7,0"
+                                                        Padding="6,2"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Top"
+                                                        Background="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                                        CornerRadius="6"
+                                                        Visibility="{Binding IsNew, Converter={StaticResource BoolToVis}}">
+                                                        <TextBlock
+                                                            FontSize="9"
+                                                            FontWeight="Bold"
+                                                            Foreground="#FFFFFF"
+                                                            Text="NEW" />
+                                                    </Border>
+                                                </Grid>
+
+                                                <!-- Details & Action buttons with uniform fixed layout -->
+                                                <StackPanel Grid.Row="1" Margin="10,8,10,10">
+                                                    <!-- Title (fixed height prevents uneven alignment) -->
+                                                    <TextBlock
+                                                        Height="18"
+                                                        FontSize="12"
+                                                        FontWeight="Bold"
+                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                        Text="{Binding Name}"
+                                                        TextTrimming="CharacterEllipsis" />
+
+                                                    <!-- Category / Metadata -->
+                                                    <TextBlock
+                                                        Height="16"
+                                                        Margin="0,2,0,8"
+                                                        FontSize="10.5"
+                                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                        Text="{Binding CategoryLabel}"
+                                                        TextTrimming="CharacterEllipsis" />
+
+                                                    <!-- Manage Button: Full width of card, perfectly aligned -->
+                                                    <Button
+                                                        HorizontalAlignment="Stretch"
+                                                        Command="{Binding DataContext.OpenGameCommand, ElementName=Root}"
+                                                        CommandParameter="{Binding}"
+                                                        Style="{StaticResource ManagePillButton}">
+                                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                                            <ui:SymbolIcon
+                                                                Margin="0,0,5,0"
+                                                                FontSize="13"
+                                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                                Symbol="FolderOpen24" />
+                                                            <TextBlock
+                                                                FontSize="11.5"
+                                                                FontWeight="SemiBold"
+                                                                Text="{x:Static res:Strings.Home_ManageGame}" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <!-- Empty state if no games -->
+                            <Border
+                                Margin="0,12,0,0"
+                                Padding="24,20"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Visibility="{Binding HasRecent, Converter={StaticResource InverseBoolToVis}}">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <ui:SymbolIcon
+                                        HorizontalAlignment="Center"
+                                        FontSize="28"
+                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                        Symbol="Games24" />
+                                    <TextBlock
+                                        Margin="0,8,0,2"
+                                        HorizontalAlignment="Center"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{x:Static res:Strings.Home_NoRecentGames}" />
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        FontSize="11.5"
+                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                        Text="{x:Static res:Strings.Home_NoRecentGames_Sub}" />
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+
+                <!-- ==================== RIGHT COLUMN ==================== -->
+                <StackPanel Grid.Column="2">
+
+                    <!-- Store-page Plugin Card -->
+                    <Border
+                        Padding="14,12"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                        <StackPanel>
+                            <Grid>
+                                <TextBlock
+                                    FontSize="13"
+                                    FontWeight="SemiBold"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="{x:Static res:Strings.Home_PluginStatus}" />
+                                <ui:SymbolIcon
+                                    HorizontalAlignment="Right"
+                                    FontSize="16"
+                                    Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                    Symbol="PuzzlePiece24" />
+                            </Grid>
+                            <Border
+                                Margin="0,8,0,0"
+                                Padding="8,5"
+                                HorizontalAlignment="Left"
+                                Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                                CornerRadius="6">
+                                <TextBlock
+                                    FontSize="12"
+                                    FontWeight="SemiBold"
+                                    Foreground="{Binding PluginStatusColor}"
+                                    Text="{Binding PluginStatusText}"
+                                    TextTrimming="CharacterEllipsis" />
+                            </Border>
+                            <!-- Install button when not installed -->
+                            <Button
+                                Margin="0,10,0,0"
+                                HorizontalAlignment="Stretch"
+                                Command="{Binding InstallPluginCommand}"
+                                Content="{x:Static res:Strings.Plugin_Btn_Install}"
+                                IsEnabled="{Binding NotInstallingPlugin}"
+                                Style="{StaticResource InstallPluginButtonStyle}"
+                                Visibility="{Binding ShowPluginInstall, Converter={StaticResource BoolToVis}}" />
+                            <!-- Manage plugin button when installed -->
+                            <Button
+                                Margin="0,10,0,0"
+                                HorizontalAlignment="Stretch"
+                                Command="{Binding OpenPluginCommand}"
+                                Content="{x:Static res:Strings.Home_ManagePlugin}"
+                                Style="{StaticResource ManagePluginButtonStyle}"
+                                Visibility="{Binding ShowPluginInstall, Converter={StaticResource InverseBoolToVis}}" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- System & Account Status -->
+                    <Border
+                        Margin="0,14,0,0"
+                        Padding="14,12"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                        <StackPanel>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                Text="{x:Static res:Strings.Home_SystemStatus}" />
+
+                            <!-- Steam Status Row -->
+                            <Button
+                                Margin="0,8,0,0"
+                                Command="{Binding OpenSettingsCommand}"
+                                Style="{StaticResource StatusRowButton}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <ui:SymbolIcon
+                                        VerticalAlignment="Center"
+                                        FontSize="15"
+                                        Symbol="Games24">
+                                        <ui:SymbolIcon.Style>
+                                            <Style TargetType="ui:SymbolIcon">
+                                                <Setter Property="Foreground" Value="#f87171" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SteamFound}" Value="True">
+                                                        <Setter Property="Foreground" Value="#34d399" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ui:SymbolIcon.Style>
+                                    </ui:SymbolIcon>
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding SteamStatus}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </Grid>
+                            </Button>
+
+                            <Separator Margin="0,8" Background="{DynamicResource CardStrokeColorDefaultBrush}" />
+
+                            <!-- Account Status Row -->
+                            <Button Command="{Binding OpenSettingsCommand}" Style="{StaticResource StatusRowButton}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <ui:SymbolIcon
+                                        VerticalAlignment="Center"
+                                        FontSize="15"
+                                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                        Symbol="Person24" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding AccountStatus}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </Grid>
+                            </Button>
+
+                            <Separator Margin="0,8" Background="{DynamicResource CardStrokeColorDefaultBrush}" />
+
+                            <!-- Quota Row -->
+                            <Button Command="{Binding OpenAddCommand}" Style="{StaticResource StatusRowButton}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <ui:SymbolIcon
+                                        VerticalAlignment="Center"
+                                        FontSize="15"
+                                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                                        Symbol="ArrowDownload24" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding DailyQuotaStatus}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Drag-and-drop install (includes Quick Tip inside) -->
+                    <views:DropZone Margin="0,14,0,0" DataContext="{Binding Drop}" />
+
+                    <!-- Discord Community Card (balances right column height) -->
+                    <Border
+                        Margin="0,14,0,0"
+                        Padding="14,14"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                        <StackPanel>
+                            <Grid>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Border
+                                        Width="26"
+                                        Height="26"
+                                        Background="#1F5865F2"
+                                        BorderBrush="#335865F2"
+                                        BorderThickness="1"
+                                        CornerRadius="13">
+                                        <ui:SymbolIcon
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="14"
+                                            Foreground="#7289DA"
+                                            Symbol="Chat24" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{x:Static res:Strings.Home_Discord_Title}" />
+                                </StackPanel>
+                                <ui:SymbolIcon
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Symbol="ArrowUpRight24" />
+                            </Grid>
+
+                            <TextBlock
+                                Margin="0,8,0,0"
+                                FontSize="11.5"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                LineHeight="16"
+                                Text="{x:Static res:Strings.Home_Discord_Desc}"
+                                TextWrapping="Wrap" />
+
+                            <Button
+                                Margin="0,12,0,0"
+                                HorizontalAlignment="Stretch"
+                                Command="{Binding OpenDiscordCommand}"
+                                Content="{x:Static res:Strings.Home_Discord_Join}"
+                                Style="{StaticResource DiscordButtonStyle}" />
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Drag-and-drop overwrite confirm (the DropZone's own flow), page-spanning -->
+        <views:ConfirmOverlay DataContext="{Binding Drop}" />
     </Grid>
 </UserControl>

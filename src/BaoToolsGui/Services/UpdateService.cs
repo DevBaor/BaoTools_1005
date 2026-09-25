@@ -1,4 +1,5 @@
 using System.IO;
+using System.Net.Http;
 using Velopack;
 using Velopack.Sources;
 using BaoToolsGui.Models;
@@ -101,15 +102,15 @@ public class UpdateService
     public async Task<GitHubReleaseInfo?> CheckGitHubReleaseFullAsync(string currentVersion)
     {
         string url = "https://api.github.com/repos/DevBaor/BaoTools_1005/releases/latest";
-        using var client = new System.Net.Http.HttpClient();
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("BaoTools");
-        client.Timeout = TimeSpan.FromSeconds(5);
+        var client = AppHttp.Create(TimeSpan.FromSeconds(5));
 
         foreach (var candidate in GithubProxy.Candidates(url))
         {
             try
             {
-                var res = await client.GetAsync(candidate);
+                using var req = new HttpRequestMessage(HttpMethod.Get, candidate);
+                req.Headers.UserAgent.ParseAdd("BaoTools");
+                var res = await client.SendAsync(req);
                 if (res.IsSuccessStatusCode)
                 {
                     var json = await res.Content.ReadAsStringAsync();
@@ -147,15 +148,15 @@ public class UpdateService
     public async Task<List<GitHubReleaseInfo>> FetchReleasesHistoryAsync(string currentVersion)
     {
         string url = "https://api.github.com/repos/DevBaor/BaoTools_1005/releases?per_page=10";
-        using var client = new System.Net.Http.HttpClient();
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("BaoTools");
-        client.Timeout = TimeSpan.FromSeconds(5);
+        var client = AppHttp.Create(TimeSpan.FromSeconds(5));
 
         foreach (var candidate in GithubProxy.Candidates(url))
         {
             try
             {
-                var res = await client.GetAsync(candidate);
+                using var req = new HttpRequestMessage(HttpMethod.Get, candidate);
+                req.Headers.UserAgent.ParseAdd("BaoTools");
+                var res = await client.SendAsync(req);
                 if (res.IsSuccessStatusCode)
                 {
                     var json = await res.Content.ReadAsStringAsync();

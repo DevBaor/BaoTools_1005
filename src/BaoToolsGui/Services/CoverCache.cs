@@ -36,7 +36,7 @@ public class CoverCache
         return hash.Equals(PlaceholderSha256, StringComparison.OrdinalIgnoreCase);
     }
 
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(20) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(20));
     private readonly SemaphoreSlim _ioGate = new(1, 1);
     private readonly ConcurrentDictionary<long, Task<string?>> _inFlight = new();
     private readonly ConcurrentDictionary<long, byte> _noCover = new(); // appids with no usable cover (this session)

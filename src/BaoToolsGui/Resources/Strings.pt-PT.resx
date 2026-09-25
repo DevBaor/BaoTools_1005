@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Idioma</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Escolha o idioma de apresentação da aplicação. Aplicado após reiniciar.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Predefinição do sistema</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Resolução de DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Se o seu fornecedor bloqueia BaoTools, a aplicação pode resolver endereços pela Cloudflare (1.1.1.1) em vez do sistema. «Automático» só muda depois de o seu DNS normal falhar.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automático</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Usar sempre a Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Usar apenas o DNS do sistema</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Localização do Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Alterar…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Abrir</value></data>
@@ -370,8 +375,8 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Transferir automaticamente da primeira fonte disponível</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Nenhuma fonte disponível encontrada para este jogo</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· via {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>Plugin BaoTools</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>O plugin BaoTools para Steam! — Agora a usar LuaLoader em vez de Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>Plugin</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>O plugin para Steam! — Agora a usar LuaLoader em vez de Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Estado</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Atualização disponível</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Versão instalada</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>FERRAMENTAS</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>SISTEMA</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>Bom dia</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>Boa tarde</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>Boa noite</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Gerencie facilmente seus jogos Steam, ferramentas e recursos desbloqueados.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Ações Rápidas</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Adicionar Jogo</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Pesquisar e baixar arquivos lua</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Reparar Jogos</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Solucionar problemas e aplicar correções</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>Ver fila de downloads</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Ver todos</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Status do Sistema</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Ver biblioteca</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Alterar modo</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Gerenciar plugin</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Gerenciar</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Nenhum jogo instalado ainda</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Adicione jogos na aba Adicionar ou arraste arquivos aqui para começar.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Dica Rápida</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Arraste e solte qualquer arquivo .lua, .manifest ou pasta de jogo diretamente na área para instalar automaticamente.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Sua biblioteca de jogos e ferramentas</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Ordenar</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Exibição</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Grade</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Lista</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Instalado</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Não instalado</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>Arquivos ausentes</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>PLATAFORMA</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>STATUS</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>GÊNERO</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>LIMPAR FILTROS</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Detalhes do Jogo</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} jogos</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>Exibindo {0} – {1} de {2} jogos</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 jogos</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>Adicionado em {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Fechar (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Suporte e Diagnóstico</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Ativar Assistente de Diagnóstico</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Exibe um botão flutuante para solução automática de problemas e guias.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>Assistente BaoTools</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Pergunte sobre jogos, erros, diagnósticos...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Pensando...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Limpar histórico do chat</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Minimizar</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Enviar pergunta (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Tópicos sugeridos:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Pergunte-me qualquer coisa...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Precisa de ajuda?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Jogo não funciona?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Precisa de uma correção?</value></data>
 </root>

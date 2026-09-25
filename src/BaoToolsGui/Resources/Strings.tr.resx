@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Dil</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Uygulamanın görüntüleme dilini seçin. Yeniden başlatmadan sonra uygulanır.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Sistem varsayılanı</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS çözümleme</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Sağlayıcınız BaoTools'u engelliyorsa, uygulama adresleri sistem çözümleyicisi yerine Cloudflare (1.1.1.1) üzerinden arayabilir. «Otomatik» yalnızca normal DNS başarısız olduktan sonra devreye girer.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Otomatik</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Her zaman Cloudflare kullan</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Yalnızca sistem DNS'ini kullan</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam konumu</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Değiştir…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Aç</value></data>
@@ -370,8 +375,8 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>İlk kullanılabilir kaynaktan otomatik indir</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Bu oyun için kullanılabilir kaynak bulunamadı</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· {0} aracılığıyla</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>BaoTools Eklentisi</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>BaoTools Steam eklentisi! — Artık Shittenium yerine LuaLoader kullanıyor</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>Eklentisi</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>Steam eklentisi! — Artık Shittenium yerine LuaLoader kullanıyor</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Durum</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Güncelleme mevcut</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Kurulu sürüm</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>ARAÇLAR</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>SİSTEM</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>Günaydın</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>Tünaydın</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>İyi akşamlar</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Steam oyunlarınızı, araçlarınızı ve kaynaklarınızı kolayca yönetin.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Hızlı İşlemler</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Oyun Ekle</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Lua dosyalarını ara ve indir</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Oyunları Onar</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Sorun giderme ve düzeltmeler</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>İndirmeler</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>İndirme kuyruğunu görüntüle</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Tümünü Gör</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Sistem Durumu</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Kütüphaneyi Gör</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Modu Değiştir</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Eklentiyi Yönet</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Yönet</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Henüz oyun yüklenmedi</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Ekle sekmesinden oyun ekleyin veya dosyaları sağa sürükleyin.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Hızlı İpucu</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Otomatik yüklemek için herhangi bir .lua, .manifest veya oyun klasörünü bırakma alanına sürükleyin.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Oyun kütüphaneniz ve araçlarınız</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Sırala</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Görünüm</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Izgara</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Liste</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Yüklendi</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Yüklü Değil</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>Eksik Dosyalar</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>PLATFORM</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>DURUM</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>TÜR</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>FİLTRELERİ SIFIRLA</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Oyun Ayrıntıları</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} oyun</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>{2} oyundan {0} – {1} arası gösteriliyor</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 oyun</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>{0} tarihinde eklendi</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Kapat (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Destek ve Tanılama</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Tanılama Asistanını Etkinleştir</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Otomatik sorun giderme ve kurulum kılavuzları için kayan asistan düğmesini gösterir.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>BaoTools Asistanı</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Oyunlar, hatalar, tanılama hakkında sorun...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Düşünüyor...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Sohbet geçmişini temizle</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Küçült</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Soruyu Gönder (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Önerilen konular:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Bana her şeyi sorabilirsin...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Yardım lazım mı?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Oyun çalışmıyor mu?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Çözüm mü lazım?</value></data>
 </root>

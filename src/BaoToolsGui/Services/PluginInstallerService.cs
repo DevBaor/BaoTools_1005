@@ -143,7 +143,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         p?.WaitForExit(5000);
     }
 
-    private static readonly HttpClient PortProbeHttp = new() { Timeout = TimeSpan.FromMilliseconds(800) };
+    private static readonly HttpClient PortProbeHttp = AppHttp.Create(TimeSpan.FromMilliseconds(800));
 
     /// <summary>Best-effort check for whether CDP's fixed port is occupied by something OTHER than Steam's
     /// own CDP server. A bare bind-test can't make that distinction: once the junction is doing its job and

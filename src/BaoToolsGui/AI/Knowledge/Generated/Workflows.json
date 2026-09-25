@@ -1,0 +1,92 @@
+[
+  {
+    "Id": "workflow_inject_game",
+    "NameVi": "Quy trình nạp game mới vào Steam",
+    "NameEn": "Game Injection Workflow",
+    "SummaryVi": "Nạp bản quyền game thông qua cấu hình .lua để game xuất hiện trong Thư viện Steam.",
+    "SummaryEn": "Inject game license via .lua configuration so it appears in Steam Library.",
+    "StepsVi": [
+      "1. Chuẩn bị file .lua, .manifest hoặc file nén .zip của game.",
+      "2. Mở Trang chủ (Home) BaoTools, kéo và thả file vào ô Drop Zone.",
+      "3. Chờ BaoTools xử lý cấu hình bản quyền tự động.",
+      "4. Bấm \u0027Restart Steam\u0027 ở thanh trên cùng để nạp game vào Thư viện Steam."
+    ],
+    "StepsEn": [
+      "1. Prepare the game\u0027s .lua, .manifest, or .zip package.",
+      "2. Open BaoTools Home tab, drag and drop the file into the Drop Zone.",
+      "3. Wait for BaoTools to process and inject the license.",
+      "4. Click \u0027Restart Steam\u0027 on the top bar to refresh your Steam Library."
+    ],
+    "RequiredTools": [],
+    "TargetScreen": "screen_home"
+  },
+  {
+    "Id": "workflow_remove_drm",
+    "NameVi": "Quy trình gỡ Steam DRM (Steamless) chống văng game",
+    "NameEn": "Steamless DRM Unpacking Workflow",
+    "SummaryVi": "Giải mã file .exe gốc để khắc phục lỗi game mở lên bị văng (crash) do Steam DRM.",
+    "SummaryEn": "Unpack the game\u0027s main .exe to strip Steam DRM and resolve launch crashes.",
+    "StepsVi": [
+      "1. Vào tab Quản lý (Manage) trên thanh menu bên trái.",
+      "2. Bấm chọn tựa game đang bị lỗi văng trong danh sách.",
+      "3. Tại cột chi tiết bên phải, bấm nút \u0027Gỡ Steam DRM\u0027 (Steamless).",
+      "4. BaoTools sẽ tự động sao lưu file gốc (.bak) và tạo file .exe đã giải mã.",
+      "5. Khởi động lại game qua Steam hoặc BaoTools."
+    ],
+    "StepsEn": [
+      "1. Open the Manage tab from the left sidebar.",
+      "2. Select the game that crashes on startup from the list.",
+      "3. In the right details panel, click \u0027Remove Steam DRM\u0027 (Steamless).",
+      "4. BaoTools creates a backup (.bak) and unpacks the clean executable.",
+      "5. Launch the game cleanly via Steam or BaoTools."
+    ],
+    "RequiredTools": [
+      "apply_game_fix"
+    ],
+    "TargetScreen": "screen_manage"
+  },
+  {
+    "Id": "workflow_delete_game",
+    "NameVi": "Quy trình gỡ / xóa game khỏi Steam",
+    "NameEn": "Uninstall / Delete Game Workflow",
+    "SummaryVi": "Xóa cấu hình bản quyền .lua để loại bỏ game khỏi Steam và tuỳ chọn dọn sạch ổ cứng.",
+    "SummaryEn": "Delete .lua configuration to unlink game from Steam and optionally reclaim disk space.",
+    "StepsVi": [
+      "1. Mở tab Quản lý (Manage).",
+      "2. Chọn game cần xóa trong danh sách.",
+      "3. Bấm biểu tượng Thùng rác (Xóa game) ở cột chi tiết bên phải.",
+      "4. Bấm \u0027Restart Steam\u0027 để Steam gỡ game khỏi Thư viện.",
+      "5. Mẹo: Bấm \u0027Mở thư mục\u0027 để xóa các file cài đặt nặng trên ổ đĩa nếu cần giải phóng dung lượng."
+    ],
+    "StepsEn": [
+      "1. Open the Manage tab.",
+      "2. Select the game to delete from the list.",
+      "3. Click the Trash icon (Delete) in the right detail panel.",
+      "4. Click \u0027Restart Steam\u0027 to remove the game from your Steam Library.",
+      "5. Tip: Click \u0027Open Folder\u0027 to delete physical files if you want to reclaim storage."
+    ],
+    "RequiredTools": [],
+    "TargetScreen": "screen_manage"
+  },
+  {
+    "Id": "workflow_override_steam_folder",
+    "NameVi": "Quy trình đổi đường dẫn thư mục Steam",
+    "NameEn": "Change Steam Folder Workflow",
+    "SummaryVi": "Chỉ định thủ công vị trí thư mục cài đặt Steam khi ứng dụng không tự nhận diện được.",
+    "SummaryEn": "Manually point BaoTools to your custom Steam installation directory.",
+    "StepsVi": [
+      "1. Vào tab Cài đặt (Settings) ở góc dưới thanh menu.",
+      "2. Tìm đến mục \u0027Steam\u0027.",
+      "3. Bấm nút \u0027Thay đổi thư mục Steam\u0027 và trỏ tới thư mục chứa steam.exe (ví dụ: C:\\Program Files (x86)\\Steam).",
+      "4. BaoTools sẽ tự động kiểm tra và lưu lại thiết lập."
+    ],
+    "StepsEn": [
+      "1. Open the Settings tab in the bottom-left menu.",
+      "2. Navigate to the \u0027Steam\u0027 section.",
+      "3. Click \u0027Change Steam Folder\u0027 and select the directory containing steam.exe.",
+      "4. BaoTools validates and persists the new path automatically."
+    ],
+    "RequiredTools": [],
+    "TargetScreen": "screen_settings"
+  }
+]

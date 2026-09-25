@@ -96,6 +96,20 @@ public class EqualityMultiConverter : IMultiValueConverter
         throw new NotSupportedException();
 }
 
+/// <summary>Multi-binding string equality: true when all bound values match as strings (case-insensitive).</summary>
+public class StringEqualityMultiConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (values is null || values.Length < 2 || values.Any(v => v is null)) return false;
+        var first = values[0]?.ToString();
+        return values.Skip(1).All(v => string.Equals(v?.ToString(), first, StringComparison.OrdinalIgnoreCase));
+    }
+
+    public object[] ConvertBack(object value, Type[] targetTypes, object? parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
+}
+
 /// <summary>Maps a Manage filter/sort option's stored value (an English key like "Recently added" or
 /// "Any") to its localized DISPLAY label, leaving the stored value itself unchanged so all the
 /// switch/equality logic in ManageViewModel keeps working. Unknown values (Steam genres/types/years)

@@ -15,80 +15,191 @@
     Drop="OnDrop"
     mc:Ignorable="d">
 
-    <Grid>
-        <!-- The drop box -->
-        <Border
-            MinHeight="92"
-            Padding="16,14"
-            CornerRadius="10"
-            SnapsToDevicePixels="True">
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Setter Property="Background" Value="#0AFFFFFF" />
-                    <Setter Property="BorderBrush" Value="#28FFFFFF" />
-                    <Setter Property="BorderThickness" Value="1.4" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDragOver}" Value="True">
-                            <Setter Property="Background" Value="#207c3aed" />
-                            <Setter Property="BorderBrush" Value="#a78bfa" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
+    <Border
+        x:Name="DropContainer"
+        MinHeight="170"
+        Padding="16,20"
+        CornerRadius="12"
+        SnapsToDevicePixels="True">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1.2" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsDragOver}" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColorPrimaryBrush}" />
+                        <Setter Property="BorderThickness" Value="1.8" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
 
-            <StackPanel
+        <StackPanel VerticalAlignment="Center">
+            <!-- Icon Circle -->
+            <Border
+                Width="46"
+                Height="46"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Horizontal">
+                Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="23">
                 <ui:SymbolIcon
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    FontSize="22"
-                    Foreground="#a78bfa"
+                    FontSize="20"
+                    Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
                     Symbol="ArrowDownload24" />
-                <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+            </Border>
+
+            <!-- Drop Title -->
+            <TextBlock
+                Margin="0,10,0,0"
+                FontSize="13"
+                FontWeight="SemiBold"
+                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                TextAlignment="Center"
+                Text="{x:Static res:Strings.Drop_Title}"
+                TextWrapping="Wrap" />
+
+            <!-- File Format Badges -->
+            <StackPanel
+                Margin="0,6,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Border
+                    Margin="2,0"
+                    Padding="6,2"
+                    Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="5">
                     <TextBlock
-                        FontSize="13.5"
+                        FontSize="10"
                         FontWeight="SemiBold"
-                        Foreground="#e5e7eb"
-                        Text="{x:Static res:Strings.Drop_Title}" />
-                    <!-- The box also takes a dragged SteamDB / Steam store link (installs that appid)                         a separate line because Drop_Title is already translated into 29 languages and
-                         rewording it would leave every one of them describing the old behaviour. -->
+                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                        Text=".lua" />
+                </Border>
+                <Border
+                    Margin="2,0"
+                    Padding="6,2"
+                    Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="5">
                     <TextBlock
-                        Margin="0,2,0,0"
-                        FontSize="11.5"
-                        Foreground="#9ca3af"
-                        Text="{x:Static res:Strings.Drop_LinkHint}" />
-
-                    <!-- Alternative to dragging: pick files from a dialog. Reuses the same install path. -->
-                    <ui:Button
-                        Margin="0,8,0,0"
-                        Padding="10,5"
-                        HorizontalAlignment="Left"
-                        Click="OnBrowseClick"
-                        Content="{x:Static res:Strings.Drop_BrowseFiles}"
-                        FontSize="11.5"
-                        Icon="{ui:SymbolIcon FolderOpen24}" />
-
-                    <!-- Result banner (inline under the hint) -->
+                        FontSize="10"
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                        Text=".manifest" />
+                </Border>
+                <Border
+                    Margin="2,0"
+                    Padding="6,2"
+                    Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                    BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="5">
                     <TextBlock
-                        Margin="0,8,0,0"
-                        FontSize="12"
-                        Text="{Binding ResultText}"
-                        TextWrapping="Wrap"
-                        Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Foreground" Value="#34d399" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ResultFailed}" Value="True">
-                                        <Setter Property="Foreground" Value="#f0a868" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </StackPanel>
+                        FontSize="10"
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                        Text=".zip" />
+                </Border>
             </StackPanel>
-        </Border>
-    </Grid>
+
+            <!-- Link Hint -->
+            <TextBlock
+                Margin="0,6,0,0"
+                FontSize="11"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                TextAlignment="Center"
+                Text="{x:Static res:Strings.Drop_LinkHint}"
+                TextWrapping="Wrap" />
+
+            <!-- Browse Button -->
+            <ui:Button
+                Margin="0,10,0,0"
+                Padding="14,6"
+                HorizontalAlignment="Center"
+                Appearance="Secondary"
+                Click="OnBrowseClick"
+                Content="{x:Static res:Strings.Drop_BrowseFiles}"
+                FontSize="11.5"
+                Icon="{ui:SymbolIcon FolderOpen24}" />
+
+            <!-- Result banner (inline under the button) -->
+            <Border
+                Margin="0,8,0,0"
+                Padding="8,4"
+                HorizontalAlignment="Center"
+                Background="#1A34d399"
+                BorderBrush="#3334d399"
+                BorderThickness="1"
+                CornerRadius="6"
+                Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ResultFailed}" Value="True">
+                                <Setter Property="Background" Value="#1Af87171" />
+                                <Setter Property="BorderBrush" Value="#33f87171" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock
+                    FontSize="11.5"
+                    FontWeight="SemiBold"
+                    Text="{Binding ResultText}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#34d399" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ResultFailed}" Value="True">
+                                    <Setter Property="Foreground" Value="#f87171" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Border>
+
+            <!-- Quick Tip inside DropZone -->
+            <Border
+                Margin="0,14,0,0"
+                Padding="12,10"
+                Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <ui:SymbolIcon
+                            FontSize="13"
+                            Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                            Symbol="Lightbulb24" />
+                        <TextBlock
+                            Margin="6,0,0,0"
+                            FontSize="11.5"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource SystemAccentColorPrimaryBrush}"
+                            Text="{x:Static res:Strings.Home_Tip_Title}" />
+                    </StackPanel>
+                    <TextBlock
+                        Margin="0,4,0,0"
+                        FontSize="11"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        LineHeight="16"
+                        TextAlignment="Center"
+                        Text="{x:Static res:Strings.Home_Tip_Body}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
 </UserControl>

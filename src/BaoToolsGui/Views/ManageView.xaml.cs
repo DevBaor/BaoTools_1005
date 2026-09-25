@@ -70,6 +70,30 @@ public partial class ManageView : UserControl
     private void Scrim_Click(object sender, System.Windows.Input.MouseButtonEventArgs e) =>
         _viewModel.CloseDetailCommand.Execute(null);
 
+    private void CardMenuButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement btn && FindAncestor<Border>(btn) is { ContextMenu: { } menu } tileBorder)
+        {
+            btn.Tag ??= tileBorder.Tag ?? _viewModel;
+            menu.PlacementTarget = btn;
+            menu.DataContext = tileBorder.DataContext ?? btn.DataContext;
+            menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            menu.IsOpen = true;
+            e.Handled = true;
+        }
+    }
+
+    private void SortButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button btn && btn.ContextMenu != null)
+        {
+            btn.ContextMenu.PlacementTarget = btn;
+            btn.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            btn.ContextMenu.IsOpen = true;
+            e.Handled = true;
+        }
+    }
+
     private static T? FindAncestor<T>(DependencyObject current) where T : DependencyObject
     {
         while (current is not null)

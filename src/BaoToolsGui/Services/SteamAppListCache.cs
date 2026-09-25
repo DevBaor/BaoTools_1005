@@ -19,7 +19,7 @@ public class SteamAppListCache
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BaoToolsGui", "steam-applist.json");
     private static readonly TimeSpan MaxAge = TimeSpan.FromDays(14);
 
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(60) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(60));
     private readonly ConcurrentDictionary<long, string> _names = new();
     private Task? _loadTask;
 

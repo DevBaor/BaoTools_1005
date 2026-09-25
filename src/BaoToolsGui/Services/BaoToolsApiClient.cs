@@ -23,11 +23,9 @@ public record QuotaSummary(int Used, int Limit, bool IsSupporter)
 /// <summary>Typed client for the lua.tools web API, authenticated with a Supabase bearer token.</summary>
 public class BaoToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, CoverCache covers)
 {
-    private readonly HttpClient _http = new(new HttpClientHandler { ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator })
-    {
-        BaseAddress = new Uri(AppConfig.ApiBaseUrl),
-        Timeout = TimeSpan.FromMinutes(5), // large manifest zips on slow connections
-    };
+    private readonly HttpClient _http = AppHttp.Create(
+        TimeSpan.FromMinutes(5), // large manifest zips on slow connections
+        new Uri(AppConfig.ApiBaseUrl));
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 

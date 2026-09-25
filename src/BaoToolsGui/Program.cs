@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using Velopack;
+using BaoToolsGui.Services;
 
 namespace BaoToolsGui;
 
@@ -17,6 +18,60 @@ public static class Program
         // MUST run before any WPF/UI work: handles Velopack install/update hooks,
         // then no-ops on a normal launch.
         VelopackApp.Build().Run();
+
+        // Developer CLI tool: Generate system knowledge files
+        if (args is { Length: > 0 } && args.Any(a => a.Equals("--generate-knowledge", StringComparison.OrdinalIgnoreCase)))
+        {
+            string targetDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "AI", "Knowledge", "Generated");
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i].Equals("--generate-knowledge", StringComparison.OrdinalIgnoreCase) && i + 1 < args.Length && !args[i + 1].StartsWith("-"))
+                {
+                    targetDir = args[i + 1];
+                    break;
+                }
+            }
+            bool success = AI.Discovery.KnowledgeGenerator.Generate(Path.GetFullPath(targetDir));
+            Environment.Exit(success ? 0 : 1);
+            return;
+        }
+
+        // Developer CLI tool: Test AI Assistant Grounding
+        if (args is { Length: > 0 } && args.Any(a => a.Equals("--test-ai", StringComparison.OrdinalIgnoreCase)))
+        {
+            var settings = new SettingsService();
+            var steam = new SteamService(settings);
+            var vault = new LuaVault(steam);
+            var executor = new Services.AiToolExecutor(steam, vault, settings);
+            var provider = new Services.Ai.LocalExpertAiProvider(executor);
+            string[] testQueries = new[]
+            {
+                "🎮 Hướng dẫn Thêm & Tải game",
+                "🔍 Chẩn đoán lỗi game / Văng crash",
+                "🛠️ Cách dùng Bản sửa lỗi (Fixes)",
+                "🧩 Kiểm tra trạng thái Steam Plugin",
+                "💻 Chẩn đoán hệ thống phần cứng",
+                "máy tao có thể chơi được game GTA 5 không"
+            };
+            foreach (var q in testQueries)
+            {
+                Console.WriteLine("\n========================================");
+                Console.WriteLine($"QUERY: {q}");
+                var res = provider.GenerateResponseFullAsync(new Services.Ai.AiPromptContext
+                {
+                    UserMessage = q,
+                    IsVietnamese = true,
+                    AppContext = Services.Ai.BaoToolsContext.CollectLive(null, null, null)
+                }).GetAwaiter().GetResult();
+                Console.WriteLine($"REPLY:\n{res.Text}");
+                if (res.ActionButtons.Count > 0)
+                {
+                    Console.WriteLine("BUTTONS: " + string.Join(", ", res.ActionButtons.Select(b => $"{b.Label} -> {b.ToolName}")));
+                }
+            }
+            Environment.Exit(0);
+            return;
+        }
 
         // Set the UI culture before any WPF element is created, so x:Static resource lookups (which
         // resolve once at parse time) pick up the right language from the first frame.

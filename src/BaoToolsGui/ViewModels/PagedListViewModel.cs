@@ -80,6 +80,19 @@ public abstract partial class PagedListViewModel<T> : ObservableObject
 
     public string PageLabel => string.Format(Resources.Strings.Manage_PageLabel, CurrentPage, TotalPages);
 
+    public int FilteredCount => _filteredCount;
+
+    public string ShowingSummary
+    {
+        get
+        {
+            if (_filteredCount == 0) return Resources.Strings.Manage_ShowingZero;
+            int start = PageSize == 0 ? 1 : ((CurrentPage - 1) * PageSize) + 1;
+            int end = PageSize == 0 ? _filteredCount : Math.Min(CurrentPage * PageSize, _filteredCount);
+            return string.Format(Resources.Strings.Manage_ShowingSummary, start, end, _filteredCount);
+        }
+    }
+
     partial void OnSelectedPageSizeChanged(string value)
     {
         SavePageSizeSetting(PageSize);
@@ -158,6 +171,8 @@ public abstract partial class PagedListViewModel<T> : ObservableObject
         OnPropertyChanged(nameof(CanGoPrev));
         OnPropertyChanged(nameof(CanGoNext));
         OnPropertyChanged(nameof(PageLabel));
+        OnPropertyChanged(nameof(ShowingSummary));
+        OnPropertyChanged(nameof(FilteredCount));
         ScrollToTop?.Invoke();
         OnPageSliced(slice);
     }

@@ -16,7 +16,7 @@ public partial class DonateKeysService(SettingsService settings, SteamService st
 {
     private const string DonationUrl = AppConfig.ManifestBackendUrl + "/donatekeys/send";
 
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(15));
 
     [GeneratedRegex(@"^\d{1,10}$")]
     private static partial Regex AppIdRegex();

@@ -17,7 +17,7 @@ namespace BaoToolsGui.Services;
 public class GithubProxy
 {
     // 5-min timeout matches the old UnlockerService client (large asset downloads on slow mirrors).
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromMinutes(5) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromMinutes(5));
 
     /// <summary>Only github.com / api.github.com URLs get the mirror treatment. Anything else is left as-is.</summary>
     private static bool IsGithub(string url) =>

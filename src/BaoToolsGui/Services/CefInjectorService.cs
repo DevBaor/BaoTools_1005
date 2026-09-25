@@ -15,7 +15,7 @@ public class CefInjectorService : IHostedService
     private CancellationTokenSource? _cts;
     private string _baotoolsJs = "";
     private string _polyfillJs = "";
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(30) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(30));
 
     // Persistent CDP WebSocket per tab (keyed by tab id), reused across calls so the fast RPC-drain
     // loop doesn't pay a connect handshake every tick. Opened lazily, evicted (and reopened next call)

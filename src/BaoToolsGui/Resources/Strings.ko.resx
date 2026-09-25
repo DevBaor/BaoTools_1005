@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>언어</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>앱의 표시 언어를 선택하세요. 재시작 후 적용됩니다.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>시스템 기본값</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS 확인</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>인터넷 사업자가 BaoTools를 차단하는 경우, 시스템 확인자 대신 Cloudflare(1.1.1.1)를 통해 주소를 조회할 수 있습니다. ‘자동’은 일반 DNS가 실패한 뒤에만 전환됩니다.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>자동</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>항상 Cloudflare 사용</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>시스템 DNS만 사용</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam 위치</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>변경…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>열기</value></data>
@@ -370,8 +375,8 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>사용 가능한 첫 번째 소스에서 자동 다운로드</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>이 게임에 사용 가능한 소스를 찾을 수 없습니다</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· 출처: {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>BaoTools 플러그인</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>BaoTools Steam 플러그인! — 이제 Shittenium 대신 LuaLoader 사용</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>플러그인</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>Steam 플러그인! — 이제 Shittenium 대신 LuaLoader 사용</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>상태</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>업데이트 있음</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>설치된 버전</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>도구</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>시스템</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>좋은 아침입니다</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>좋은 오후입니다</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>좋은 저녁입니다</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Steam 게임, 도구 및 잠금 해제된 리소스를 간편하게 관리하세요.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>빠른 작업</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>게임 추가</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>lua 파일 검색 및 다운로드</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>게임 수정</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>문제 해결 및 패치 적용</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>다운로드</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>다운로드 대기열 보기</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>모두 보기</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>시스템 상태</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>라이브러리 보기</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>모드 변경</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>플러그인 관리</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>관리</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>아직 설치된 게임이 없습니다</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>추가 탭에서 게임을 추가하거나 오른쪽으로 파일을 끌어다 놓아 시작하세요.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>간단 팁</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>.lua, .manifest 파일 또는 게임 폴더를 드롭 영역에 직접 끌어다 놓으면 자동으로 설치됩니다.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>게임 라이브러리 및 도구</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>정렬</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>보기</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>그리드 보기</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>목록 보기</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>설치됨</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>설치 안 됨</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>누락된 파일</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>플랫폼</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>상태</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>장르</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>필터 초기화</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>게임 세부 정보</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0}개 게임</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>전체 {2}개 중 {0} – {1}개 표시 중</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0개 게임</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>{0}에 추가됨</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>닫기 (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>지원 및 진단</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>진단 도우미 활성화</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>자동 문제 해결 및 게임 설정 가이드를 위한 플로팅 도우미 버튼을 표시합니다.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>BaoTools 도우미</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>게임, 오류, 진단에 대해 물어보세요...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>생각 중...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>대화 기록 지우기</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>최소화</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>질문 보내기 (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>추천 주제:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>메시지 복사</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>복사됨!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>답변 다시 생성</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>보고 있는 게임: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>게임 컨텍스트 지우기</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>무엇이든 물어보세요...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>도움이 필요하신가요?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>게임이 실행되지 않나요?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>오류 해결이 필요한가요?</value></data>
 </root>

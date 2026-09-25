@@ -1,0 +1,292 @@
+[
+  {
+    "Id": "screen_home",
+    "NameVi": "Trang chủ (Home)",
+    "NameEn": "Home Page",
+    "PurposeVi": "Vùng kéo thả nạp nhanh file .lua, .manifest, .zip; hiển thị game vừa thêm và trạng thái hệ thống.",
+    "PurposeEn": "Drag-and-drop drop zone for .lua, .manifest, .zip; displays recently added games and system overview.",
+    "SourceFile": "HomeView.xaml",
+    "NavigationRoute": "MainWindow -\u003E HomeView",
+    "SidebarIcon": "Home24",
+    "Sections": [
+      "Drop Zone",
+      "Recent Games",
+      "Status Tiles"
+    ],
+    "PrimaryCommands": [
+      "InstallDroppedItemCommand",
+      "BrowseFilesCommand"
+    ],
+    "RelatedFeatures": [
+      "home_injection",
+      "game_management"
+    ]
+  },
+  {
+    "Id": "screen_add",
+    "NameVi": "Thêm game (Add / Download)",
+    "NameEn": "Add Game (Download Catalog)",
+    "PurposeVi": "Tìm kiếm và nạp game mới từ kho lưu trữ trực tuyến vào Steam.",
+    "PurposeEn": "Search and inject new games from online catalog into Steam.",
+    "SourceFile": "DownloadView.xaml",
+    "NavigationRoute": "MainWindow -\u003E DownloadView",
+    "SidebarIcon": "Add24",
+    "Sections": [
+      "Search Bar",
+      "Featured Grid",
+      "Catalog List",
+      "Filter Tags"
+    ],
+    "PrimaryCommands": [
+      "SearchCommand",
+      "AddGameCommand",
+      "DirectDownloadCommand"
+    ],
+    "RelatedFeatures": [
+      "fast_downloads",
+      "home_injection"
+    ]
+  },
+  {
+    "Id": "screen_manage",
+    "NameVi": "Quản lý game (Manage)",
+    "NameEn": "Manage Games",
+    "PurposeVi": "Quản lý danh sách game đã nạp: Gỡ Steam DRM (Steamless), mở thư mục, đặt Launch Options, xóa cấu hình .lua.",
+    "PurposeEn": "Manage unlocked games: Remove Steam DRM (Steamless), open folder, configure Launch Options, delete .lua config.",
+    "SourceFile": "ManageView.xaml",
+    "NavigationRoute": "MainWindow -\u003E ManageView",
+    "SidebarIcon": "Games24",
+    "Sections": [
+      "Game Grid/List",
+      "Detail Sidebar",
+      "Depots \u0026 DLC List",
+      "Action Bar"
+    ],
+    "PrimaryCommands": [
+      "RemoveDrmCommand",
+      "OpenFolderCommand",
+      "DeleteGameCommand",
+      "ConfigureLaunchOptionsCommand",
+      "ManageBuildCommand"
+    ],
+    "RelatedFeatures": [
+      "game_management",
+      "steamless_drm",
+      "launch_options"
+    ]
+  },
+  {
+    "Id": "screen_builds",
+    "NameVi": "Bản dựng (Builds)",
+    "NameEn": "Game Builds \u0026 Depots",
+    "PurposeVi": "Xem chi tiết manifests, các nhánh build (branches) và depots của từng tựa game và DLC.",
+    "PurposeEn": "Inspect manifests, build branches, and depot files for games and DLCs.",
+    "SourceFile": "BuildsView.xaml",
+    "NavigationRoute": "MainWindow -\u003E BuildsView",
+    "SidebarIcon": "Database24",
+    "Sections": [
+      "Builds Sidebar",
+      "Depot Manifest List",
+      "Branch Selector",
+      "Download Manifest Action"
+    ],
+    "PrimaryCommands": [
+      "DownloadManifestCommand",
+      "SelectBranchCommand"
+    ],
+    "RelatedFeatures": [
+      "depot_builds",
+      "game_management"
+    ]
+  },
+  {
+    "Id": "screen_mode",
+    "NameVi": "Chế độ Unlocker (Modes)",
+    "NameEn": "Unlocker Modes",
+    "PurposeVi": "Lựa chọn công cụ mở khóa backend: BetterSteamTools (BST), OpenSteamTools (OST) hoặc cấu hình Custom.",
+    "PurposeEn": "Select backend unlocker engine: BetterSteamTools (BST), OpenSteamTools (OST), or Custom setup.",
+    "SourceFile": "ModeView.xaml",
+    "NavigationRoute": "MainWindow -\u003E ModeView",
+    "SidebarIcon": "Options24",
+    "Sections": [
+      "Active Mode Badge",
+      "Mode Selection Cards",
+      "Migration Status"
+    ],
+    "PrimaryCommands": [
+      "SelectModeCommand",
+      "MigrateModeCommand"
+    ],
+    "RelatedFeatures": [
+      "unlocker_modes"
+    ]
+  },
+  {
+    "Id": "screen_fixes",
+    "NameVi": "Bản sửa lỗi (Fixes)",
+    "NameEn": "Game Fixes",
+    "PurposeVi": "Kho bản vá lỗi crash game, thiếu DLL, gỡ DRM Steamless, sửa màn hình đen.",
+    "PurposeEn": "Repository of crash fixes, missing DLL patches, Steamless DRM unpacks, and black screen fixes.",
+    "SourceFile": "FixesView.xaml",
+    "NavigationRoute": "MainWindow -\u003E FixesView",
+    "SidebarIcon": "Wrench24",
+    "Sections": [
+      "Search Fixes",
+      "Fix Category Filter",
+      "Fix Details Markdown",
+      "Apply/Revert Actions"
+    ],
+    "PrimaryCommands": [
+      "ApplyFixCommand",
+      "RevertFixCommand",
+      "FilterMyGamesCommand"
+    ],
+    "RelatedFeatures": [
+      "game_fixes",
+      "steamless_drm"
+    ]
+  },
+  {
+    "Id": "screen_online_fixes",
+    "NameVi": "Chơi Online (Online Fixes)",
+    "NameEn": "Online Multiplayer Fixes",
+    "PurposeVi": "Tích hợp bản patch Online-Fix cho phép kết nối chơi co-op và multiplayer qua Steam Spacewar.",
+    "PurposeEn": "Integrated Online-Fix patches allowing multiplayer/co-op via Steam Spacewar emulation.",
+    "SourceFile": "OnlineFixesView.xaml",
+    "NavigationRoute": "MainWindow -\u003E OnlineFixesView",
+    "SidebarIcon": "Globe24",
+    "Sections": [
+      "Online Fix List",
+      "Installation Guide",
+      "Apply Action"
+    ],
+    "PrimaryCommands": [
+      "ApplyOnlineFixCommand"
+    ],
+    "RelatedFeatures": [
+      "online_coop_fixes"
+    ]
+  },
+  {
+    "Id": "screen_tickets",
+    "NameVi": "Vé Steam (Tickets)",
+    "NameEn": "Steam Tickets",
+    "PurposeVi": "Quản lý và kích hoạt vé bảo mật DRM của Steam (Steam App Tickets).",
+    "PurposeEn": "Manage and inject Steam DRM App Tickets.",
+    "SourceFile": "TicketsView.xaml",
+    "NavigationRoute": "MainWindow -\u003E TicketsView",
+    "SidebarIcon": "TicketDiagonal24",
+    "Sections": [
+      "Ticket Status List",
+      "Inject Ticket Button"
+    ],
+    "PrimaryCommands": [
+      "InjectTicketCommand",
+      "RefreshTicketsCommand"
+    ],
+    "RelatedFeatures": [
+      "steam_tickets"
+    ]
+  },
+  {
+    "Id": "screen_plugin",
+    "NameVi": "Steam Plugin",
+    "NameEn": "Steam Store Plugin",
+    "PurposeVi": "Cài đặt và quản lý Millennium Plugin trên Steam Store để thêm game trực tiếp 1-click từ trình duyệt.",
+    "PurposeEn": "Install and manage Millennium Plugin on Steam Store for 1-click game additions from web browser.",
+    "SourceFile": "PluginView.xaml",
+    "NavigationRoute": "MainWindow -\u003E PluginView",
+    "SidebarIcon": "PuzzlePiece24",
+    "Sections": [
+      "Status Card",
+      "Installation Steps",
+      "Install/Uninstall Action Buttons"
+    ],
+    "PrimaryCommands": [
+      "InstallPluginCommand",
+      "UninstallPluginCommand",
+      "RestartSteamCommand"
+    ],
+    "RelatedFeatures": [
+      "steam_plugin"
+    ]
+  },
+  {
+    "Id": "screen_downloads",
+    "NameVi": "Hàng đợi tải game (Downloads)",
+    "NameEn": "Downloads Queue",
+    "PurposeVi": "Theo dõi tiến độ, tốc độ, tạm dừng hoặc huỷ các tác vụ tải game và depot.",
+    "PurposeEn": "Track download progress, speed, pause, or cancel active game and depot download jobs.",
+    "SourceFile": "DownloadsView.xaml",
+    "NavigationRoute": "MainWindow -\u003E DownloadsView",
+    "SidebarIcon": "ArrowDownload24",
+    "Sections": [
+      "Active Queue",
+      "Speed Meter",
+      "Completed Items"
+    ],
+    "PrimaryCommands": [
+      "PauseDownloadCommand",
+      "ResumeDownloadCommand",
+      "CancelDownloadCommand"
+    ],
+    "RelatedFeatures": [
+      "fast_downloads"
+    ]
+  },
+  {
+    "Id": "screen_settings",
+    "NameVi": "Cài đặt (Settings)",
+    "NameEn": "Settings",
+    "PurposeVi": "Cấu hình tài khoản, thư mục Steam, Hubcap API, giao diện (Theme), khởi động và Trợ lý AI.",
+    "PurposeEn": "Configure account, Steam directory, Hubcap API, UI Theme, startup behavior, and AI Assistant.",
+    "SourceFile": "SettingsView.xaml",
+    "NavigationRoute": "MainWindow -\u003E SettingsView (Footer)",
+    "SidebarIcon": "Settings24",
+    "Sections": [
+      "Account",
+      "Steam Path",
+      "Hubcap API",
+      "Appearance / Theme",
+      "Startup \u0026 Tray",
+      "AI Assistant",
+      "Community"
+    ],
+    "PrimaryCommands": [
+      "ChangeSteamFolderCommand",
+      "ResetSteamFolderCommand",
+      "SignInDiscordCommand",
+      "SignOutCommand"
+    ],
+    "RelatedFeatures": [
+      "settings_configuration",
+      "ai_assistant"
+    ]
+  },
+  {
+    "Id": "screen_ai_assistant",
+    "NameVi": "Trợ lý AI BaoTools (AiChatWidget)",
+    "NameEn": "BaoTools AI Assistant",
+    "PurposeVi": "Trợ lý kỹ thuật floating hỗ trợ chẩn đoán cấu hình, kiểm tra lỗi crash, gỡ game, tối ưu FPS và hướng dẫn sử dụng.",
+    "PurposeEn": "Floating technical copilot for hardware diagnosis, crash troubleshooting, uninstallation, FPS optimization, and usage help.",
+    "SourceFile": "AiChatWidget.xaml",
+    "NavigationRoute": "Floating widget on bottom-right corner of MainWindow",
+    "SidebarIcon": "Bot / Sparkle",
+    "Sections": [
+      "Chat Header",
+      "Messages Scroll",
+      "Suggested Topics",
+      "Context Chip",
+      "Input Bar"
+    ],
+    "PrimaryCommands": [
+      "SendMessageCommand",
+      "ClearChatCommand",
+      "CopyMessageCommand",
+      "ClearActiveContextGameCommand"
+    ],
+    "RelatedFeatures": [
+      "ai_assistant"
+    ]
+  }
+]

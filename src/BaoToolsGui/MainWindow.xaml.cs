@@ -17,8 +17,14 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
         InitializeComponent();
         DataContext = viewModel;
 
+        // Ensure Application.Current.MainWindow is assigned immediately for DI / early callers
+        if (Application.Current is not null && Application.Current.MainWindow is null)
+        {
+            Application.Current.MainWindow = this;
+        }
+
         // Apply theme backdrop/background to window
-        themeService.ApplyCurrentTheme();
+        themeService.ApplyCurrentTheme(this);
 
         // NavigationView resolves page instances (DownloadView/SettingsView) from DI.
         RootNavigation.SetServiceProvider(services);
@@ -26,8 +32,14 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
         InitializeTrayIcon();
         Closing += OnWindowClosing;
 
+        SourceInitialized += (_, _) =>
+        {
+            themeService.ApplyCurrentTheme(this);
+        };
+
         Loaded += async (_, _) =>
         {
+            themeService.ApplyCurrentTheme(this);
             RootNavigation.Navigate(typeof(HomeView));
             try { await viewModel.InitializeAsync(); }
             catch { /* auth restore failed (e.g. offline). UI still loads as guest */ }
@@ -129,6 +141,9 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
             message,
             error ? System.Windows.Forms.ToolTipIcon.Error : System.Windows.Forms.ToolTipIcon.Info);
     }
+
+    /// <summary>Switch to Home page.</summary>
+    public void NavigateToHome() => RootNavigation.Navigate(typeof(HomeView));
 
     /// <summary>Switch to the Add page (used by the Manage page's "Update" action).</summary>
     public void NavigateToAdd() => RootNavigation.Navigate(typeof(DownloadView));

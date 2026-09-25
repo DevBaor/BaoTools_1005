@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Språk</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Velg appens visningsspråk. Tas i bruk etter en omstart.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Systemstandard</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS-oppslag</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Hvis leverandøren din blokkerer BaoTools, kan appen slå opp adresser via Cloudflare (1.1.1.1) i stedet for systemets oppslag. «Automatisk» bytter først når vanlig DNS feiler.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automatisk</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Bruk alltid Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Bruk bare systemets DNS</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam-plassering</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Endre…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Åpne</value></data>
@@ -370,8 +375,8 @@ Dette sletter .lua-filene fra Steam\config\stplug-in.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Automatisk nedlasting fra første tilgjengelige kilde</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Ingen tilgjengelige kilder funnet for dette spillet</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· via {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>BaoTools-programtillegg</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>BaoTools Steam-programtillegget! — Bruker nå LuaLoader i stedet for Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>programtillegg</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>Steam-programtillegget! — Bruker nå LuaLoader i stedet for Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Status</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Oppdatering tilgjengelig</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Installert versjon</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>VERKTØY</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>SYSTEM</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>God morgen</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>God ettermiddag</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>God kveld</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Administrer Steam-spill, verktøy og opplåste ressurser enkelt.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Hurtighandlinger</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Legg til spill</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Søk og last ned lua-filer</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Reparer spill</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Feilsøking og feilrettinger</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>Nedlastinger</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>Vis nedlastingskø</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Vis alle</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Systemstatus</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Vis bibliotek</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Endre modus</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Administrer plugin</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Administrer</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Ingen spill installert ennå</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Legg til spill fra Legg til-fanen eller slipp filer til høyre.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Hurtigtips</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Dra og slipp hvilken som helst .lua-, .manifest- eller spillmappe direkte inn i slippsonen for å installere automatisk.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Ditt spillbibliotek og verktøy</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Sorter</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Visning</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Rutenettvisning</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Listevisning</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Installert</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Ikke installert</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>Manglende filer</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>PLATTFORM</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>STATUS</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>SJANGER</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>TILBAKESTILL FILTRE</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Spilldetaljer</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} spill</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>Viser {0} – {1} av {2} spill</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 spill</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>Lagt til {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Lukk (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Støtte og diagnostikk</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Aktiver diagnostikkassistent</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Vis en flytende assistentknapp for automatisert feilsøking.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>BaoTools-assistent</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Spør om spill, feil, diagnostikk...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Tenker...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Tøm chatlogg</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Minimer</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Send spørsmål (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Foreslåtte emner:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Spør meg om hva som helst...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Trenger du hjelp?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Fungerer ikke spillet?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Trenger du en fiks?</value></data>
 </root>

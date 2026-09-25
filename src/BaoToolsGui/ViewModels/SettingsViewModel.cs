@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BaoToolsGui.Services;
@@ -10,7 +12,101 @@ namespace BaoToolsGui.ViewModels;
 
 /// <summary>A selectable UI language. <see cref="Tag"/> is the BCP-47 tag ("en", "zh-Hans") or null for
 /// "follow the system display language".</summary>
-public record LanguageOption(string Display, string? Tag);
+public record LanguageOption(string Display, string? Tag, string? FlagCode = null)
+{
+    private static readonly Dictionary<string, ImageSource> _flagCache = new(StringComparer.OrdinalIgnoreCase);
+
+    static LanguageOption()
+    {
+        try
+        {
+            _ = System.IO.Packaging.PackUriHelper.UriSchemePack;
+        }
+        catch { }
+    }
+
+    public string? ResolvedFlagCode => FlagCode ?? (Tag switch
+    {
+        "en" => "us",
+        "zh-Hans" => "cn",
+        "zh-Hant" => "tw",
+        "ja" => "jp",
+        "ko" => "kr",
+        "es" => "es",
+        "es-419" => "mx",
+        "pt-BR" => "br",
+        "pt-PT" => "pt",
+        "fr" => "fr",
+        "de" => "de",
+        "it" => "it",
+        "nl" => "nl",
+        "pl" => "pl",
+        "ru" => "ru",
+        "uk" => "ua",
+        "ar" => "sa",
+        "cs" => "cz",
+        "hu" => "hu",
+        "ro" => "ro",
+        "tr" => "tr",
+        "el" => "gr",
+        "bg" => "bg",
+        "th" => "th",
+        "vi" => "vn",
+        "id" => "id",
+        "da" => "dk",
+        "fi" => "fi",
+        "nb" => "no",
+        "sv" => "se",
+        _ => null
+    });
+
+    public ImageSource? FlagIcon
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(ResolvedFlagCode)) return null;
+            lock (_flagCache)
+            {
+                if (_flagCache.TryGetValue(ResolvedFlagCode, out var cached)) return cached;
+
+                string[] candidateUris =
+                [
+                    $"pack://application:,,,/BaoTools;component/Resources/Flags/{ResolvedFlagCode}.png",
+                    $"pack://application:,,,/Resources/Flags/{ResolvedFlagCode}.png"
+                ];
+
+                foreach (var uriStr in candidateUris)
+                {
+                    try
+                    {
+                        var uri = new Uri(uriStr, UriKind.Absolute);
+                        var bmp = new BitmapImage();
+                        bmp.BeginInit();
+                        bmp.UriSource = uri;
+                        bmp.CacheOption = BitmapCacheOption.OnLoad;
+                        bmp.EndInit();
+                        bmp.Freeze();
+                        _flagCache[ResolvedFlagCode] = bmp;
+                        return bmp;
+                    }
+                    catch
+                    {
+                        // Try next format
+                    }
+                }
+
+                return null;
+            }
+        }
+    }
+
+    public bool HasFlag => FlagIcon != null;
+    public string? FlagPath => HasFlag ? $"pack://application:,,,/BaoTools;component/Resources/Flags/{ResolvedFlagCode}.png" : null;
+}
+
+/// <summary>A DNS resolution mode. <see cref="Tag"/> is the stored value and stays English ("Auto",
+/// "Always", "Never") because it is matched in code; only <see cref="Display"/> is localized.</summary>
+public record DnsModeOption(string Display, string Tag);
 
 public partial class SettingsViewModel : ObservableObject
 {
@@ -33,6 +129,9 @@ public partial class SettingsViewModel : ObservableObject
     private bool _isGuest = true;
 
     public bool IsRealUser => !IsGuest;
+
+    /// <summary>Active category in the modern settings master-detail navigation.</summary>
+    [ObservableProperty] private int _selectedCategoryIndex;
 
     // ── Login-required redirect banner ─────────────────────────────
     /// <summary>Set by App when navigating here from a protected action. Null = banner hidden.</summary>
@@ -161,6 +260,24 @@ public partial class SettingsViewModel : ObservableObject
 
     [ObservableProperty] private LanguageOption _selectedLanguage = null!;
 
+    // ── DNS ─────────────────────────────────────────────────────────
+    /// <summary>How host names are resolved. See <see cref="Services.AppHttp"/>.</summary>
+    public ObservableCollection<DnsModeOption> DnsModeOptions { get; } =
+    [
+        new(Resources.Strings.Settings_Dns_Auto, "Auto"),
+        new(Resources.Strings.Settings_Dns_Always, "Always"),
+        new(Resources.Strings.Settings_Dns_Never, "Never"),
+    ];
+
+    [ObservableProperty] private DnsModeOption _selectedDnsMode = null!;
+
+    // Takes effect on new connections; pooled ones turn over within AppHttp's connection lifetime, so
+    // there is no restart prompt here (unlike the language switch, which is baked in at parse time).
+    partial void OnSelectedDnsModeChanged(DnsModeOption value)
+    {
+        if (value is not null) _settings.DnsMode = value.Tag;
+    }
+
     public IReadOnlyList<ThemeDefinition> ThemeOptions => ThemeService.AvailableThemes;
 
     [ObservableProperty] private ThemeDefinition _selectedTheme = null!;
@@ -204,6 +321,17 @@ public partial class SettingsViewModel : ObservableObject
         }
         catch { }
     }
+
+    // ── AI Assistant ────────────────────────────────────────────────
+    [ObservableProperty] private bool _enableAiAssistant;
+
+    partial void OnEnableAiAssistantChanged(bool value)
+    {
+        _settings.EnableAiAssistant = value;
+        AiAssistantChanged?.Invoke();
+    }
+
+    public static event Action? AiAssistantChanged;
 
     // ── Hubcap API key ──────────────────────────────────────────────
     /// <summary>The key the user is typing/pasting. Starts blank. The saved key is never shown back.</summary>
@@ -287,6 +415,7 @@ public partial class SettingsViewModel : ObservableObject
         _startWithWindows = settings.StartWithWindows; // default OFF. Init without triggering the registry write
         _startWithSteam = steamStartup.IsStartWithSteamActive;
         _minimizeToTray = settings.MinimizeToTray;
+        _enableAiAssistant = settings.EnableAiAssistant;
         _hubcapIsKeyConfigured = !string.IsNullOrEmpty(settings.HubcapApiKey);
 
         // Select the saved theme without re-triggering save
@@ -298,6 +427,10 @@ public partial class SettingsViewModel : ObservableObject
         _suppressLanguagePrompt = true;
         _selectedLanguage = LanguageOptions.FirstOrDefault(o => o.Tag == settings.Language) ?? LanguageOptions[0];
         _suppressLanguagePrompt = false;
+
+        // Assign the backing field, not the property: going through the setter would fire the change
+        // handler and write the default straight back to disk on first open.
+        _selectedDnsMode = DnsModeOptions.FirstOrDefault(o => o.Tag == settings.DnsMode) ?? DnsModeOptions[0];
     }
 
     private void RefreshSteam()

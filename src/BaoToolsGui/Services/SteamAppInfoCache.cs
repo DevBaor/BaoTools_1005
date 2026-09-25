@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using BaoToolsGui.Models;
+using Microsoft.Extensions.Logging;
 
 namespace BaoToolsGui.Services;
 
@@ -40,6 +41,7 @@ public record AppOverview(
 
     public bool HasDescription => !string.IsNullOrWhiteSpace(ShortDescription);
     public bool HasDeveloper => Developers.Count > 0;
+    public IReadOnlyList<string> LocalizedGenres => Genres.Select(GenreLocalizationHelper.GetLocalized).ToList();
 
     /// <summary>
     /// Developer and publisher are the SAME studio for roughly 40% of apps. Showing both lines then
@@ -66,7 +68,7 @@ public class SteamAppInfoCache
     // (the fast in-RAM index below) are derived from these on demand; there is no separate appinfo.json.
     private static readonly string DetailsDir = Path.Combine(Dir, "details");
 
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(15));
     // In-memory fast path for name/header-image. Populated by network resolves, and lazily rehydrated from
     // the /details blobs on a GetCached miss. A null value means "looked, no usable details" (negative
     // cache) so we don't re-read a missing/empty blob on every grid render.
@@ -78,15 +80,17 @@ public class SteamAppInfoCache
     // trip the 429. The window timestamps persist to cache.json so a restart resumes it (no fresh burst
     // into a still-counting window).
     private readonly CacheService _cache2;
+    private readonly ILogger<SteamAppInfoCache> _log;
     private readonly SemaphoreSlim _rateGate = new(1, 1);
     private readonly Queue<DateTime> _requestTimes = new();
     private static readonly TimeSpan Window = TimeSpan.FromSeconds(200);
     private const int MaxPerWindow = 190; // small safety margin under the measured 200
     private DateTime _lastPersist = DateTime.MinValue;
 
-    public SteamAppInfoCache(CacheService cache)
+    public SteamAppInfoCache(CacheService cache, ILogger<SteamAppInfoCache> log)
     {
         _cache2 = cache;
+        _log = log;
         // Restore the rolling window from a previous run so we don't burst fresh into a counting window.
         var now = DateTime.UtcNow;
         foreach (long ms in _cache2.GetSteamApiRequestTimes())
@@ -97,7 +101,13 @@ public class SteamAppInfoCache
     }
 
     /// <summary>
-    /// Predictable CDN cover URL. Works for older and even delisted apps (assets stay on the CDN);
+    /// High-resolution CDN cover capsule (616x353).
+    /// </summary>
+    public static string GuessCapsuleImageUrl(long appid) =>
+        $"https://cdn.cloudflare.steamstatic.com/steam/apps/{appid}/capsule_616x353.jpg";
+
+    /// <summary>
+    /// Predictable CDN cover URL (460x215). Works for older and even delisted apps (assets stay on the CDN);
     /// some newer apps 404 here and fall back to the appdetails header_image.
     /// </summary>
     public static string GuessHeaderImageUrl(long appid) =>
@@ -132,6 +142,68 @@ public class SteamAppInfoCache
         catch { return null; } // corrupt/partial blob → treat as not-cached
     }
 
+    // ── appdetails response shape ────────────────────────────────────
+
+    /// <summary>
+    /// Pick out the appdetails entry that actually describes <paramref name="appid"/>.
+    /// Null when no entry in the response can be PROVEN to be this app's.
+    /// </summary>
+    /// <remarks>
+    /// appdetails used to be keyed by the appid you asked for. Since ~Sep 2026, any app that HAS child
+    /// apps (a DLC, a soundtrack) comes back keyed by one of those CHILD ids instead: appids=500 answers
+    /// under "1660740" ("Left 4 Dead - Uncensored", whose parent is 500 and which itself returns
+    /// success:false when queried on its own). Measured the same way for 730→2678630, 620→323180,
+    /// 220→323140, 243470→293061 and 1091500→2441600. Apps with no child apps (10, 240, 271590, 5080530)
+    /// and EVERY success:false body are still keyed by the requested id. The inner data.steam_appid always
+    /// echoes the id we asked for; it is the only trustworthy anchor left, and filters=basic changes none
+    /// of this. Do not "simplify" the scan away.
+    ///
+    /// There is deliberately no "if the object has exactly one entry, take it" fallback. It would look
+    /// like it fixes more cases, but its failure mode is silent and permanent: the wrong game's name,
+    /// header image, genres and release date get written to details\&lt;appid&gt;.json, which is the single
+    /// on-disk source of truth for this app from then on. Resolving nothing costs one wasted request and
+    /// self-heals on the next ship; resolving the wrong game needs the user to find and delete their
+    /// cache. Refuse rather than guess.
+    ///
+    /// Returns JsonElement? rather than throwing on purpose: GetProperty(appid) throwing
+    /// KeyNotFoundException into a bare catch is exactly what made this bug invisible for so long.
+    /// internal, not private, so the shape tolerance is unit-testable with no HTTP stub
+    /// (InternalsVisibleTo BaoToolsGui.Tests).
+    /// </remarks>
+    internal static JsonElement? FindAppDetailsEntry(JsonElement root, long appid)
+    {
+        if (root.ValueKind != JsonValueKind.Object) return null;
+
+        // 1. The direct key. Still correct for childless apps, and the ONLY way a success:false body can
+        //    ever be matched (it carries no "data" object to anchor on). Refused only if it DOES carry a
+        //    data object and that object names some other app.
+        if (root.TryGetProperty(appid.ToString(), out var direct) &&
+            (!TryGetDataObject(direct, out var directData) || DataNamesApp(directData, appid)))
+            return direct;
+
+        // 2. Child-keyed shape: the key is a DLC/soundtrack id, so scan for the entry whose
+        //    data.steam_appid is the app we actually asked for.
+        foreach (var prop in root.EnumerateObject())
+            if (TryGetDataObject(prop.Value, out var data) && DataNamesApp(data, appid))
+                return prop.Value;
+
+        return null;
+    }
+
+    /// <summary>The entry's "data" object, if it has one. A success:false entry does not.</summary>
+    private static bool TryGetDataObject(JsonElement entry, out JsonElement data)
+    {
+        data = default;
+        return entry.ValueKind == JsonValueKind.Object &&
+               entry.TryGetProperty("data", out data) && data.ValueKind == JsonValueKind.Object;
+    }
+
+    /// <summary>True when this data blob's steam_appid is the app we asked for. A missing or non-numeric
+    /// steam_appid counts as "not proven", so it is refused rather than assumed.</summary>
+    private static bool DataNamesApp(JsonElement data, long appid) =>
+        data.TryGetProperty("steam_appid", out var sa) && sa.ValueKind == JsonValueKind.Number &&
+        sa.TryGetInt64(out long got) && got == appid;
+
     /// <summary>Fetch an app's name + header image from Steam (throttled, retries on 429/403). Null on
     /// failure. Pulls the FULL appdetails payload and caches the whole blob (for filters). Name/header
     /// are derived from it, so each app is only ever fetched once.</summary>
@@ -141,7 +213,7 @@ public class SteamAppInfoCache
 
         // cc=us so region-blocked games (e.g. titles banned in the user's country) still resolve.
         // This is metadata only, not purchasing, so a neutral region is correct.
-        var url = $"https://store.steampowered.com/api/appdetails?appids={appid}&cc=us&l=english";
+        var url = $"https://store.steampowered.com/api/appdetails?appids={appid}&cc=us&l={GetSteamApiLanguage()}";
 
         const int maxAttempts = 3; // initial + 2 retries
         for (int attempt = 0; attempt < maxAttempts; attempt++)
@@ -158,16 +230,25 @@ public class SteamAppInfoCache
                 if (!res.IsSuccessStatusCode) return null;
 
                 using var doc = JsonDocument.Parse(await res.Content.ReadAsStringAsync(ct));
-                var entry = doc.RootElement.GetProperty(appid.ToString());
-                if (!entry.GetProperty("success").GetBoolean())
+                if (FindAppDetailsEntry(doc.RootElement, appid) is not { } entry)
+                {
+                    // Steam changed the response shape again. Resolve nothing, cache nothing — a null
+                    // here already means "couldn't resolve right now" to every caller.
+                    LogUnresolvableOnce(appid);
+                    return null;
+                }
+
+                // success:false carries no "data" at all, and a success:true with no usable data object
+                // is just as empty. Either way Steam has nothing for this app.
+                if (!entry.TryGetProperty("success", out var okEl) || okEl.ValueKind != JsonValueKind.True ||
+                    !entry.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Object)
                 {
                     // Delisted/unavailable → no details to cache for filters; mark so backfill skips it.
                     _ = SaveFullDetailsAsync(appid, "{}");
                     return null;
                 }
 
-                var data = entry.GetProperty("data");
-                string? name = data.GetProperty("name").GetString();
+                string? name = data.TryGetProperty("name", out var nameEl) ? nameEl.GetString() : null;
                 if (string.IsNullOrWhiteSpace(name)) return null;
 
                 string? image = data.TryGetProperty("header_image", out var img) ? img.GetString() : null;
@@ -217,6 +298,21 @@ public class SteamAppInfoCache
                 foreach (var item in g.EnumerateArray())
                     if (item.TryGetProperty("description", out var desc) && desc.GetString() is { } s)
                         genres.Add(s);
+
+            // Universal Survival detection: Steam store API doesn't classify Survival as an official primary genre,
+            // but games explicitly identify as survival in their description / categories.
+            if (!genres.Any(x => x.Contains("Survival", StringComparison.OrdinalIgnoreCase)))
+            {
+                string? descText = null;
+                if (d.TryGetProperty("short_description", out var sd) && sd.GetString() is { } sds)
+                    descText = sds;
+
+                if (!string.IsNullOrEmpty(descText) &&
+                    Regex.IsMatch(descText, @"\b(survival|survive|surviving)\b", RegexOptions.IgnoreCase))
+                {
+                    genres.Add("Survival");
+                }
+            }
 
             bool win = false, mac = false, lin = false;
             if (d.TryGetProperty("platforms", out var p) && p.ValueKind == JsonValueKind.Object)
@@ -285,6 +381,21 @@ public class SteamAppInfoCache
 
     private readonly ConcurrentDictionary<long, AppFilterData> _filterCache = new();
     private readonly ConcurrentDictionary<long, AppOverview> _overviewCache = new();
+
+    // Appids whose appdetails entry we could not identify at all this session. Used ONLY to keep the log
+    // to one line per app — deliberately nothing is persisted for them (see FindAppDetailsEntry: a "{}"
+    // marker here would permanently poison a perfectly good game's cache just to save a few requests).
+    private readonly ConcurrentDictionary<long, byte> _unresolvable = new();
+
+    /// <summary>Report, once per app per session, that no entry in the response could be proven to be
+    /// this app's. In normal operation this never fires; if it starts firing, Steam changed the response
+    /// shape again and <see cref="FindAppDetailsEntry"/> needs another case.</summary>
+    private void LogUnresolvableOnce(long appid)
+    {
+        if (_unresolvable.TryAdd(appid, 0))
+            _log.LogWarning("appdetails: no entry with steam_appid={AppId} in the response — Steam's " +
+                            "response shape changed again. Nothing cached for this app.", appid);
+    }
 
     /// <summary>
     /// Blurb + studio + genres from the cached blob, for the Manage flyout. Null when the app has no
@@ -404,7 +515,7 @@ public class SteamAppInfoCache
 
         // cc=us so region-blocked games (e.g. titles banned in the user's country) still resolve.
         // This is metadata only, not purchasing, so a neutral region is correct.
-        var url = $"https://store.steampowered.com/api/appdetails?appids={appid}&cc=us&l=english";
+        var url = $"https://store.steampowered.com/api/appdetails?appids={appid}&cc=us&l={GetSteamApiLanguage()}";
         const int maxAttempts = 3;
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
@@ -417,11 +528,26 @@ public class SteamAppInfoCache
                     if (attempt < maxAttempts - 1) { await Task.Delay(TimeSpan.FromSeconds(4 * (attempt + 1)), ct); continue; }
                     return false;
                 }
+                if (res.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.BadRequest)
+                {
+                    // Does not exist on Steam Store (e.g. delisted/non-Steam/invalid appid)
+                    await SaveFullDetailsAsync(appid, "{}");
+                    return true;
+                }
                 if (!res.IsSuccessStatusCode) return false;
 
                 using var doc = JsonDocument.Parse(await res.Content.ReadAsStringAsync(ct));
-                var entry = doc.RootElement.GetProperty(appid.ToString());
-                if (!entry.GetProperty("success").GetBoolean())
+                if (FindAppDetailsEntry(doc.RootElement, appid) is not { } entry)
+                {
+                    // Nothing landed on disk, so say so. Deliberately NOT the "{}" marker: that is
+                    // permanent (HasFullDetails would return true forever, so nothing ever re-fetches),
+                    // and poisoning a healthy game's cache is far worse than a few retried requests.
+                    LogUnresolvableOnce(appid);
+                    return false;
+                }
+
+                if (!entry.TryGetProperty("success", out var okEl) || okEl.ValueKind != JsonValueKind.True ||
+                    !entry.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Object)
                 {
                     // Delisted / unavailable even in a neutral region → won't ever resolve. Cache an
                     // empty marker so backfill stops retrying and it's not counted as "still fetching".
@@ -429,7 +555,6 @@ public class SteamAppInfoCache
                     return true;
                 }
 
-                var data = entry.GetProperty("data");
                 await SaveFullDetailsAsync(appid, data.GetRawText());
 
                 // Opportunistically warm the session RAM index too if it's missing.
@@ -442,6 +567,13 @@ public class SteamAppInfoCache
             }
             catch (OperationCanceledException) { return false; }
             catch { return false; }
+        }
+
+        // If background backfill could not retrieve details (e.g. persistent error/custom game),
+        // cache empty marker so backfill doesn't spin perpetually on every launch.
+        if (background && !_unresolvable.ContainsKey(appid))
+        {
+            await SaveFullDetailsAsync(appid, "{}");
         }
         return false;
     }
@@ -542,4 +674,95 @@ public class SteamAppInfoCache
         _cache2.SaveSteamApiRequestTimes(times);
     }
 
+    /// <summary>
+    /// Intelligently resolves the most defining primary gameplay genre from a game's genre list,
+    /// filtering out generic meta-tags (Indie, Early Access) and prioritizing distinctive gameplay categories.
+    /// </summary>
+    public static string ResolvePrimaryGenre(IReadOnlyList<string>? genres)
+    {
+        if (genres is null || genres.Count == 0) return "Steam";
+
+        // 1. Survival: Highly distinct, defining gameplay loop
+        if (genres.Any(g => g.Contains("Survival", StringComparison.OrdinalIgnoreCase)))
+            return "Survival";
+
+        // 2. RPG: Role-playing / cRPG / ARPG / JRPG / MMORPG
+        if (genres.Any(g => g.Contains("RPG", StringComparison.OrdinalIgnoreCase) ||
+                            g.Contains("Role-Playing", StringComparison.OrdinalIgnoreCase)))
+            return "RPG";
+
+        // 3. Strategy: Tactical / RTS / Grand Strategy / Turn-based
+        if (genres.Any(g => g.Contains("Strategy", StringComparison.OrdinalIgnoreCase) ||
+                            g.Contains("Tactics", StringComparison.OrdinalIgnoreCase)))
+            return "Strategy";
+
+        // 4. Racing: High-speed driving / motorsports
+        if (genres.Any(g => g.Contains("Racing", StringComparison.OrdinalIgnoreCase)))
+            return "Racing";
+
+        // 5. Sports: Athletics / football / basketball
+        if (genres.Any(g => g.Contains("Sports", StringComparison.OrdinalIgnoreCase)))
+            return "Sports";
+
+        // 6. Simulation: Simulators / building / management
+        if (genres.Any(g => g.Contains("Simulation", StringComparison.OrdinalIgnoreCase) ||
+                            g.Contains("Simulator", StringComparison.OrdinalIgnoreCase)))
+            return "Simulation";
+
+        // 7. Action: Combat / shooters / action-adventures
+        if (genres.Any(g => g.Contains("Action", StringComparison.OrdinalIgnoreCase)))
+            return "Action";
+
+        // 8. Adventure: Exploration / narrative / platformer
+        if (genres.Any(g => g.Contains("Adventure", StringComparison.OrdinalIgnoreCase)))
+            return "Adventure";
+
+        // 9. Specific non-meta genres (e.g. Puzzle, Arcade)
+        string[] nonDefiningMeta = ["Indie", "Early Access", "Free to Play", "Casual", "Massively Multiplayer"];
+        var specificGenre = genres.FirstOrDefault(g => !nonDefiningMeta.Any(m => g.Equals(m, StringComparison.OrdinalIgnoreCase)));
+        if (!string.IsNullOrEmpty(specificGenre))
+            return specificGenre;
+
+        // 10. Fallback to the first available genre
+        return genres[0];
+    }
+
+    /// <summary>
+    /// Maps the current UI culture to Steam's Store Web API language code.
+    /// </summary>
+    public static string GetSteamApiLanguage()
+    {
+        string twoLetter = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
+        string name = System.Globalization.CultureInfo.CurrentUICulture.Name;
+        return twoLetter switch
+        {
+            "vi" => "vietnamese",
+            "zh" => name.Contains("Hant", StringComparison.OrdinalIgnoreCase) || name.Contains("TW", StringComparison.OrdinalIgnoreCase) ? "tchinese" : "schinese",
+            "ja" => "japanese",
+            "ko" => "koreana",
+            "fr" => "french",
+            "de" => "german",
+            "es" => name.Contains("419", StringComparison.OrdinalIgnoreCase) ? "latam" : "spanish",
+            "ru" => "russian",
+            "uk" => "ukrainian",
+            "pt" => name.Contains("PT", StringComparison.OrdinalIgnoreCase) ? "portuguese" : "brazilian",
+            "it" => "italian",
+            "pl" => "polish",
+            "tr" => "turkish",
+            "th" => "thai",
+            "ar" => "arabic",
+            "cs" => "czech",
+            "hu" => "hungarian",
+            "ro" => "romanian",
+            "da" => "danish",
+            "fi" => "finnish",
+            "nl" => "dutch",
+            "nb" or "no" => "norwegian",
+            "sv" => "swedish",
+            "el" => "greek",
+            "bg" => "bulgarian",
+            "id" => "indonesian",
+            _ => "english"
+        };
+    }
 }

@@ -12,7 +12,7 @@ namespace BaoToolsGui.Services;
 /// </summary>
 public class AnalyticsService
 {
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(10) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(10));
 
     private static readonly string Version =
         Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()

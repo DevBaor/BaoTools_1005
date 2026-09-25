@@ -141,7 +141,7 @@
 
     <Grid x:Name="Root">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel MaxWidth="640" Margin="8,16,8,24">
+        <StackPanel MaxWidth="1140" Margin="16,16,16,24">
 
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>

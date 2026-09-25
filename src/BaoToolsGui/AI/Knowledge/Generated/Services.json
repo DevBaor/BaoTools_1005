@@ -1,0 +1,58 @@
+[
+  {
+    "Name": "SteamService",
+    "ResponsibilityVi": "Quản lý tiến trình Steam, phát hiện đường dẫn cài đặt Steam, đọc thư viện Steam và khởi động lại Steam.",
+    "ResponsibilityEn": "Manages Steam process, detects Steam installation path, reads Steam libraries, and restarts Steam.",
+    "Capabilities": [],
+    "SourceFile": "SteamService.cs"
+  },
+  {
+    "Name": "LuaVault",
+    "ResponsibilityVi": "Quản lý kho tệp cấu hình .lua của các game đã nạp trong BaoTools.",
+    "ResponsibilityEn": "Manages repository of .lua game configuration files in BaoTools.",
+    "Capabilities": [],
+    "SourceFile": "LuaVault.cs"
+  },
+  {
+    "Name": "SteamlessService",
+    "ResponsibilityVi": "Giải mã lớp bảo vệ SteamStub DRM trên tệp thực thi .exe của game để chống văng lúc khởi động.",
+    "ResponsibilityEn": "Unpacks SteamStub DRM on game executables to prevent launch crashes.",
+    "Capabilities": [],
+    "SourceFile": "SteamlessService.cs"
+  },
+  {
+    "Name": "UnlockerService",
+    "ResponsibilityVi": "Điều phối các công cụ mở khóa backend (BetterSteamTools, OpenSteamTools, SmokeAPI, Koaloader).",
+    "ResponsibilityEn": "Orchestrates backend unlocker engines (BetterSteamTools, OpenSteamTools, SmokeAPI, Koaloader).",
+    "Capabilities": [],
+    "SourceFile": "UnlockerService.cs"
+  },
+  {
+    "Name": "PluginInstallerService",
+    "ResponsibilityVi": "Tự động cài đặt, gỡ bỏ và cập nhật Millennium loader và BaoTools Plugin cho Steam Store.",
+    "ResponsibilityEn": "Installs, uninstalls, and updates Millennium loader and BaoTools Plugin for Steam Store.",
+    "Capabilities": [],
+    "SourceFile": "PluginInstallerService.cs"
+  },
+  {
+    "Name": "SettingsService",
+    "ResponsibilityVi": "Lưu trữ và đồng bộ an toàn các thiết lập cấu hình của ứng dụng trong %AppData%/BaoToolsGui/settings.json.",
+    "ResponsibilityEn": "Stores and synchronizes app configuration settings in %AppData%/BaoToolsGui/settings.json.",
+    "Capabilities": [],
+    "SourceFile": "SettingsService.cs"
+  },
+  {
+    "Name": "AiChatService",
+    "ResponsibilityVi": "Điều phối cuộc trò chuyện giữa giao diện Chat, mô hình chuyên gia cục bộ LocalExpert và kho tri thức SystemKnowledgeStore.",
+    "ResponsibilityEn": "Orchestrates chat conversations between Chat UI, LocalExpert engine, and SystemKnowledgeStore.",
+    "Capabilities": [],
+    "SourceFile": "AiChatService.cs"
+  },
+  {
+    "Name": "AiToolExecutor",
+    "ResponsibilityVi": "Thực thi an toàn các công cụ chẩn đoán phần cứng, quét lỗi game và thao tác hệ thống theo whitelist.",
+    "ResponsibilityEn": "Safely executes hardware diagnostics, game crash scanning, and whitelisted system actions.",
+    "Capabilities": [],
+    "SourceFile": "AiToolExecutor.cs"
+  }
+]

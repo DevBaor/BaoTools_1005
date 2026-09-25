@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Limbă</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Alege limba de afișare a aplicației. Se aplică după repornire.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Implicit din sistem</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Rezolvare DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Dacă furnizorul tău blochează BaoTools, aplicația poate rezolva adresele prin Cloudflare (1.1.1.1) în loc de rezolvatorul sistemului. „Automat” comută doar după ce DNS-ul obișnuit eșuează.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automat</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Folosește mereu Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Folosește doar DNS-ul sistemului</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Locația Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Schimbă…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Deschide</value></data>
@@ -370,8 +375,8 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Descărcare automată de la prima sursă disponibilă</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Nu s-au găsit surse disponibile pentru acest joc</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· prin {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>Plugin BaoTools</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>Pluginul BaoTools pentru Steam! — Acum folosește LuaLoader în loc de Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>Plugin</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>Pluginul pentru Steam! — Acum folosește LuaLoader în loc de Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Stare</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Actualizare disponibilă</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Versiune instalată</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>INSTRUMENTE</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>SISTEM</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>Bună dimineața</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>Bună ziua</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>Bună seara</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Gestionați cu ușurință jocurile Steam, instrumentele și resursele deblocate.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Acțiuni rapide</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Adaugă joc</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Căutare și descărcare fișiere lua</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Repară jocuri</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Depanare și aplicare remedieri</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>Descărcări</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>Vezi coada de descărcare</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Vezi tot</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Stare sistem</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Vezi biblioteca</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Schimbă modul</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Gestionează pluginul</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Gestionează</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Niciun joc instalat încă</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Adăugați jocuri din fila Adăugare sau trageți fișiere în dreapta.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Sfat rapid</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Trageți și plasați orice fișier .lua, .manifest sau folder de joc în zonă pentru instalare automată.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Biblioteca ta de jocuri și instrumente</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Sortează</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Vizualizare</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Grilă</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Listă</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Instalat</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Neinstalat</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>Fișiere lipsă</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>PLATFORMĂ</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>STARE</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>GEN</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>RESETEAZĂ FILTRELE</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Detalii joc</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} jocuri</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>Se afișează {0} – {1} din {2} jocuri</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 jocuri</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>Adăugat pe {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Închide (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Asistență și diagnosticare</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Activează asistentul de diagnosticare</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Afișează un buton plutitor pentru depanare automată și ghiduri.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>Asistent BaoTools</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Întreabă despre jocuri, erori, diagnosticare...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Se procesează...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Șterge istoricul chatului</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Minimizează</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Trimite întrebarea (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Subiecte sugerate:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Întreabă-mă orice...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Ai nevoie de ajutor?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Nu funcționează jocul?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Ai nevoie de un fix?</value></data>
 </root>

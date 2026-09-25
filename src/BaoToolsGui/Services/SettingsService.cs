@@ -60,6 +60,14 @@ public class AppSettings
 
     // UI Theme ("Default" | "Dracula" | "Nord" | "Catppuccin" | "Cyberpunk" | "Midnight")
     public string? Theme { get; set; }
+
+    // Floating AI Assistant
+    public bool? EnableAiAssistant { get; set; }
+
+    // How host names are resolved: "Auto" (default), "Always" or "Never". Stored in English because
+    // it is matched in code; the Settings page localizes the display only. Null = never set → "Auto".
+    // See AppHttp for what each mode does.
+    public string? DnsMode { get; set; }
 }
 
 public class SettingsService
@@ -94,6 +102,8 @@ public class SettingsService
         }
         return _settings.DailyAddCount < AppConfig.AppDailyDownloadLimit;
     }
+
+    public int DailyAddCount => _settings.DailyAddCount;
 
     public void IncrementAddCount()
     {
@@ -203,6 +213,27 @@ public class SettingsService
         set { _settings.Theme = value; Save(); }
     }
 
+    public bool EnableAiAssistant
+    {
+        get => _settings.EnableAiAssistant ?? true; // default ON
+        set { _settings.EnableAiAssistant = value; Save(); }
+    }
+
+    /// <summary>
+    /// How host names are resolved: "Auto" (default), "Always" or "Never". See <see cref="AppHttp"/>.
+    /// </summary>
+    /// <remarks>
+    /// Defaults to Auto rather than off on purpose. A user whose ISP DNS-blocks lua.tools cannot reach
+    /// anything in the app to discover that a setting would fix it, so an opt-in toggle would be found
+    /// by everyone except the people who need it. Auto costs unaffected users nothing: the system
+    /// resolver is still tried first and DoH only engages once it has actually failed.
+    /// </remarks>
+    public string DnsMode
+    {
+        get => _settings.DnsMode is "Always" or "Never" ? _settings.DnsMode : "Auto";
+        set { _settings.DnsMode = value; Save(); }
+    }
+
     private void Load()
     {
         // Prefer the primary file; fall back to the last-good .bak. Crucially, NEVER silently reset a
@@ -259,7 +290,8 @@ public class SettingsService
             && _settings.StartWithWindows is null
             && _settings.MinimizeToTray is null
             && _settings.FastFetch is null
-            && _settings.Theme is null;
+            && _settings.Theme is null
+            && _settings.EnableAiAssistant is null;
         if (empty)
         {
             foreach (var p in new[] { _filePath, _bakPath, _tmpPath })

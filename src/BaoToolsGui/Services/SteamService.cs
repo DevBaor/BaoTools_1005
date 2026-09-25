@@ -69,6 +69,50 @@ public class SteamService(SettingsService settings)
         }
     }
 
+    /// <summary>
+    /// The Steam account persona name / gamer tag (e.g. from loginusers.vdf or registry), or null if unavailable.
+    /// </summary>
+    public static string? SteamPersonaName
+    {
+        get
+        {
+            try
+            {
+                using var key = RegistryKey
+                    .OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64)
+                    .OpenSubKey(@"SOFTWARE\Valve\Steam");
+
+                string? persona = key?.GetValue("PersonaName") as string;
+                if (!string.IsNullOrWhiteSpace(persona)) return persona.Trim();
+
+                string? steamPath = key?.GetValue("SteamPath") as string;
+                if (!string.IsNullOrWhiteSpace(steamPath))
+                {
+                    string vdfPath = Path.Combine(steamPath, "config", "loginusers.vdf");
+                    if (File.Exists(vdfPath))
+                    {
+                        foreach (string line in File.ReadLines(vdfPath))
+                        {
+                            if (line.Contains("\"PersonaName\"", StringComparison.OrdinalIgnoreCase))
+                            {
+                                var parts = line.Split('"', StringSplitOptions.RemoveEmptyEntries);
+                                if (parts.Length >= 2 && !string.IsNullOrWhiteSpace(parts[1]) && !parts[1].Contains("???"))
+                                {
+                                    return parts[1].Trim();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                string? autoLogin = key?.GetValue("AutoLoginUser") as string;
+                if (!string.IsNullOrWhiteSpace(autoLogin)) return autoLogin.Trim();
+            }
+            catch { }
+            return null;
+        }
+    }
+
     /// <summary>True when the effective path exists and contains steam.exe.</summary>
     public bool IsValid => EffectivePath is not null && File.Exists(SteamExePathFor(EffectivePath));
 

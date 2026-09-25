@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Bahasa</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Pilih bahasa tampilan aplikasi. Diterapkan setelah memulai ulang.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Bawaan sistem</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Resolusi DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Jika penyedia Anda memblokir BaoTools, aplikasi dapat mencari alamat melalui Cloudflare (1.1.1.1) alih-alih resolver sistem. «Otomatis» hanya beralih setelah DNS biasa gagal.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Otomatis</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Selalu gunakan Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Hanya gunakan DNS sistem</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Lokasi Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Ubah…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Buka</value></data>
@@ -370,8 +375,8 @@ Ini menghapus berkas .lua dari Steam\config\stplug-in.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Unduh otomatis dari sumber pertama yang tersedia</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Tidak ada sumber tersedia yang ditemukan untuk game ini</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· melalui {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>Plugin BaoTools</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>Plugin BaoTools untuk Steam! — Kini memakai LuaLoader alih-alih Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>Plugin</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>Plugin untuk Steam! — Kini memakai LuaLoader alih-alih Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Status</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Pembaruan tersedia</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Versi terpasang</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>ALAT</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>SISTEM</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>Selamat pagi</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>Selamat siang</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>Selamat malam</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Kelola game Steam, alat, dan sumber daya terbuka Anda dengan mudah.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Tindakan Cepat</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Tambah Game</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Cari &amp; unduh file lua</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Perbaiki Game</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Pemecahan masalah &amp; terapkan perbaikan</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>Unduhan</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>Lihat antrean unduhan</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Lihat semua</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Status Sistem</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Lihat perpustakaan</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Ubah mode</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Kelola plugin</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Kelola</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Belum ada game yang diinstal</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Tambahkan game dari tab Tambah atau seret file ke kanan untuk memulai.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Tips Cepat</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Seret dan lepas file .lua, .manifest, atau folder game langsung ke area drop untuk menginstal otomatis.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Perpustakaan game &amp; alat Anda</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Urutkan</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Tampilan</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Tampilan Kisi</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Tampilan Daftar</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Terinstal</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Belum Terinstal</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>File Hilang</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>PLATFORM</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>STATUS</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>GENRE</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>RESET FILTER</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Detail Game</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} game</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>Menampilkan {0} – {1} dari {2} game</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 game</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>Ditambahkan {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Tutup (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Dukungan &amp; Diagnostik</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Aktifkan Asisten Diagnostik</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Tampilkan tombol asisten mengambang untuk pemecahan masalah otomatis dan panduan penyiapan.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>Asisten BaoTools</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Tanyakan tentang game, kesalahan, diagnostik...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Sedang berpikir...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Hapus riwayat obrolan</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Minimalkan</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Kirim pertanyaan (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Topik yang disarankan:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Tanya apa saja...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Butuh bantuan?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Game tidak bisa dibuka?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Butuh perbaikan?</value></data>
 </root>

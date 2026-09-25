@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Taal</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Kies de weergavetaal van de app. Wordt toegepast na een herstart.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Systeemstandaard</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS-resolutie</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Als je provider BaoTools blokkeert, kan de app adressen opzoeken via Cloudflare (1.1.1.1) in plaats van je systeemresolver. 'Automatisch' schakelt pas over nadat je normale DNS faalt.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automatisch</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Altijd Cloudflare gebruiken</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Alleen systeem-DNS gebruiken</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam-locatie</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Wijzigen…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Openen</value></data>
@@ -370,8 +375,8 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in.</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Automatisch downloaden van de eerste beschikbare bron</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Geen beschikbare bronnen gevonden voor dit spel</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· via {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>BaoTools-plug-in</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>De BaoTools Steam-plugin! — Gebruikt nu LuaLoader in plaats van Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>plug-in</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>De Steam-plugin! — Gebruikt nu LuaLoader in plaats van Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Status</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Update beschikbaar</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Geïnstalleerde versie</value></data>
@@ -834,4 +839,79 @@ Step 2: Click "Install Fix" and select the downloaded ZIP file to automatically 
   <data name="UpdateDialog_OpenBrowser" xml:space="preserve">
     <value>Open Browser</value>
   </data>
+
+  <!-- Added Keys Sync -->
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>GEREEDSCHAPPEN</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>SYSTEEM</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>Goedemorgen</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>Goedemiddag</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>Goedenavond</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Beheer eenvoudig je Steam-spellen, tools en ontgrendelde bronnen.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Snelle acties</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Spel toevoegen</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Lua-bestanden zoeken en downloaden</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Spellen repareren</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Probleemoplossing en fixes toepassen</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>Downloadwachtrij bekijken</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Alles bekijken</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Systeemstatus</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Bibliotheek bekijken</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Modus wijzigen</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Plugin beheren</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Beheren</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Nog geen spellen geïnstalleerd</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Voeg spellen toe via het tabblad Toevoegen of sleep bestanden naar rechts.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Snelle tip</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Sleep een .lua-, .manifest- of spelmap rechtstreeks naar het neerzetgebied om automatisch te installeren.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Je spelbibliotheek &amp; tools</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Sorteren</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Weergave</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Rasterweergave</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Lijstweergave</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Geïnstalleerd</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Niet geïnstalleerd</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>Ontbrekende bestanden</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>PLATFORM</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>STATUS</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>GENRE</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>FILTERS RESETTEN</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Speldetails</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} spellen</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>{0} – {1} van {2} spellen weergegeven</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 spellen</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>Toegevoegd op {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Sluiten (Esc)</value></data>
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Ondersteuning &amp; Diagnostiek</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Diagnostische assistent inschakelen</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Toon een zwevende assistent-knop voor geautomatiseerde probleemoplossing.</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>BaoTools-assistent</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Vraag over spellen, fouten, diagnostiek...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Denkt na...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Chatgeschiedenis wissen</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Minimaliseren</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Vraag verzenden (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Voorgestelde onderwerpen:</value></data>
+
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Manage BaoTools preferences</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Discord Community</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Join the BaoTools Discord server for announcements, fresh updates, and technical support.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Join Discord</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Local / Offline</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Diagnose games, explain errors and help fix common problems.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Free API key from Google AI Studio. Used by the assistant for deeper reasoning.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Paste your Gemini API key (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Get Free API Key</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Copy message</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Copied!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Regenerate response</value></data>
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Inspecting: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Clear game context</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Vraag me wat dan ook...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Hulp nodig?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Spel werkt niet?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Oplossing nodig?</value></data>
 </root>

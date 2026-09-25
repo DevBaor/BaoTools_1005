@@ -63,8 +63,10 @@
   <data name="Nav_Home" xml:space="preserve"><value>Trang chủ</value></data>
   <data name="Nav_Add" xml:space="preserve"><value>Thêm</value></data>
   <data name="Nav_Manage" xml:space="preserve"><value>Quản lý</value></data>
-  <data name="Nav_Mode" xml:space="preserve"><value>Chế độ</value></data>
+  <data name="Nav_Mode" xml:space="preserve"><value>Modes</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Bản sửa lỗi</value></data>
+  <data name="Nav_Section_Tools" xml:space="preserve"><value>TOOLS</value></data>
+  <data name="Nav_Section_System" xml:space="preserve"><value>SYSTEM</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Khởi động lại Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Cài đặt</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Đăng nhập bằng Discord</value></data>
@@ -73,6 +75,7 @@
   <data name="Nav_Footer_LoggedIn" xml:space="preserve"><value>Đã đăng nhập</value></data>
   <data name="Main_RestartSteam_Ask" xml:space="preserve"><value>Khởi động lại Steam ngay bây giờ? Thao tác này sẽ đóng Steam và mọi trò chơi đang chạy, sau đó khởi chạy lại.</value></data>
   <data name="Settings_Title" xml:space="preserve"><value>Cài đặt</value></data>
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Quản lý tùy chọn và cấu hình BaoTools</value></data>
   <data name="Settings_Section_Account" xml:space="preserve"><value>TÀI KHOẢN</value></data>
   <data name="Settings_Section_General" xml:space="preserve"><value>CHUNG</value></data>
   <data name="Settings_Section_Steam" xml:space="preserve"><value>STEAM</value></data>
@@ -109,6 +112,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Ngôn ngữ</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Chọn ngôn ngữ hiển thị của ứng dụng. Áp dụng sau khi khởi động lại.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Mặc định của hệ thống</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Phân giải DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Nếu nhà mạng chặn kết nối BaoTools, ứng dụng có thể tra cứu địa chỉ qua Cloudflare (1.1.1.1) thay cho bộ phân giải hệ thống. «Tự động» chỉ chuyển sang sau khi DNS thông thường thất bại.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Tự động</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Luôn dùng Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Chỉ dùng DNS hệ thống</value></data>
     <data name="Settings_Section_Appearance" xml:space="preserve"><value>GIAO DIỆN &amp; CHỦ ĐỀ</value></data>
     <data name="Settings_Theme" xml:space="preserve"><value>Chủ đề màu sắc</value></data>
     <data name="Settings_Theme_Hint" xml:space="preserve"><value>Tùy biến phong cách màu sắc cho BaoTools: Dracula, Nord, Cyberpunk, Catppuccin, Midnight OLED...</value></data>
@@ -130,6 +138,9 @@
   <data name="Lang_Changed_Body" xml:space="preserve"><value>Khởi động lại ứng dụng để áp dụng ngôn ngữ mới.</value></data>
   <data name="Lang_Changed_Restart" xml:space="preserve"><value>Khởi động lại ngay</value></data>
   <data name="Home_Welcome" xml:space="preserve"><value>Chào mừng đến với BaoTools</value></data>
+  <data name="Home_Greeting_Morning" xml:space="preserve"><value>Chào buổi sáng</value></data>
+  <data name="Home_Greeting_Afternoon" xml:space="preserve"><value>Chào buổi chiều</value></data>
+  <data name="Home_Greeting_Evening" xml:space="preserve"><value>Chào buổi tối</value></data>
   <data name="Home_LuasOnBoard" xml:space="preserve"><value>Lua đã có</value></data>
   <data name="Home_LastAdded" xml:space="preserve"><value>THÊM GẦN NHẤT</value></data>
   <data name="Home_PluginStatus" xml:space="preserve"><value>Trạng thái plugin</value></data>
@@ -143,7 +154,28 @@
   <data name="Home_SignedInAs" xml:space="preserve"><value>Đã đăng nhập với tên {0}</value></data>
   <data name="Home_NoModeSelected" xml:space="preserve"><value>Chưa chọn chế độ</value></data>
   <data name="Home_ModeIs" xml:space="preserve"><value>Chế độ · {0}</value></data>
-  <data name="Mode_Title" xml:space="preserve"><value>Chế độ</value></data>
+  <data name="Home_WelcomeSubtitle" xml:space="preserve"><value>Quản lý thư viện game và các công cụ hỗ trợ Steam dễ dàng và nhanh chóng.</value></data>
+  <data name="Home_QuickActions" xml:space="preserve"><value>Thao tác nhanh</value></data>
+  <data name="Home_AddGame" xml:space="preserve"><value>Thêm Game mới</value></data>
+  <data name="Home_AddGame_Sub" xml:space="preserve"><value>Tìm &amp; tải file lua</value></data>
+  <data name="Home_FixGame" xml:space="preserve"><value>Sửa lỗi Game</value></data>
+  <data name="Home_FixGame_Sub" xml:space="preserve"><value>Kiểm tra &amp; vá lỗi</value></data>
+  <data name="Home_Downloads" xml:space="preserve"><value>Tải xuống</value></data>
+  <data name="Home_Downloads_Sub" xml:space="preserve"><value>Xem danh sách tải</value></data>
+  <data name="Home_ViewAll" xml:space="preserve"><value>Xem tất cả</value></data>
+  <data name="Home_SystemStatus" xml:space="preserve"><value>Trạng thái hệ thống</value></data>
+  <data name="Home_ViewLibrary" xml:space="preserve"><value>Xem thư viện</value></data>
+  <data name="Home_ChangeMode" xml:space="preserve"><value>Đổi chế độ</value></data>
+  <data name="Home_ManagePlugin" xml:space="preserve"><value>Quản lý plugin</value></data>
+  <data name="Home_ManageGame" xml:space="preserve"><value>Quản lý</value></data>
+  <data name="Home_NoRecentGames" xml:space="preserve"><value>Chưa có game nào trong thư viện</value></data>
+  <data name="Home_NoRecentGames_Sub" xml:space="preserve"><value>Thêm game từ mục Thêm hoặc kéo thả file vào ô bên phải để bắt đầu.</value></data>
+  <data name="Home_Tip_Title" xml:space="preserve"><value>Mẹo nhanh</value></data>
+  <data name="Home_Tip_Body" xml:space="preserve"><value>Bạn có thể kéo thả trực tiếp file .lua, .manifest hoặc thư mục game vào ô bên trên để cài đặt tự động.</value></data>
+  <data name="Home_Discord_Title" xml:space="preserve"><value>Cộng đồng Discord</value></data>
+  <data name="Home_Discord_Desc" xml:space="preserve"><value>Tham gia máy chủ Discord BaoTools để nhận thông báo, cập nhật mới và hỗ trợ kỹ thuật.</value></data>
+  <data name="Home_Discord_Join" xml:space="preserve"><value>Tham gia Discord</value></data>
+  <data name="Mode_Title" xml:space="preserve"><value>Mode</value></data>
   <data name="Mode_Subtitle" xml:space="preserve"><value>Chuyển đổi backend dùng để mở khóa các trò chơi được thêm bằng BaoTools — chỉ một cái hoạt động tại một thời điểm.</value></data>
   <data name="Mode_CheckForUpdates" xml:space="preserve"><value>Kiểm tra cập nhật</value></data>
   <data name="Mode_Active" xml:space="preserve"><value>ĐANG HOẠT ĐỘNG</value></data>
@@ -293,6 +325,24 @@ Thao tác này xóa các tệp .lua khỏi Steam\config\stplug-in.</value></data
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>Không thể xóa {0} tệp.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Khởi động lại Steam</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Không tìm thấy hoặc không thể khởi chạy Steam. Đặt vị trí của nó trong Cài đặt.</value></data>
+  <data name="Manage_Subtitle" xml:space="preserve"><value>Thư viện game &amp; công cụ</value></data>
+  <data name="Manage_Sort_Title" xml:space="preserve"><value>Sắp xếp</value></data>
+  <data name="Manage_View" xml:space="preserve"><value>Xem</value></data>
+  <data name="Manage_View_Grid" xml:space="preserve"><value>Dạng lưới</value></data>
+  <data name="Manage_View_List" xml:space="preserve"><value>Dạng danh sách</value></data>
+  <data name="Manage_Status_Installed" xml:space="preserve"><value>Đã cài đặt</value></data>
+  <data name="Manage_Status_NotInstalled" xml:space="preserve"><value>Chưa cài đặt</value></data>
+  <data name="Manage_Status_MissingFiles" xml:space="preserve"><value>Thiếu tệp tin</value></data>
+  <data name="Manage_Filter_Platform" xml:space="preserve"><value>NỀN TẢNG</value></data>
+  <data name="Manage_Filter_Status" xml:space="preserve"><value>TRẠNG THÁI</value></data>
+  <data name="Manage_Filter_GenreUpper" xml:space="preserve"><value>THỂ LOẠI</value></data>
+  <data name="Manage_ClearFiltersUpper" xml:space="preserve"><value>ĐẶT LẠI BỘ LỌC</value></data>
+  <data name="Manage_GameDetails_Title" xml:space="preserve"><value>Chi tiết trò chơi</value></data>
+  <data name="Manage_TotalGames" xml:space="preserve"><value>{0} trò chơi</value></data>
+  <data name="Manage_ShowingSummary" xml:space="preserve"><value>Hiển thị {0} – {1} trên {2} trò chơi</value></data>
+  <data name="Manage_ShowingZero" xml:space="preserve"><value>0 trò chơi</value></data>
+  <data name="Manage_AddedDate" xml:space="preserve"><value>Đã thêm {0}</value></data>
+  <data name="Manage_CloseTooltip" xml:space="preserve"><value>Đóng (Esc)</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Bản sửa lỗi</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Đang tải bản sửa lỗi…</value></data>
   <data name="Fixes_Build" xml:space="preserve"><value>Bản dựng {0}</value></data>
@@ -375,8 +425,8 @@ Thao tác này xóa các tệp .lua khỏi Steam\config\stplug-in.</value></data
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Tự động tải xuống từ nguồn có sẵn đầu tiên</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Không tìm thấy nguồn khả dụng cho trò chơi này</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· qua {0}</value></data>
-  <data name="Plugin_Title" xml:space="preserve"><value>Plugin BaoTools</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>Plugin BaoTools cho Steam! — Giờ đây dùng LuaLoader thay cho Shittenium</value></data>
+  <data name="Plugin_Title" xml:space="preserve"><value>Plugin</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>Plugin cho Steam! — Giờ đây dùng LuaLoader thay cho Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Trạng thái</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Có bản cập nhật</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Phiên bản đã cài</value></data>
@@ -833,4 +883,34 @@ B2: Bấm "Cài đặt" và chọn file ZIP vừa tải về để app tự gi�
   <data name="Theme_AbyssalOcean" xml:space="preserve"><value>Abyssal Ocean</value></data>
   <data name="Theme_OneDark" xml:space="preserve"><value>One Dark Pro</value></data>
   <data name="Theme_Gruvbox" xml:space="preserve"><value>Gruvbox Retro</value></data>
+
+  <!-- AI Assistant -->
+  <data name="Settings_Section_AiAssistant" xml:space="preserve"><value>Trợ lý Hỗ trợ &amp; Chẩn đoán</value></data>
+  <data name="Settings_AiAssistant_Enable" xml:space="preserve"><value>Bật Trợ lý hỗ trợ &amp; chẩn đoán</value></data>
+  <data name="Settings_AiAssistant_Enable_Hint" xml:space="preserve"><value>Hiển thị nút trợ lý nổi để chẩn đoán hệ thống, hướng dẫn thêm game và sửa lỗi tự động.</value></data>
+  <data name="Settings_AiAssistant_LocalOffline" xml:space="preserve"><value>Cục bộ / Ngoại tuyến</value></data>
+  <data name="Settings_AiAssistant_CardDesc" xml:space="preserve"><value>Chẩn đoán game, giải thích mã lỗi và hỗ trợ xử lý sự cố thường gặp.</value></data>
+  <data name="Settings_AiAssistant_Key" xml:space="preserve"><value>Google Gemini API Key</value></data>
+  <data name="Settings_AiAssistant_Key_Hint" xml:space="preserve"><value>Khóa API miễn phí từ Google AI Studio để chatbot phản hồi nâng cao.</value></data>
+  <data name="Settings_AiAssistant_KeyPlaceholder" xml:space="preserve"><value>Dán mã API key Gemini (AIzaSy...)</value></data>
+  <data name="Settings_AiAssistant_GetKey" xml:space="preserve"><value>Lấy API Key Miễn Phí</value></data>
+  <data name="AiChat_Title" xml:space="preserve"><value>Trợ lý BaoTools</value></data>
+  <data name="AiChat_InputPlaceholder" xml:space="preserve"><value>Hỏi về cách dùng, sửa lỗi, chẩn đoán...</value></data>
+  <data name="AiChat_Thinking" xml:space="preserve"><value>Đang suy nghĩ...</value></data>
+  <data name="AiChat_ClearChat" xml:space="preserve"><value>Làm mới đoạn chat</value></data>
+  <data name="AiChat_Close" xml:space="preserve"><value>Thu nhỏ</value></data>
+  <data name="AiChat_Send" xml:space="preserve"><value>Gửi câu hỏi (Enter)</value></data>
+  <data name="AiChat_SuggestionsHeader" xml:space="preserve"><value>Chủ đề gợi ý phổ biến:</value></data>
+  <data name="AiChat_CopyMessage" xml:space="preserve"><value>Sao chép tin nhắn</value></data>
+  <data name="AiChat_Copied" xml:space="preserve"><value>Đã sao chép!</value></data>
+  <data name="AiChat_Regenerate" xml:space="preserve"><value>Tạo lại câu trả lời</value></data>
+
+  <data name="AiChat_InspectingGame" xml:space="preserve"><value>Đang xem: {0}</value></data>
+  <data name="AiChat_ClearGameContext" xml:space="preserve"><value>Bỏ ghim ngữ cảnh game</value></data>
+
+  <!-- Assistant Rotating Discovery Messages -->
+  <data name="AssistantAskAnything" xml:space="preserve"><value>Hỏi tôi bất cứ điều gì...</value></data>
+  <data name="AssistantNeedHelp" xml:space="preserve"><value>Cần trợ giúp?</value></data>
+  <data name="AssistantGameNotWorking" xml:space="preserve"><value>Game bị lỗi?</value></data>
+  <data name="AssistantNeedFix" xml:space="preserve"><value>Cần sửa lỗi?</value></data>
 </root>
