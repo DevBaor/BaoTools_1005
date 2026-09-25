@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Ongeldige of onbekende code.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Serverfout — probeer het opnieuw.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Voltooi het koppelen van je account</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Je bent ingelogd met een tijdelijk Discord-account. Log in op lua.tools, voer daarna /login opnieuw uit en voer de code in om je volledige account te koppelen.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Je bent ingelogd met een tijdelijk Discord-account. Log in op BaoTools, voer daarna /login opnieuw uit en voer de code in om je volledige account te koppelen.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Sluiten</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>Inloggen is vereist voor deze actie.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Beheer je Hubcap-API-sleutel en profiel op</value></data>

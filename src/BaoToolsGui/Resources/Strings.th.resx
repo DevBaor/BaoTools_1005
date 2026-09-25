@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>รหัสไม่ถูกต้องหรือไม่รู้จัก</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>เซิร์ฟเวอร์ผิดพลาด — ลองอีกครั้ง</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>เชื่อมโยงบัญชีของคุณให้เสร็จสิ้น</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>คุณลงชื่อเข้าใช้ด้วยบัญชี Discord ชั่วคราว ลงชื่อเข้าใช้ที่ lua.tools แล้วเรียกใช้ /login อีกครั้งและป้อนรหัสเพื่อเชื่อมโยงบัญชีเต็มของคุณ</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>คุณลงชื่อเข้าใช้ด้วยบัญชี Discord ชั่วคราว ลงชื่อเข้าใช้ที่ BaoTools แล้วเรียกใช้ /login อีกครั้งและป้อนรหัสเพื่อเชื่อมโยงบัญชีเต็มของคุณ</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>ปิด</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>จำเป็นต้องเข้าสู่ระบบสำหรับการดำเนินการนี้</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>จัดการคีย์ API Hubcap และโปรไฟล์ของคุณที่</value></data>

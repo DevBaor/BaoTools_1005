@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Codice non valido o sconosciuto.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Errore del server — riprova.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Completa il collegamento del tuo account</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Hai effettuato l'accesso con un account Discord temporaneo. Accedi su lua.tools, poi esegui di nuovo /login e inserisci il codice per collegare il tuo account completo.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Hai effettuato l'accesso con un account Discord temporaneo. Accedi su BaoTools, poi esegui di nuovo /login e inserisci il codice per collegare il tuo account completo.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Ignora</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>È necessario accedere per eseguire questa azione.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Gestisci la tua chiave API Hubcap e il tuo profilo su</value></data>

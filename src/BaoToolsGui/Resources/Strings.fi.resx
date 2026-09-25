@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Virheellinen tai tuntematon koodi.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Palvelinvirhe — yritä uudelleen.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Viimeistele tilisi linkitys</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Olet kirjautunut väliaikaisella Discord-tilillä. Kirjaudu sisään osoitteessa lua.tools, suorita sitten /login uudelleen ja syötä koodi linkittääksesi täyden tilisi.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Olet kirjautunut väliaikaisella Discord-tilillä. Kirjaudu sisään osoitteessa BaoTools, suorita sitten /login uudelleen ja syötä koodi linkittääksesi täyden tilisi.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Hylkää</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>Tämä toiminto vaatii kirjautumisen.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Hallinnoi Hubcap API -avaintasi ja profiiliasi osoitteessa</value></data>

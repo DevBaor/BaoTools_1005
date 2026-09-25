@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Ugyldig eller ukjent kode.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Serverfeil — prøv igjen.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Fullfør sammenkoblingen av kontoen din</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Du er logget på med en midlertidig Discord-konto. Logg på lua.tools, kjør deretter /login på nytt og skriv inn koden for å koble til hele kontoen din.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Du er logget på med en midlertidig Discord-konto. Logg på BaoTools, kjør deretter /login på nytt og skriv inn koden for å koble til hele kontoen din.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Avvis</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>Innlogging er nødvendig for denne handlingen.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Administrer Hubcap API-nøkkelen og profilen din på</value></data>

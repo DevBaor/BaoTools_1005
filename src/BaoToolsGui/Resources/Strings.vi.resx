@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -92,7 +92,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Mã không hợp lệ hoặc không xác định.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Lỗi máy chủ — vui lòng thử lại.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Hoàn tất liên kết tài khoản của bạn</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Bạn đã đăng nhập bằng tài khoản Discord tạm thời. Đăng nhập tại lua.tools, sau đó chạy /login lại và nhập mã để liên kết tài khoản đầy đủ của bạn.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Bạn đã đăng nhập bằng tài khoản Discord tạm thời. Đăng nhập tại BaoTools, sau đó chạy /login lại và nhập mã để liên kết tài khoản đầy đủ của bạn.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Bỏ qua</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>Cần đăng nhập để thực hiện thao tác này.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Quản lý khóa API Hubcap và hồ sơ của bạn tại</value></data>

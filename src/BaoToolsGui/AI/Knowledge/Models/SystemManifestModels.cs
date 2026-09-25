@@ -6,7 +6,7 @@ namespace BaoToolsGui.AI.Knowledge.Models;
 public class SystemManifest
 {
     public string Application { get; set; } = "BaoTools";
-    public string Version { get; set; } = "105.6";
+    public string Version { get; set; } = "105.7";
     public string Description { get; set; } = "Professional Steam game management, optimization, and DRM diagnosis toolkit.";
     public DateTime GeneratedAt { get; set; } = DateTime.UtcNow;
     public List<FeatureItem> Features { get; set; } = new();

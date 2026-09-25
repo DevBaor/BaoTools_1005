@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Μη έγκυρος ή άγνωστος κωδικός.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Σφάλμα διακομιστή — δοκιμάστε ξανά.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Ολοκληρώστε τη σύνδεση του λογαριασμού σας</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Έχετε συνδεθεί με προσωρινό λογαριασμό Discord. Συνδεθείτε στο lua.tools, μετά εκτελέστε ξανά /login και εισαγάγετε τον κωδικό για να συνδέσετε τον πλήρη λογαριασμό σας.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Έχετε συνδεθεί με προσωρινό λογαριασμό Discord. Συνδεθείτε στο BaoTools, μετά εκτελέστε ξανά /login και εισαγάγετε τον κωδικό για να συνδέσετε τον πλήρη λογαριασμό σας.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Απόρριψη</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>Απαιτείται σύνδεση για αυτήν την ενέργεια.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Διαχειριστείτε το κλειδί API Hubcap και το προφίλ σας στο</value></data>

@@ -300,12 +300,12 @@ public static class BaoToolsKnowledgeBase
             Category = "Settings",
             TitleVi = "Tài khoản & Mã kích hoạt Bot Provision",
             TitleEn = "Account & Bot Provision Redeem Code",
-            Keywords = new[] { "tài khoản", "account", "đăng nhập", "discord", "lua.tools", "bot provision", "code", "mã" },
+            Keywords = new[] { "tài khoản", "account", "đăng nhập", "discord", "BaoTools", "bot provision", "code", "mã" },
             ContentVi = "Quản lý tài khoản trong tab Cài đặt:\n" +
-                        "• Đăng nhập Discord: Liên kết tài khoản lua.tools để lưu trữ dữ liệu và đồng bộ game cá nhân.\n" +
+                        "• Đăng nhập Discord: Liên kết tài khoản BaoTools để lưu trữ dữ liệu và đồng bộ game cá nhân.\n" +
                         "• Mã Bot Provision: Nếu bạn nhận được mã 6 chữ số từ Discord Bot, bạn nhập mã vào ô 'Redeem code' trong tab Cài đặt để kích hoạt tài khoản ngay tức thì.",
             ContentEn = "Account management in Settings:\n" +
-                        "• Discord Login: Links your lua.tools account to sync personal game libraries.\n" +
+                        "• Discord Login: Links your BaoTools account to sync personal game libraries.\n" +
                         "• Bot Provision: If you received a 6-digit code from Discord Bot, enter it in Settings to redeem your account.",
             RelatedTools = new[] { "navigate_settings" }
         },

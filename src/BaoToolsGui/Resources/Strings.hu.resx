@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Érvénytelen vagy ismeretlen kód.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Szerverhiba — próbáld újra.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Fejezd be a fiókod összekapcsolását</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Ideiglenes Discord-fiókkal vagy bejelentkezve. Jelentkezz be a lua.tools oldalon, majd futtasd újra a /login parancsot, és add meg a kódot a teljes fiókod összekapcsolásához.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Ideiglenes Discord-fiókkal vagy bejelentkezve. Jelentkezz be a BaoTools oldalon, majd futtasd újra a /login parancsot, és add meg a kódot a teljes fiókod összekapcsolásához.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Elvetés</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>Ehhez a művelethez bejelentkezés szükséges.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Kezeld a Hubcap API-kulcsodat és profilodat itt:</value></data>

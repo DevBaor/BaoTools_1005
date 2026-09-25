@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Geçersiz veya bilinmeyen kod.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Sunucu hatası — tekrar dene.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Hesabını bağlamayı tamamla</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Geçici bir Discord hesabıyla giriş yaptın. lua.tools'ta oturum aç, ardından /login komutunu tekrar çalıştır ve tam hesabını bağlamak için kodu gir.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>Geçici bir Discord hesabıyla giriş yaptın. BaoTools'ta oturum aç, ardından /login komutunu tekrar çalıştır ve tam hesabını bağlamak için kodu gir.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Kapat</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>Bu işlem için giriş yapmanız gerekiyor.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Hubcap API anahtarınızı ve profilinizi şurada yönetin:</value></data>

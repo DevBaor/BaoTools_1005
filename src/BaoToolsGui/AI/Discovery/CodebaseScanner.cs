@@ -19,7 +19,7 @@ public static class CodebaseScanner
         var manifest = new SystemManifest
         {
             Application = "BaoTools",
-            Version = "105.6",
+            Version = "105.7",
             Description = "BaoTools Professional Steam Game Management & Optimization Toolkit",
             GeneratedAt = DateTime.UtcNow
         };

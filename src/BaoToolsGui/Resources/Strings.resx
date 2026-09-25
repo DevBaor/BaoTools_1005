@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:schema id="root">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -94,7 +94,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>Invalid or unknown code.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>Server error. Try again.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>Finish linking your account</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>You're signed in with a temporary Discord account. Sign in at lua.tools, then run /login again and enter the code to link your full account.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>You're signed in with a temporary Discord account. Sign in at BaoTools, then run /login again and enter the code to link your full account.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>Dismiss</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>Login is required for this action.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Manage your Hubcap API key and profile on</value></data>

@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>유효하지 않거나 알 수 없는 코드입니다.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>서버 오류 — 다시 시도하세요.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>계정 연결을 완료하세요</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>임시 Discord 계정으로 로그인되어 있습니다. lua.tools에서 로그인한 다음 /login을 다시 실행하고 코드를 입력하여 정식 계정을 연결하세요.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>임시 Discord 계정으로 로그인되어 있습니다. BaoTools에서 로그인한 다음 /login을 다시 실행하고 코드를 입력하여 정식 계정을 연결하세요.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>닫기</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>이 작업을 수행하려면 로그인이 필요합니다.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Hubcap API 키와 프로필을 다음에서 관리하세요:</value></data>

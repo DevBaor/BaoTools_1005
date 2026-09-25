@@ -91,7 +91,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>رمز غير صالح أو غير معروف.</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>خطأ في الخادم — حاول مرة أخرى.</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>أكمل ربط حسابك</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>لقد سجّلت الدخول بحساب ديسكورد مؤقت. سجّل الدخول في lua.tools، ثم شغّل /login مرة أخرى وأدخل الرمز لربط حسابك الكامل.</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>لقد سجّلت الدخول بحساب ديسكورد مؤقت. سجّل الدخول في BaoTools، ثم شغّل /login مرة أخرى وأدخل الرمز لربط حسابك الكامل.</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>تجاهل</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>تسجيل الدخول مطلوب لهذا الإجراء.</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>أدر مفتاح Hubcap API وملفك الشخصي على</value></data>

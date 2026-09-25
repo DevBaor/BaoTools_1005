@@ -89,7 +89,7 @@
   <data name="Settings_BotCode_Invalid" xml:space="preserve"><value>無効または不明なコードです。</value></data>
   <data name="Settings_BotCode_ServerError" xml:space="preserve"><value>サーバーエラー — もう一度お試しください。</value></data>
   <data name="Settings_BotLink_Title" xml:space="preserve"><value>アカウントのリンクを完了してください</value></data>
-  <data name="Settings_BotLink_Body" xml:space="preserve"><value>一時的な Discord アカウントでサインインしています。lua.tools でサインインし、もう一度 /login を実行してコードを入力すると、完全なアカウントにリンクできます。</value></data>
+  <data name="Settings_BotLink_Body" xml:space="preserve"><value>一時的な Discord アカウントでサインインしています。BaoTools でサインインし、もう一度 /login を実行してコードを入力すると、完全なアカウントにリンクできます。</value></data>
   <data name="Settings_BotLink_Dismiss" xml:space="preserve"><value>閉じる</value></data>
   <data name="Settings_LoginRequired" xml:space="preserve"><value>この操作にはログインが必要です。</value></data>
   <data name="Settings_ManageKeyHintPrefix" xml:space="preserve"><value>Hubcap APIキーとプロフィールはこちらで管理：</value></data>
